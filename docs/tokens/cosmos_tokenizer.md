@@ -1,19 +1,16 @@
-# Tokenização | Tokenization
+# Cosmos Tokenizer
 
-- [Tokenização | Tokenization](#tokenização--tokenization)
+- [Cosmos Tokenizer](#cosmos-tokenizer)
   - [Português](#português)
-    - [Resumo do capítulo 4 do artigo do Cosmos](#resumo-do-capítulo-4-do-artigo-do-cosmos)
-      - [Visão Geral](#visão-geral)
+    - [Visão Geral](#visão-geral)
   - [English](#english)
-    - [Summary of chapter 4 in Cosmos paper](#summary-of-chapter-4-in-cosmos-paper)
-      - [Overview](#overview)
+    - [Overview](#overview)
+    - [Architecture](#architecture)
   - [Referências](#referências)
 
 ## Português
 
-### Resumo do capítulo 4 do artigo do Cosmos
-
-#### Visão Geral
+### Visão Geral
 
 Tokenizers são blocos fundamentais na construção de modelos modernos em larga escala. Eles transformam dados brutos em representações mais eficientes ao aprender um espaços latentes "bottle-necked" descobertos de maneira não supervisionada. Especificamente, tokenizers visuais mapeiam dados visuais brutos e redundantes em tokens semânticos compactos, o que os torna cruciais para lidar com dados visuais de alta dimensionalidade.
 
@@ -73,9 +70,7 @@ Os gráficos abaixo mostram a comparação de desempenho entre o _Cosmos Tokeniz
 
 ## English
 
-### Summary of chapter 4 in Cosmos paper
-
-#### Overview
+### Overview
 
 Tokenizers are fundamental building blocks of modern large-scale models. They transform raw data into more efficient representations by learning a bottle-necked latent space discovered in an unsupervised manner. Specifically, visual tokenizers map raw and redundant visual data into compact semantic tokens, making them crucial for handling high-dimensional visual data.
 
@@ -130,6 +125,24 @@ The tokenizers are trained directly on high-resolution images and long-duration 
 The plots bellow show the comparison in performance between the Cosmos Tokenizer and other ones, and denotes the superior quality even at higher compression rates:
 
 ![Tokenizer comparisons](images/tokenizer_comparison.png)
+
+### Architecture
+
+Cosmos Tokenizer is designed as an encoder-decoder architecture. Given an input video $x_{0:T} \in \mathbb{R^{(1 + T) \times H \times W \times 3}}$ with $H,\ W,\ T$ being the height, width, and number of frames, the encoder ($\varepsilon$) tokenizes the inputs into a token video $z_{0:T'} \in \mathbb{R^{(1 + T) \times H \times W \times 3}}$, with a spatial compression factor of $s_{H W} = \frac{H}{H'}=\frac{W}{W'}$ and a temporal compression factor of $S_T = \frac{T}{T'}$. The decoder ($\mathcal{D}$) then reconstructs the input video from these tokens, resulting in the reconstructed video $\hat{x}_{0:T} \in \mathbb{R^{(1 + T) \times H \times W \times 3}}$
+
+$$\hat{x}_{0:T} = \mathcal{D}(\varepsilon(x_{0:T}))$$
+
+> This is an overall view of the architecture, where the encoder encodes an input $x_{0:T}$ to tokens $z_{0:T'}$, and the decoder decodes these tokens and outputs $\hat{x}_{0:T}$.
+
+Our architecture employs a temporally causal design, ensuring that each stage processes only current and past frames. _Our tokenizer operates in the wavelet space, where inputs are first processed by a 2-level wavelet transform_. The wavelet transform maps the input video $x_{0:T}$ in a group-wise manner to downsample the inputs by a factor of four along $x, y,$ and $t$. The groups are formed as: $\lbrace x_0, x_{1:4}, x_{5:8}, ..., x_{(T-3):T}\rbrace \rightarrow \lbrace g_0, g_1, g_2, ..., g_{T/4}\rbrace$. Successive encoder stages follow a similar scheme, finally outputting the tokens $z_{0:T'}$. The causal design helps adapt models built on top of the tokenizer to downstream Physical AI applications that often operate on the temporal causal setting. the wavelet transform allows us to operate on a more compact video representation that eliminates redundancies in pixel information, allowing the remaining layers to focus on more semantic compression.
+
+Our encoder stages are implemented using a series of residual blocks interleaved with downsampling blocks. In each block, we employ a spatio-temporal factorized 3D convolution, where we first apply a 2D convolution with a kernel size of $1\times k\times k$ to capture spatial information, followed by a temporal convolution with a kernel size of $k\times 1\times 1$ to capture temporal dynamics. We use left padding of k-1 to ensure causality. To capture long-range dependencies, we utilize a spatio-temporal factorized causal self-attention with a global support region for non-linearity. We leverage Layer Normalization (LayerNorm) instead of Group Normalization (GroupNorm), which prevents large magnitudes from appearing in specific regions of the latent space or reconstructed outputs. The decoder mirrors the encoder replacing the downsampling blocks with an upsampling block. The image bellow depicts an overview of the overall Cosmos Tokenizer architecture.
+
+![Tokenizer architecture](images/tokenizer_architecture.png)
+
+The image depicts the **Overall Cosmos Tokenizer architecture illustrating the integration of temporal causality and an encoder-decoder structure.** Temporal causality (left) processes sequential inputs, while the encoder-decoder (right) leverages wavelet transforms and causal operations to capture spatial and temporal dependencies in the data.
+
+We employ the vanilla autoencoder (AE) formulation to model the continuous tokenizer's latent space. For discrete tokenizers, we adopt the Finite-Scalar-Quantization (FSQ) as the latent space quantizer. The latent dimension for the continuous tokenizers is 16, whereas for the discrete tokenizers, it is 6, which represents the number of the FSQ levels, which are $(8,8,8,5,5,5)$. This configuration corresponds to a vocabulary size of $64,000$.
 
 ---
 

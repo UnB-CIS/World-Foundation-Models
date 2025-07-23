@@ -6,7 +6,8 @@ nav:
   - Home: index.md
   - Difussion models: difussion.md
   - Autoregressive models: autoregressive.md
-  - Tokens: tokens/tokens.md
+  - Tokens: 
+    - tokens/cosmos_tokenizer.md
 
 markdown_extensions:
   - pymdownx.arithmatex:

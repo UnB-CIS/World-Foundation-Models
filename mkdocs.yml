@@ -6,8 +6,9 @@ nav:
   - Home: index.md
   - Difussion models: difussion.md
   - Autoregressive models: autoregressive.md
-  - Tokens: 
-    - tokens/cosmos_tokenizer.md
+  - Tokens:
+      - tokens/cosmos_tokenizer.md
+      - tokens/dsc_tokenization.md
 
 markdown_extensions:
   - pymdownx.arithmatex:
@@ -17,4 +18,3 @@ extra_javascript:
   - javascripts/mathjax.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-

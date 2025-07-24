@@ -3,6 +3,7 @@
 - [Cosmos Tokenizer](#cosmos-tokenizer)
   - [Português](#português)
     - [Visão Geral](#visão-geral)
+    - [Arquitetura](#arquitetura)
   - [English](#english)
     - [Overview](#overview)
     - [Architecture](#architecture)
@@ -20,7 +21,7 @@ Tokenizers são blocos fundamentais na construção de modelos modernos em larga
 
 A imagem abaixo ilustra o pipeline de treinamento de tokenização, onde o objetivo é treinar o codificador (encoder) e o decodificador (decoder), de forma que a representação por tokens no gargalo preserve ao máximo a informação visual do input.
 
-![Tokenization Pipeline](images/tokenization_pipeline.png)
+![Tokenization Pipeline](images/cosmos_tokenizer/tokenization_pipeline.png)
 
 Na pipeline, um vídeo de entrada é codificado em tokens, que geralmente são muito mais compactos do que o vídeo de entrada. O decodificador então reconstrói o vídeo original a partir desses tokens. _O treinamento do tokenizer consiste em aprender o codificador e decodificador de modo a preservar ao máximo a informação visual nos tokens_.
 
@@ -38,7 +39,7 @@ O sucesso dos tokenizers depende, em grande parte, da sua habilidade de fornecer
 
 A imagem a seguir ilustra os dois tipos de tokens:
 
-![Visualization of continuous and discrete tokenizers](images/token_types.png)
+![Visualization of continuous and discrete tokenizers](images/cosmos_tokenizer/token_types.png)
 
 Tokens ao longo das dimensões espaciais ($\frac{H}{S_{HW}} \times \frac{W}{S_{HW}}$) e temporais ($1 + \frac{T}{S_T}$), com um fator de compressão espacial $S_{HW}$ e um fator de compressão temporal $S_T$. O primeiro token temporal representa o primeiro quadro da entrada, possibilitando a tokenização conjunta de imagens ($T=0$) e vídeos ($T>0$) em um espaço latente compartilhado.
 
@@ -52,7 +53,7 @@ Tokens ao longo das dimensões espaciais ($\frac{H}{S_{HW}} \times \frac{W}{S_{H
 
 A tabela a seguir ilustra diferentes tokenizers visuais e suas capacidades:
 
-![Different tokenizers and capabilities](images/tokenizers_table.png)
+![Different tokenizers and capabilities](images/cosmos_tokenizer/tokenizers_table.png)
 
 O _Tokenizador Cosmos_ utiliza uma arquitetura leve e computacionalmente eficiente com um mecanismo temporal causal. Especificamente, ele emprega camadas de convolução temporal causal e camadas de atenção temporal causal para preservar a ordem temporal natural dos quadros de vídeo.
 
@@ -64,7 +65,75 @@ Os tokenizers são treinados diretamente em imagens de alta resolução e vídeo
 
 Os gráficos abaixo mostram a comparação de desempenho entre o _Cosmos Tokenizer_ e outros tokenizers, evidenciando a sua qualidade superior mesmo em taxas de compressão mais altas:
 
-![Tokenizer comparisons](images/tokenizer_comparison.png)
+![Tokenizer comparisons](images/cosmos_tokenizer/tokenizer_comparison.png)
+
+Claro! Segue abaixo o texto traduzido para o português, com a estrutura Markdown totalmente preservada, e mantendo em inglês apenas os termos técnicos que fazem mais sentido no original:
+
+### Arquitetura
+
+O Cosmos Tokenizer é projetado com uma arquitetura encoder-decoder. Dado um vídeo de entrada $x_{0:T} \in \mathbb{R^{(1 + T) \times H \times W \times 3}}$, com $H,\ W,\ T$ representando a altura, largura e número de quadros, o encoder ($\varepsilon$) tokeniza as entradas em um vídeo de tokens $z_{0:T'} \in \mathbb{R^{(1 + T) \times H \times W \times 3}}$, com um fator de compressão espacial de $s_{H W} = \frac{H}{H'}=\frac{W}{W'}$ e um fator de compressão temporal de $S_T = \frac{T}{T'}$. O decoder ($\mathcal{D}$) então reconstrói o vídeo de entrada a partir desses tokens, resultando no vídeo reconstruído $\hat{x}_{0:T} \in \mathbb{R^{(1 + T) \times H \times W \times 3}}$
+
+$$\hat{x}_{0:T} = \mathcal{D}(\varepsilon(x_{0:T}))$$
+
+> Esta é uma visão geral da arquitetura, onde o encoder codifica uma entrada $x_{0:T}$ em tokens $z_{0:T'}$, e o decoder decodifica esses tokens e produz $\hat{x}_{0:T}$.
+
+Nossa arquitetura emprega um design temporalmente causal, garantindo que cada estágio processe apenas quadros atuais e passados. _Nosso tokenizer opera no wavelet space, onde as entradas são primeiro processadas por uma wavelet transform de 2 níveis_. A wavelet transform mapeia o vídeo de entrada $x_{0:T}$ de forma agrupada para realizar um downsample das entradas por um fator de quatro ao longo das direções $x, y$ e $t$. Os grupos são formados como: $\lbrace x_0, x_{1:4}, x_{5:8}, ..., x_{(T-3):T}\rbrace \rightarrow \lbrace g_0, g_1, g_2, ..., g_{T/4}\rbrace$. Estágios subsequentes do encoder processam esses quadros de forma temporalmente causal como $\lbrace g_0, g_{0:1}. g_{0:2}, ...\rbrace \rightarrow \lbrace \xi_0, \xi_1, \xi_2,...  \rbrace$. Estágios posteriores seguem um esquema similar, produzindo finalmente os tokens $z_{0:T'}$.
+
+> A _**wavelet transform**_ é uma técnica para processamento de sinais em múltiplas escalas e resoluções. Ela difere de transformadas mais tradicionais, como a _Fourier Transform_, que representam dados em termos de ondas senoidais e cossenoidais de frequência fixa, utilizando no lugar oscilações curtas e semelhantes a ondas, que podem ser escaladas e deslocadas. Esta transformada decompõe tanto variações espaciais quanto temporais (ao longo dos quadros), comprimindo e isolando mudanças bruscas em regiões suaves.
+
+> O **_wavelet space_** é a representação de um sinal após passar por uma wavelet transform. Assim, a sentença "_[...]nosso tokenizer opera no wavelet space, onde as entradas são primeiro processadas por uma wavelet transform de 2 níveis[...]_" significa que cada dimensão espacial e temporal é decomposta, extraindo informações tanto de baixa frequência (globais) quanto de alta frequência.
+
+> Durante o processo de aplicação da wavelet transform de 2 níveis, os dados são redimensionados em cada dimensão ($x, y, t$) por um fator de $4$. Assim, cada grupo de $4$ pixels ($x_{t:(t+3)}$) nas 3 dimensões da imagem é representado por um grupo comprimido ($g_i$).
+
+> O tokenizer final utiliza a Haar Wavelet, que é uma das funções wavelet mais simples.
+
+> ![haar_wavelet](images/cosmos_tokenizer/haar_wavelet.png)
+>
+> Wavelet Transforms comprimem imagens por meio de decomposição, primeiro em uma aproximação de baixa resolução da imagem original, em seguida com detalhes verticais, horizontais, e diagonais, semelhante ao demonstrado abaixo:
+
+> ![Wavelet decomposition](images/cosmos_tokenizer/wavelet_decomposition.png)
+
+> Resultando em imagens comprimidas como esta:
+
+> ![Wavelet compressed image](images/cosmos_tokenizer/wavelet_compressed_image.png)
+
+E uma transformada wavelet de 2 níveis teria uma aparência semelhante à seguinte:
+
+> ![2-level wavelet](images/cosmos_tokenizer/2-level_wavelet.png)
+
+O design causal ajuda a adaptar modelos baseados no tokenizer para aplicações de Physical AI que frequentemente operam em cenários temporalmente causais. A wavelet transform nos permite operar sobre uma representação de vídeo mais compacta que elimina redundâncias na informação de pixel, permitindo que as camadas restantes foquem em compressão mais semântica.
+
+Nossos estágios de encoder são implementados utilizando uma série de residual blocks intercalados com downsampling blocks. Em cada bloco, utilizamos uma convolução 3D fatorada espaço-temporalmente, onde aplicamos primeiro uma convolução 2D com kernel de tamanho $1\times k\times k$ para capturar informações espaciais, seguida por uma convolução temporal com kernel de tamanho $k\times 1\times 1$ para capturar dinâmicas temporais. Utilizamos padding à esquerda de k-1 para garantir causalidade.
+
+> Emprega convolução (2 + 1)D.
+
+Para capturar dependências de longo alcance, utilizamos uma self-attention causal fatorada espaço-temporal com uma global support region. Usamos a função de ativação Swish para não-linearidade. Utilizamos Layer Normalization (LayerNorm) em vez de Group Normalization (GroupNorm), o que evita o aparecimento de grandes magnitudes em regiões específicas do espaço latente ou das saídas reconstruídas. O decoder espelha o encoder, substituindo os downsampling blocks por um upsampling block. A imagem abaixo mostra uma visão geral da arquitetura do Cosmos Tokenizer.
+
+> Global support region para não-linearidade significa que os tokens interagem com todos os outros tokens disponíveis no momento (devido às restrições da arquitetura causal).
+
+> A **_Swish activation function_**, definida por $\operatorname{Swish}^{\beta}(x) = x \cdot sigmoid(\beta x) = \frac{x}{1+e^{-\beta x}}$
+
+> ![Swish activation function](images/cosmos_tokenizer/swish_activation_function.png)
+
+![Tokenizer architecture](images/cosmos_tokenizer/tokenizer_architecture.png)
+
+A imagem mostra a **arquitetura geral do Cosmos Tokenizer, ilustrando a integração da causalidade temporal com a estrutura encoder-decoder.** A causalidade temporal (à esquerda) processa entradas sequenciais, enquanto o encoder-decoder (à direita) utiliza transformadas wavelet e operações causais para capturar dependências espaciais e temporais nos dados.
+
+> O bloco Haar Wavelet3D realiza o processo mostrado na visualização abaixo para um grupo de 4 valores em cada dimensão:
+
+> ![3d_wavelet_decomposition](images/cosmos_tokenizer/3d_wavelet_decomposition.png)
+>
+> **_ResBlock3D_** aplica a convolução (2 + 1)D com conexões residuais.
+
+> O bloco **_Inverse Haar Wavelet3D_** nada mais é do que a inversão da transformada original, que pega os coeficientes wavelet e reconstrói a imagem (ou vídeo) original.
+
+> O encoder e o decoder são separados do restante da arquitetura do modelo.
+
+Utilizamos a formulação convencional de autoencoder (AE) para modelar o espaço latente do tokenizer contínuo. Para tokenizers discretos, adotamos o Finite-Scalar-Quantization (FSQ) como quantizador do espaço latente. A dimensão latente para os tokenizers contínuos é 16, enquanto para os tokenizers discretos é 6, representando o número de níveis FSQ, que são $(8,8,8,5,5,5)$. Essa configuração corresponde a um vocabulário de tamanho $64.000$.
+
+> O tokenizer contínuo utiliza uma arquitetura Autoencoder, onde uma rede neural comprime os dados de entrada para uma representação latente e depois reconstrói a entrada a partir dessa forma comprimida. A dimensão do espaço latente sendo $16$ significa que cada token é representado por um vetor contínuo de 16 dimensões.
+
+> O tokenizer discreto utiliza Finite-Scalar-Quantization, que mapeia valores contínuos em um conjunto finito de níveis discretos, atribuindo a cada ponto no espaço latente um índice discreto. A dimensão latente no tokenizer discreto ainda é $6$, mas cada dimensão representa mais de um valor. Neste caso, as primeiras $3$ dimensões podem assumir $8$ valores possíveis, e as últimas três podem assumir $5$ valores cada, totalizando $8^3\times 5^3 = 64.000$ possíveis tokens discretos.
 
 ---
 
@@ -80,7 +149,7 @@ Tokenizers are fundamental building blocks of modern large-scale models. They tr
 
 The image bellow illustrates the tokenization training pipeline, where the goal is to train the encoder and decoder, so that the bottleneck token representation maximally preserves visual information in the input.
 
-![Tokenization Pipeline](images/tokenization_pipeline.png)
+![Tokenization Pipeline](images/cosmos_tokenizer/tokenization_pipeline.png)
 
 In the pipeline, an input video is encoded into tokens, which are usually much more compact than the input video. The decoder then reconstructs the input video from the tokens. _Tokenizer training is about learning the encoder and decoder to maximally preserve the visual information in the tokens_.
 
@@ -98,7 +167,7 @@ The success of tokenizers largely relies on their ability to deliver high compre
 
 The following image illustrates the two types of tokens:
 
-![Visualization of continuous and discrete tokenizers](images/token_types.png)
+![Visualization of continuous and discrete tokenizers](images/cosmos_tokenizer/token_types.png)
 
 Tokens along spatial ($\frac{H}{S_{HW}} \times \frac{W}{S_{HW}}$) and temporal ($1 + \frac{T}{S_T}$) dimensions, with a spatial compression factor of $S_{HW}$ and a temporal compression factor of $S_T$. The first temporal token represents the first input frame, enabling joint image ($T=0$) and video ($T>0$) tokenization in a shared latent space.
 
@@ -112,7 +181,7 @@ Tokens along spatial ($\frac{H}{S_{HW}} \times \frac{W}{S_{HW}}$) and temporal (
 
 The following table illustrates different visual Tokenizers and their capabilities:
 
-![Different tokenizers and capabilities](images/tokenizers_table.png)
+![Different tokenizers and capabilities](images/cosmos_tokenizer/tokenizers_table.png)
 
 The _Cosmos Tokenizer_ uses a lightweight and computationally efficient architecture with a temporally causal mechanism. Specifically, it employs causal temporal convolution layers and causal temporal attention layers to preserve the natural temporal order of video frames.
 
@@ -124,7 +193,7 @@ The tokenizers are trained directly on high-resolution images and long-duration 
 
 The plots bellow show the comparison in performance between the Cosmos Tokenizer and other ones, and denotes the superior quality even at higher compression rates:
 
-![Tokenizer comparisons](images/tokenizer_comparison.png)
+![Tokenizer comparisons](images/cosmos_tokenizer/tokenizer_comparison.png)
 
 ### Architecture
 
@@ -134,18 +203,70 @@ $$\hat{x}_{0:T} = \mathcal{D}(\varepsilon(x_{0:T}))$$
 
 > This is an overall view of the architecture, where the encoder encodes an input $x_{0:T}$ to tokens $z_{0:T'}$, and the decoder decodes these tokens and outputs $\hat{x}_{0:T}$.
 
-Our architecture employs a temporally causal design, ensuring that each stage processes only current and past frames. _Our tokenizer operates in the wavelet space, where inputs are first processed by a 2-level wavelet transform_. The wavelet transform maps the input video $x_{0:T}$ in a group-wise manner to downsample the inputs by a factor of four along $x, y,$ and $t$. The groups are formed as: $\lbrace x_0, x_{1:4}, x_{5:8}, ..., x_{(T-3):T}\rbrace \rightarrow \lbrace g_0, g_1, g_2, ..., g_{T/4}\rbrace$. Successive encoder stages follow a similar scheme, finally outputting the tokens $z_{0:T'}$. The causal design helps adapt models built on top of the tokenizer to downstream Physical AI applications that often operate on the temporal causal setting. the wavelet transform allows us to operate on a more compact video representation that eliminates redundancies in pixel information, allowing the remaining layers to focus on more semantic compression.
+Our architecture employs a temporally causal design, ensuring that each stage processes only current and past frames. _Our tokenizer operates in the wavelet space, where inputs are first processed by a 2-level wavelet transform_. The wavelet transform maps the input video $x_{0:T}$ in a group-wise manner to downsample the inputs by a factor of four along $x, y,$ and $t$. The groups are formed as: $\lbrace x_0, x_{1:4}, x_{5:8}, ..., x_{(T-3):T}\rbrace \rightarrow \lbrace g_0, g_1, g_2, ..., g_{T/4}\rbrace$. Subsequent encoder stages process the frames in a temporally causal manner as $\lbrace g_0, g_{0:1}. g_{0:2}, ...\rbrace \rightarrow \lbrace \xi_0, \xi_1, \xi_2,...  \rbrace$. Successive encoder stages follow a similar scheme, finally outputting the tokens $z_{0:T'}$.
 
-Our encoder stages are implemented using a series of residual blocks interleaved with downsampling blocks. In each block, we employ a spatio-temporal factorized 3D convolution, where we first apply a 2D convolution with a kernel size of $1\times k\times k$ to capture spatial information, followed by a temporal convolution with a kernel size of $k\times 1\times 1$ to capture temporal dynamics. We use left padding of k-1 to ensure causality. To capture long-range dependencies, we utilize a spatio-temporal factorized causal self-attention with a global support region for non-linearity. We leverage Layer Normalization (LayerNorm) instead of Group Normalization (GroupNorm), which prevents large magnitudes from appearing in specific regions of the latent space or reconstructed outputs. The decoder mirrors the encoder replacing the downsampling blocks with an upsampling block. The image bellow depicts an overview of the overall Cosmos Tokenizer architecture.
+> The _**wavelet transform**_ is a technique for signal processing at multiple scales and resolutions. It differs from more traditional transforms, such as the _Fourier Transform_ that represents data in terms of fixed-frequency sine and cosine waves, by using short, wave-like oscillations that can be scaled and shifted. This transform will decompose both spatial and temporal changes (across fames), compressing and isolating sharp changes in smooth areas.
 
-![Tokenizer architecture](images/tokenizer_architecture.png)
+> The **_Wavelet space_** is the representation of a signal after it has passed through a wavelet transform. So the sentence "_[...]our tokenizer operates in the wavelet space, where inputs are first processed by a 2-level wavelet transform[...]_", means that each spatial and temporal dimension is decomposed, extracting both low-frequency, global, and high-frequency information
+
+> In the process of passing through the 2-level wavelet transform, the data is downsized in each dimension ($x, y, t$) by a factor of $4$. So every group of $4$ pixels ($x_{t:(t+3)}$) in the $3$ dimensions of the image is represented by a compressed group ($g_i$).
+
+> The final tokenizer uses the _Haar Wavelet_, which is one of the simplest wavelet function.
+
+> ![haar_wavelet](images/cosmos_tokenizer/haar_wavelet.png)
+
+> Wavelet Transforms compress images through decomposition, firstly with a low resolution approximation of the original image, followed by processing vertical, horizontal, and diagonal details in a manner close to the one shown bellow:
+
+> ![Wavelet decomposition](images/cosmos_tokenizer/wavelet_decomposition.png)
+
+> Resulting in compressed images like this:
+
+> ![Wavelet compressed image](images/cosmos_tokenizer/wavelet_compressed_image.png)
+
+> And a 2-level wavelet transform would look something like the following:
+
+> ![2-level wavelet](images/cosmos_tokenizer/2-level_wavelet.png)
+
+The causal design helps adapt models built on top of the tokenizer to downstream Physical AI applications that often operate on the temporal causal setting. the wavelet transform allows us to operate on a more compact video representation that eliminates redundancies in pixel information, allowing the remaining layers to focus on more semantic compression.
+
+Our encoder stages are implemented using a series of residual blocks interleaved with downsampling blocks. In each block, we employ a spatio-temporal factorized 3D convolution, where we first apply a 2D convolution with a kernel size of $1\times k\times k$ to capture spatial information, followed by a temporal convolution with a kernel size of $k\times 1\times 1$ to capture temporal dynamics. We use left padding of k-1 to ensure causality.
+
+> Employs (2 + 1)D convolution.
+
+To capture long-range dependencies, we utilize a spatio-temporal factorized causal self-attention with a global support region. We use the Swish activation function for non-linearity. We leverage Layer Normalization (LayerNorm) instead of Group Normalization (GroupNorm), which prevents large magnitudes from appearing in specific regions of the latent space or reconstructed outputs. The decoder mirrors the encoder replacing the downsampling blocks with an upsampling block. The image bellow depicts an overview of the overall Cosmos Tokenizer architecture.
+
+> Global support region for non linearity means that, tokens interact with all other tokens available at a given time (due to causal architecture restrictions)
+
+> The **_Swish activation function_**, defined by $\operatorname{Swish}^{\beta}(x) = x \cdot sigmoid(\beta x) = \frac{x}{1+e^{-\beta x}}$
+
+> ![Swish activation function](images/cosmos_tokenizer/swish_activation_function.png)
+
+![Tokenizer architecture](images/cosmos_tokenizer/tokenizer_architecture.png)
 
 The image depicts the **Overall Cosmos Tokenizer architecture illustrating the integration of temporal causality and an encoder-decoder structure.** Temporal causality (left) processes sequential inputs, while the encoder-decoder (right) leverages wavelet transforms and causal operations to capture spatial and temporal dependencies in the data.
 
+> The **_Haar Wavelet3D_** block does the process shown in the visualization bellow to a group of 4 values in each dimension:
+
+> ![3d_wavelet_decomposition](images/cosmos_tokenizer/3d_wavelet_decomposition.png)
+
+> The **_ResBlock3D_** applies the (2 + 1)D Convolution with residual connections.
+
+> The **_Inverse Haar Wavelet3D_** is simply the inversion of the original transform, that takes the wavelet coefficients and reconstructs the original image (or video).
+
+> The encoder and decoder are separated by the rest of the model architecture.
+
 We employ the vanilla autoencoder (AE) formulation to model the continuous tokenizer's latent space. For discrete tokenizers, we adopt the Finite-Scalar-Quantization (FSQ) as the latent space quantizer. The latent dimension for the continuous tokenizers is 16, whereas for the discrete tokenizers, it is 6, which represents the number of the FSQ levels, which are $(8,8,8,5,5,5)$. This configuration corresponds to a vocabulary size of $64,000$.
+
+> The continuous tokenizer uses an Autoencoder architecture, where a neural network compresses the input data into a latent representation and then reconstruct the input from this compressed form. The latent space dimension being set by $16$ means each token is represented by a $16$-dimensional continuous vector.
+
+> The discrete tokenizer uses Finite-Scalar-Quantization, that maps continuous values onto a finite set of discrete levels, assigning each point in the latent space to a discrete index. The latent dimension in the discrete tokenizer is still $6$, but each dimension represents more than one value. In this case, the first $3$ dimensions can take $8$ possible values, and the last three can each take $5$ possible values for a total of $8^3\times 5^3 = 64,000$ possible discrete tokens.
 
 ---
 
 ## Referências
 
-[Cosmos World Foundation Model Platform for Physical AI](https://arxiv.org/abs/2501.03575)
+- [Cosmos World Foundation Model Platform for Physical AI](https://arxiv.org/abs/2501.03575)
+
+- [What is Wavelet Transform?Fourier vs Wavelet Transform|CWT-DWT|Wavelet Transform in Image Processing](https://www.youtube.com/watch?v=pUty-98Km_0)
+
+- [Discrete tools for virtual sculpture - Scientific Figure on ResearchGate. Available from: https://www.researchgate.net/figure/D-Haar-wavelet-decomposition_fig1_220868824 [accessed 24 Jul 2025]](https://www.researchgate.net/figure/D-Haar-wavelet-decomposition_fig1_220868824)

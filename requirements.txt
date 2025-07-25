@@ -4,3 +4,7 @@ mkdocs-jupyter
 mkdocs-material
 pymdown-extensions
 
+# Other
+PyWavelets
+numpy
+matplotlib

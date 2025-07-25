@@ -114,7 +114,7 @@ A imagem mostra a **arquitetura geral do Cosmos Tokenizer, ilustrando a integra�
 
 > ![3d_wavelet_decomposition](../images/cosmos_tokenizer/3d_wavelet_decomposition.png)
 >
-> **_ResBlock3D_** aplica a convolução (2 + 1)D com conexões residuais.
+> Tanto o **_ResBlock3D_**, quanto o **_DownSampleBlock3D_** aplicam convoluções (2 + 1)D, com a diferença entre eles sendo a presença de "_skip connections_" para o **_ResBlock3D_**.
 
 > O bloco **_Inverse Haar Wavelet3D_** nada mais é do que a inversão da transformada original, que pega os coeficientes wavelet e reconstrói a imagem (ou vídeo) original.
 
@@ -240,7 +240,7 @@ The image depicts the **Overall Cosmos Tokenizer architecture illustrating the i
 
 > ![3d_wavelet_decomposition](../images/cosmos_tokenizer/3d_wavelet_decomposition.png)
 
-> The **_ResBlock3D_** applies the (2 + 1)D Convolution with residual connections.
+> Both the **_ResBlock3D_** and the **_DownSample3D_** apply (2 + 1)D Convolutions with the difference being the skip connections in the **_ResBlock3d_**.
 
 > The **_Inverse Haar Wavelet3D_** is simply the inversion of the original transform, that takes the wavelet coefficients and reconstructs the original image (or video).
 

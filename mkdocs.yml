@@ -7,7 +7,9 @@ nav:
   - Difussion models: difussion.md
   - Autoregressive models: autoregressive.md
   - Tokens:
-      - cosmos_tokenizer/cosmos_tokenizer.md
+      - Cosmos Tokenizer:
+        - tokens/cosmos_tokenizer/cosmos_tokenizer.md
+        - tokens/cosmos_tokenizer/wavelet_compression.ipynb 
       - tokens/dsc_tokenization.md
 
 markdown_extensions:

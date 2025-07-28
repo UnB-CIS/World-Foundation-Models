@@ -126,6 +126,59 @@ Utilizamos a formulação convencional de autoencoder (AE) para modelar o espaç
 
 > O tokenizer discreto utiliza Finite-Scalar-Quantization, que mapeia valores contínuos em um conjunto finito de níveis discretos, atribuindo a cada ponto no espaço latente um índice discreto. A dimensão latente no tokenizer discreto ainda é $6$, mas cada dimensão representa mais de um valor. Neste caso, as primeiras $3$ dimensões podem assumir $8$ valores possíveis, e as últimas três podem assumir $5$ valores cada, totalizando $8^3\times 5^3 = 64.000$ possíveis tokens discretos.
 
+### Estratégia de Treinamento
+
+Empregamos uma estratégia de treinamento conjunto alternando mini-batches de imagens e vídeos em uma frequência pré-definida. Supervisionamos apenas a saída final do decoder do nosso tokenizer. Não utilizamos losses auxiliares conectados aos espaços latentes.
+
+> "_[...] mini-batches de imagens e vídeos em uma frequência pré-definida [...]_" significa que o modelo utiliza lotes de imagens e vídeos durante o treinamento, de maneira alternada, em uma frequência pré-estabelecida, ou seja, trocando entre eles a cada $N$ lotes.
+
+> A ideia do treinamento conjunto para imagens e vídeos expõe a rede tanto a dados de um único quadro quanto a dados multi-quadro, tornando seu espaço latente mais apropriado para ambos os tipos de entrada.
+
+> Tanto os tokenizers discretos quanto os contínuos mapeiam dados contínuos para um espaço latente, e a frase "_[...] Não utilizamos losses auxiliares conectados aos espaços latentes [...]_" significa que o treinamento não utiliza losses adicionais para estimular certos comportamentos ou propriedades (como desmembramento, compacidade ou interpretabilidade) nesse espaço latente.
+
+Utilizamos um esquema de treinamento em duas etapas. Na primeira etapa, otimizamos com o _L1 Loss_, que minimiza a diferença RGB pixel a pixel entre o vídeo de entrada e o reconstruído ($\hat{x}_{0:T}$), dada por:
+
+$$\mathcal{L}_1 = ||\hat{x}_{0:T} - x_{0:T}||_1$$
+
+> $\mathcal{L}_1$ loss é outro nome para **_Erro Absoluto Médio_**. Em vez de elevar ao quadrado a diferença entre o valor previsto e o real (como no **_Mean Squared Error_**, ou $\mathcal{L}_2$ loss), toma-se o valor absoluto da diferença entre eles.
+
+> A função é representada em [**_Notação de Einstein_**](https://en.wikipedia.org/wiki/Einstein_notation).
+
+E o perceptual loss, baseado nas features do VGG-19, dado por:
+
+$$\frac{1}{L}\sum_{l=1}^{L} \sum_{t}^{}{ \alpha_l || \mathrm{VGG}_l(\hat{x}_t) - \mathrm{VGG}_l(x_t) ||1}$$
+
+Onde $\mathrm{VGG}_l(\cdot) \in \mathbb{R}^{H\times W\times C}$ são as features extraídas da $l$-ésima camada de uma rede _VGG-19_ pré-treinada, $L$ é o número de camadas consideradas, e $\alpha_l$ é o peso da camada $l$.
+
+> O perceptual loss é uma forma de analisar o quão bem uma imagem está sendo reconstruída, gerada ou aprimorada. Ele compara a representação das imagens no espaço de features em vez da diferença píxel a píxel. Enquanto o $\mathcal{L}_1$ loss mede a diferença entre duas imagens em cada etapa, o perceptual loss mede o quão "distantes" dois mapas de features estão um do outro.
+
+> A função de loss acima determina quão diferente está o mapa de features (calculando o $\mathcal{L}_1$ loss) em uma camada $l$ do modelo VGG-19, entre a imagem real e a imagem gerada nessa camada. Após medir as diferenças absolutas, multiplica-se esse valor pelo peso da camada ($\alpha_l$).
+
+Na segunda etapa, utilizamos a optical flow ($\mathrm{OF}$) loss para tratar a suavidade temporal dos vídeos reconstruídos:
+
+$$\frac{1}{T}\sum_{t=1}^{T}||\mathrm{OF}(\hat{x}_{t}, \hat{x}_{t - 1}) - \mathrm{OF}({x}_{t}, {x}_{t - 1})||_1 + \frac{1}{T}\sum_{t=0}^{T - 1}||\mathrm{OF}(\hat{x}_{t}, \hat{x}_{t - 1}) - \mathrm{OF}({x}_{t}, {x}_{t - 1})||_1$$
+
+> **_Optical Flow_** é o movimento aparente de objetos, superfícies e contornos entre quadros consecutivos de uma sequência de vídeo. Ele cria um campo vetorial onde cada vetor representa o movimento de um pixel de um quadro para o seguinte, ajudando a entender como e onde ocorre o movimento em uma cena.
+
+> Esse loss é utilizado para estimular que o modelo de vídeo preserve os padrões de movimento do vídeo original. $\mathrm{OF}(\hat{x}_{t}, \hat{x}_{t - 1})$ é o optical flow entre os quadros reconstruídos, e $\mathrm{OF}(x_{t}, x_{t - 1})$ é o optical flow entre os quadros reais.
+
+> A função $\mathcal{L}_{Flow}$ soma o $\mathcal{L}_1$ loss entre todos os pares consecutivos de quadros do vídeo reconstruído e do original. Isso penaliza discrepâncias temporais entre os frames reconstruídos e originais.
+
+Além disso, utilizamos o adversarial loss na etapa de fine-tuning para melhorar ainda mais os detalhes da reconstrução, especialmente em taxas de compressão elevadas.
+
+> O adversarial loss é uma técnica empregada em _GANs_, onde uma rede discriminadora tenta distinguir entre imagens reais e geradas.
+
+Treinamos os tokenizers de imagem (CI e DI) em duas taxas de compressão: $8\times 8$ e $16\times 16$. De maneira análoga, treinamos os tokenizers de vídeo (CV e DV) em três taxas de compressão: $4\times 8\times 8$, $8\times 8\times 8$, e $8\times 16\times 16$. Aqui, as taxas de compressão são $H\times W$ para imagens e $T\times H\times W$ para vídeos, onde $T$ é a dimensão temporal, e $H$ e $W$ são as dimensões espaciais.
+
+> As taxas de compressão determinam o quanto da resolução de entrada é reduzida durante a tokenização.
+
+Para os tokenizers de vídeo, criamos duas variantes:
+
+1. **Cosmos-0.1-Tokenizer**: treinado utilizando mini-batches com menor quantidade de frames por vídeo ($49$ frames para CV e $17$ frames para DV).
+2. **Cosmos-1.0-Tokenizer**: treinado utilizando mini-batches com maior quantidade de frames por vídeo ($121$ frames para CV e $49$ frames para DV).
+
+Essa abordagem garante flexibilidade no tratamento de diferentes resoluções espaciais e temporais para dados de imagem e vídeo.
+
 ---
 
 ## English
@@ -251,6 +304,59 @@ We employ the vanilla autoencoder (AE) formulation to model the continuous token
 > The continuous tokenizer uses an Autoencoder architecture, where a neural network compresses the input data into a latent representation and then reconstruct the input from this compressed form. The latent space dimension being set by $16$ means each token is represented by a $16$-dimensional continuous vector.
 
 > The discrete tokenizer uses Finite-Scalar-Quantization, that maps continuous values onto a finite set of discrete levels, assigning each point in the latent space to a discrete index. The latent dimension in the discrete tokenizer is still $6$, but each dimension represents more than one value. In this case, the first $3$ dimensions can take $8$ possible values, and the last three can each take $5$ possible values for a total of $8^3\times 5^3 = 64,000$ possible discrete tokens.
+
+### Training Strategy
+
+We employ a joint training strategy by alternating mini-batches of images and videos at a preset frequency. We only supervise the final output of our tokenizer's decoder. We do not use auxiliary losses tapped into the latent spaces.
+
+> "_[...] mini-batches of images and videos at a preset frequency [...]_", means that the model uses batches of both images and videos during training, in an alternating manner, set at a preset frequency, or in other words, switching between the two every $N$ number of batches.
+
+> The idea of joint training for both images and videos, gets the network exposed to both single-framed and multi-framed data, so its latent space becomes more suitable for both types of input data.
+
+> Both the discrete and the continuous tokenizers, map continuous data to a latent space, and the sentence "_[...] We do not use auxiliary losses tapped into the latent spaces [...]_" means that the training does not use any additional losses in order to encourage certain behaviours or properties (such as disentanglement, compactness, or interpretability) in that latent space.
+
+We employ a two-stage training scheme. In the first stage, we optimize with the _L1 Loss_ that minimizes the pixel-wise RGB difference between the input and reconstructed video ($\hat{x}_{0:T}$) given by:
+
+$$\mathcal{L}_1 = ||\hat{x}_{0:T} - x_{0:T}||_1$$
+
+> $\mathcal{L}_1$ loss is another name for **_Mean Absolute Error_**, where instead of squaring the difference between the predicted value and its actual value, in order to make the values positive (as performed in **_Mean Squared Error_**, or $\mathcal{L}_2$ loss), we take the absolute difference between the two values.
+
+> The function is represented in the [**_Einstein Notation_**](https://en.wikipedia.org/wiki/Einstein_notation).
+
+And the perceptual loss based on the VGG-19 features, given by:
+
+$$\frac{1}{L}\sum_{l=1}^{L} \sum_{t}^{}{ \alpha_l || \mathrm{VGG}_l(\hat{x}_t) - \mathrm{VGG}_l(x_t) ||1}$$
+
+Where $\mathrm{VGG}_l(\cdot) \in \mathbb{R}^{H\times W\times C}$ is the features from the $l$-th layer of a pre-trained _VGG-19_ network, $L$ is the number of layers considered, and $\alpha_l$ is the weight of the $l$-th layer.
+
+> A perceptual loss is a way of analysing how well an image is being reconstructed, generated, or enhanced. It compares the feature representations of images rather than the pixel-wise difference. So where a simple $\mathcal{L}_1$ loss measures the pixel difference between two images at a given step, the perceptual loss above, will measure how "far apart" two feature maps are from one another.
+
+> The loss function above, determines how different the feature map (compute the $\mathcal{L}_1$ loss), at a given layer $l$ of the VGG-19 model, between the real image and the generated image at the layer $l$. After measuring the absolute differences, it multiplies that value by the weight of that layer ($\alpha_l$).
+
+In the second stage, we use the optical flow ($\mathrm{OF}$) loss to handle the temporal smoothness of reconstructed videos,
+
+$$\frac{1}{T}\sum_{t=1}^{T}||\mathrm{OF}(\hat{x}_{t}, \hat{x}_{t - 1}) - \mathrm{OF}({x}_{t}, {x}_{t - 1})||_1 + \frac{1}{T}\sum_{t=0}^{T - 1}||\mathrm{OF}(\hat{x}_{t}, \hat{x}_{t - 1}) - \mathrm{OF}({x}_{t}, {x}_{t - 1})||_1$$
+
+> **_Optical Flow_** is the apparent motion of objects, surfaces and edges between consecutive frames in a video sequence. It is a vector field where each vector represents the motion of pixel from one frame to the next. This process, helps understand how and where things move in a scene.
+
+> This loss is used to encourage a video model to preserve the motion patterns present in the original video. $\mathrm{OF}(\hat{x}_{t}, \hat{x}_{t - 1})$ is the optical flow between reconstructed frames $\hat{x}_{t}, \hat{x}_{t - 1}$, and $\mathrm{OF}(x_{t}, x_{t - 1})$ is the optical flow between the actual frames $x_{t}, x_{t - 1}$.
+
+> The function for $\mathcal{L}_{Flow}$ sums the $\mathcal{L}_1$ loss between the frames from $(t=1 \rightarrow t=T)$, and the loss between the frames $(t=0 \rightarrow t=T-1)$. This is done in order to penalise mismatches between reconstructed and original video frames over all consecutive frame pairs.
+
+Additionally, we use adversarial loss in the fine-tuning stage to further enhance reconstruction details, particularly at large compression rates.
+
+> Adversarial loss is a technique used in *GAN*s where a discriminator network tries to distinguish between real and generated images.
+
+We train the image tokenizers (CI and DI) at two compression rates: $8\times 8$ and $16\times 16$. Similarly we train the video tokenizers (CV and DV) at three compression rates: $4\times 8\times 8$, $8\times 8\times 8$, and $8\times 16\times 16$. Here, the compression rates are expressed as $H\times W$ for images and $T\times H\times W$ for videos, where $T$ represents the temporal dimension and $H$ and $W$ represent the spatial dimensions.
+
+> The compression rates determine how much of the input's resolution is reduced during tokenization.
+
+For the video tokenizers, we create two variants:
+
+1. **Cosmos-0.1-Tokenizer**: Trained using mini-batches sampling a smaller number of video frames ($49$ frames for CV and $17$ frames for DV).
+2. **Cosmos-1.0-Tokenizer**: Trained using mini-batches sampling a larger number of video frames ($121$ frames for CV and $49$ frames for DV).
+
+This approach ensures flexibility in handling varying temporal and spatial resolutions for image and video data.
 
 ---
 

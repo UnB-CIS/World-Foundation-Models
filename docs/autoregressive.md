@@ -8,13 +8,35 @@ Um modelo autorregressivo (AR) é um tipo de modelo estatístico que prevê valo
 
 - **Saída**: Previsão do próximo valor na sequência (ex: próxima palavra, próximo quadro).
 
+A fórmula que descreve os modelos autoregressivos é expressa como
+
+\( X_t = \sum_{i=1}^{p} \phi_i X_{t-i} + \varepsilon_t \).
+
+Onde:
+
+- \( X_t \) é o valor da série temporal no tempo \( t \),
+- \( \phi_i \) são os coeficientes autoregressivos,
+- \( p \) é a ordem do modelo autoregressivo,
+- \( X_{t-i} \) são os valores passados da série temporal
+- \( \varepsilon_t \) é o erro ou ruído, considerado como uma variável aleatória com média zero e variância constante
+
+![Comparação de 2 modelos AR](../images/autoregressive/AR_comparison.png)
+
+> Comparação entre 2 modelos autoregressivos com parâmetros diferentes. A imagem mostra a flexibilidade dos modelos em tratar diferentes padrões de séries temporais.
+
 ### Exemplos de uso
 
 Modelos autoregressivos são muito usados em áreas como processamento de linguagem natural (PLN) e séries temporais, devido à sua capacidade de capturar dependências sequenciais e temporais. Alguns exemplos de modelos autoregressivos são:
 
 - **Séries temporais**: usados para prever dados sequenciais, como preços de ações, previsão do tempo ou tráfego de dados
 
-- **PLN**: modelos como o GPT funcionam com abordagem autoregressiva, gerando a próxima palavra com base nas palavras anteriores, sequencialmente
+- **PLN**: modelos como o GPT funcionam com abordagem autoregressiva, gerando a próxima palavra com base nas palavras anteriores, sequencialmente. A dependência entre palavras anteriores é importante para a geração de contexto e de frases coerentes.
+
+- **Áudio e Sinais**: O modelo AR é uma base clássica na análise de sinais de áudio, como na codificação de áudio, reconhecimento de fala e processamento de sinais de música. A autocorrelação entre os dados de áudio em diferentes tempos pode ser modelada para prever sons ou identificar padrões temporais.
+
+![Exemplo de autoregressão aplicado em contexto de PLN](../images/autoregressive/exemplo_autoregressao_linguagem.png)
+
+> Exemplo de aplicação autoregressiva para previsão da próxima palavra em um contexto. Percebe-se a sequencialidade das previsões, em que apenas uma palavra é predita de cada vez. Além disso, cada palavra depende das palavras previamente geradas, demonstrando o caráter autoregressivo dos modelos de linguagem.
 
 ## O que são World Foundation Models (WFMs)?
 
@@ -25,6 +47,14 @@ Na construção de WFMs, usamos uma abordagem em duas etapas, de pré-treinament
 ## WFM baseado em modelo autoregressivo
 
 WFMs que utilizam abordagens autoregressivas aplicam os mesmos princípios dos modelos de linguagem à geração de ambientes simulados. Nesta arquitetura, a simulação de mundo é gerada por meio da previsão do próximo token, onde cada frame de vídeo é convertido em uma sequência de tokens que são processados sequencialmente pelo modelo. O caráter autoregressivo vem justamente da previsão dos próximos tokens com base na sequência de frames já vista.
+
+Esses tokens podem representar pixels, patches visuais (como no Vision Transformer), embeddings de texto, comandos ou ações. O modelo é treinado para prever o próximo token a partir de um contexto acumulado, respeitando a ordem causal dos dados: cada predição é condicionada apenas pelos valores presentes e passados de entrada, mas nunca de valores futuros.
+
+![Entradas para o WFM](../images/autoregressive/WFM_input_imagens_texto.png)
+
+> Frequentemente usa-se a combinação de imagens e texto para gerar as ações que a IA física realizará. A combinação de frames de imagens com inputs textuais, proporcionados pela arquitetura transformer do modelo, permite um controle mais fino das ações realizadas pelo agente no mundo real.
+
+Essa integração multimodal (combinação de várias modalidades de dados), permite que o modelo funcione como um agente geral que observa o ambiente (por vídeo ou imagens), entende comandos (por texto) e gera sequências de ações com base nessas entradas. O modelo aprende a simular e antecipar estados do mundo, funcionando como um planejador autoregressivo que age com base em observações contínuas do ambiente.
 
 ### Arquitetura do Sistema
 

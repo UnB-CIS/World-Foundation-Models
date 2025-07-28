@@ -179,6 +179,57 @@ Para os tokenizers de vídeo, criamos duas variantes:
 
 Essa abordagem garante flexibilidade no tratamento de diferentes resoluções espaciais e temporais para dados de imagem e vídeo.
 
+### Resultados
+
+![Tokenizer Evaluation 1](../images/cosmos_tokenizer/tokenizer_evaluation_1.png)
+
+![Tokenizer Evaluation 2](../images/cosmos_tokenizer/tokenizer_evaluation_2.png)
+
+Nós avaliamos nossa suíte Cosmos Tokenizer em vários datasets benchmark de imagens e vídeos. Para a avaliação dos image tokenizers, seguimos trabalhos anteriores para avaliar o **MS-COCO 2017** e o **ImageNet-1K**. Utilizamos o subconjunto de validação do **MS-COCO 2017** com $5.000$ imagens, e o subconjunto de validação do **ImageNet-1K** com $50.000$ imagens como benchmark para avaliação de imagens.
+
+**TokenBench**. Para avaliação dos video tokenizers, ainda não existe um benchmark padrão para vídeos de alta resolução e longa duração. Para isso, introduzimos um benchmark chamado _TokenBench_ para cobrir uma ampla variedade de domínios, incluindo manipulação robótica, direção, egocêntrico e vídeos da web, padronizando assim a avaliação. Utilizamos datasets de vídeo existentes que são comumente usados para várias tarefas, incluindo **BDD100K**, **EgoExo-4D**, **BridgeData V2**, e **Panda-70M**. Amostramos aleatoriamente $100$ vídeos de cada dataset e pré-processamos pegando os primeiros $10$ segundos e redimensionando a menor dimensão para $1080$. Para o **Panda-70M**, filtramos manualmente vídeos com conteúdo de baixa qualidade e poucos movimentos. Para o **EgoExo-4D**, selecionamos aleatoriamente $100$ cenas e amostramos um vídeo egocêntrico e um exocêntrico. Isso resulta em um total de $500$ vídeos.
+
+> Imagens **Egocentric** são do ponto de vista da primeira pessoa, enquanto imagens **Exocentric** são de pontos de vista de terceira pessoa.
+
+Além do _TokenBench_, também avaliamos nossos video tokenizers no dataset **DAVIS** em resolução de $1080p$.
+
+**Baselines e métricas de avaliação**. Avaliamos nossos tokenizers com diferentes taxas de compressão para demonstrar sua eficácia para diversas necessidades computacionais. Comparamos cada um desses tokenizers com os state-of-the-art tokenizers de imagem e vídeo. As métricas de avaliação incluem **_Peak Signal-to-Noise Ratio (PSNR)_**, **_Structural Similarity(SSIM)_**, **_reconstruction Fréchet Inception Distance (rFID)_** para imagens e **_reconstruction Fréchet Video Distance (rFVD)_** para vídeos.
+
+> **_Peak Signal-to-Noise Ratio (PSNR)_**: Mede a diferença média entre as imagens/vídeos originais e reconstruídos focando na fidelidade a nível de pixel. Valores mais altos de **PSNR** indicam melhor qualidade e menos distorção (não necessariamente para a percepção humana).
+> $$PSNR = 10 \cdot \log_{10} \left(\frac{{MAX}_I^2}{MSE}\right)$$
+> Onde $MAX$ é o valor máximo possível de pixel da imagem ($255$ para imagens de $8$ bits).
+
+> **_Structural Similarity Index Measure (SSIM)_**: Mede a similaridade estrutural percebida comparando luminância, contraste e estrutura. Essa métrica está mais alinhada com a visão humana, em comparação ao $PSNR$.
+> $$SSIM(x, \hat{x}) = \frac{(2\mu_x\mu_{\hat{x}} + c_1)(2\sigma_{x\hat{x}} + c_2)}{(\mu_x^2 + \mu_{\hat{x}}^2 + c_1)(\sigma_x^2 + \sigma_{\hat{x}}^2 + c_2)}$$
+> Onde:
+>
+> - $\mu_x, \mu_{\hat{x}}$ são as médias dos patches originais e reconstruídos.
+> - $\sigma_x^2, \sigma_{\hat{x}}^2$ são as variâncias dos patches.
+> - $\sigma_{x\hat{x}}$ é a covariância entre os patches.
+> - $c_1, c_2$ são pequenas constantes para estabilizar a divisão.
+
+> **_reconstruction Fréchet Inception Distance (rFID)_**: Mede a similaridade distributiva entre as features abstratas das imagens originais e reconstruídas. Valores mais baixos indicam que as reconstruções são mais estatisticamente similares às imagens reais em espaços de características de alto nível.
+> $$rFID(X,Y) = ||\mu_X - \mu_Y||_2^2 + Tr \left(\sum X + \sum Y - 2(\sum X\sum Y)^{1/2}\right)$$
+>
+> - $X,Y$ são coleções de features das imagens reais e reconstruídas.
+> - $\mu_X, \mu_Y$ são as médias dos vetores de features originais e reconstruídos.
+> - $\sum X, \sum Y$ são as matrizes de covariância.
+> - $Tr$ é o traço da matriz.
+
+> **_reconstruction Fréchet Video Distance (rFVD)_**: Mede o quão próxima está a distribuição dos vídeos reconstruídos dos vídeos reais em espaços de features. Valores mais baixos indicam não só vídeos mais realistas, mas também movimentos e dinâmicas temporais que correspondem aos vídeos originais.
+> $$rFVD(X,Y) = ||\mu_X - \mu_Y||_2^2 + Tr \left(\sum X + \sum Y - 2(\sum X\sum Y)^{1/2}\right)$$
+>
+> - $X,Y$ são coleções de features dos vídeos reais e reconstruídos.
+> - $\mu_X, \mu_Y$ são as médias dos vetores de features originais e reconstruídos.
+> - $\sum X, \sum Y$ são as matrizes de covariância.
+> - $Tr$ é o traço da matriz.
+
+**Resultados quantitativos** Como mostrado nas tabelas ($5,6$), o Cosmos Tokenizer alcança desempenho state-of-the-art em todas as métricas comparadas a trabalhos anteriores tanto no dataset de vídeo _DAVIS_ quanto no _TokenBench_, com uma taxa de compressão espaço-temporal de $4\times 8\times 8$. Além disso, mesmo com taxas de compressão $2\times$ e $8\times$ maiores, o Cosmos Tokenizer frequentemente é comparável ou até melhor do que trabalhos anteriores com taxa de compressão $8\times 8$, como mostrado nas tabelas $7$ e $8$.
+
+Como mostrado nessas tabelas, comparado a trabalhos anteriores, o Cosmos Tokenizer consistentemente alcança resultados de state-of-the-art com taxa de compressão $8\times 8$. Mais importante, numa taxa de compressão $4\times$ maior de $16\times 16$, a qualidade da imagem do Cosmos Tokenizer é frequentemente comparável ou até melhor do que trabalhos anteriores em $8\times 8$.
+
+Como mostrado na tabela $9$, para ambos image e video tokenizers, o Cosmos Tokenizer é de $2\times$ a $12\times$ mais rápido enquanto mantém o menor tamanho de modelo comparado a trabalhos anteriores, demonstrando que o Cosmos Tokenizer tem alta eficiência para codificação e decodificação de conteúdo visual.
+
 ---
 
 ## English
@@ -357,6 +408,57 @@ For the video tokenizers, we create two variants:
 2. **Cosmos-1.0-Tokenizer**: Trained using mini-batches sampling a larger number of video frames ($121$ frames for CV and $49$ frames for DV).
 
 This approach ensures flexibility in handling varying temporal and spatial resolutions for image and video data.
+
+### Results
+
+![Tokenizer Evaluation 1](../images/cosmos_tokenizer/tokenizer_evaluation_1.png)
+
+![Tokenizer Evaluation 2](../images/cosmos_tokenizer/tokenizer_evaluation_2.png)
+
+We evaluate our Cosmos Tokenizer suite on various image and video benchmark datasets. For the evaluation of image tokenizers, we follow prior art to evaluate **MS-COCO 2017** and **ImageNet-1K**. We use the **MS-COCO 2017** validation subset of $5,000$ images, and **ImageNet-1K** validation subset of $50,000$ images as image evaluation benchmark.
+
+**TokenBench**. For video tokenizer evaluation, there is not yet a standard benchmark for high-resolution and long-duration videos. To this end, we introduce a benchmark called _TokenBench_ to cover a wide variety of domains, including robotic manipulation, driving, egocentric, and web videos, and standardize the evaluation. We resort to existing video datasets that are commonly used for various tasks, including **BDD100K**, **EgoExo-4D**, **BridgeData V2**, and **Panda-70M**. We randomly sample $100$ videos from each dataset and preprocess them by taking the first $10$ seconds and resizing the short size to $1080$. For **Panda-70M**, we manually filter out the videos with low-quality content and small motions. For **EgoExo-4D** , we randomly pick $100$ scenes and sample one egocentric video and one exocentric video. This results in a total of $500$ videos.
+
+> **Egocentric** images are from first-person viewpoint, whereas **Exocentric** images are from third-person viewpoints.
+
+In addition to _TokenBench_, we also evaluate our video tokenizers on the **DAVIS** dataset at $1080p$ resolution.
+
+**Baselines and evaluation metrics**. We evaluate our tokenizers at various compression rates to showcase their effectiveness for different computational needs. We compare each of these tokenizers with state-of-the-art image and video tokenizers. The evaluation metrics include **_Peak Signal-to-Noise Ratio (PSNR)_**, **_Structural Similarity(SSIM)_**, **_reconstruction Fréchet Inception Distance (rFID)_** for images and **_reconstruction Fréchet Video Distance (rFVD)_** for videos.
+
+> **_Peak Signal-to-Noise Ratio (PSNR)_**: Measure the average difference between the original and reconstructed images/videos with focus on pixel-level fidelity. Higher **PSNR** values imply better quality and less distortion (not necessarily for human vision).
+> $$PSNR = 10 \cdot \log_{10} (\frac{{MAX}_I^2}{MSE})$$
+> Where $MAX$ is the maximum possible pixel value of the image ($255$ for $8$ bit images).
+
+> **_Structural Similarity Index Measure(SSIM)_**: Measures the perceived structural similarity by comparing luminance, contrast and structure. This metric is better aligned with human vision, compared to $PSNR$.
+> $$SSIM(x, \hat{x}) = \frac{(2\mu_x\mu_{\hat{x}} + c_1)(2\sigma_{x\hat{x}} + c_2)}{(\mu_x^2 + \mu_{\hat{x}}^2 + c_1)(\sigma_x^2 + \sigma_{\hat{x}}^2 + c_1)}$$
+> Where:
+>
+> - $\mu_x, \mu_{\hat{x}}$ are means of original and reconstructed patches.
+> - $\sigma_x^2, \sigma_{\hat{x}}^2$ are variances of the patches.
+> - $\sigma_{x\hat{x}}$ is the covariance between patches.
+> - $c_1, c_2$ are small constants for division stabilization.
+
+> **_reconstruction Fréchet Inception Distance (rFID)_**: Measures distributional similarity between the abstract features of the original and reconstructed images. Lower values indicate reconstructions are more statistically similar to real images in high-level feature spaces.
+> $$rFID(X,Y) = ||\mu_X - \mu_Y||_2^2 + Tr (\sum X + \sum Y - 2(\sum X\sum Y)^{1/2})$$
+>
+> - $X,Y$ are collections of features from the real and reconstructed images.
+> - $\mu_X, \mu_Y$ are means of original and reconstructed feature vectors.
+> - $\sum X, \sum Y$ are covariance matrices.
+> - $Tr$ is the matrix trace.
+
+> **_reconstruction Fréchet Video Distance (rFVD)_**: Measures how close the distribution of reconstructed videos is to real videos in feature spaces. Lower values indicate not only more realistic looking videos, but motion an temporal dynamic matching the original videos.
+> $$rFVD(X,Y) = ||\mu_X - \mu_Y||_2^2 + Tr (\sum X + \sum Y - 2(\sum X\sum Y)^{1/2})$$
+>
+> - $X,Y$ are collections of features from the real and reconstructed images.
+> - $\mu_X, \mu_Y$ are means of original and reconstructed feature vectors.
+> - $\sum X, \sum Y$ are covariance matrices.
+> - $Tr$ is the matrix trace.
+
+**Quantitative results** As shown in both tables ($5,6$), Cosmos Tokenizer achieves state-of-the-art performance in all the metrics compared to prior arts on both the _DAVIS_ video dataset and _TokenBench_, with a spatial-temporal compression ratio of $4\times 8\times 8$. Moreover, even with $2\times$ and $8\times$ higher compression ratios, Cosmos Tokenizer is often comparable or even better than prior art at $8\times 8$ compression ratio, as shown in tables $7$, and $8$.
+
+As shown in these tables, compared to prior arts, Cosmos Tokenizer consistently achieves state-of-the-art results with a compression ratio of $8\times 8$. More importantly, at a $4\times$ larger compression ratio of $16\times 16$, the image quality of Cosmos Tokenizer is often comparable or even better than prior art at $8\times 8$ compression ratio.
+
+As shown in table $9$, for both image and video tokenizers, Cosmos Tokenizer is $2\times \ ~ \ 12\times$ faster while maintaining the smallest model size compared to prior arts, showing that Cosmos Tokenizer has high efficiency for encoding and decoding visual content.
 
 ---
 

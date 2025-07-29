@@ -2,6 +2,14 @@
 
 ## Português
 
+### Resumo
+
+O _Cosmos Tokenizer_ é composto por **2 partes**: um **codificador** e um **decodificador**. O **codificador** começa com uma operação _Haar Wavelet 3D_, para comprimir a imagem ou vídeo, seguida de vários blocos compostos por uma camada _Causal ResBlock3D_, camadas _Causal DownSample3D_ e uma camada _Causal SpatioTemporalAttn_. O **decodificador** espelha essa arquitetura, substituindo as camadas de downsample por camadas _Causal UpSample3D_ e, ao final, trocando a _Haar Wavelet 3D_ por sua inversa.
+
+Ambas as partes são treinadas juntas, com supervisão apenas na saída do decodificador. Esses tokenizers funcionam para arquiteturas autoregressivas e de difusão, sendo capazes de tokenizar imagens/vídeos de maneira discreta (para modelos AR) ou contínua (para modelos de difusão).
+
+O _Cosmos Tokenizer_ atinge desempenho superior em menos tempo que outros tokenizers, principalmente devido à sua arquitetura, além de conseguir processar múltiplos tipos de taxas de compressão e operar de forma ubíqua para imagens e vídeos.
+
 ### Visão Geral
 
 Tokenizers são blocos fundamentais na construção de modelos modernos em larga escala. Eles transformam dados brutos em representações mais eficientes ao aprender um espaços latentes "bottle-necked" descobertos de maneira não supervisionada. Especificamente, tokenizers visuais mapeiam dados visuais brutos e redundantes em tokens semânticos compactos, o que os torna cruciais para lidar com dados visuais de alta dimensionalidade.
@@ -234,6 +242,14 @@ Como mostrado na tabela $9$, para ambos image e video tokenizers, o Cosmos Token
 
 ## English
 
+### Summary
+
+The _Cosmos Tokenizer_ is composed by $2 $parts, an **encoder** and a **decoder**. The **encoder** starts with a _Haar Wavelet 3D_ operation, to compress the image or video, then a number of blocks composed by a _Causal ResBlock3D_ layer, _Causal DownSample3D_ layers, and a _Causal SpatioTemporalAttn_ layer. The **decoder** mirrors this architecture, substituting the downsample layers for _Causal UpSample3D_ layers, and in the end substituting the _Haar Wavelet3D_ for its inverse.
+
+Both parts are trained together, with supervision only in the output of the decoder. These tokenizers work for both autoregressive and diffusion architectures, being able to tokenize images/videos in a discrete (for AR models), or continuous manner (for diffusion models).
+
+The _Cosmos Tokenizer_ reaches higher performance in less time than other tokenizers, mostly due to its architecture, while also being able to process multiple types of compression rates, and work ubiquitously for images and videos.
+
 ### Overview
 
 Tokenizers are fundamental building blocks of modern large-scale models. They transform raw data into more efficient representations by learning a bottle-necked latent space discovered in an unsupervised manner. Specifically, visual tokenizers map raw and redundant visual data into compact semantic tokens, making them crucial for handling high-dimensional visual data.
@@ -462,7 +478,7 @@ As shown in table $9$, for both image and video tokenizers, Cosmos Tokenizer is 
 
 ---
 
-## Referências
+## Referências | References
 
 - [Cosmos World Foundation Model Platform for Physical AI](https://arxiv.org/abs/2501.03575)
 

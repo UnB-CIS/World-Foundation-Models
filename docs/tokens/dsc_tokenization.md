@@ -298,8 +298,6 @@ O problema de fora do vocabulário na tokenização por palavra e a extensão da
 
 Essa solução é o Byte Pair Encoding (BPE), utilizada em quase todos os modelos modernos.
 
-## Visão Geral
-
 ## English
 
 ### Overview

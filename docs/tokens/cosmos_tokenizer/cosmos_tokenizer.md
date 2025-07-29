@@ -2,6 +2,16 @@
 
 ## Português
 
+A seguir apresentamos trechos do capítulo $5$ do artigo **_Cosmos World Foundation Model Platform for Physical AI_**, interpoladas com comentários clarificando e/ou contextualizando conteúdos de seus parágrafos.
+
+---
+
+Trechos formatados de forma semelhante a esse parágrafo correspondem a insertos do artigo (traduzidos).
+
+> Trechos formatados de forma semelhante a esse parágrafo, são comentários a respeito do parágrafo diretamente acima.
+
+---
+
 ### Resumo
 
 O _Cosmos Tokenizer_ é composto por **2 partes**: um **codificador** e um **decodificador**. O **codificador** começa com uma operação _Haar Wavelet 3D_, para comprimir a imagem ou vídeo, seguida de vários blocos compostos por uma camada _Causal ResBlock3D_, camadas _Causal DownSample3D_ e uma camada _Causal SpatioTemporalAttn_. O **decodificador** espelha essa arquitetura, substituindo as camadas de downsample por camadas _Causal UpSample3D_ e, ao final, trocando a _Haar Wavelet 3D_ por sua inversa.
@@ -241,6 +251,16 @@ Como mostrado na tabela $9$, para ambos image e video tokenizers, o Cosmos Token
 ---
 
 ## English
+
+Below we present excerpts from chapter 5 of the article **_Cosmos World Foundation Model Platform for Physical AI_**, interspersed with comments clarifying and/or contextualizing the content of its paragraphs.
+
+---
+
+Passages formatted similarly to this paragraph correspond to translated excerpts from the article.
+
+> Passages formatted similarly to this paragraph are comments regarding the paragraph directly above.
+
+---
 
 ### Summary
 

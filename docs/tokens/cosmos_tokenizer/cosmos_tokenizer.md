@@ -526,10 +526,10 @@ We compare each of these tokenizers with state-of-the-art image and video tokeni
 > **_reconstruction Fréchet Video Distance (rFVD)_**: Measures how close the distribution of reconstructed videos is to real videos in feature spaces. Lower values indicate not only more realistic looking videos, but motion an temporal dynamic matching the original videos.
 > $$rFVD(X,Y) = ||\mu_X - \mu_Y||_2^2 + Tr (\sum X + \sum Y - 2(\sum X\sum Y)^{1/2})$$
 >
-> - $X,Y$ are collections of features from the real and reconstructed images.
-> - $\mu_X, \mu_Y$ are means of original and reconstructed feature vectors.
-> - $\sum X, \sum Y$ are covariance matrices.
-> - $Tr$ is the matrix trace.
+> - $X,Y$ are collections of features from the real and reconstructed videos.
+> - $\mu_X, \mu_Y$ are means of original and reconstructed feature vectors of the videos.
+> - $\sum X, \sum Y$ are the video's covariance matrices.
+> - $Tr$ is the matrix trace (same as above).
 
 **Quantitative results** As shown in both tables ($5,6$), Cosmos Tokenizer achieves state-of-the-art performance in all the metrics compared to prior arts on both the _DAVIS_ video dataset and _TokenBench_, with a spatial-temporal compression ratio of $4\times 8\times 8$.
 Moreover, even with $2\times$ and $8\times$ higher compression ratios, Cosmos Tokenizer is often comparable or even better than prior art at $8\times 8$ compression ratio, as shown in tables $7$, and $8$.

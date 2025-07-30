@@ -4,13 +4,13 @@ theme:
 site_name: World Foundation Models
 nav:
   - Home: index.md
-  - Difussion models: difussion.md
-  - Autoregressive models: autoregressive.md
+  - Diffusion models: difussion.md
+  - Autoregressive models: autoregressive/autoregressive.md
   - Tokens:
       - Cosmos Tokenizer:
-        - tokens/cosmos_tokenizer/cosmos_tokenizer.md
-        - tokens/cosmos_tokenizer/wavelet_compression.ipynb 
-      - tokens/dsc_tokenization.md
+          - tokens/cosmos_tokenizer/cosmos_tokenizer.md
+          - tokens/cosmos_tokenizer/wavelet_compression.ipynb
+      - DSC Tokenization: tokens/dsc_tokenization.md
 
 markdown_extensions:
   - pymdownx.arithmatex:

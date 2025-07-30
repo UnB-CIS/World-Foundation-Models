@@ -1110,10 +1110,10 @@ Where:</p>
 <p><strong><em>reconstruction Fréchet Video Distance (rFVD)</em></strong>: Measures how close the distribution of reconstructed videos is to real videos in feature spaces. Lower values indicate not only more realistic looking videos, but motion an temporal dynamic matching the original videos.
 <span class="arithmatex">\(<span class="arithmatex">\(rFVD(X,Y) = ||\mu_X - \mu_Y||_2^2 + Tr (\sum X + \sum Y - 2(\sum X\sum Y)^{1/2})\)</span>\)</span></p>
 <ul>
-<li><span class="arithmatex">\(X,Y\)</span> are collections of features from the real and reconstructed images.</li>
-<li><span class="arithmatex">\(\mu_X, \mu_Y\)</span> are means of original and reconstructed feature vectors.</li>
-<li><span class="arithmatex">\(\sum X, \sum Y\)</span> are covariance matrices.</li>
-<li><span class="arithmatex">\(Tr\)</span> is the matrix trace.</li>
+<li><span class="arithmatex">\(X,Y\)</span> are collections of features from the real and reconstructed videos.</li>
+<li><span class="arithmatex">\(\mu_X, \mu_Y\)</span> are means of original and reconstructed feature vectors of the videos.</li>
+<li><span class="arithmatex">\(\sum X, \sum Y\)</span> are the video's covariance matrices.</li>
+<li><span class="arithmatex">\(Tr\)</span> is the matrix trace (same as above).</li>
 </ul>
 </blockquote>
 <p><strong>Quantitative results</strong> As shown in both tables (<span class="arithmatex">\(5,6\)</span>), Cosmos Tokenizer achieves state-of-the-art performance in all the metrics compared to prior arts on both the <em>DAVIS</em> video dataset and <em>TokenBench</em>, with a spatial-temporal compression ratio of <span class="arithmatex">\(4\times 8\times 8\)</span>.

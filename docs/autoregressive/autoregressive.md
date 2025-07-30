@@ -10,8 +10,8 @@ Um modelo autorregressivo (AR) é um tipo de modelo estatístico que prevê valo
 
 A fórmula que descreve os modelos autoregressivos é expressa como
 
-$$ 
-X_t = \sum_{i=1}^{p} \phi_i X_{t-i} + \varepsilon_t 
+$$
+X_t = \sum_{i=1}^{p} \phi_i X_{t-i} + \varepsilon_t
 $$.
 
 Onde:

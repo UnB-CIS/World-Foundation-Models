@@ -17,7 +17,7 @@ Trechos formatados de forma semelhante a esse parágrafo correspondem a insertos
 O _Cosmos Tokenizer_ é composto por **2 partes**: um **codificador** e um **decodificador**. O **codificador** começa com uma operação _Haar Wavelet 3D_, para comprimir a imagem ou vídeo, seguida de vários blocos compostos por uma camada _Causal ResBlock3D_, camadas _Causal DownSample3D_ e uma camada _Causal SpatioTemporalAttn_.
 O **decodificador** espelha essa arquitetura, substituindo as camadas de downsample por camadas _Causal UpSample3D_ e, ao final, trocando a _Haar Wavelet 3D_ por sua inversa.
 
-Ambas as partes são treinadas juntas, com supervisão apenas na saída do decodificador. Esses tokenizers funcionam para arquiteturas autoregressivas e de difusão, sendo capazes de tokenizar imagens/vídeos de maneira discreta (para modelos AR) ou contínua (para modelos de difusão).
+Ambas as partes são treinadas juntas, com supervisão apenas na saída do decodificador. Esses tokenizers funcionam para modelos AutoRegressivas e de difusão, sendo capazes de tokenizar imagens/vídeos de maneira discreta (para modelos AR) ou contínua (para modelos de difusão).
 
 O _Cosmos Tokenizer_ atinge desempenho superior em menos tempo que outros tokenizers, principalmente devido à sua arquitetura, além de conseguir processar múltiplos tipos de taxas de compressão e operar de forma ubíqua para imagens e vídeos.
 

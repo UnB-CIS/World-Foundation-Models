@@ -731,7 +731,7 @@
 <h3 id="resumo">Resumo</h3>
 <p>O <em>Cosmos Tokenizer</em> é composto por <strong>2 partes</strong>: um <strong>codificador</strong> e um <strong>decodificador</strong>. O <strong>codificador</strong> começa com uma operação <em>Haar Wavelet 3D</em>, para comprimir a imagem ou vídeo, seguida de vários blocos compostos por uma camada <em>Causal ResBlock3D</em>, camadas <em>Causal DownSample3D</em> e uma camada <em>Causal SpatioTemporalAttn</em>.
 O <strong>decodificador</strong> espelha essa arquitetura, substituindo as camadas de downsample por camadas <em>Causal UpSample3D</em> e, ao final, trocando a <em>Haar Wavelet 3D</em> por sua inversa.</p>
-<p>Ambas as partes são treinadas juntas, com supervisão apenas na saída do decodificador. Esses tokenizers funcionam para arquiteturas autoregressivas e de difusão, sendo capazes de tokenizar imagens/vídeos de maneira discreta (para modelos AR) ou contínua (para modelos de difusão).</p>
+<p>Ambas as partes são treinadas juntas, com supervisão apenas na saída do decodificador. Esses tokenizers funcionam para modelos AutoRegressivas e de difusão, sendo capazes de tokenizar imagens/vídeos de maneira discreta (para modelos AR) ou contínua (para modelos de difusão).</p>
 <p>O <em>Cosmos Tokenizer</em> atinge desempenho superior em menos tempo que outros tokenizers, principalmente devido à sua arquitetura, além de conseguir processar múltiplos tipos de taxas de compressão e operar de forma ubíqua para imagens e vídeos.</p>
 <h3 id="visao-geral">Visão Geral</h3>
 <p>Tokenizers são blocos fundamentais na construção de modelos modernos em larga escala. Eles transformam dados brutos em representações mais eficientes ao aprender um espaços latentes "bottle-necked" descobertos de maneira não supervisionada.

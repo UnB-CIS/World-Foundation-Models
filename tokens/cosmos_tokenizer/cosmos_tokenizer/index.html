@@ -16,7 +16,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
     
     
       
@@ -24,7 +24,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.7e37652d.min.css">
       
       
 
@@ -731,7 +731,7 @@
 <h3 id="resumo">Resumo</h3>
 <p>O <em>Cosmos Tokenizer</em> é composto por <strong>2 partes</strong>: um <strong>codificador</strong> e um <strong>decodificador</strong>. O <strong>codificador</strong> começa com uma operação <em>Haar Wavelet 3D</em>, para comprimir a imagem ou vídeo, seguida de vários blocos compostos por uma camada <em>Causal ResBlock3D</em>, camadas <em>Causal DownSample3D</em> e uma camada <em>Causal SpatioTemporalAttn</em>.
 O <strong>decodificador</strong> espelha essa arquitetura, substituindo as camadas de downsample por camadas <em>Causal UpSample3D</em> e, ao final, trocando a <em>Haar Wavelet 3D</em> por sua inversa.</p>
-<p>Ambas as partes são treinadas juntas, com supervisão apenas na saída do decodificador. Esses tokenizers funcionam para arquiteturas autoregressivas e de difusão, sendo capazes de tokenizar imagens/vídeos de maneira discreta (para modelos AR) ou contínua (para modelos de difusão).</p>
+<p>Ambas as partes são treinadas juntas, com supervisão apenas na saída do decodificador. Esses tokenizers funcionam para modelos AutoRegressivas e de difusão, sendo capazes de tokenizar imagens/vídeos de maneira discreta (para modelos AR) ou contínua (para modelos de difusão).</p>
 <p>O <em>Cosmos Tokenizer</em> atinge desempenho superior em menos tempo que outros tokenizers, principalmente devido à sua arquitetura, além de conseguir processar múltiplos tipos de taxas de compressão e operar de forma ubíqua para imagens e vídeos.</p>
 <h3 id="visao-geral">Visão Geral</h3>
 <p>Tokenizers são blocos fundamentais na construção de modelos modernos em larga escala. Eles transformam dados brutos em representações mais eficientes ao aprender um espaços latentes "bottle-necked" descobertos de maneira não supervisionada.
@@ -1110,10 +1110,10 @@ Where:</p>
 <p><strong><em>reconstruction Fréchet Video Distance (rFVD)</em></strong>: Measures how close the distribution of reconstructed videos is to real videos in feature spaces. Lower values indicate not only more realistic looking videos, but motion an temporal dynamic matching the original videos.
 <span class="arithmatex">\(<span class="arithmatex">\(rFVD(X,Y) = ||\mu_X - \mu_Y||_2^2 + Tr (\sum X + \sum Y - 2(\sum X\sum Y)^{1/2})\)</span>\)</span></p>
 <ul>
-<li><span class="arithmatex">\(X,Y\)</span> are collections of features from the real and reconstructed images.</li>
-<li><span class="arithmatex">\(\mu_X, \mu_Y\)</span> are means of original and reconstructed feature vectors.</li>
-<li><span class="arithmatex">\(\sum X, \sum Y\)</span> are covariance matrices.</li>
-<li><span class="arithmatex">\(Tr\)</span> is the matrix trace.</li>
+<li><span class="arithmatex">\(X,Y\)</span> are collections of features from the real and reconstructed videos.</li>
+<li><span class="arithmatex">\(\mu_X, \mu_Y\)</span> are means of original and reconstructed feature vectors of the videos.</li>
+<li><span class="arithmatex">\(\sum X, \sum Y\)</span> are the video's covariance matrices.</li>
+<li><span class="arithmatex">\(Tr\)</span> is the matrix trace (same as above).</li>
 </ul>
 </blockquote>
 <p><strong>Quantitative results</strong> As shown in both tables (<span class="arithmatex">\(5,6\)</span>), Cosmos Tokenizer achieves state-of-the-art performance in all the metrics compared to prior arts on both the <em>DAVIS</em> video dataset and <em>TokenBench</em>, with a spatial-temporal compression ratio of <span class="arithmatex">\(4\times 8\times 8\)</span>.
@@ -1184,7 +1184,7 @@ Moreover, even with <span class="arithmatex">\(2\times\)</span> and <span class=
       <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.50899def.min.js"></script>
       
         <script src="../../../javascripts/mathjax.js"></script>
       

@@ -4,7 +4,7 @@ theme:
 site_name: World Foundation Models
 nav:
   - Home: index.md
-  - Diffusion models: difussion.md
+  - Diffusion models: diffusion.md
   - Autoregressive models: autoregressive/autoregressive.md
   - Tokens:
       - Cosmos Tokenizer:

@@ -9,7 +9,7 @@
       
       
       
-        <link rel="prev" href="../../../autoregressive/">
+        <link rel="prev" href="../../../autoregressive/autoregressive/">
       
       
         <link rel="next" href="../wavelet_compression/">
@@ -181,7 +181,7 @@
   
   
   <span class="md-ellipsis">
-    Difussion models
+    Diffusion models
     
   </span>
   
@@ -198,7 +198,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../autoregressive/" class="md-nav__link">
+      <a href="../../../autoregressive/autoregressive/" class="md-nav__link">
         
   
   
@@ -530,7 +530,7 @@
   
   
   <span class="md-ellipsis">
-    Data Science Collective - Tokenization
+    DSC Tokenization
     
   </span>
   
@@ -759,7 +759,7 @@ Por outro, uma compressão excessiva pode levar à perda de detalhes visuais ess
 <p><img alt="Visualization of continuous and discrete tokenizers" src="../../images/cosmos_tokenizer/token_types.png" /></p>
 <p>Tokens ao longo das dimensões espaciais (<span class="arithmatex">\(\frac{H}{S_{HW}} \times \frac{W}{S_{HW}}\)</span>) e temporais (<span class="arithmatex">\(1 + \frac{T}{S_T}\)</span>), com um fator de compressão espacial <span class="arithmatex">\(S_{HW}\)</span> e um fator de compressão temporal <span class="arithmatex">\(S_T\)</span>. O primeiro token temporal representa o primeiro quadro da entrada, possibilitando a tokenização conjunta de imagens (<span class="arithmatex">\(T=0\)</span>) e vídeos (<span class="arithmatex">\(T&gt;0\)</span>) em um espaço latente compartilhado.</p>
 <blockquote>
-<p><span class="arithmatex">\(S_{HW}\)</span> é o <em>fator de compressão espacial</em> usado para comprimir as dimensões espaciais de uma imagem. Essa é uma etapa chave no processo de tokenização espacial, no qual o quadro de entrada é dividido em pequenos blocos ou regiões, cada um dos quais é representado por um ou mais tokens.</p>
+<p><span class="arithmatex">\(S_{HW}\)</span> é o <strong><em>fator de compressão espacial</em></strong> usado para comprimir as dimensões espaciais de uma imagem. Essa é uma etapa chave no processo de tokenização espacial, no qual o quadro de entrada é dividido em pequenos blocos ou regiões, cada um dos quais é representado por um ou mais tokens.</p>
 <p>Se a dimensão da imagem original for <span class="arithmatex">\(224\times 224 \times 3\)</span>, e o <em>fator de compressão espacial</em> for 16, a grade de tokens será de <span class="arithmatex">\(14\times 14\)</span>, e cada token conterá informações sobre uma região de <span class="arithmatex">\(16\times 16\)</span> pixels.</p>
 <p><span class="arithmatex">\(S_T\)</span> é o <em>fator de compressão temporal</em>, e é usado para reduzir o número de tokens que representam o eixo temporal agrupando quadros. Isso é aplicado no processo de <em>Tokenização Temporal</em>, para representar o número de quadros.
 A adição de <span class="arithmatex">\(1\)</span> permite ao modelo tratar o quadro inicial como um token especial, dando suporte à tokenização conjunta de imagens e vídeos. Se o processo for aplicado a uma imagem, <span class="arithmatex">\(T=0\)</span> e a dimensão temporal reduz-se a <span class="arithmatex">\(1\)</span>.</p>
@@ -805,11 +805,14 @@ Esta transformada decompõe tanto variações espaciais quanto temporais (ao lon
 <p><img alt="2-level wavelet" src="../../images/cosmos_tokenizer/2-level_wavelet.png" /></p>
 </blockquote>
 <p>O design causal ajuda a adaptar modelos baseados no tokenizer para aplicações de Physical AI que frequentemente operam em cenários temporalmente causais. A wavelet transform nos permite operar sobre uma representação de vídeo mais compacta que elimina redundâncias na informação de pixel, permitindo que as camadas restantes foquem em compressão mais semântica.</p>
-<p>Nossos estágios de encoder são implementados utilizando uma série de residual blocks intercalados com downsampling blocks. Em cada bloco, utilizamos uma convolução 3D fatorada espaço-temporalmente, onde aplicamos primeiro uma convolução 2D com kernel de tamanho <span class="arithmatex">\(1\times k\times k\)</span> para capturar informações espaciais, seguida por uma convolução temporal com kernel de tamanho <span class="arithmatex">\(k\times 1\times 1\)</span> para capturar dinâmicas temporais. Utilizamos padding à esquerda de k-1 para garantir causalidade.</p>
+<p>Nossos estágios de encoder são implementados utilizando uma série de residual blocks intercalados com downsampling blocks.
+Em cada bloco, utilizamos uma convolução 3D fatorada espaço-temporalmente, onde aplicamos primeiro uma convolução 2D com kernel de tamanho <span class="arithmatex">\(1\times k\times k\)</span> para capturar informações espaciais, seguida por uma convolução temporal com kernel de tamanho <span class="arithmatex">\(k\times 1\times 1\)</span> para capturar dinâmicas temporais. Utilizamos padding à esquerda de k-1 para garantir causalidade.</p>
 <blockquote>
 <p>Emprega convolução (2 + 1)D.</p>
 </blockquote>
-<p>Para capturar dependências de longo alcance, utilizamos uma self-attention causal fatorada espaço-temporal com uma global support region. Usamos a função de ativação Swish para não-linearidade. Utilizamos Layer Normalization (LayerNorm) em vez de Group Normalization (GroupNorm), o que evita o aparecimento de grandes magnitudes em regiões específicas do espaço latente ou das saídas reconstruídas. O decoder espelha o encoder, substituindo os downsampling blocks por um upsampling block. A imagem abaixo mostra uma visão geral da arquitetura do Cosmos Tokenizer.</p>
+<p>Para capturar dependências de longo alcance, utilizamos uma self-attention causal fatorada espaço-temporal com uma global support region.
+Usamos a função de ativação Swish para não-linearidade. Utilizamos Layer Normalization (LayerNorm) em vez de Group Normalization (GroupNorm), o que evita o aparecimento de grandes magnitudes em regiões específicas do espaço latente ou das saídas reconstruídas. O decoder espelha o encoder, substituindo os downsampling blocks por um upsampling block.
+A imagem abaixo mostra uma visão geral da arquitetura do Cosmos Tokenizer.</p>
 <blockquote>
 <p>Global support region para não-linearidade significa que os tokens interagem com todos os outros tokens disponíveis no momento (devido às restrições da arquitetura causal).</p>
 <p>A <strong><em>Swish activation function</em></strong>, definida por <span class="arithmatex">\(\operatorname{Swish}^{\beta}(x) = x \cdot sigmoid(\beta x) = \frac{x}{1+e^{-\beta x}}\)</span></p>
@@ -944,7 +947,8 @@ The <strong>decoder</strong> mirrors this architecture, substituting the downsam
 <p>The image bellow illustrates the tokenization training pipeline, where the goal is to train the encoder and decoder, so that the bottleneck token representation maximally preserves visual information in the input.</p>
 <p><img alt="Tokenization Pipeline" src="../../images/cosmos_tokenizer/tokenization_pipeline.png" /></p>
 <p>In the pipeline, an input video is encoded into tokens, which are usually much more compact than the input video. The decoder then reconstructs the input video from the tokens. <em>Tokenizer training is about learning the encoder and decoder to maximally preserve the visual information in the tokens</em>.</p>
-<p>Tokenizers come in two types: continuous and discrete. Continuous tokenizers encode visual data into continuous latent embeddings, as in latent diffusion models like <em>Stable Diffusion</em> or <em>VideoLDM</em>. These embeddings are suitable for models that generate data by sampling from continuous distributions. Discrete tokenizers encode visual data into discrete latent codes, mapping them into quantized indices, as seen in autoregressive transformers such as VideoPoet. This discrete representation is necessary for models such as GPT that are trained with the <em>cross-entropy loss</em>.</p>
+<p>Tokenizers come in two types: continuous and discrete. Continuous tokenizers encode visual data into continuous latent embeddings, as in latent diffusion models like <em>Stable Diffusion</em> or <em>VideoLDM</em>. These embeddings are suitable for models that generate data by sampling from continuous distributions.
+Discrete tokenizers encode visual data into discrete latent codes, mapping them into quantized indices, as seen in autoregressive transformers such as VideoPoet. This discrete representation is necessary for models such as GPT that are trained with the <em>cross-entropy loss</em>.</p>
 <blockquote>
 <p><em><strong>Continuous tokenizers</strong></em>: encodes the data into a continuous, high-dimensional vector space. They are used in diffusion models since these models generate data by sampling from continuous distributions. These embeddings allow the model to interpolate and re-sample variations in the underlying data.</p>
 <p><em><strong>Discrete tokenizers</strong></em>: encode the data into discrete latent codes, which are quantized or mapped to a set of distinct finite indices. These tokenizers are often used with <em>autoregressive models</em> that generate sequences one token at a time.
@@ -999,7 +1003,8 @@ This transform will decompose both spatial and temporal changes (across fames), 
 <p><img alt="2-level wavelet" src="../../images/cosmos_tokenizer/2-level_wavelet.png" /></p>
 </blockquote>
 <p>The causal design helps adapt models built on top of the tokenizer to downstream Physical AI applications that often operate on the temporal causal setting. the wavelet transform allows us to operate on a more compact video representation that eliminates redundancies in pixel information, allowing the remaining layers to focus on more semantic compression.</p>
-<p>Our encoder stages are implemented using a series of residual blocks interleaved with downsampling blocks. In each block, we employ a spatio-temporal factorized 3D convolution, where we first apply a 2D convolution with a kernel size of <span class="arithmatex">\(1\times k\times k\)</span> to capture spatial information, followed by a temporal convolution with a kernel size of <span class="arithmatex">\(k\times 1\times 1\)</span> to capture temporal dynamics. We use left padding of k-1 to ensure causality.</p>
+<p>Our encoder stages are implemented using a series of residual blocks interleaved with downsampling blocks.
+In each block, we employ a spatio-temporal factorized 3D convolution, where we first apply a 2D convolution with a kernel size of <span class="arithmatex">\(1\times k\times k\)</span> to capture spatial information, followed by a temporal convolution with a kernel size of <span class="arithmatex">\(k\times 1\times 1\)</span> to capture temporal dynamics. We use left padding of k-1 to ensure causality.</p>
 <blockquote>
 <p>Employs (2 + 1)D convolution.</p>
 </blockquote>

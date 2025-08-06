@@ -28,7 +28,13 @@ Ademais, uma discussão importante a ser feita é sobre a **viabilidade** da apl
 
 Outro ponto relevante é a **qualidade dos dados sintéticos**. Embora visualmente realistas, esses dados ainda podem conter vieses ou inconsistências que afetam o treinamento dos modelos. Dessa forma, faz-se necessário o uso de práticas de validação dos outputs gerados e comparação com dados reais de referência. Essa verificação pode ser feita com o **Cosmos-Reason**, destacado anteriormente pela sua capacidade interpretativa de vídeos, ou mesmo manualmente, a depender do tamanho do dataset sintético.
 
-## 2. Pré-visualização de cenas em filmes e jogos
+## 2. Outras Aplicações 
+
+Usar a mesma abordagem da aplicação anterior, em que usamos o _Cosmos-Predict2-2B-Video2World_ para gerar vídeos a partir de imagens ou vídeos de entrada somados a um input de texto, abre portas para várias outras aplicações de cunho semelhante. Dentre elas, podemos destacar:
+
+- **Pré-visualização de cenas em filmes e jogos:** Na indústria criativa, a produção de filmes, animações e jogos digitais passa por várias etapas de prototipação visual. Tradicionalmente, isso exige o uso de ferramentas de modelagem 3D, simulação física e renderização, processos que podem ser caros e demorados. Com o Cosmos, porém, é possível criar pré-visualizações de cenas inteiras, usando apenas esboços e descrições textuais simples. Por exemplo, um artista pode enviar uma foto de uma paisagem e adicionar algo como "vento forte balançando as árvores ao entardecer". O modelo então gera um clipe curto que mostra essa cena com movimento, iluminação e clima, sem precisar passar pel etapa de modelagem.
+
+- **Reconstrução de cenas históricas para museus:** Centros culturais também podem se beneficiar muito do uso do Cosmos. Com ele, torna-se possível reconstruir cenas do passado a partir de pinturas ou fotografias antigas, o que permite ao visitante um engajamento maior com o conteúdo exposto e amplia a sua compreensão do contexto histórico.
 
 ## Modelos Disponíveis
 

@@ -4,25 +4,6 @@ theme:
 site_name: World Foundation Models
 nav:
   - Home: index.md
-  - Diffusion models: diffusion.md
-  - Autoregressive models: autoregressive/autoregressive.md
-  - Tokens:
-      - Cosmos Tokenizer:
-          - tokens/cosmos_tokenizer/cosmos_tokenizer.md
-          - tokens/cosmos_tokenizer/wavelet_compression.ipynb
-      - DSC Tokenization: tokens/dsc_tokenization.md
-
-markdown_extensions:
-  - pymdownx.arithmatex:
-      generic: true
-
-extra_javascript:
-  - javascripts/mathjax.js
-  - https://polyfill.io/v3/polyfill.min.js?features=es6
-  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-
-plugins:
- - mkdocs-jupyter:
-      execute: true
-      include_source: true
-      include: ["*.ipynb"]
+  - Difussion models: difussion.md
+  - Autoregressive models: autoregressive.md
+  - Tokens: tokens.md

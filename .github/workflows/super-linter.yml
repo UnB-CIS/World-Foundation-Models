@@ -8,10 +8,9 @@ name: Lint Code Base
 
 on:
   push:
-    branches: ['main']
+    branches: [ "main" ]
   pull_request:
-    branches: ['main']
-
+    branches: [ "main" ]
 jobs:
   run-lint:
     runs-on: ubuntu-latest
@@ -22,20 +21,9 @@ jobs:
           # Full git history is needed to get a proper list of changed files within `super-linter`
           fetch-depth: 0
 
-      - name: Create super-linter config file to exclude site directory
-        run: |
-          cat <<EOF > .super-linter.yml
-          filters:
-            exclude:
-              - "site/**"
-              - "**/site/**"
-          EOF
-
       - name: Lint Code Base
         uses: github/super-linter@v4
         env:
-          VALIDATE_MARKDOWN: false
-          VALIDATE_HTML: false
           VALIDATE_ALL_CODEBASE: false
-          DEFAULT_BRANCH: 'main'
+          DEFAULT_BRANCH: "main"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

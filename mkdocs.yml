@@ -11,7 +11,7 @@ nav:
           - tokens/cosmos_tokenizer/cosmos_tokenizer.md
           - tokens/cosmos_tokenizer/wavelet_compression.ipynb
       - DSC Tokenization: tokens/dsc_tokenization.md
-
+  - Cosmos Applications: cosmos_applications/cosmos_applications.md
 markdown_extensions:
   - pymdownx.arithmatex:
       generic: true

@@ -1,6 +1,8 @@
 # Aplicações da plataforma Cosmos
 
-## Modelos Disponíveis
+O artigo da [Cosmos](https://arxiv.org/html/2501.03575v1), sugere uma série de possíveis aplicações da plataforma de World Foundation Models, aqui são discutidas algumas dessas possíveis aplicações, além dos diferentes modelos disponibilizados para tais aplicações.
+
+## Diferentes Modelos do Cosmos WFM
 
 A NVIDIA, através do site [nvidia Developer](https://developer.nvidia.com/cosmos?hitsPerPage=6), disponibiliza uma série de modelos pré-treinados para download. Eles variam em função, para geração de mundo, e aceleração de IA física. Abaixo estão listados os diferentes modelos e suas funções.
 
@@ -11,34 +13,47 @@ Nosso melhor modelo fundamental de mundo até agora—maior fidelidade, taxas de
 Gere prévias a partir de texto em menos de 4 segundos e até 30 segundos de vídeo do mundo futuro a partir de uma imagem de referência ou prévia. Abaixo é mostrada a utilização do modelo em `python`:
 
 ```python
-  import torch
-  from imaginaire.utils.io import save_image_or_video
-  from cosmos_predict2.configs.base.config_video2world import PREDICT2_VIDEO2WORLD_PIPELINE_2B
-  from cosmos_predict2.pipelines.video2world import Video2WorldPipeline
+import torch
+from imaginaire.utils.io import save_image_or_video
+from cosmos_predict2.configs.base.config_video2world import PREDICT2_VIDEO2WORLD_PIPELINE_2B
+from cosmos_predict2.pipelines.video2world import Video2WorldPipeline
 
-  # Create the video generation pipeline.
+# Create the video generation pipeline.
 
-  pipe = Video2WorldPipeline.from_config(
-  config=PREDICT2_VIDEO2WORLD_PIPELINE_2B,
-  dit_path="checkpoints/nvidia/Cosmos-Predict2-2B-Video2World/model-720p-16fps.pt",
-  text_encoder_path="checkpoints/google-t5/t5-11b",
-  )
+pipe = Video2WorldPipeline.from_config(
+config=PREDICT2_VIDEO2WORLD_PIPELINE_2B,
+dit_path="checkpoints/nvidia/Cosmos-Predict2-2B-Video2World/model-720p-16fps.pt",
+text_encoder_path="checkpoints/google-t5/t5-11b",
+)
 
-  # Specify the input image path and text prompt.
+# Specify the input image path and text prompt.
 
-  image_path = "assets/video2world/example_input.jpg"
-  prompt = "A high-definition video captures the precision of robotic welding in an industrial setting. The first frame showcases a robotic arm, equipped with a welding torch, positioned over a large metal structure. The welding process is in full swing, with bright sparks and intense light illuminating the scene, creating a vivid display of blue and white hues. A significant amount of smoke billows around the welding area, partially obscuring the view but emphasizing the heat and activity. The background reveals parts of the workshop environment, including a ventilation system and various pieces of machinery, indicating a busy and functional industrial workspace. As the video progresses, the robotic arm maintains its steady position, continuing the welding process and moving to its left. The welding torch consistently emits sparks and light, and the smoke continues to rise, diffusing slightly as it moves upward. The metal surface beneath the torch shows ongoing signs of heating and melting. The scene retains its industrial ambiance, with the welding sparks and smoke dominating the visual field, underscoring the ongoing nature of the welding operation."
+image_path = "assets/video2world/example_input.jpg"
+prompt = """
+A high-definition video captures the precision of robotic welding in an industrial setting.
+The first frame showcases a robotic arm, equipped with a welding torch, positioned over a large metal structure.
+The welding process is in full swing, with bright sparks and intense light illuminating the scene, creating a vivid display of blue and white hues.
+A significant amount of smoke billows around the welding area, partially obscuring the view but emphasizing the heat and activity.
+The background reveals parts of the workshop environment, including a ventilation system and various pieces of machinery,
+indicating a busy and functional industrial workspace.
+As the video progresses, the robotic arm maintains its steady position, continuing the welding process and moving to its left.
+The welding torch consistently emits sparks and light, and the smoke continues to rise, diffusing slightly as it moves upward.
+The metal surface beneath the torch shows ongoing signs of heating and melting. The scene retains its industrial ambiance,
+with the welding sparks and smoke dominating the visual field, underscoring the ongoing nature of the welding operation.
+"""
 
-  # Run the video generation pipeline.
+# Run the video generation pipeline.
 
-  video = pipe(input_path=image_path, prompt=prompt)
+video = pipe(input_path=image_path, prompt=prompt)
 
-  # Save the resulting output video.
+# Save the resulting output video.
 
-  save_image_or_video(video, "output/test.mp4", fps=16)
+save_image_or_video(video, "output/test.mp4", fps=16)
 ```
 
 Para mais informações sobre a utilização do modelo, utilizar [github do cosmos predict](https://github.com/nvidia-cosmos/cosmos-predict2?tab=readme-ov-file).
+
+Esse [artigo](https://developer.nvidia.com/blog/develop-custom-physical-ai-foundation-models-with-nvidia-cosmos-predict-2/) explica uma possível pipeline de utilização do modelo.
 
 ### Cosmos Transfer
 
@@ -101,7 +116,23 @@ Esses componentes atuam de forma integrada para garantir que tanto os prompts de
 
 O Cosmos-1.0-Prompt-Upsampler-Text2World é um modelo de linguagem de grande porte (LLM) projetado para transformar prompts originais em versões mais detalhadas e enriquecidas. Ele aprimora os prompts adicionando informações e mantendo uma estrutura descritiva consistente antes que sejam utilizados em um modelo text-to-world, o que normalmente resulta em saídas de maior qualidade. Este modelo está pronto para uso comercial.
 
-## 1. Geração de datasets sintéticos
+## Usos do Cosmos WFM
+
+Abaixo são citadas algumas das diferentes aplicações da plataforma.
+
+### Treinamento de Carros autônomos
+
+Uma série de empresas do setor de transportes adotaram a plataforma _Cosmos WFM_ para soluções de **_AV (Autonomous Vehicles)_**
+
+- **_Waabi_**, empresa pioneira em IA generativa para o mundo físico, começando com veículos autônomos, está avaliando o Cosmos no contexto da curadoria de dados para desenvolvimento e simulação de software de _AV_.
+
+- **_Wayve_**, empresa que está desenvolvendo modelos de base de IA para direção autônoma, está avaliando o Cosmos como uma ferramenta para pesquisar cenários de direção em curvas e esquinas usados para segurança e validação.
+
+- **_Uber_**, a gigante global de compartilhamento de viagens está fazendo uma parceria com a NVIDIA para acelerar a mobilidade autônoma. Os riscos conjuntos de dados de direção da Uber, combinados com recursos da plataforma Cosmos e do NVIDIA DGX Cloud, podem ajudar os parceiros de _AV_ a criarem modelos de IA mais fortes de forma ainda mais eficiente.
+
+Esse [artigo](https://developer.nvidia.com/blog/simplify-end-to-end-autonomous-vehicle-development-with-new-nvidia-cosmos-world-foundation-models/) mostra uma forma de simplificar desenvolvimento end-to-end de veículos autônomos com a plataforma _Cosmos WFM_.
+
+### Geração de datasets sintéticos
 
 Nos últimos anos, com o avanço dos modelos de visão computacional e deep learning, surgiu uma forte demanda por grandes volumes de dados para o treinamento dessas redes. Nesse cenário, uma das aplicações mais promissoras do Cosmos é justamente a geração de dados sintéticos, especialmente em contextos onde a coleta de dados reais é custosa, ou inviável. Assim, o Cosmos entra como um extensor artificial de datasets já existentes, suprindo a demanda por dados treináveis mencionada.
 
@@ -113,18 +144,23 @@ Nesse sentido, o **Cosmos Predict** se mostra como o modelo mais adequado, já q
 
 Ademais, uma discussão importante a ser feita é sobre a **viabilidade** da aplicação. Para a geração de vídeos, um dos modelos mais simples é o _Cosmos-Predict2-2B-Video2World_, com 2 Bilhões de parâmetros. Esse modelo, embora seja o mais simples disponibilizado pela Nvidia, não roda localmente em notebooks. Talvez com uma GPU mais potente seja possível rodar com limitações, mas de forma geral o custo computacional é mais alto do que um notebook normal suporta. Assim, abre-se a alternativa de usar cloud computing, que também vem com custos financeiros associados.
 
-| Input image                           | Output video                   |
-| ------------------------------------- | ------------------------------ |
-| ![Input Image](src/example_input.jpg) | [Output Video](src/output.mp4) |
+| Input image                           | Output video                    |
+| ------------------------------------- | ------------------------------- |
+| ![Input Image](src/example_input.jpg) | ![Output video](src/output.mp4) |
 
 > Exemplo de como o _Cosmos-Predict2-2B-Video2World_ pode ser usado. Com uma imagem e texto de input, gera-se um vídeo curto. Essa estratégia pode ser simulada para diferentes situações e aplicações, como por exemplo a da faixa de pedestres mencionada anteriormente.
 
 Outro ponto relevante é a **qualidade dos dados sintéticos**. Embora visualmente realistas, esses dados ainda podem conter vieses ou inconsistências que afetam o treinamento dos modelos. Dessa forma, faz-se necessário o uso de práticas de validação dos outputs gerados e comparação com dados reais de referência. Essa verificação pode ser feita com o **Cosmos-Reason**, destacado anteriormente pela sua capacidade interpretativa de vídeos, ou mesmo manualmente, a depender do tamanho do dataset sintético.
 
-## 2. Outras Aplicações
+### Outras Aplicações
 
 Usar a mesma abordagem da aplicação anterior, em que usamos o _Cosmos-Predict2-2B-Video2World_ para gerar vídeos a partir de imagens ou vídeos de entrada somados a um input de texto, abre portas para várias outras aplicações de cunho semelhante. Dentre elas, podemos destacar:
 
 - **Pré-visualização de cenas em filmes e jogos:** Na indústria criativa, a produção de filmes, animações e jogos digitais passa por várias etapas de prototipação visual. Tradicionalmente, isso exige o uso de ferramentas de modelagem 3D, simulação física e renderização, processos que podem ser caros e demorados. Com o Cosmos, porém, é possível criar pré-visualizações de cenas inteiras, usando apenas esboços e descrições textuais simples. Por exemplo, um artista pode enviar uma foto de uma paisagem e adicionar algo como "vento forte balançando as árvores ao entardecer". O modelo então gera um clipe curto que mostra essa cena com movimento, iluminação e clima, sem precisar passar pel etapa de modelagem.
 
 - **Reconstrução de cenas históricas para museus:** Centros culturais também podem se beneficiar muito do uso do Cosmos. Com ele, torna-se possível reconstruir cenas do passado a partir de pinturas ou fotografias antigas, o que permite ao visitante um engajamento maior com o conteúdo exposto e amplia a sua compreensão do contexto histórico.
+
+## Referências
+
+- [NVIDIA Cosmos for Developers](https://developer.nvidia.com/cosmos?hitsPerPage=6)
+- [World Foundation Models: 10 Use Cases & Examples [2025]](https://research.aimultiple.com/world-foundation-model/)

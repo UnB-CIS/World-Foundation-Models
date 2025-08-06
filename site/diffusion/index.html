@@ -61,6 +61,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#modelos-de-difusao-em-world-foundation-models-wfms" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -178,6 +183,19 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Diffusion models
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -189,6 +207,173 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#modelos-de-difusao-em-world-foundation-models-wfms" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modelos de Difusão em World Foundation Models (WFMs)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Modelos de Difusão em World Foundation Models (WFMs)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tokenizacao-de-video-transformando-videos-em-latentes-continuos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tokenização de Vídeo: Transformando Vídeos em "Latentes Contínuos"
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formulacao-o-processo-de-denoising-remocao-de-ruido" class="md-nav__link">
+    <span class="md-ellipsis">
+      Formulação: O Processo de Denoising (Remoção de Ruído)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Formulação: O Processo de Denoising (Remoção de Ruído)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#detalhes-da-formulacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Detalhes da Formulação
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arquitetura-do-modelo-como-o-denoising-e-construido" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arquitetura do Modelo: Como o Denoising é Construído
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Arquitetura do Modelo: Como o Denoising é Construído">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#componentes-arquitetonicos-chave" class="md-nav__link">
+    <span class="md-ellipsis">
+      Componentes Arquitetônicos Chave
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estrategia-de-treinamento-como-o-modelo-aprende-a-pintar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estratégia de Treinamento: Como o Modelo Aprende a "Pintar"
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#otimizacao-de-inferencia-tornando-a-geracao-rapida" class="md-nav__link">
+    <span class="md-ellipsis">
+      Otimização de Inferência: Tornando a Geração Rápida
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Otimização de Inferência: Tornando a Geração Rápida">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tecnicas-de-otimizacao-de-inferencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      Técnicas de Otimização de Inferência
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prompt-upsampler-para-entradas-de-texto-do-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prompt Upsampler: Para Entradas de Texto do Usuário
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decodificador-de-difusao-melhorando-a-qualidade-visual-do-autoregressivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Decodificador de Difusão: Melhorando a Qualidade Visual do Autoregressivo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#equacoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Equações
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resultados-e-aplicacoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resultados e Aplicações
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limitacoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Limitações
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -376,6 +561,28 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cosmos_applications/cosmos_applications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cosmos Applications
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -394,6 +601,164 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#modelos-de-difusao-em-world-foundation-models-wfms" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modelos de Difusão em World Foundation Models (WFMs)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Modelos de Difusão em World Foundation Models (WFMs)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tokenizacao-de-video-transformando-videos-em-latentes-continuos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tokenização de Vídeo: Transformando Vídeos em "Latentes Contínuos"
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formulacao-o-processo-de-denoising-remocao-de-ruido" class="md-nav__link">
+    <span class="md-ellipsis">
+      Formulação: O Processo de Denoising (Remoção de Ruído)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Formulação: O Processo de Denoising (Remoção de Ruído)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#detalhes-da-formulacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Detalhes da Formulação
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arquitetura-do-modelo-como-o-denoising-e-construido" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arquitetura do Modelo: Como o Denoising é Construído
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Arquitetura do Modelo: Como o Denoising é Construído">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#componentes-arquitetonicos-chave" class="md-nav__link">
+    <span class="md-ellipsis">
+      Componentes Arquitetônicos Chave
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estrategia-de-treinamento-como-o-modelo-aprende-a-pintar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estratégia de Treinamento: Como o Modelo Aprende a "Pintar"
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#otimizacao-de-inferencia-tornando-a-geracao-rapida" class="md-nav__link">
+    <span class="md-ellipsis">
+      Otimização de Inferência: Tornando a Geração Rápida
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Otimização de Inferência: Tornando a Geração Rápida">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tecnicas-de-otimizacao-de-inferencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      Técnicas de Otimização de Inferência
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prompt-upsampler-para-entradas-de-texto-do-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prompt Upsampler: Para Entradas de Texto do Usuário
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decodificador-de-difusao-melhorando-a-qualidade-visual-do-autoregressivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Decodificador de Difusão: Melhorando a Qualidade Visual do Autoregressivo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#equacoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Equações
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resultados-e-aplicacoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resultados e Aplicações
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limitacoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Limitações
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -410,7 +775,218 @@
 
   <h1>Diffusion models</h1>
 
-
+<h2 id="modelos-de-difusao-em-world-foundation-models-wfms">Modelos de Difusão em World Foundation Models (WFMs)</h2>
+<p>No contexto dos World Foundation Models (WFMs), <strong>ele transforma ruído em uma simulação de vídeo do mundo.</strong></p>
+<p>Analogia: "Pense em um modelo de difusão como um artista que começa com uma tela cheia de ruído aleatório (como uma "chuva" de TV antiga) e, gradualmente, passo a passo, aprende a remover esse ruído, revelando uma imagem ou vídeo coerente e significativo."</p>
+<p><img alt="figure" src="https://miro.medium.com/v2/resize:fit:1400/0*Gv-tiaJtJDPcvwu8.png" /></p>
+<h3 id="tokenizacao-de-video-transformando-videos-em-latentes-continuos">Tokenização de Vídeo: Transformando Vídeos em "Latentes Contínuos"</h3>
+<p>Assim como os modelos autoregressivos, os modelos de difusão precisam processar vídeos em um formato mais gerenciável para sua operação.</p>
+<ul>
+<li>
+<p>Tokens Contínuos: Para modelos de difusão, os vídeos são transformados em embeddings latentes contínuos (vetores de números decimais). Pense neles como uma representação compacta e fluida do vídeo, em oposição aos "tokens discretos" (números inteiros) usados pelos modelos autoregressivos.</p>
+</li>
+<li>
+<p>Cosmos Continuous Tokenizer (Cosmos-1.0-Tokenizer-CV8x8x8): Este é o componente responsável por essa transformação. Ele comprime o vídeo de entrada em uma representação latente de menor dimensão, preservando a maior parte da informação visual. Este tokenizer possui uma arquitetura de codificador-decodificador que opera no espaço wavelet para maior compressão e preservação de informações semânticas, além de um design causal temporal (a codificação de quadros atuais não depende de quadros futuros, crucial para aplicações de IA Física).</p>
+</li>
+</ul>
+<h3 id="formulacao-o-processo-de-denoising-remocao-de-ruido">Formulação: O Processo de Denoising (Remoção de Ruído)</h3>
+<p>O cerne do modelo de difusão é o processo iterativo de "denoising" (remoção de ruído).</p>
+<h4 id="detalhes-da-formulacao">Detalhes da Formulação</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><strong>Aspecto</strong></th>
+<th><strong>Descrição</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Adição e Remoção de Ruído</td>
+<td>Durante o treinamento, <strong>ruído gaussiano (aleatório)</strong> é progressivamente adicionado a um vídeo real. O modelo é, então, treinado para inverter esse processo, aprendendo a remover o ruído em cada etapa para reconstruir o vídeo original a partir de uma versão ruidosa.<br><br></td>
+</tr>
+<tr>
+<td style="text-align: center;">Função Denoising (D_theta)</td>
+<td>O modelo de difusão utiliza uma rede neural <strong>D_theta</strong> (chamada "denoiser") treinada para estimar o ruído presente em uma amostra corrompida (vídeo com ruído) e, consequentemente, removê-lo para chegar à versão limpa do vídeo.</td>
+</tr>
+<tr>
+<td style="text-align: center;">Função de Perda</td>
+<td>O treinamento emprega uma função de perda de <strong>"denoising score matching"</strong> que penaliza a diferença entre o ruído previsto pelo modelo e o ruído real adicionado. Uma técnica de <strong>ponderação baseada em incerteza (mu(sigma))</strong> é utilizada para gerenciar o aprendizado em diferentes níveis de ruído, tratando-o como um problema de aprendizado multi-tarefa.</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="figure2" src="https://miro.medium.com/v2/resize:fit:1400/0*rqhDUmWmJsSquQwP.png" /></p>
+<h3 id="arquitetura-do-modelo-como-o-denoising-e-construido">Arquitetura do Modelo: Como o Denoising é Construído</h3>
+<p>A rede D_theta do modelo de difusão é uma adaptação de uma arquitetura Transformer, otimizada para dados visuais e controle.</p>
+<h4 id="componentes-arquitetonicos-chave">Componentes Arquitetônicos Chave</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><strong>Componente</strong></th>
+<th><strong>Descrição</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Patchificação 3D</td>
+<td>As representações latentes de entrada são convertidas em <strong>"patches" (pedaços cúbicos) tridimensionais</strong>, que são então "achatados" em uma sequência unidimensional. Isso prepara os dados para serem processados eficientemente pelo Transformer.<br><br></td>
+</tr>
+<tr>
+<td style="text-align: center;">Embeddings Posicionais Híbridos</td>
+<td>Essenciais para a compreensão espacial e temporal: <br>• <strong>Rotary Position Embedding (RoPE) Fatorado em 3D</strong>: Ajuda o modelo a entender as posições relativas dos tokens nas dimensões temporal, de altura e de largura, permitindo a geração de vídeos de tamanhos e durações arbitrárias, compatível com diferentes taxas de quadros (FPS). <br>• <strong>Embedding Posicional Absoluto (Aprendível)</strong>: Um embedding adicional usado em cada bloco Transformer que, combinado com RoPE, melhora o desempenho, reduz a perda de treinamento e minimiza artefatos de "morphing".</td>
+</tr>
+<tr>
+<td style="text-align: center;">Cross-Attention para Condicionamento de Texto</td>
+<td>Camadas integradas que permitem ao modelo gerar vídeos com base em descrições de texto, incorporando informações de <strong>embeddings de texto</strong> (gerados pelo <strong>T5-XXL</strong>) no processo de denoising.</td>
+</tr>
+<tr>
+<td style="text-align: center;">QK-Normalização (QKNorm)</td>
+<td>Normaliza os vetores de "query" (Q) e "key" (K) antes da operação de atenção, o que aumenta a <strong>estabilidade do treinamento</strong>, especialmente nas fases iniciais, prevenindo a saturação da atenção.</td>
+</tr>
+<tr>
+<td style="text-align: center;">AdaLN-LoRA</td>
+<td>Uma otimização arquitetônica que <strong>reduz significativamente a contagem de parâmetros</strong> (ex: 36% para o modelo de 7B parâmetros) sem comprometer o desempenho, tornando o modelo mais eficiente em termos de memória e computação.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="estrategia-de-treinamento-como-o-modelo-aprende-a-pintar">Estratégia de Treinamento: Como o Modelo Aprende a "Pintar"</h3>
+<p>Os modelos de difusão são treinados em várias etapas para otimizar seu desempenho e generalização.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><strong>Aspecto</strong></th>
+<th><strong>Descrição</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Treinamento Conjunto Imagem e Vídeo</td>
+<td>Para alavancar a vasta quantidade de dados de imagens, uma estratégia de <strong>otimização alternada</strong> intercala lotes de dados de imagem e vídeo. É usada uma <strong>normalização específica de domínio</strong> para alinhar as distribuições latentes e encorajar uma representação isotrópica gaussiana. A perda de denoising para vídeos é escalonada para lidar com a convergência mais lenta.<br><br></td>
+</tr>
+<tr>
+<td style="text-align: center;">Treinamento Progressivo</td>
+<td>O modelo é treinado progressivamente, iniciando com <strong>resoluções e durações de vídeo menores</strong> (ex: 512p com 57 quadros) e avançando para <strong>resoluções e durações maiores</strong> (ex: 720p com 121 quadros). Uma fase de <strong>"resfriamento" (cooling-down)</strong> com dados de alta qualidade e uma taxa de aprendizado decrescente refina ainda mais o modelo.<br><br></td>
+</tr>
+<tr>
+<td style="text-align: center;">Treinamento Multi-Aspecto</td>
+<td>Os dados são organizados em "buckets" com base em suas <strong>proporções de aspecto</strong> (ex: 1:1, 16:9) para acomodar a diversidade de conteúdo. <strong>Preenchimento (padding) com reflexão</strong> é usado para pixels ausentes durante o processamento em lote.</td>
+</tr>
+<tr>
+<td style="text-align: center;">Treinamento com Precisão Mista</td>
+<td>Para eficiência, os pesos do modelo são mantidos em <strong>BF16 e FP32</strong>. O BF16 é usado para os passes de <em>forward</em> e <em>backward</em>, e o FP32 para as atualizações de parâmetros, garantindo <strong>estabilidade numérica</strong>.</td>
+</tr>
+<tr>
+<td style="text-align: center;">Condicionamento de Texto</td>
+<td>Utiliza o <strong>T5-XXL</strong> como codificador de texto. Modelos <strong>Text2World</strong> são capazes de gerar vídeo a partir de uma entrada textual.</td>
+</tr>
+<tr>
+<td style="text-align: center;">Condicionamento de Imagem e Vídeo (Video2World)</td>
+<td>Modelos <strong>Video2World</strong> estendem os modelos Text2World para aceitar quadros anteriores (imagem ou vídeo) como condição para gerar quadros futuros. Ruído adicional é introduzido nos quadros condicionais durante o treinamento para aumentar a robustez.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="otimizacao-de-inferencia-tornando-a-geracao-rapida">Otimização de Inferência: Tornando a Geração Rápida</h3>
+<p>Embora os modelos de difusão sejam inerentemente mais lentos devido ao seu processo iterativo de denoising, otimizações significativas são aplicadas para acelerar a geração.</p>
+<h4 id="tecnicas-de-otimizacao-de-inferencia">Técnicas de Otimização de Inferência</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><strong>Técnica</strong></th>
+<th><strong>Descrição</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">FSDP (Fully Sharded Data Parallelism)</td>
+<td>Distribui os parâmetros do modelo, gradientes e estados do otimizador por múltiplos dispositivos (GPUs), resultando em significativa <strong>economia de memória</strong> e permitindo o uso de modelos maiores.<br><br></td>
+</tr>
+<tr>
+<td style="text-align: center;">Context Parallelism (CP)</td>
+<td>Divide a computação e as ativações ao longo da dimensão da sequência, distribuindo-as entre GPUs. Esta técnica é crucial para lidar com <strong>contextos longos de vídeo</strong>, onde a quantidade de dados a ser processada é muito grande.<br><br></td>
+</tr>
+</tbody>
+</table>
+<h3 id="prompt-upsampler-para-entradas-de-texto-do-usuario">Prompt Upsampler: Para Entradas de Texto do Usuário</h3>
+<ul>
+<li>
+<p>Para preencher a lacuna entre as prompts de texto curtas e variadas fornecidas pelos usuários e as descrições de vídeo detalhadas usadas no treinamento dos WFMs, um "Prompt Upsampler" é desenvolvido.</p>
+</li>
+<li>
+<p>Ele transforma as prompts originais em versões mais detalhadas e ricas que se alinham com a distribuição das prompts de treinamento, melhorando a qualidade do vídeo gerado. Para modelos Text2World, o Mistral-NeMo-12B-Instruct é usado para isso; para Video2World, o Pixtral-12B é utilizado.</p>
+</li>
+</ul>
+<h3 id="decodificador-de-difusao-melhorando-a-qualidade-visual-do-autoregressivo">Decodificador de Difusão: Melhorando a Qualidade Visual do Autoregressivo</h3>
+<p>Embora este seja uma parte do modelo de difusão, ele tem um papel especial de pós-otimização para outros modelos:</p>
+<ul>
+<li>
+<p>Para os modelos autoregressivos (que podem gerar vídeos borrados devido à tokenização agressiva), um decodificador de difusão mais poderoso é usado como uma "pós-otimização".</p>
+</li>
+<li>
+<p>Este decodificador pega os tokens discretos (saída do modelo autoregressivo) e os "traduz" de volta para tokens contínuos de maior qualidade, que são então convertidos em vídeos RGB de alta qualidade. É como refinar um rascunho em uma obra de arte acabada.</p>
+</li>
+</ul>
+<h3 id="equacoes">Equações</h3>
+<p><strong>Perda do Denoising:</strong> <code>ℒ(𝐷𝜃, 𝜎) = Ex0,n [︁⃦⃦ 𝐷𝜃(x0 + n;𝜎)− x0 ⃦⃦2 2 ]︁</code></p>
+<ul>
+<li><code>x0 (lê-se "x zero")</code>: Representa o vídeo original, limpo (a "tela perfeita")</li>
+<li><code>n</code>: Representa o ruído gaussiano aleatório que foi adicionado ao vídeo x0</li>
+<li><code>𝜎 (sigma)</code>: Indica o nível de ruído naquele momento. Vídeos com mais ruído terão um 𝜎 maior.</li>
+<li><code>x0 + n</code>: É o vídeo com ruído (a "tela suja") que é dado como entrada para o nosso modelo</li>
+<li><code>𝐷𝜃</code>: É a nossa rede neural "denoiser". O 𝜃 (theta) representa todos os parâmetros (pesos) que a rede precisa aprender durante o treinamento</li>
+<li><code>𝐷𝜃(x0 + n;𝜎)</code>: É o que o modelo 𝐷𝜃 prevê que seja o vídeo original limpo (x0), dado o vídeo ruidoso (x0 + n) e o nível de ruído (𝜎)</li>
+<li><code>𝐷𝜃(x0 + n;𝜎)− x0</code>: Esta é a diferença entre o que o modelo previu e o vídeo real e limpo (x0)</li>
+<li><code>... ⃦⃦2 2 ]︁</code>: Isso significa o quadrado da norma L2, que é uma forma de medir a "distância" ou o "erro" entre a previsão do modelo e a realidade. Basicamente, estamos pegando a diferença, elevando ao quadrado (para que valores negativos e positivos contem igualmente) e somando tudo. Queremos que esse erro seja o menor possível</li>
+<li><code>E_x0,n [ ... ]</code>: Significa a esperança (ou média) sobre diferentes vídeos limpos (x0) e diferentes tipos de ruído (n)</li>
+</ul>
+<p><strong>Perda total de Treinamento:</strong> <code>ℒ(𝐷𝜃) = E𝜎 [ 𝜆(𝜎) ℒ(𝐷𝜃, 𝜎) + 𝑢(𝜎) ]</code></p>
+<ul>
+<li><code>E𝜎 [ ... ]</code>: Significa a esperança (média) sobre diferentes níveis de ruído (𝜎). O modelo é treinado para lidar com todos os níveis de ruído, do quase limpo ao totalmente ruidoso.</li>
+<li><code>𝜆(𝜎) (lambda de sigma)</code>: É uma função de ponderação. Ela ajusta a importância de cada nível de ruído (𝜎) na perda total, para que o modelo preste atenção a todos eles. Inicialmente, ela garante que todos os níveis de ruído contribuam igualmente para o aprendizado.</li>
+<li><code>𝑢(𝜎) (u de sigma)</code>: É uma função de incerteza contínua. O modelo também aprende essa função. Se o modelo está "incerto" sobre como remover o ruído em um certo nível 𝜎, ele se penaliza, incentivando-o a reduzir essa incerteza. Isso ajuda a otimização em diferentes níveis de ruído, tratando-os como um problema de aprendizado multi-tarefa</li>
+</ul>
+<p><strong>Função de Ponderação:</strong> <code>𝜆(𝜎) = (︀ 𝜎2 + 𝜎2data )︀ / (𝜎 · 𝜎data)</code></p>
+<ul>
+<li><code>𝜎data</code>: É o desvio padrão dos dados de treinamento. Essa equação define como o 𝜆(𝜎) calcula o peso de cada nível de ruído, inicialmente visando uma contribuição igualitária</li>
+</ul>
+<p><strong>Distribuição do Nível de Ruído:</strong> <code>ln(𝜎) ∼ 𝒩 (︀ 𝑃mean, 𝑃 2std )︀</code></p>
+<ul>
+<li>Isso descreve como os níveis de ruído (𝜎) são escolhidos durante o treinamento. O logaritmo natural (ln) de 𝜎 segue uma distribuição normal (𝒩), com uma média (𝑃mean) e um desvio padrão (𝑃std) definidos. Isso garante que o modelo veja uma boa variedade de níveis de ruído</li>
+</ul>
+<h3 id="resultados-e-aplicacoes">Resultados e Aplicações</h3>
+<p>Os modelos de difusão Cosmos-1.0 (7B e 14B) são capazes de gerar vídeos com alta qualidade visual, dinâmicas de movimento e alinhamento preciso com o texto. O modelo de 14B demonstra uma capacidade aprimorada de capturar detalhes visuais mais finos e padrões de movimento mais intrincados.</p>
+<p>Eles são utilizados em diversas aplicações de IA Física, como:</p>
+<ul>
+<li>
+<p>Controle de Câmera: Permitem gerar mundos virtuais navegáveis com base em uma imagem de referência e trajetórias de câmera, mantendo a coerência 3D e temporal.</p>
+</li>
+<li>
+<p>Manipulação Robótica: Podem ser ajustados para prever vídeos de robôs seguindo instruções de texto ou sequências de ações.</p>
+</li>
+<li>
+<p>Condução Autônoma: São adaptados para criar modelos de mundo multi-visão para cenários de condução, gerando vídeos de seis câmeras simultaneamente e até seguindo trajetórias de veículos.</p>
+</li>
+<li>
+<p>Modelos de difusão baseados em Transformer são frequentemente capazes de incorporar diversos sinais de controle.</p>
+</li>
+<li>
+<p>As avaliações mostram que os WFMs baseados em difusão entregam melhor qualidade de geração e maior consistência 3D em comparação com as linhas de base e os modelos autoregressivos em certas condições.</p>
+</li>
+</ul>
+<h3 id="limitacoes">Limitações</h3>
+<p>Apesar dos avanços, os modelos de difusão para simulação do mundo ainda enfrentam desafios comuns aos WFMs:</p>
+<ul>
+<li>
+<p>Falta de Permanência de Objetos: Objetos podem desaparecer ou aparecer inesperadamente.</p>
+</li>
+<li>
+<p>Imprecisões em Dinâmicas com Contato: Interações físicas complexas, como colisões, ainda são difíceis de modelar com precisão.</p>
+</li>
+<li>
+<p>Inconsistência no Seguimento de Instruções: O modelo nem sempre segue as instruções de texto de forma totalmente precisa.</p>
+</li>
+<li>
+<p>Aderência às Leis da Física: A gravidade, interações de luz e dinâmicas de fluidos ainda não são perfeitamente simuladas.</p>
+</li>
+</ul>
 
 
 

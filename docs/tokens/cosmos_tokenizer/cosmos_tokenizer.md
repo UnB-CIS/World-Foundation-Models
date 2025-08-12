@@ -547,3 +547,7 @@ As shown in table $9$, for both image and video tokenizers, Cosmos Tokenizer is 
 - [What is Wavelet Transform?Fourier vs Wavelet Transform|CWT-DWT|Wavelet Transform in Image Processing](https://www.youtube.com/watch?v=pUty-98Km_0)
 
 - [Discrete tools for virtual sculpture - Scientific Figure on ResearchGate. Available from: https://www.researchgate.net/figure/D-Haar-wavelet-decomposition_fig1_220868824 [accessed 24 Jul 2025]](https://www.researchgate.net/figure/D-Haar-wavelet-decomposition_fig1_220868824)
+
+- [NVIDIA Lança Plataforma Cosmos World Foundation Model para Acelerar o Desenvolvimento da IA Física](https://blog.nvidia.com.br/blog/nvidia-lanca-plataforma-cosmos-world-foundation-model-para-acelerar-o-desenvolvimento-da-ia-fisica/)
+
+- [Uber Teams Up with NVIDIA to Accelerate Autonomous Mobility](https://investor.uber.com/news-events/news/press-release-details/2025/Uber-Teams-Up-with-NVIDIA-to-Accelerate-Autonomous-Mobility/default.aspx)

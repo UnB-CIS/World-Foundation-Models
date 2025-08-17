@@ -1,17 +1,21 @@
 theme:
-  name: material
+  name: readthedocs
+  color_mode: auto
+  user_color_mode_toggle: true
 
 site_name: World Foundation Models
 nav:
   - Home: index.md
-  - Diffusion models: diffusion.md
-  - Autoregressive models: autoregressive/autoregressive.md
-  - Tokens:
-      - Cosmos Tokenizer:
-          - tokens/cosmos_tokenizer/cosmos_tokenizer.md
-          - tokens/cosmos_tokenizer/wavelet_compression.ipynb
-      - DSC Tokenization: tokens/dsc_tokenization.md
-  - Cosmos Applications: cosmos_applications/cosmos_applications.md
+  - Projeto: projeto/escopo.md
+  - Referências:
+      - Diffusion models: diffusion.md
+      - Autoregressive models: autoregressive/autoregressive.md
+      - Tokens:
+          - Cosmos Tokenizer:
+              - tokens/cosmos_tokenizer/cosmos_tokenizer.md
+              - tokens/cosmos_tokenizer/wavelet_compression.ipynb
+          - DSC Tokenization: tokens/dsc_tokenization.md
+      - Cosmos Applications: cosmos_applications/cosmos_applications.md
 markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
@@ -22,7 +26,7 @@ extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 plugins:
- - mkdocs-jupyter:
+  - mkdocs-jupyter:
       execute: true
       include_source: true
       include: ["*.ipynb"]

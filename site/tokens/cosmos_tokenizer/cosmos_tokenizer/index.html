@@ -1,0 +1,1219 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../../autoregressive/autoregressive/">
+      
+      
+        <link rel="next" href="../wavelet_compression/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
+    
+    
+      
+        <title>Cosmos Tokenizer - World Foundation Models</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#cosmos-tokenizer" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="World Foundation Models" class="md-header__button md-logo" aria-label="World Foundation Models" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            World Foundation Models
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Cosmos Tokenizer
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="World Foundation Models" class="md-nav__button md-logo" aria-label="World Foundation Models" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    World Foundation Models
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../diffusion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Diffusion models
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../autoregressive/autoregressive/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Autoregressive models
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Tokens
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Tokens
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Cosmos Tokenizer
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            Cosmos Tokenizer
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Cosmos Tokenizer
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cosmos Tokenizer
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#portugues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Português
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Português">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resumo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resumo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visao-geral" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visão Geral
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arquitetura" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arquitetura
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estrategia-de-treinamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estratégia de Treinamento
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resultados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resultados
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#english" class="md-nav__link">
+    <span class="md-ellipsis">
+      English
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="English">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#training-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Training Strategy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Results
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      Referências | References
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wavelet_compression/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Decomposição de imagem com Wavelets
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dsc_tokenization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DSC Tokenization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cosmos_applications/cosmos_applications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cosmos Applications
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#portugues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Português
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Português">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resumo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resumo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visao-geral" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visão Geral
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arquitetura" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arquitetura
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estrategia-de-treinamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estratégia de Treinamento
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resultados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resultados
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#english" class="md-nav__link">
+    <span class="md-ellipsis">
+      English
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="English">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#training-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Training Strategy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Results
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      Referências | References
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="cosmos-tokenizer">Cosmos Tokenizer</h1>
+<h2 id="portugues">Português</h2>
+<p>A seguir apresentamos trechos do capítulo <span class="arithmatex">\(5\)</span> do artigo <strong><em>Cosmos World Foundation Model Platform for Physical AI</em></strong>, interpoladas com comentários clarificando e/ou contextualizando conteúdos de seus parágrafos.</p>
+<hr />
+<p>Trechos formatados de forma semelhante a esse parágrafo correspondem a insertos do artigo (traduzidos).</p>
+<blockquote>
+<p>Trechos formatados de forma semelhante a esse parágrafo, são comentários a respeito do parágrafo diretamente acima.</p>
+</blockquote>
+<hr />
+<h3 id="resumo">Resumo</h3>
+<p>O <em>Cosmos Tokenizer</em> é composto por <strong>2 partes</strong>: um <strong>codificador</strong> e um <strong>decodificador</strong>. O <strong>codificador</strong> começa com uma operação <em>Haar Wavelet 3D</em>, para comprimir a imagem ou vídeo, seguida de vários blocos compostos por uma camada <em>Causal ResBlock3D</em>, camadas <em>Causal DownSample3D</em> e uma camada <em>Causal SpatioTemporalAttn</em>.
+O <strong>decodificador</strong> espelha essa arquitetura, substituindo as camadas de downsample por camadas <em>Causal UpSample3D</em> e, ao final, trocando a <em>Haar Wavelet 3D</em> por sua inversa.</p>
+<p>Ambas as partes são treinadas juntas, com supervisão apenas na saída do decodificador. Esses tokenizers funcionam para modelos AutoRegressivas e de difusão, sendo capazes de tokenizar imagens/vídeos de maneira discreta (para modelos AR) ou contínua (para modelos de difusão).</p>
+<p>O <em>Cosmos Tokenizer</em> atinge desempenho superior em menos tempo que outros tokenizers, principalmente devido à sua arquitetura, além de conseguir processar múltiplos tipos de taxas de compressão e operar de forma ubíqua para imagens e vídeos.</p>
+<h3 id="visao-geral">Visão Geral</h3>
+<p>Tokenizers são blocos fundamentais na construção de modelos modernos em larga escala. Eles transformam dados brutos em representações mais eficientes ao aprender um espaços latentes "bottle-necked" descobertos de maneira não supervisionada.
+Especificamente, tokenizers visuais mapeiam dados visuais brutos e redundantes em tokens semânticos compactos, o que os torna cruciais para lidar com dados visuais de alta dimensionalidade.</p>
+<blockquote>
+<p>Mapear os dados brutos (no formato de valores de pixels) para um "espaços latentes bottle-necked" significa que a imagem original — que é muito alta em dimensionalidade (para uma pequena imagem RGB com dimensões <span class="arithmatex">\(224\times 224 \times 3\)</span> você tem um total de <span class="arithmatex">\(196.608\)</span> características por imagem)
+— será comprimida em uma forma menor e mais útil ao aprender uma representação interna comprimida (espaço latente).</p>
+<p>Tudo isso para dizer que as imagens serão comprimidas para uma forma de menor dimensionalidade (tokens) ao passar por um <em>tokenizer</em> que é treinado de forma não supervisionada.</p>
+</blockquote>
+<p>A imagem abaixo ilustra o pipeline de treinamento de tokenização, onde o objetivo é treinar o codificador (encoder) e o decodificador (decoder), de forma que a representação por tokens no gargalo preserve ao máximo a informação visual do input.</p>
+<p><img alt="Tokenization Pipeline" src="../../images/cosmos_tokenizer/tokenization_pipeline.png" /></p>
+<p>Na pipeline, um vídeo de entrada é codificado em tokens, que geralmente são muito mais compactos do que o vídeo de entrada. O decodificador então reconstrói o vídeo original a partir desses tokens. <em>O treinamento do tokenizer consiste em aprender o codificador e decodificador de modo a preservar ao máximo a informação visual nos tokens</em>.</p>
+<p>Tokenizers existem em dois tipos: contínuos e discretos. Tokenizers contínuos codificam dados visuais em embeddings contínuos latentes, como nos modelos de difusão latente (latent diffusion models) tal como o <em>Stable Diffusion</em> ou o <em>VideoLDM</em>. Esses embeddings são adequados para modelos que geram dados ao amostrar de distribuições contínuas.
+Tokenizers discretos codificam dados visuais em códigos latentes discretos, mapeando-os para índices quantizados, como visto em transformers autorregressivos como o VideoPoet. Essa representação discreta é necessária para modelos como o GPT, que são treinados com <em>cross-entropy loss</em>.</p>
+<blockquote>
+<p><em><strong>Tokenizers contínuos</strong></em>: codificam os dados em um espaço vetorial contínuo e de alta dimensionalidade. Eles são usados em modelos de difusão, pois esses modelos geram dados por meio de amostragem em distribuições contínuas. Esses embeddings permitem ao modelo interpolar e reamostrar variações nos dados de base.</p>
+<p><em><strong>Tokenizers discretos</strong></em>: codificam dados em códigos latentes discretos, que são quantizados ou mapeados para um conjunto de índices finitos distintos. Esses tokenizers são usados com <em>modelos autorregressivos</em> que geram sequências um token por vez. O artigo cita os <em>modelos GPT</em> e como eles são treinados com cross-entropy loss;
+essa abordagem requer tokens discretos, pois trata o processo de geração como uma predição sobre um vocabulário fixo, sendo essa função de perda voltada a medir a diferença entre distribuições categóricas previstas e reais.</p>
+<p>A principal diferença entre os dois tipos de tokenizers está na forma como os tokenizers discretos mapeiam os valores de imagem para valores discretos (<span class="arithmatex">\(\mathbb{N}\)</span>), enquanto tokenizers contínuos mapeiam para valores reais (<span class="arithmatex">\(\mathbb{R}\)</span>), permitindo uma maior quantidade de valores no espaço latente (por exemplo, <em>"[...]espaço vetorial de alta dimensionalidade[...]”</em>).</p>
+<p>Modelos de difusão aprendem ao reverter um processo gradual de "adicionar ruído" a dados reais. Esse processo gradual é o motivo pelo qual tais modelos dependem de tokens com valores reais (<span class="arithmatex">\(\mathbb{R}\)</span>).</p>
+</blockquote>
+<p>O sucesso dos tokenizers depende, em grande parte, da sua habilidade de fornecer altas taxas de compressão sem comprometer a qualidade da reconstrução visual posterior. Por um lado, uma alta compressão reduz os requisitos de armazenamento e computação.
+Por outro, uma compressão excessiva pode levar à perda de detalhes visuais essenciais. Esse equilíbrio representa um desafio importante no projeto de tokenizers.</p>
+<p>A imagem a seguir ilustra os dois tipos de tokens:</p>
+<p><img alt="Visualization of continuous and discrete tokenizers" src="../../images/cosmos_tokenizer/token_types.png" /></p>
+<p>Tokens ao longo das dimensões espaciais (<span class="arithmatex">\(\frac{H}{S_{HW}} \times \frac{W}{S_{HW}}\)</span>) e temporais (<span class="arithmatex">\(1 + \frac{T}{S_T}\)</span>), com um fator de compressão espacial <span class="arithmatex">\(S_{HW}\)</span> e um fator de compressão temporal <span class="arithmatex">\(S_T\)</span>. O primeiro token temporal representa o primeiro quadro da entrada, possibilitando a tokenização conjunta de imagens (<span class="arithmatex">\(T=0\)</span>) e vídeos (<span class="arithmatex">\(T&gt;0\)</span>) em um espaço latente compartilhado.</p>
+<blockquote>
+<p><span class="arithmatex">\(S_{HW}\)</span> é o <strong><em>fator de compressão espacial</em></strong> usado para comprimir as dimensões espaciais de uma imagem. Essa é uma etapa chave no processo de tokenização espacial, no qual o quadro de entrada é dividido em pequenos blocos ou regiões, cada um dos quais é representado por um ou mais tokens.</p>
+<p>Se a dimensão da imagem original for <span class="arithmatex">\(224\times 224 \times 3\)</span>, e o <em>fator de compressão espacial</em> for 16, a grade de tokens será de <span class="arithmatex">\(14\times 14\)</span>, e cada token conterá informações sobre uma região de <span class="arithmatex">\(16\times 16\)</span> pixels.</p>
+<p><span class="arithmatex">\(S_T\)</span> é o <em>fator de compressão temporal</em>, e é usado para reduzir o número de tokens que representam o eixo temporal agrupando quadros. Isso é aplicado no processo de <em>Tokenização Temporal</em>, para representar o número de quadros.
+A adição de <span class="arithmatex">\(1\)</span> permite ao modelo tratar o quadro inicial como um token especial, dando suporte à tokenização conjunta de imagens e vídeos. Se o processo for aplicado a uma imagem, <span class="arithmatex">\(T=0\)</span> e a dimensão temporal reduz-se a <span class="arithmatex">\(1\)</span>.</p>
+<p>Se a imagem mencionada acima fizer parte de um vídeo com <span class="arithmatex">\(32\)</span> quadros, e o <em>fator de compressão temporal</em> tiver valor <span class="arithmatex">\(4\)</span>, o processo de tokenização produzirá 9 tokens temporais: <span class="arithmatex">\(1\)</span> para o primeiro quadro (adaptabilidade para lidar com imagens), e outros 8, cada um agrupando 4 quadros.</p>
+</blockquote>
+<p>A tabela a seguir ilustra diferentes tokenizers visuais e suas capacidades:</p>
+<p><img alt="Different tokenizers and capabilities" src="../../images/cosmos_tokenizer/tokenizers_table.png" /></p>
+<p>O <em>Tokenizador Cosmos</em> utiliza uma arquitetura leve e computacionalmente eficiente com um mecanismo temporal causal. Especificamente, ele emprega camadas de convolução temporal causal e camadas de atenção temporal causal para preservar a ordem temporal natural dos quadros de vídeo.</p>
+<blockquote>
+<p>O termo "causal" implica que qualquer predição sobre um determinado quadro ou ponto no tempo é baseada somente nesse quadro e em todos os quadros anteriores, nunca nos futuros. Portanto, "<em>Convolução Temporal Causal</em>" significa que a geração de características para um dado quadro utiliza apenas dados do quadro <span class="arithmatex">\(t\)</span> para trás.</p>
+<p>A mesma ideia aplica-se à "<em>Atenção Temporal Causal</em>", onde o tokenizer pondera dinamicamente em quais quadros focar ao tomar decisões sobre o quadro atual.</p>
+</blockquote>
+<p>Os tokenizers são treinados diretamente em imagens de alta resolução e vídeos de longa duração, sem limitar as categorias ou proporções de aspecto. O <em>Cosmos Tokenizer</em> opera em diferentes proporções de aspecto. Ele é agnóstico quanto à duração temporal durante a inferência, sendo capaz de tokenizar além da duração temporal usada durante o treinamento.</p>
+<p>Os gráficos abaixo mostram a comparação de desempenho entre o <em>Cosmos Tokenizer</em> e outros tokenizers, evidenciando a sua qualidade superior mesmo em taxas de compressão mais altas:</p>
+<p><img alt="Tokenizer comparisons" src="../../images/cosmos_tokenizer/tokenizer_comparison.png" /></p>
+<p>Claro! Segue abaixo o texto traduzido para o português, com a estrutura Markdown totalmente preservada, e mantendo em inglês apenas os termos técnicos que fazem mais sentido no original:</p>
+<h3 id="arquitetura">Arquitetura</h3>
+<p>O Cosmos Tokenizer é projetado com uma arquitetura encoder-decoder.
+Dado um vídeo de entrada <span class="arithmatex">\(x_{0:T}\in\mathbb{R^{(1+T)\times H\times W\times3}}\)</span>, com <span class="arithmatex">\(H,\ W,\ T\)</span> sendo a altura, largura e número de quadros, o encoder (<span class="arithmatex">\(\varepsilon\)</span>) tokeniza as entradas em um vídeo de tokens <span class="arithmatex">\(z_{0:T'}\in\mathbb{R^{(1+T)\times H\times W\times3}}\)</span>, com um fator de compressão espacial de <span class="arithmatex">\(s_{H W}=\frac{H}{H'}=\frac{W}{W'}\)</span> e um fator de compressão temporal de <span class="arithmatex">\(S_T=\frac{T}{T'}\)</span>.
+O decoder (<span class="arithmatex">\(\mathcal{D}\)</span>) então reconstrói o vídeo de entrada a partir desses tokens, resultando no vídeo reconstruído <span class="arithmatex">\(\hat{x}_{0:T} \in \mathbb{R^{(1 + T) \times H \times W \times 3}}\)</span></p>
+<div class="arithmatex">\[\hat{x}_{0:T} = \mathcal{D}(\varepsilon(x_{0:T}))\]</div>
+<blockquote>
+<p>Esta é uma visão geral da arquitetura, onde o encoder codifica uma entrada <span class="arithmatex">\(x_{0:T}\)</span> em tokens <span class="arithmatex">\(z_{0:T'}\)</span>, e o decoder decodifica esses tokens e produz <span class="arithmatex">\(\hat{x}_{0:T}\)</span>.</p>
+</blockquote>
+<p>Nossa arquitetura emprega um design temporalmente causal, garantindo que cada estágio processe apenas quadros atuais e passados. <em>Nosso tokenizer opera no wavelet space, onde as entradas são primeiro processadas por uma wavelet transform de 2 níveis</em>.
+A wavelet transform mapeia o vídeo de entrada <span class="arithmatex">\(x_{0:T}\)</span> de forma agrupada para realizar um downsample das entradas por um fator de quatro ao longo das direções <span class="arithmatex">\(x, y\)</span> e <span class="arithmatex">\(t\)</span>.
+Os grupos são formados como: <span class="arithmatex">\(\lbrace x_0, x_{1:4}, x_{5:8}, ..., x_{(T-3):T}\rbrace \rightarrow \lbrace g_0, g_1, g_2, ..., g_{T/4}\rbrace\)</span>. Estágios subsequentes do encoder processam esses quadros de forma temporalmente causal como <span class="arithmatex">\(\lbrace g_0, g_{0:1}. g_{0:2}, ...\rbrace \rightarrow \lbrace \xi_0, \xi_1, \xi_2,...  \rbrace\)</span>.
+Estágios posteriores seguem um esquema similar, produzindo finalmente os tokens <span class="arithmatex">\(z_{0:T'}\)</span>.</p>
+<blockquote>
+<p>A <em><strong>wavelet transform</strong></em> é uma técnica para processamento de sinais em múltiplas escalas e resoluções. Ela difere de transformadas mais tradicionais, como a <em>Fourier Transform</em>, que representam dados em termos de ondas senoidais e cossenoidais de frequência fixa, utilizando no lugar oscilações curtas e semelhantes a ondas, que podem ser escaladas e deslocadas.
+Esta transformada decompõe tanto variações espaciais quanto temporais (ao longo dos quadros), comprimindo e isolando mudanças bruscas em regiões suaves.</p>
+<p>O <strong><em>wavelet space</em></strong> é a representação de um sinal após passar por uma wavelet transform. Assim, a sentença "<em>[...]nosso tokenizer opera no wavelet space, onde as entradas são primeiro processadas por uma wavelet transform de 2 níveis[...]</em>" significa que cada dimensão espacial e temporal é decomposta, extraindo informações tanto de baixa frequência (globais) quanto de alta frequência.</p>
+<p>Durante o processo de aplicação da wavelet transform de 2 níveis, os dados são redimensionados em cada dimensão (<span class="arithmatex">\(x, y, t\)</span>) por um fator de <span class="arithmatex">\(4\)</span>. Assim, cada grupo de <span class="arithmatex">\(4\)</span> pixels (<span class="arithmatex">\(x_{t:(t+3)}\)</span>) nas 3 dimensões da imagem é representado por um grupo comprimido (<span class="arithmatex">\(g_i\)</span>).</p>
+<p>O tokenizer final utiliza a Haar Wavelet, que é uma das funções wavelet mais simples.</p>
+<p><img alt="haar_wavelet" src="../../images/cosmos_tokenizer/haar_wavelet.png" /></p>
+<p>Wavelet Transforms comprimem imagens por meio de decomposição, primeiro em uma aproximação de baixa resolução da imagem original, em seguida com detalhes verticais, horizontais, e diagonais, semelhante ao demonstrado abaixo:</p>
+<p><img alt="Wavelet decomposition" src="../../images/cosmos_tokenizer/wavelet_decomposition.png" /></p>
+<p>Resultando em imagens comprimidas como esta:</p>
+<p><img alt="Wavelet compressed image" src="../../images/cosmos_tokenizer/wavelet_compressed_image.png" /></p>
+</blockquote>
+<p>E uma transformada wavelet de 2 níveis teria uma aparência semelhante à seguinte:</p>
+<blockquote>
+<p><img alt="2-level wavelet" src="../../images/cosmos_tokenizer/2-level_wavelet.png" /></p>
+</blockquote>
+<p>O design causal ajuda a adaptar modelos baseados no tokenizer para aplicações de Physical AI que frequentemente operam em cenários temporalmente causais. A wavelet transform nos permite operar sobre uma representação de vídeo mais compacta que elimina redundâncias na informação de pixel, permitindo que as camadas restantes foquem em compressão mais semântica.</p>
+<p>Nossos estágios de encoder são implementados utilizando uma série de residual blocks intercalados com downsampling blocks.
+Em cada bloco, utilizamos uma convolução 3D fatorada espaço-temporalmente, onde aplicamos primeiro uma convolução 2D com kernel de tamanho <span class="arithmatex">\(1\times k\times k\)</span> para capturar informações espaciais, seguida por uma convolução temporal com kernel de tamanho <span class="arithmatex">\(k\times 1\times 1\)</span> para capturar dinâmicas temporais. Utilizamos padding à esquerda de k-1 para garantir causalidade.</p>
+<blockquote>
+<p>Emprega convolução (2 + 1)D.</p>
+</blockquote>
+<p>Para capturar dependências de longo alcance, utilizamos uma self-attention causal fatorada espaço-temporal com uma global support region.
+Usamos a função de ativação Swish para não-linearidade. Utilizamos Layer Normalization (LayerNorm) em vez de Group Normalization (GroupNorm), o que evita o aparecimento de grandes magnitudes em regiões específicas do espaço latente ou das saídas reconstruídas. O decoder espelha o encoder, substituindo os downsampling blocks por um upsampling block.
+A imagem abaixo mostra uma visão geral da arquitetura do Cosmos Tokenizer.</p>
+<blockquote>
+<p>Global support region para não-linearidade significa que os tokens interagem com todos os outros tokens disponíveis no momento (devido às restrições da arquitetura causal).</p>
+<p>A <strong><em>Swish activation function</em></strong>, definida por <span class="arithmatex">\(\operatorname{Swish}^{\beta}(x) = x \cdot sigmoid(\beta x) = \frac{x}{1+e^{-\beta x}}\)</span></p>
+<p><img alt="Swish activation function" src="../../images/cosmos_tokenizer/swish_activation_function.png" /></p>
+</blockquote>
+<p><img alt="Tokenizer architecture" src="../../images/cosmos_tokenizer/tokenizer_architecture.png" /></p>
+<p>A imagem mostra a <strong>arquitetura geral do Cosmos Tokenizer, ilustrando a integração da causalidade temporal com a estrutura encoder-decoder.</strong> A causalidade temporal (à esquerda) processa entradas sequenciais, enquanto o encoder-decoder (à direita) utiliza transformadas wavelet e operações causais para capturar dependências espaciais e temporais nos dados.</p>
+<blockquote>
+<p>O bloco Haar Wavelet3D realiza o processo mostrado na visualização abaixo para um grupo de 4 valores em cada dimensão:</p>
+<p><img alt="3d_wavelet_decomposition" src="../../images/cosmos_tokenizer/3d_wavelet_decomposition.png" /></p>
+<p>Tanto o <strong><em>ResBlock3D</em></strong>, quanto o <strong><em>DownSampleBlock3D</em></strong> aplicam convoluções (2 + 1)D, com a diferença entre eles sendo a presença de "<em>skip connections</em>" para o <strong><em>ResBlock3D</em></strong>.</p>
+<p>O bloco <strong><em>Inverse Haar Wavelet3D</em></strong> nada mais é do que a inversão da transformada original, que pega os coeficientes wavelet e reconstrói a imagem (ou vídeo) original.</p>
+<p>O encoder e o decoder são separados do restante da arquitetura do modelo.</p>
+</blockquote>
+<p>Utilizamos a formulação convencional de autoencoder (AE) para modelar o espaço latente do tokenizer contínuo. Para tokenizers discretos, adotamos o Finite-Scalar-Quantization (FSQ) como quantizador do espaço latente.
+A dimensão latente para os tokenizers contínuos é 16, enquanto para os tokenizers discretos é 6, representando o número de níveis FSQ, que são <span class="arithmatex">\((8,8,8,5,5,5)\)</span>. Essa configuração corresponde a um vocabulário de tamanho <span class="arithmatex">\(64.000\)</span>.</p>
+<blockquote>
+<p>O tokenizer contínuo utiliza uma arquitetura Autoencoder, onde uma rede neural comprime os dados de entrada para uma representação latente e depois reconstrói a entrada a partir dessa forma comprimida. A dimensão do espaço latente sendo <span class="arithmatex">\(16\)</span> significa que cada token é representado por um vetor contínuo de 16 dimensões.</p>
+<p>O tokenizer discreto utiliza Finite-Scalar-Quantization, que mapeia valores contínuos em um conjunto finito de níveis discretos, atribuindo a cada ponto no espaço latente um índice discreto. A dimensão latente no tokenizer discreto ainda é <span class="arithmatex">\(6\)</span>, mas cada dimensão representa mais de um valor.
+Neste caso, as primeiras <span class="arithmatex">\(3\)</span> dimensões podem assumir <span class="arithmatex">\(8\)</span> valores possíveis, e as últimas três podem assumir <span class="arithmatex">\(5\)</span> valores cada, totalizando <span class="arithmatex">\(8^3\times 5^3 = 64.000\)</span> possíveis tokens discretos.</p>
+</blockquote>
+<h3 id="estrategia-de-treinamento">Estratégia de Treinamento</h3>
+<p>Empregamos uma estratégia de treinamento conjunto alternando mini-batches de imagens e vídeos em uma frequência pré-definida. Supervisionamos apenas a saída final do decoder do nosso tokenizer. Não utilizamos losses auxiliares conectados aos espaços latentes.</p>
+<blockquote>
+<p>"<em>[...] mini-batches de imagens e vídeos em uma frequência pré-definida [...]</em>" significa que o modelo utiliza lotes de imagens e vídeos durante o treinamento, de maneira alternada, em uma frequência pré-estabelecida, ou seja, trocando entre eles a cada <span class="arithmatex">\(N\)</span> lotes.</p>
+<p>A ideia do treinamento conjunto para imagens e vídeos expõe a rede tanto a dados de um único quadro quanto a dados multi-quadro, tornando seu espaço latente mais apropriado para ambos os tipos de entrada.</p>
+<p>Tanto os tokenizers discretos quanto os contínuos mapeiam dados contínuos para um espaço latente, e a frase "<em>[...] Não utilizamos losses auxiliares conectados aos espaços latentes [...]</em>" significa que o treinamento não utiliza losses adicionais para estimular certos comportamentos ou propriedades (como desmembramento, compacidade ou interpretabilidade) nesse espaço latente.</p>
+</blockquote>
+<p>Utilizamos um esquema de treinamento em duas etapas. Na primeira etapa, otimizamos com o <em>L1 Loss</em>, que minimiza a diferença RGB pixel a pixel entre o vídeo de entrada e o reconstruído (<span class="arithmatex">\(\hat{x}_{0:T}\)</span>), dada por:</p>
+<div class="arithmatex">\[\mathcal{L}_1 = ||\hat{x}_{0:T} - x_{0:T}||_1\]</div>
+<blockquote>
+<p><span class="arithmatex">\(\mathcal{L}_1\)</span> loss é outro nome para <strong><em>Erro Absoluto Médio</em></strong>. Em vez de elevar ao quadrado a diferença entre o valor previsto e o real (como no <strong><em>Mean Squared Error</em></strong>, ou <span class="arithmatex">\(\mathcal{L}_2\)</span> loss), toma-se o valor absoluto da diferença entre eles.</p>
+<p>A função é representada em <a href="https://en.wikipedia.org/wiki/Einstein_notation"><strong><em>Notação de Einstein</em></strong></a>.</p>
+</blockquote>
+<p>E o perceptual loss, baseado nas features do VGG-19, dado por:</p>
+<div class="arithmatex">\[\frac{1}{L}\sum_{l=1}^{L} \sum_{t}^{}{ \alpha_l || \mathrm{VGG}_l(\hat{x}_t) - \mathrm{VGG}_l(x_t) ||1}\]</div>
+<p>Onde <span class="arithmatex">\(\mathrm{VGG}_l(\cdot) \in \mathbb{R}^{H\times W\times C}\)</span> são as features extraídas da <span class="arithmatex">\(l\)</span>-ésima camada de uma rede <strong><em>VGG-19</em></strong> pré-treinada, <span class="arithmatex">\(L\)</span> é o número de camadas consideradas, e <span class="arithmatex">\(\alpha_l\)</span> é o peso da camada <span class="arithmatex">\(l\)</span>.</p>
+<blockquote>
+<p>O perceptual loss é uma forma de analisar o quão bem uma imagem está sendo reconstruída, gerada ou aprimorada. Ele compara a representação das imagens no espaço de features em vez da diferença píxel a píxel. Enquanto o <span class="arithmatex">\(\mathcal{L}_1\)</span> loss mede a diferença entre duas imagens em cada etapa, o perceptual loss mede o quão "distantes" dois mapas de features estão um do outro.</p>
+<p>A função de loss acima determina quão diferente está o mapa de features (calculando o <span class="arithmatex">\(\mathcal{L}_1\)</span> loss) em uma camada <span class="arithmatex">\(l\)</span> do modelo VGG-19, entre a imagem real e a imagem gerada nessa camada. Após medir as diferenças absolutas, multiplica-se esse valor pelo peso da camada (<span class="arithmatex">\(\alpha_l\)</span>).</p>
+</blockquote>
+<p>Na segunda etapa, utilizamos a optical flow (<span class="arithmatex">\(\mathrm{OF}\)</span>) loss para tratar a suavidade temporal dos vídeos reconstruídos:</p>
+<div class="arithmatex">\[\frac{1}{T}\sum_{t=1}^{T}||\mathrm{OF}(\hat{x}_{t}, \hat{x}_{t - 1}) - \mathrm{OF}({x}_{t}, {x}_{t - 1})||_1 + \frac{1}{T}\sum_{t=0}^{T - 1}||\mathrm{OF}(\hat{x}_{t}, \hat{x}_{t - 1}) - \mathrm{OF}({x}_{t}, {x}_{t - 1})||_1\]</div>
+<blockquote>
+<p><strong><em>Optical Flow</em></strong> é o movimento aparente de objetos, superfícies e contornos entre quadros consecutivos de uma sequência de vídeo. Ele cria um campo vetorial onde cada vetor representa o movimento de um pixel de um quadro para o seguinte, ajudando a entender como e onde ocorre o movimento em uma cena.</p>
+<p>Esse loss é utilizado para estimular que o modelo de vídeo preserve os padrões de movimento do vídeo original. <span class="arithmatex">\(\mathrm{OF}(\hat{x}_{t}, \hat{x}_{t - 1})\)</span> é o optical flow entre os quadros reconstruídos, e <span class="arithmatex">\(\mathrm{OF}(x_{t}, x_{t - 1})\)</span> é o optical flow entre os quadros reais.</p>
+<p>A função <span class="arithmatex">\(\mathcal{L}_{Flow}\)</span> soma o <span class="arithmatex">\(\mathcal{L}_1\)</span> loss entre todos os pares consecutivos de quadros do vídeo reconstruído e do original. Isso penaliza discrepâncias temporais entre os frames reconstruídos e originais.</p>
+</blockquote>
+<p>Além disso, utilizamos o adversarial loss na etapa de fine-tuning para melhorar ainda mais os detalhes da reconstrução, especialmente em taxas de compressão elevadas.</p>
+<blockquote>
+<p>O adversarial loss é uma técnica empregada em <em>GANs</em>, onde uma rede discriminadora tenta distinguir entre imagens reais e geradas.</p>
+</blockquote>
+<p>Treinamos os tokenizers de imagem (CI e DI) em duas taxas de compressão: <span class="arithmatex">\(8\times 8\)</span> e <span class="arithmatex">\(16\times 16\)</span>. De maneira análoga, treinamos os tokenizers de vídeo (CV e DV) em três taxas de compressão: <span class="arithmatex">\(4\times 8\times 8\)</span>, <span class="arithmatex">\(8\times 8\times 8\)</span>, e <span class="arithmatex">\(8\times 16\times 16\)</span>.
+Aqui, as taxas de compressão são <span class="arithmatex">\(H\times W\)</span> para imagens e <span class="arithmatex">\(T\times H\times W\)</span> para vídeos, onde <span class="arithmatex">\(T\)</span> é a dimensão temporal, e <span class="arithmatex">\(H\)</span> e <span class="arithmatex">\(W\)</span> são as dimensões espaciais.</p>
+<blockquote>
+<p>As taxas de compressão determinam o quanto da resolução de entrada é reduzida durante a tokenização.</p>
+</blockquote>
+<p>Para os tokenizers de vídeo, criamos duas variantes:</p>
+<ol>
+<li><strong>Cosmos-0.1-Tokenizer</strong>: treinado utilizando mini-batches com menor quantidade de frames por vídeo (<span class="arithmatex">\(49\)</span> frames para CV e <span class="arithmatex">\(17\)</span> frames para DV).</li>
+<li><strong>Cosmos-1.0-Tokenizer</strong>: treinado utilizando mini-batches com maior quantidade de frames por vídeo (<span class="arithmatex">\(121\)</span> frames para CV e <span class="arithmatex">\(49\)</span> frames para DV).</li>
+</ol>
+<p>Essa abordagem garante flexibilidade no tratamento de diferentes resoluções espaciais e temporais para dados de imagem e vídeo.</p>
+<h3 id="resultados">Resultados</h3>
+<p><img alt="Tokenizer Evaluation 1" src="../../images/cosmos_tokenizer/tokenizer_evaluation_1.png" /></p>
+<p><img alt="Tokenizer Evaluation 2" src="../../images/cosmos_tokenizer/tokenizer_evaluation_2.png" /></p>
+<p>Nós avaliamos nossa suíte Cosmos Tokenizer em vários datasets benchmark de imagens e vídeos. Para a avaliação dos image tokenizers, seguimos trabalhos anteriores para avaliar o <strong>MS-COCO 2017</strong> e o <strong>ImageNet-1K</strong>. Utilizamos o subconjunto de validação do <strong>MS-COCO 2017</strong> com <span class="arithmatex">\(5.000\)</span> imagens, e o subconjunto de validação do <strong>ImageNet-1K</strong> com <span class="arithmatex">\(50.000\)</span> imagens como benchmark para avaliação de imagens.</p>
+<p><strong>TokenBench</strong>. Para avaliação dos video tokenizers, ainda não existe um benchmark padrão para vídeos de alta resolução e longa duração. Para isso, introduzimos um benchmark chamado <em>TokenBench</em> para cobrir uma ampla variedade de domínios, incluindo manipulação robótica, direção, egocêntrico e vídeos da web, padronizando assim a avaliação.
+Utilizamos datasets de vídeo existentes que são comumente usados para várias tarefas, incluindo <strong>BDD100K</strong>, <strong>EgoExo-4D</strong>, <strong>BridgeData V2</strong>, e <strong>Panda-70M</strong>.
+Amostramos aleatoriamente <span class="arithmatex">\(100\)</span> vídeos de cada dataset e pré-processamos pegando os primeiros <span class="arithmatex">\(10\)</span> segundos e redimensionando a menor dimensão para <span class="arithmatex">\(1080\)</span>. Para o <strong>Panda-70M</strong>, filtramos manualmente vídeos com conteúdo de baixa qualidade e poucos movimentos. Para o <strong>EgoExo-4D</strong>, selecionamos aleatoriamente <span class="arithmatex">\(100\)</span> cenas e amostramos um vídeo egocêntrico e um exocêntrico.
+Isso resulta em um total de <span class="arithmatex">\(500\)</span> vídeos.</p>
+<blockquote>
+<p>Imagens <strong>Egocentric</strong> são do ponto de vista da primeira pessoa, enquanto imagens <strong>Exocentric</strong> são de pontos de vista de terceira pessoa.</p>
+</blockquote>
+<p>Além do <em>TokenBench</em>, também avaliamos nossos video tokenizers no dataset <strong>DAVIS</strong> em resolução de <span class="arithmatex">\(1080p\)</span>.</p>
+<p><strong>Baselines e métricas de avaliação</strong>. Avaliamos nossos tokenizers com diferentes taxas de compressão para demonstrar sua eficácia para diversas necessidades computacionais.
+Comparamos cada um desses tokenizers com os state-of-the-art tokenizers de imagem e vídeo. As métricas de avaliação incluem <strong><em>Peak Signal-to-Noise Ratio (PSNR)</em></strong>, <strong><em>Structural Similarity(SSIM)</em></strong>, <strong><em>reconstruction Fréchet Inception Distance (rFID)</em></strong> para imagens e <strong><em>reconstruction Fréchet Video Distance (rFVD)</em></strong> para vídeos.</p>
+<blockquote>
+<p><strong><em>Peak Signal-to-Noise Ratio (PSNR)</em></strong>: Mede a diferença média entre as imagens/vídeos originais e reconstruídos focando na fidelidade a nível de pixel. Valores mais altos de <strong>PSNR</strong> indicam melhor qualidade e menos distorção (não necessariamente para a percepção humana).
+<span class="arithmatex">\(<span class="arithmatex">\(PSNR = 10 \cdot \log_{10} \left(\frac{{MAX}_I^2}{MSE}\right)\)</span>\)</span>
+Onde <span class="arithmatex">\(MAX\)</span> é o valor máximo possível de pixel da imagem (<span class="arithmatex">\(255\)</span> para imagens de <span class="arithmatex">\(8\)</span> bits).</p>
+<p><strong><em>Structural Similarity Index Measure (SSIM)</em></strong>: Mede a similaridade estrutural percebida comparando luminância, contraste e estrutura. Essa métrica está mais alinhada com a visão humana, em comparação ao <span class="arithmatex">\(PSNR\)</span>.
+<span class="arithmatex">\(<span class="arithmatex">\(SSIM(x, \hat{x}) = \frac{(2\mu_x\mu_{\hat{x}} + c_1)(2\sigma_{x\hat{x}} + c_2)}{(\mu_x^2 + \mu_{\hat{x}}^2 + c_1)(\sigma_x^2 + \sigma_{\hat{x}}^2 + c_2)}\)</span>\)</span>
+Onde:</p>
+<ul>
+<li><span class="arithmatex">\(\mu_x, \mu_{\hat{x}}\)</span> são as médias dos patches originais e reconstruídos.</li>
+<li><span class="arithmatex">\(\sigma_x^2, \sigma_{\hat{x}}^2\)</span> são as variâncias dos patches.</li>
+<li><span class="arithmatex">\(\sigma_{x\hat{x}}\)</span> é a covariância entre os patches.</li>
+<li><span class="arithmatex">\(c_1, c_2\)</span> são pequenas constantes para estabilizar a divisão.</li>
+</ul>
+<p><strong><em>reconstruction Fréchet Inception Distance (rFID)</em></strong>: Mede a similaridade distributiva entre as features abstratas das imagens originais e reconstruídas. Valores mais baixos indicam que as reconstruções são mais estatisticamente similares às imagens reais em espaços de características de alto nível.
+<span class="arithmatex">\(<span class="arithmatex">\(rFID(X,Y) = ||\mu_X - \mu_Y||_2^2 + Tr \left(\sum X + \sum Y - 2(\sum X\sum Y)^{1/2}\right)\)</span>\)</span></p>
+<ul>
+<li><span class="arithmatex">\(X,Y\)</span> são coleções de features das imagens reais e reconstruídas.</li>
+<li><span class="arithmatex">\(\mu_X, \mu_Y\)</span> são as médias dos vetores de features originais e reconstruídos.</li>
+<li><span class="arithmatex">\(\sum X, \sum Y\)</span> são as matrizes de covariância.</li>
+<li><span class="arithmatex">\(Tr\)</span> é o traço da matriz.</li>
+</ul>
+<p><strong><em>reconstruction Fréchet Video Distance (rFVD)</em></strong>: Mede o quão próxima está a distribuição dos vídeos reconstruídos dos vídeos reais em espaços de features. Valores mais baixos indicam não só vídeos mais realistas, mas também movimentos e dinâmicas temporais que correspondem aos vídeos originais.
+<span class="arithmatex">\(<span class="arithmatex">\(rFVD(X,Y) = ||\mu_X - \mu_Y||_2^2 + Tr \left(\sum X + \sum Y - 2(\sum X\sum Y)^{1/2}\right)\)</span>\)</span></p>
+<ul>
+<li><span class="arithmatex">\(X,Y\)</span> são coleções de features dos vídeos reais e reconstruídos.</li>
+<li><span class="arithmatex">\(\mu_X, \mu_Y\)</span> são as médias dos vetores de features originais e reconstruídos.</li>
+<li><span class="arithmatex">\(\sum X, \sum Y\)</span> são as matrizes de covariância.</li>
+<li><span class="arithmatex">\(Tr\)</span> é o traço da matriz.</li>
+</ul>
+</blockquote>
+<p><strong>Resultados quantitativos</strong> Como mostrado nas tabelas (<span class="arithmatex">\(5,6\)</span>), o Cosmos Tokenizer alcança desempenho state-of-the-art em todas as métricas comparadas a trabalhos anteriores tanto no dataset de vídeo <em>DAVIS</em> quanto no <em>TokenBench</em>, com uma taxa de compressão espaço-temporal de <span class="arithmatex">\(4\times 8\times 8\)</span>.
+Além disso, mesmo com taxas de compressão <span class="arithmatex">\(2\times\)</span> e <span class="arithmatex">\(8\times\)</span> maiores, o Cosmos Tokenizer frequentemente é comparável ou até melhor do que trabalhos anteriores com taxa de compressão <span class="arithmatex">\(8\times 8\)</span>, como mostrado nas tabelas <span class="arithmatex">\(7\)</span> e <span class="arithmatex">\(8\)</span>.</p>
+<p>Como mostrado nessas tabelas, comparado a trabalhos anteriores, o Cosmos Tokenizer consistentemente alcança resultados de state-of-the-art com taxa de compressão <span class="arithmatex">\(8\times 8\)</span>. Mais importante, numa taxa de compressão <span class="arithmatex">\(4\times\)</span> maior de <span class="arithmatex">\(16\times 16\)</span>, a qualidade da imagem do Cosmos Tokenizer é frequentemente comparável ou até melhor do que trabalhos anteriores em <span class="arithmatex">\(8\times 8\)</span>.</p>
+<p>Como mostrado na tabela <span class="arithmatex">\(9\)</span>, para ambos image e video tokenizers, o Cosmos Tokenizer é de <span class="arithmatex">\(2\times\)</span> a <span class="arithmatex">\(12\times\)</span> mais rápido enquanto mantém o menor tamanho de modelo comparado a trabalhos anteriores, demonstrando que o Cosmos Tokenizer tem alta eficiência para codificação e decodificação de conteúdo visual.</p>
+<hr />
+<h2 id="english">English</h2>
+<p>Below we present excerpts from chapter 5 of the article <strong><em>Cosmos World Foundation Model Platform for Physical AI</em></strong>, interspersed with comments clarifying and/or contextualizing the content of its paragraphs.</p>
+<hr />
+<p>Passages formatted similarly to this paragraph correspond to translated excerpts from the article.</p>
+<blockquote>
+<p>Passages formatted similarly to this paragraph are comments regarding the paragraph directly above.</p>
+</blockquote>
+<hr />
+<h3 id="summary">Summary</h3>
+<p>The <em>Cosmos Tokenizer</em> is composed by $2 $parts, an <strong>encoder</strong> and a <strong>decoder</strong>. The <strong>encoder</strong> starts with a <em>Haar Wavelet 3D</em> operation, to compress the image or video, then a number of blocks composed by a <em>Causal ResBlock3D</em> layer, <em>Causal DownSample3D</em> layers, and a <em>Causal SpatioTemporalAttn</em> layer.
+The <strong>decoder</strong> mirrors this architecture, substituting the downsample layers for <em>Causal UpSample3D</em> layers, and in the end substituting the <em>Haar Wavelet3D</em> for its inverse.</p>
+<p>Both parts are trained together, with supervision only in the output of the decoder. These tokenizers work for both autoregressive and diffusion architectures, being able to tokenize images/videos in a discrete (for AR models), or continuous manner (for diffusion models).</p>
+<p>The <em>Cosmos Tokenizer</em> reaches higher performance in less time than other tokenizers, mostly due to its architecture, while also being able to process multiple types of compression rates, and work ubiquitously for images and videos.</p>
+<h3 id="overview">Overview</h3>
+<p>Tokenizers are fundamental building blocks of modern large-scale models. They transform raw data into more efficient representations by learning a bottle-necked latent space discovered in an unsupervised manner. Specifically, visual tokenizers map raw and redundant visual data into compact semantic tokens, making them crucial for handling high-dimensional visual data.</p>
+<blockquote>
+<p>Mapping the raw data (in the format of pixel values) to a "bottle-necked latent space", means that the original image that is very high-dimensional (for a small RGB image of dimensions <span class="arithmatex">\(224\times 224 \times 3\)</span> you have a total of <span class="arithmatex">\(196,608\)</span> features per image), will be compressed into a more useful, smaller form by learning an internal compressed representation (latent space).</p>
+<p>All that to say that the images will be compressed to a lower dimensional form (tokens) when passing through a model <em>"tokenizer"</em> that is trained in a unsupervised manner.</p>
+</blockquote>
+<p>The image bellow illustrates the tokenization training pipeline, where the goal is to train the encoder and decoder, so that the bottleneck token representation maximally preserves visual information in the input.</p>
+<p><img alt="Tokenization Pipeline" src="../../images/cosmos_tokenizer/tokenization_pipeline.png" /></p>
+<p>In the pipeline, an input video is encoded into tokens, which are usually much more compact than the input video. The decoder then reconstructs the input video from the tokens. <em>Tokenizer training is about learning the encoder and decoder to maximally preserve the visual information in the tokens</em>.</p>
+<p>Tokenizers come in two types: continuous and discrete. Continuous tokenizers encode visual data into continuous latent embeddings, as in latent diffusion models like <em>Stable Diffusion</em> or <em>VideoLDM</em>. These embeddings are suitable for models that generate data by sampling from continuous distributions.
+Discrete tokenizers encode visual data into discrete latent codes, mapping them into quantized indices, as seen in autoregressive transformers such as VideoPoet. This discrete representation is necessary for models such as GPT that are trained with the <em>cross-entropy loss</em>.</p>
+<blockquote>
+<p><em><strong>Continuous tokenizers</strong></em>: encodes the data into a continuous, high-dimensional vector space. They are used in diffusion models since these models generate data by sampling from continuous distributions. These embeddings allow the model to interpolate and re-sample variations in the underlying data.</p>
+<p><em><strong>Discrete tokenizers</strong></em>: encode the data into discrete latent codes, which are quantized or mapped to a set of distinct finite indices. These tokenizers are often used with <em>autoregressive models</em> that generate sequences one token at a time.
+The paper cites <em>GPT models</em> and how they're trained with cross-entropy loss, this requires discrete tokens because they treat the generation process as prediction over a fixed vocabulary, and due to the nature of this loss function measuring the difference between predicted and true categorical distributions.</p>
+<p>The main difference between the two tokenizers is how discrete tokenizers map image values to discrete values (<span class="arithmatex">\(\mathbb{N}\)</span>), whereas continuous tokenizers map values to real (<span class="arithmatex">\(\mathbb{R}\)</span>) values, allowing for a higher number of values in the latent space (e.g. <em>"[...]high-dimensional vector space[...]"</em>).</p>
+<p>Diffusion models learn from reversing gradual "noising" in real data. The gradual process is why diffusion models need real (<span class="arithmatex">\(\mathbb{R}\)</span>) valued tokens.</p>
+</blockquote>
+<p>The success of tokenizers largely relies on their ability to deliver high compression rates without compromising their subsequent visual reconstruction quality. On one hand, high compression reduces storage and computational demands. On the other hand, excessive compression can lead to the loss of essential visual details. This trade-off presents a significant challenge in tokenizer design.</p>
+<p>The following image illustrates the two types of tokens:</p>
+<p><img alt="Visualization of continuous and discrete tokenizers" src="../../images/cosmos_tokenizer/token_types.png" /></p>
+<p>Tokens along spatial (<span class="arithmatex">\(\frac{H}{S_{HW}} \times \frac{W}{S_{HW}}\)</span>) and temporal (<span class="arithmatex">\(1 + \frac{T}{S_T}\)</span>) dimensions, with a spatial compression factor of <span class="arithmatex">\(S_{HW}\)</span> and a temporal compression factor of <span class="arithmatex">\(S_T\)</span>. The first temporal token represents the first input frame, enabling joint image (<span class="arithmatex">\(T=0\)</span>) and video (<span class="arithmatex">\(T&gt;0\)</span>) tokenization in a shared latent space.</p>
+<blockquote>
+<p><span class="arithmatex">\(S_{HW}\)</span> is the <strong><em>spatial compression factor</em></strong> used to compress the spatial dimensions of an image. This is a key step in the spatial tokenization process, where the input frame is divided into smaller patches or blocks with each one of these being represented by one or more tokens.</p>
+<p>If the original image's dimension is <span class="arithmatex">\(224\times 224 \times 3\)</span>, and the <em>spatial compression factor</em> was 16, the token grid would be <span class="arithmatex">\(14\times 14\)</span>, and each token would hold information on a patch of <span class="arithmatex">\(16\times 16\)</span> pixels.</p>
+<p><span class="arithmatex">\(S_T\)</span> is the <em>temporal compression factor</em>, and its used to reduce the number of tokens representing the temporal axis by grouping frames. This is applied in the <em>Temporal Tokenization</em> process, for representation of the number of frames.
+The addition of <span class="arithmatex">\(1\)</span> allows the model to treat the initial frame as a special token to support joint image and video tokenization. If the process applied to an image, <span class="arithmatex">\(T=0\)</span> and the temporal dimension reduces to <span class="arithmatex">\(1\)</span>.</p>
+<p>If the image mentioned above was part of a video with <span class="arithmatex">\(32\)</span> frames, and the <em>temporal compression factor</em> had a value of <span class="arithmatex">\(4\)</span>, the tokenization process will produce 9 temporal tokens. <span class="arithmatex">\(1\)</span> for the first frame (adaptability for handling images), and 8 other tokens each compressing 4 frames.</p>
+</blockquote>
+<p>The following table illustrates different visual Tokenizers and their capabilities:</p>
+<p><img alt="Different tokenizers and capabilities" src="../../images/cosmos_tokenizer/tokenizers_table.png" /></p>
+<p>The <em>Cosmos Tokenizer</em> uses a lightweight and computationally efficient architecture with a temporally causal mechanism. Specifically, it employs causal temporal convolution layers and causal temporal attention layers to preserve the natural temporal order of video frames.</p>
+<blockquote>
+<p>The term "causal" implies that any predictions on a particular frame or time step are based only on that frame and all previous frames, not on any future ones. Therefore "<em>Causal Temporal Convolution</em>" means that the feature generation for a given frame only uses data from frame <span class="arithmatex">\(t\)</span> and earlier.</p>
+<p>The same idea applies to "<em>Causal Temporal Attention</em>", where the tokenizer dynamically weighs which frames to focus on when making decisions about the current frame.</p>
+</blockquote>
+<p>The tokenizers are trained directly on high-resolution images and long-duration videos without limiting the categories or aspect ratios. The Cosmos Tokenizer operates across various aspect ratios. They are temporally length-agnostic during inference, capable of tokenizing beyond the temporal length on which it was trained.</p>
+<p>The plots bellow show the comparison in performance between the Cosmos Tokenizer and other ones, and denotes the superior quality even at higher compression rates:</p>
+<p><img alt="Tokenizer comparisons" src="../../images/cosmos_tokenizer/tokenizer_comparison.png" /></p>
+<h3 id="architecture">Architecture</h3>
+<p>Cosmos Tokenizer is designed as an encoder-decoder architecture.
+Given an input video <span class="arithmatex">\(x_{0:T}\in\mathbb{R^{(1 + T)\times H\times W\times 3}}\)</span> with <span class="arithmatex">\(H,\ W,\ T\)</span> being the height, width, and number of frames, the encoder (<span class="arithmatex">\(\varepsilon\)</span>) tokenizes the inputs into a token video <span class="arithmatex">\(z_{0:T'}\in\mathbb{R^{(1+T) \times H\times W\times 3}}\)</span>, with a spatial compression factor of <span class="arithmatex">\(s_{HW} = \frac{H}{H'}=\frac{W}{W'}\)</span> and a temporal compression factor of <span class="arithmatex">\(S_T = \frac{T}{T'}\)</span>.
+The decoder (<span class="arithmatex">\(\mathcal{D}\)</span>) then reconstructs the input video from these tokens, resulting in the reconstructed video <span class="arithmatex">\(\hat{x}_{0:T} \in \mathbb{R^{(1 + T) \times H \times W \times 3}}\)</span></p>
+<div class="arithmatex">\[\hat{x}_{0:T} = \mathcal{D}(\varepsilon(x_{0:T}))\]</div>
+<blockquote>
+<p>This is an overall view of the architecture, where the encoder encodes an input <span class="arithmatex">\(x_{0:T}\)</span> to tokens <span class="arithmatex">\(z_{0:T'}\)</span>, and the decoder decodes these tokens and outputs <span class="arithmatex">\(\hat{x}_{0:T}\)</span>.</p>
+</blockquote>
+<p>Our architecture employs a temporally causal design, ensuring that each stage processes only current and past frames. <em>Our tokenizer operates in the wavelet space, where inputs are first processed by a 2-level wavelet transform</em>.
+The wavelet transform maps the input video <span class="arithmatex">\(x_{0:T}\)</span> in a group-wise manner to downsample the inputs by a factor of four along <span class="arithmatex">\(x, y,\)</span> and <span class="arithmatex">\(t\)</span>.
+The groups are formed as: <span class="arithmatex">\(\lbrace x_0,x_{1:4},x_{5:8},...,x_{(T-3):T}\rbrace\rightarrow\lbrace g_0,g_1,g_2,..., g_{T/4}\rbrace\)</span>. Subsequent encoder stages process the frames in a temporally causal manner as <span class="arithmatex">\(\lbrace g_0, g_{0:1}. g_{0:2}, ...\rbrace \rightarrow \lbrace \xi_0, \xi_1, \xi_2,...  \rbrace\)</span>. Successive encoder stages follow a similar scheme, finally outputting the tokens <span class="arithmatex">\(z_{0:T'}\)</span>.</p>
+<blockquote>
+<p>The <em><strong>wavelet transform</strong></em> is a technique for signal processing at multiple scales and resolutions. It differs from more traditional transforms, such as the <em>Fourier Transform</em> that represents data in terms of fixed-frequency sine and cosine waves, by using short, wave-like oscillations that can be scaled and shifted.
+This transform will decompose both spatial and temporal changes (across fames), compressing and isolating sharp changes in smooth areas.</p>
+<p>The <strong><em>Wavelet space</em></strong> is the representation of a signal after it has passed through a wavelet transform. So the sentence "<em>[...]our tokenizer operates in the wavelet space, where inputs are first processed by a 2-level wavelet transform[...]</em>", means that each spatial and temporal dimension is decomposed, extracting both low-frequency, global, and high-frequency information</p>
+<p>In the process of passing through the 2-level wavelet transform, the data is downsized in each dimension (<span class="arithmatex">\(x, y, t\)</span>) by a factor of <span class="arithmatex">\(4\)</span>. So every group of <span class="arithmatex">\(4\)</span> pixels (<span class="arithmatex">\(x_{t:(t+3)}\)</span>) in the <span class="arithmatex">\(3\)</span> dimensions of the image is represented by a compressed group (<span class="arithmatex">\(g_i\)</span>).</p>
+<p>The final tokenizer uses the <em>Haar Wavelet</em>, which is one of the simplest wavelet function.</p>
+<p><img alt="haar_wavelet" src="../../images/cosmos_tokenizer/haar_wavelet.png" /></p>
+<p>Wavelet Transforms compress images through decomposition, firstly with a low resolution approximation of the original image, followed by processing vertical, horizontal, and diagonal details in a manner close to the one shown bellow:</p>
+<p><img alt="Wavelet decomposition" src="../../images/cosmos_tokenizer/wavelet_decomposition.png" /></p>
+<p>Resulting in compressed images like this:</p>
+<p><img alt="Wavelet compressed image" src="../../images/cosmos_tokenizer/wavelet_compressed_image.png" /></p>
+<p>And a 2-level wavelet transform would look something like the following:</p>
+<p><img alt="2-level wavelet" src="../../images/cosmos_tokenizer/2-level_wavelet.png" /></p>
+</blockquote>
+<p>The causal design helps adapt models built on top of the tokenizer to downstream Physical AI applications that often operate on the temporal causal setting. the wavelet transform allows us to operate on a more compact video representation that eliminates redundancies in pixel information, allowing the remaining layers to focus on more semantic compression.</p>
+<p>Our encoder stages are implemented using a series of residual blocks interleaved with downsampling blocks.
+In each block, we employ a spatio-temporal factorized 3D convolution, where we first apply a 2D convolution with a kernel size of <span class="arithmatex">\(1\times k\times k\)</span> to capture spatial information, followed by a temporal convolution with a kernel size of <span class="arithmatex">\(k\times 1\times 1\)</span> to capture temporal dynamics. We use left padding of k-1 to ensure causality.</p>
+<blockquote>
+<p>Employs (2 + 1)D convolution.</p>
+</blockquote>
+<p>To capture long-range dependencies, we utilize a spatio-temporal factorized causal self-attention with a global support region. We use the Swish activation function for non-linearity. We leverage Layer Normalization (LayerNorm) instead of Group Normalization (GroupNorm), which prevents large magnitudes from appearing in specific regions of the latent space or reconstructed outputs.
+The decoder mirrors the encoder replacing the downsampling blocks with an upsampling block. The image bellow depicts an overview of the overall Cosmos Tokenizer architecture.</p>
+<blockquote>
+<p>Global support region for non linearity means that, tokens interact with all other tokens available at a given time (due to causal architecture restrictions)</p>
+<p>The <strong><em>Swish activation function</em></strong>, defined by <span class="arithmatex">\(\operatorname{Swish}^{\beta}(x) = x \cdot sigmoid(\beta x) = \frac{x}{1+e^{-\beta x}}\)</span></p>
+<p><img alt="Swish activation function" src="../../images/cosmos_tokenizer/swish_activation_function.png" /></p>
+</blockquote>
+<p><img alt="Tokenizer architecture" src="../../images/cosmos_tokenizer/tokenizer_architecture.png" /></p>
+<p>The image depicts the <strong>Overall Cosmos Tokenizer architecture illustrating the integration of temporal causality and an encoder-decoder structure.</strong> Temporal causality (left) processes sequential inputs, while the encoder-decoder (right) leverages wavelet transforms and causal operations to capture spatial and temporal dependencies in the data.</p>
+<blockquote>
+<p>The <strong><em>Haar Wavelet3D</em></strong> block does the process shown in the visualization bellow to a group of 4 values in each dimension:</p>
+<p><img alt="3d_wavelet_decomposition" src="../../images/cosmos_tokenizer/3d_wavelet_decomposition.png" /></p>
+<p>Both the <strong><em>ResBlock3D</em></strong> and the <strong><em>DownSample3D</em></strong> apply (2 + 1)D Convolutions with the difference being the skip connections in the <strong><em>ResBlock3d</em></strong>.</p>
+<p>The <strong><em>Inverse Haar Wavelet3D</em></strong> is simply the inversion of the original transform, that takes the wavelet coefficients and reconstructs the original image (or video).</p>
+<p>The encoder and decoder are separated by the rest of the model architecture.</p>
+</blockquote>
+<p>We employ the vanilla autoencoder (AE) formulation to model the continuous tokenizer's latent space. For discrete tokenizers, we adopt the Finite-Scalar-Quantization (FSQ) as the latent space quantizer.
+The latent dimension for the continuous tokenizers is 16, whereas for the discrete tokenizers, it is 6, which represents the number of the FSQ levels, which are <span class="arithmatex">\((8,8,8,5,5,5)\)</span>. This configuration corresponds to a vocabulary size of <span class="arithmatex">\(64,000\)</span>.</p>
+<blockquote>
+<p>The continuous tokenizer uses an Autoencoder architecture, where a neural network compresses the input data into a latent representation and then reconstruct the input from this compressed form. The latent space dimension being set by <span class="arithmatex">\(16\)</span> means each token is represented by a <span class="arithmatex">\(16\)</span>-dimensional continuous vector.</p>
+<p>The discrete tokenizer uses Finite-Scalar-Quantization, that maps continuous values onto a finite set of discrete levels, assigning each point in the latent space to a discrete index.
+The latent dimension in the discrete tokenizer is still <span class="arithmatex">\(6\)</span>, but each dimension represents more than one value. In this case, the first <span class="arithmatex">\(3\)</span> dimensions can take <span class="arithmatex">\(8\)</span> possible values, and the last three can each take <span class="arithmatex">\(5\)</span> possible values for a total of <span class="arithmatex">\(8^3\times 5^3 = 64,000\)</span> possible discrete tokens.</p>
+</blockquote>
+<h3 id="training-strategy">Training Strategy</h3>
+<p>We employ a joint training strategy by alternating mini-batches of images and videos at a preset frequency. We only supervise the final output of our tokenizer's decoder. We do not use auxiliary losses tapped into the latent spaces.</p>
+<blockquote>
+<p>"<em>[...] mini-batches of images and videos at a preset frequency [...]</em>", means that the model uses batches of both images and videos during training, in an alternating manner, set at a preset frequency, or in other words, switching between the two every <span class="arithmatex">\(N\)</span> number of batches.</p>
+<p>The idea of joint training for both images and videos, gets the network exposed to both single-framed and multi-framed data, so its latent space becomes more suitable for both types of input data.</p>
+<p>Both the discrete and the continuous tokenizers, map continuous data to a latent space, and the sentence "<em>[...] We do not use auxiliary losses tapped into the latent spaces [...]</em>" means that the training does not use any additional losses in order to encourage certain behaviours or properties (such as disentanglement, compactness, or interpretability) in that latent space.</p>
+</blockquote>
+<p>We employ a two-stage training scheme. In the first stage, we optimize with the <em>L1 Loss</em> that minimizes the pixel-wise RGB difference between the input and reconstructed video (<span class="arithmatex">\(\hat{x}_{0:T}\)</span>) given by:</p>
+<div class="arithmatex">\[\mathcal{L}_1 = ||\hat{x}_{0:T} - x_{0:T}||_1\]</div>
+<blockquote>
+<p><span class="arithmatex">\(\mathcal{L}_1\)</span> loss is another name for <strong><em>Mean Absolute Error</em></strong>, where instead of squaring the difference between the predicted value and its actual value, in order to make the values positive (as performed in <strong><em>Mean Squared Error</em></strong>, or <span class="arithmatex">\(\mathcal{L}_2\)</span> loss), we take the absolute difference between the two values.</p>
+<p>The function is represented in the <a href="https://en.wikipedia.org/wiki/Einstein_notation"><strong><em>Einstein Notation</em></strong></a>.</p>
+</blockquote>
+<p>And the perceptual loss based on the VGG-19 features, given by:</p>
+<div class="arithmatex">\[\frac{1}{L}\sum_{l=1}^{L} \sum_{t}^{}{ \alpha_l || \mathrm{VGG}_l(\hat{x}_t) - \mathrm{VGG}_l(x_t) ||1}\]</div>
+<p>Where <span class="arithmatex">\(\mathrm{VGG}_l(\cdot) \in \mathbb{R}^{H\times W\times C}\)</span> is the features from the <span class="arithmatex">\(l\)</span>-th layer of a pre-trained <strong><em>VGG-19</em></strong> network, <span class="arithmatex">\(L\)</span> is the number of layers considered, and <span class="arithmatex">\(\alpha_l\)</span> is the weight of the <span class="arithmatex">\(l\)</span>-th layer.</p>
+<blockquote>
+<p>A perceptual loss is a way of analysing how well an image is being reconstructed, generated, or enhanced. It compares the feature representations of images rather than the pixel-wise difference. So where a simple <span class="arithmatex">\(\mathcal{L}_1\)</span> loss measures the pixel difference between two images at a given step, the perceptual loss above, will measure how "far apart" two feature maps are from one another.</p>
+<p>The loss function above, determines how different the feature map (compute the <span class="arithmatex">\(\mathcal{L}_1\)</span> loss), at a given layer <span class="arithmatex">\(l\)</span> of the VGG-19 model, between the real image and the generated image at the layer <span class="arithmatex">\(l\)</span>. After measuring the absolute differences, it multiplies that value by the weight of that layer (<span class="arithmatex">\(\alpha_l\)</span>).</p>
+</blockquote>
+<p>In the second stage, we use the optical flow (<span class="arithmatex">\(\mathrm{OF}\)</span>) loss to handle the temporal smoothness of reconstructed videos,</p>
+<div class="arithmatex">\[\frac{1}{T}\sum_{t=1}^{T}||\mathrm{OF}(\hat{x}_{t}, \hat{x}_{t - 1}) - \mathrm{OF}({x}_{t}, {x}_{t - 1})||_1 + \frac{1}{T}\sum_{t=0}^{T - 1}||\mathrm{OF}(\hat{x}_{t}, \hat{x}_{t - 1}) - \mathrm{OF}({x}_{t}, {x}_{t - 1})||_1\]</div>
+<blockquote>
+<p><strong><em>Optical Flow</em></strong> is the apparent motion of objects, surfaces and edges between consecutive frames in a video sequence. It is a vector field where each vector represents the motion of pixel from one frame to the next. This process, helps understand how and where things move in a scene.</p>
+<p>This loss is used to encourage a video model to preserve the motion patterns present in the original video. <span class="arithmatex">\(\mathrm{OF}(\hat{x}_{t}, \hat{x}_{t - 1})\)</span> is the optical flow between reconstructed frames <span class="arithmatex">\(\hat{x}_{t}, \hat{x}_{t - 1}\)</span>, and <span class="arithmatex">\(\mathrm{OF}(x_{t}, x_{t - 1})\)</span> is the optical flow between the actual frames <span class="arithmatex">\(x_{t}, x_{t - 1}\)</span>.</p>
+<p>The function for <span class="arithmatex">\(\mathcal{L}_{Flow}\)</span> sums the <span class="arithmatex">\(\mathcal{L}_1\)</span> loss between the frames from <span class="arithmatex">\((t=1 \rightarrow t=T)\)</span>, and the loss between the frames <span class="arithmatex">\((t=0 \rightarrow t=T-1)\)</span>. This is done in order to penalise mismatches between reconstructed and original video frames over all consecutive frame pairs.</p>
+</blockquote>
+<p>Additionally, we use adversarial loss in the fine-tuning stage to further enhance reconstruction details, particularly at large compression rates.</p>
+<blockquote>
+<p>Adversarial loss is a technique used in <em>GANs</em> where a discriminator network tries to distinguish between real and generated images.</p>
+</blockquote>
+<p>We train the image tokenizers (CI and DI) at two compression rates: <span class="arithmatex">\(8\times 8\)</span> and <span class="arithmatex">\(16\times 16\)</span>. Similarly we train the video tokenizers (CV and DV) at three compression rates: <span class="arithmatex">\(4\times 8\times 8\)</span>, <span class="arithmatex">\(8\times 8\times 8\)</span>, and <span class="arithmatex">\(8\times 16\times 16\)</span>.
+Here, the compression rates are expressed as <span class="arithmatex">\(H\times W\)</span> for images and <span class="arithmatex">\(T\times H\times W\)</span> for videos, where <span class="arithmatex">\(T\)</span> represents the temporal dimension and <span class="arithmatex">\(H\)</span> and <span class="arithmatex">\(W\)</span> represent the spatial dimensions.</p>
+<blockquote>
+<p>The compression rates determine how much of the input's resolution is reduced during tokenization.</p>
+</blockquote>
+<p>For the video tokenizers, we create two variants:</p>
+<ol>
+<li><strong>Cosmos-0.1-Tokenizer</strong>: Trained using mini-batches sampling a smaller number of video frames (<span class="arithmatex">\(49\)</span> frames for CV and <span class="arithmatex">\(17\)</span> frames for DV).</li>
+<li><strong>Cosmos-1.0-Tokenizer</strong>: Trained using mini-batches sampling a larger number of video frames (<span class="arithmatex">\(121\)</span> frames for CV and <span class="arithmatex">\(49\)</span> frames for DV).</li>
+</ol>
+<p>This approach ensures flexibility in handling varying temporal and spatial resolutions for image and video data.</p>
+<h3 id="results">Results</h3>
+<p><img alt="Tokenizer Evaluation 1" src="../../images/cosmos_tokenizer/tokenizer_evaluation_1.png" /></p>
+<p><img alt="Tokenizer Evaluation 2" src="../../images/cosmos_tokenizer/tokenizer_evaluation_2.png" /></p>
+<p>We evaluate our Cosmos Tokenizer suite on various image and video benchmark datasets. For the evaluation of image tokenizers, we follow prior art to evaluate <strong>MS-COCO 2017</strong> and <strong>ImageNet-1K</strong>. We use the <strong>MS-COCO 2017</strong> validation subset of <span class="arithmatex">\(5,000\)</span> images, and <strong>ImageNet-1K</strong> validation subset of <span class="arithmatex">\(50,000\)</span> images as image evaluation benchmark.</p>
+<p><strong>TokenBench</strong>. For video tokenizer evaluation, there is not yet a standard benchmark for high-resolution and long-duration videos.
+To this end, we introduce a benchmark called <em>TokenBench</em> to cover a wide variety of domains, including robotic manipulation, driving, egocentric, and web videos, and standardize the evaluation. We resort to existing video datasets that are commonly used for various tasks, including <strong>BDD100K</strong>, <strong>EgoExo-4D</strong>, <strong>BridgeData V2</strong>, and <strong>Panda-70M</strong>.
+We randomly sample <span class="arithmatex">\(100\)</span> videos from each dataset and preprocess them by taking the first <span class="arithmatex">\(10\)</span> seconds and resizing the short size to <span class="arithmatex">\(1080\)</span>. For <strong>Panda-70M</strong>, we manually filter out the videos with low-quality content and small motions. For <strong>EgoExo-4D</strong> , we randomly pick <span class="arithmatex">\(100\)</span> scenes and sample one egocentric video and one exocentric video. This results in a total of <span class="arithmatex">\(500\)</span> videos.</p>
+<blockquote>
+<p><strong>Egocentric</strong> images are from first-person viewpoint, whereas <strong>Exocentric</strong> images are from third-person viewpoints.</p>
+</blockquote>
+<p>In addition to <em>TokenBench</em>, we also evaluate our video tokenizers on the <strong>DAVIS</strong> dataset at <span class="arithmatex">\(1080p\)</span> resolution.</p>
+<p><strong>Baselines and evaluation metrics</strong>. We evaluate our tokenizers at various compression rates to showcase their effectiveness for different computational needs.
+We compare each of these tokenizers with state-of-the-art image and video tokenizers. The evaluation metrics include <strong><em>Peak Signal-to-Noise Ratio (PSNR)</em></strong>, <strong><em>Structural Similarity(SSIM)</em></strong>, <strong><em>reconstruction Fréchet Inception Distance (rFID)</em></strong> for images and <strong><em>reconstruction Fréchet Video Distance (rFVD)</em></strong> for videos.</p>
+<blockquote>
+<p><strong><em>Peak Signal-to-Noise Ratio (PSNR)</em></strong>: Measure the average difference between the original and reconstructed images/videos with focus on pixel-level fidelity. Higher <strong>PSNR</strong> values imply better quality and less distortion (not necessarily for human vision).
+<span class="arithmatex">\(<span class="arithmatex">\(PSNR = 10 \cdot \log_{10} (\frac{{MAX}_I^2}{MSE})\)</span>\)</span>
+Where <span class="arithmatex">\(MAX\)</span> is the maximum possible pixel value of the image (<span class="arithmatex">\(255\)</span> for <span class="arithmatex">\(8\)</span> bit images).</p>
+<p><strong><em>Structural Similarity Index Measure(SSIM)</em></strong>: Measures the perceived structural similarity by comparing luminance, contrast and structure. This metric is better aligned with human vision, compared to <span class="arithmatex">\(PSNR\)</span>.
+<span class="arithmatex">\(<span class="arithmatex">\(SSIM(x, \hat{x}) = \frac{(2\mu_x\mu_{\hat{x}} + c_1)(2\sigma_{x\hat{x}} + c_2)}{(\mu_x^2 + \mu_{\hat{x}}^2 + c_1)(\sigma_x^2 + \sigma_{\hat{x}}^2 + c_1)}\)</span>\)</span>
+Where:</p>
+<ul>
+<li><span class="arithmatex">\(\mu_x, \mu_{\hat{x}}\)</span> are means of original and reconstructed patches.</li>
+<li><span class="arithmatex">\(\sigma_x^2, \sigma_{\hat{x}}^2\)</span> are variances of the patches.</li>
+<li><span class="arithmatex">\(\sigma_{x\hat{x}}\)</span> is the covariance between patches.</li>
+<li><span class="arithmatex">\(c_1, c_2\)</span> are small constants for division stabilization.</li>
+</ul>
+<p><strong><em>reconstruction Fréchet Inception Distance (rFID)</em></strong>: Measures distributional similarity between the abstract features of the original and reconstructed images. Lower values indicate reconstructions are more statistically similar to real images in high-level feature spaces.
+<span class="arithmatex">\(<span class="arithmatex">\(rFID(X,Y) = ||\mu_X - \mu_Y||_2^2 + Tr (\sum X + \sum Y - 2(\sum X\sum Y)^{1/2})\)</span>\)</span></p>
+<ul>
+<li><span class="arithmatex">\(X,Y\)</span> are collections of features from the real and reconstructed images.</li>
+<li><span class="arithmatex">\(\mu_X, \mu_Y\)</span> are means of original and reconstructed feature vectors.</li>
+<li><span class="arithmatex">\(\sum X, \sum Y\)</span> are covariance matrices.</li>
+<li><span class="arithmatex">\(Tr\)</span> is the matrix trace.</li>
+</ul>
+<p><strong><em>reconstruction Fréchet Video Distance (rFVD)</em></strong>: Measures how close the distribution of reconstructed videos is to real videos in feature spaces. Lower values indicate not only more realistic looking videos, but motion an temporal dynamic matching the original videos.
+<span class="arithmatex">\(<span class="arithmatex">\(rFVD(X,Y) = ||\mu_X - \mu_Y||_2^2 + Tr (\sum X + \sum Y - 2(\sum X\sum Y)^{1/2})\)</span>\)</span></p>
+<ul>
+<li><span class="arithmatex">\(X,Y\)</span> are collections of features from the real and reconstructed videos.</li>
+<li><span class="arithmatex">\(\mu_X, \mu_Y\)</span> are means of original and reconstructed feature vectors of the videos.</li>
+<li><span class="arithmatex">\(\sum X, \sum Y\)</span> are the video's covariance matrices.</li>
+<li><span class="arithmatex">\(Tr\)</span> is the matrix trace (same as above).</li>
+</ul>
+</blockquote>
+<p><strong>Quantitative results</strong> As shown in both tables (<span class="arithmatex">\(5,6\)</span>), Cosmos Tokenizer achieves state-of-the-art performance in all the metrics compared to prior arts on both the <em>DAVIS</em> video dataset and <em>TokenBench</em>, with a spatial-temporal compression ratio of <span class="arithmatex">\(4\times 8\times 8\)</span>.
+Moreover, even with <span class="arithmatex">\(2\times\)</span> and <span class="arithmatex">\(8\times\)</span> higher compression ratios, Cosmos Tokenizer is often comparable or even better than prior art at <span class="arithmatex">\(8\times 8\)</span> compression ratio, as shown in tables <span class="arithmatex">\(7\)</span>, and <span class="arithmatex">\(8\)</span>.</p>
+<p>As shown in these tables, compared to prior arts, Cosmos Tokenizer consistently achieves state-of-the-art results with a compression ratio of <span class="arithmatex">\(8\times 8\)</span>. More importantly, at a <span class="arithmatex">\(4\times\)</span> larger compression ratio of <span class="arithmatex">\(16\times 16\)</span>, the image quality of Cosmos Tokenizer is often comparable or even better than prior art at <span class="arithmatex">\(8\times 8\)</span> compression ratio.</p>
+<p>As shown in table <span class="arithmatex">\(9\)</span>, for both image and video tokenizers, Cosmos Tokenizer is <span class="arithmatex">\(2\times \ ~ \ 12\times\)</span> faster while maintaining the smallest model size compared to prior arts, showing that Cosmos Tokenizer has high efficiency for encoding and decoding visual content.</p>
+<hr />
+<h2 id="referencias-references">Referências | References</h2>
+<ul>
+<li>
+<p><a href="https://arxiv.org/abs/2501.03575">Cosmos World Foundation Model Platform for Physical AI</a></p>
+</li>
+<li>
+<p><a href="https://www.youtube.com/watch?v=pUty-98Km_0">What is Wavelet Transform?Fourier vs Wavelet Transform|CWT-DWT|Wavelet Transform in Image Processing</a></p>
+</li>
+<li>
+<p><a href="https://www.researchgate.net/figure/D-Haar-wavelet-decomposition_fig1_220868824">Discrete tools for virtual sculpture - Scientific Figure on ResearchGate. Available from: https://www.researchgate.net/figure/D-Haar-wavelet-decomposition_fig1_220868824 [accessed 24 Jul 2025]</a></p>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

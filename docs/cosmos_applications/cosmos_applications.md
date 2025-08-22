@@ -136,7 +136,7 @@ Esse [artigo](https://developer.nvidia.com/blog/simplify-end-to-end-autonomous-v
 
 Nos últimos anos, com o avanço dos modelos de visão computacional e deep learning, surgiu uma forte demanda por grandes volumes de dados para o treinamento dessas redes. Nesse cenário, uma das aplicações mais promissoras do Cosmos é justamente a geração de dados sintéticos, especialmente em contextos onde a coleta de dados reais é custosa, ou inviável. Assim, o Cosmos entra como um extensor artificial de datasets já existentes, suprindo a demanda por dados treináveis mencionada.
 
-![Faixa de pedestres](src/pedestrian_crosswalk.webp)
+![Faixa de pedestres](images/pedestrian_crosswalk.webp)
 
 > Como exemplo, com base em um vídeo curto ou imagem mostrando um pedestre atravessando na faixa, é possível simular diferentes condições climáticas, de iluminação, de horários, com ângulos diferentes, etc. Essa diversidade vem a ser muito útil para o treinamento de veículos autônomos, por exemplo, já que reduz muito o tamanho do dataset de vídeos reais de treinamento.
 
@@ -144,9 +144,9 @@ Nesse sentido, o **Cosmos Predict** se mostra como o modelo mais adequado, já q
 
 Ademais, uma discussão importante a ser feita é sobre a **viabilidade** da aplicação. Para a geração de vídeos, um dos modelos mais simples é o _Cosmos-Predict2-2B-Video2World_, com 2 Bilhões de parâmetros. Esse modelo, embora seja o mais simples disponibilizado pela Nvidia, não roda localmente em notebooks. Talvez com uma GPU mais potente seja possível rodar com limitações, mas de forma geral o custo computacional é mais alto do que um notebook normal suporta. Assim, abre-se a alternativa de usar cloud computing, que também vem com custos financeiros associados.
 
-| Input image                           | Output video                    |
-| ------------------------------------- | ------------------------------- |
-| ![Input Image](src/example_input.jpg) | ![Output video](src/output.mp4) |
+| Input image                              | Output video                       |
+| ---------------------------------------- | ---------------------------------- |
+| ![Input Image](images/example_input.jpg) | ![Output video](images/output.mp4) |
 
 > Exemplo de como o _Cosmos-Predict2-2B-Video2World_ pode ser usado. Com uma imagem e texto de input, gera-se um vídeo curto. Essa estratégia pode ser simulada para diferentes situações e aplicações, como por exemplo a da faixa de pedestres mencionada anteriormente.
 

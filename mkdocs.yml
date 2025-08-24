@@ -8,7 +8,7 @@ nav:
   - Home: index.md
   - Projeto: projeto/escopo.md
   - Referências:
-      - Diffusion models: diffusion.md
+      - Diffusion models: diffusion/diffusion.md
       - Autoregressive models: autoregressive/autoregressive.md
       - Tokens:
           - Cosmos Tokenizer:

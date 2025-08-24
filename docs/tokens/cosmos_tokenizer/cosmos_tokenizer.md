@@ -1,5 +1,7 @@
 # Cosmos Tokenizer
 
+**_Authors / Autores: [@figredos](http://github.com/figredos)_**
+
 ## Português
 
 A seguir apresentamos trechos do capítulo $5$ do artigo **_Cosmos World Foundation Model Platform for Physical AI_**, interpoladas com comentários clarificando e/ou contextualizando conteúdos de seus parágrafos.
@@ -542,7 +544,7 @@ As shown in table $9$, for both image and video tokenizers, Cosmos Tokenizer is 
 
 ## Referências | References
 
-- [Cosmos World Foundation Model Platform for Physical AI](https://arxiv.org/abs/2501.03575)
+- [Cosmos World Foundation Model Platform for Physical AI arXiv:2501.03575](https://arxiv.org/abs/2501.03575)
 
 - [What is Wavelet Transform?Fourier vs Wavelet Transform|CWT-DWT|Wavelet Transform in Image Processing](https://www.youtube.com/watch?v=pUty-98Km_0)
 

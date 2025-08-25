@@ -41,3 +41,9 @@ A segunda abordagem é a óbvia: usar um dataset pronto com vídeos de simulaç�
 Dessa forma, não consegui encontrar um dataset já pronto que cumpra os requisitos para sugerir nesse documento. A falta de conhecimento em onde procurar tais datasets, somada  à inadequação dos datasets encontrados impediu a exposição e sugestão deles.
 
 Não obstante, essa abordagem continua muito válida e, dadas as complexidades discutidas no método das bibliotecas, o uso de datasets prontos é o meio ideal de treinar o World Foundation Model.
+
+## Referências e links
+
+[PyMunk](https://github.com/viblo/pymunk)
+
+[Box2D](https://github.com/erincatto/box2d)

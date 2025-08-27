@@ -9,6 +9,7 @@ No contexto dos World Foundation Models (WFMs), **ele transforma ruído em uma s
 Analogia: "Pense em um modelo de difusão como um artista que começa com uma tela cheia de ruído aleatório (como uma "chuva" de TV antiga) e, gradualmente, passo a passo, aprende a remover esse ruído, revelando uma imagem ou vídeo coerente e significativo."
 
 ![Noise](images/noise.png)
+_"Figura S1.1-F1-ptbr — Modelo de ruído"_
 
 ### Tokenização de Vídeo: Transformando Vídeos em "Latentes Contínuos"
 
@@ -31,6 +32,7 @@ O cerne do modelo de difusão é o processo iterativo de "denoising" (remoção 
 |             Função de Perda             | O treinamento emprega uma função de perda de **"denoising score matching"** que penaliza a diferença entre o ruído previsto pelo modelo e o ruído real adicionado. Uma técnica de **ponderação baseada em incerteza ($\mu(\sigma)$)** é utilizada para gerenciar o aprendizado em diferentes níveis de ruído, tratando-o como um problema de aprendizado multi-tarefa. |
 
 ![Diffusion Denoising](images/diffusion_denoising.png)
+_"Figura S1.1-F2-ptbr — Remoção de ruidos em difusão"_
 
 ### Arquitetura do Modelo: Como o Denoising é Construído
 
@@ -173,6 +175,7 @@ In the context of World Foundation Models (WFMs), it transforms noise into a vid
 Analogy: “Think of a diffusion model as an artist who starts with a canvas full of random noise (like old TV ‘static’) and, gradually, step by step, learns to remove that noise, revealing a coherent and meaningful image or video.”
 
 ![Noise](images/noise.png)
+_"Figura S1.1-F2-ENG — Removal of noises"_
 
 ### Video Tokenization: Transforming Videos into “Continuous Latents”
 

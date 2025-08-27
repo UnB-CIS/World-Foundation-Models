@@ -1,0 +1,1829 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Diffusion models - World Foundation Models</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css"
+    />
+
+    <script>
+      // Current page data
+      var mkdocs_page_name = "Diffusion models";
+      var mkdocs_page_input_path = "diffusion/diffusion.md";
+      var mkdocs_page_url = null;
+    </script>
+
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+  </head>
+
+  <body class="wy-body-for-nav" role="document">
+    <div class="wy-grid-for-nav">
+      <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+        <div class="wy-side-scroll">
+          <div class="wy-side-nav-search">
+            <a href="../.." class="icon icon-home"> World Foundation Models </a>
+          </div>
+
+          <div
+            class="wy-menu wy-menu-vertical"
+            data-spy="affix"
+            role="navigation"
+            aria-label="Navigation menu"
+          >
+            <ul>
+              <li class="toctree-l1">
+                <a class="reference internal" href="../..">Home</a>
+              </li>
+            </ul>
+            <ul>
+              <li class="toctree-l1">
+                <a class="reference internal" href="../../projeto/escopo/"
+                  >Projeto</a
+                >
+              </li>
+            </ul>
+            <p class="caption"><span class="caption-text">Referências</span></p>
+            <ul class="current">
+              <li class="toctree-l1 current">
+                <a class="reference internal current" href="#"
+                  >Diffusion models</a
+                >
+                <ul class="current">
+                  <li class="toctree-l2">
+                    <a class="reference internal" href="#portugues"
+                      >Português</a
+                    >
+                    <ul>
+                      <li class="toctree-l3">
+                        <a
+                          class="reference internal"
+                          href="#tokenizacao-de-video-transformando-videos-em-latentes-continuos"
+                          >Tokenização de Vídeo: Transformando Vídeos em
+                          "Latentes Contínuos"</a
+                        >
+                      </li>
+                      <li class="toctree-l3">
+                        <a
+                          class="reference internal"
+                          href="#formulacao-o-processo-de-denoising-remocao-de-ruido"
+                          >Formulação: O Processo de Denoising (Remoção de
+                          Ruído)</a
+                        >
+                        <ul>
+                          <li class="toctree-l4">
+                            <a
+                              class="reference internal"
+                              href="#detalhes-da-formulacao"
+                              >Detalhes da Formulação</a
+                            >
+                          </li>
+                        </ul>
+                      </li>
+                      <li class="toctree-l3">
+                        <a
+                          class="reference internal"
+                          href="#arquitetura-do-modelo-como-o-denoising-e-construido"
+                          >Arquitetura do Modelo: Como o Denoising é
+                          Construído</a
+                        >
+                        <ul>
+                          <li class="toctree-l4">
+                            <a
+                              class="reference internal"
+                              href="#componentes-arquitetonicos-chave"
+                              >Componentes Arquitetônicos Chave</a
+                            >
+                          </li>
+                        </ul>
+                      </li>
+                      <li class="toctree-l3">
+                        <a
+                          class="reference internal"
+                          href="#estrategia-de-treinamento-como-o-modelo-aprende-a-pintar"
+                          >Estratégia de Treinamento: Como o Modelo Aprende a
+                          "Pintar"</a
+                        >
+                      </li>
+                      <li class="toctree-l3">
+                        <a
+                          class="reference internal"
+                          href="#otimizacao-de-inferencia-tornando-a-geracao-rapida"
+                          >Otimização de Inferência: Tornando a Geração
+                          Rápida</a
+                        >
+                        <ul>
+                          <li class="toctree-l4">
+                            <a
+                              class="reference internal"
+                              href="#tecnicas-de-otimizacao-de-inferencia"
+                              >Técnicas de Otimização de Inferência</a
+                            >
+                          </li>
+                        </ul>
+                      </li>
+                      <li class="toctree-l3">
+                        <a
+                          class="reference internal"
+                          href="#prompt-upsampler-para-entradas-de-texto-do-usuario"
+                          >Prompt Upsampler: Para Entradas de Texto do
+                          Usuário</a
+                        >
+                      </li>
+                      <li class="toctree-l3">
+                        <a
+                          class="reference internal"
+                          href="#decodificador-de-difusao-melhorando-a-qualidade-visual-do-autoregressivo"
+                          >Decodificador de Difusão: Melhorando a Qualidade
+                          Visual do Autoregressivo</a
+                        >
+                      </li>
+                      <li class="toctree-l3">
+                        <a class="reference internal" href="#equacoes"
+                          >Equações</a
+                        >
+                        <ul>
+                          <li class="toctree-l4">
+                            <a
+                              class="reference internal"
+                              href="#perda-do-denoising"
+                              >Perda do Denoising:</a
+                            >
+                          </li>
+                          <li class="toctree-l4">
+                            <a
+                              class="reference internal"
+                              href="#perda-total-de-treinamento"
+                              >Perda total de Treinamento:</a
+                            >
+                          </li>
+                          <li class="toctree-l4">
+                            <a
+                              class="reference internal"
+                              href="#funcao-de-ponderacao"
+                              >Função de Ponderação:</a
+                            >
+                          </li>
+                          <li class="toctree-l4">
+                            <a
+                              class="reference internal"
+                              href="#distribuicao-do-nivel-de-ruido"
+                              >Distribuição do Nível de Ruído:</a
+                            >
+                          </li>
+                        </ul>
+                      </li>
+                      <li class="toctree-l3">
+                        <a
+                          class="reference internal"
+                          href="#resultados-e-aplicacoes"
+                          >Resultados e Aplicações</a
+                        >
+                      </li>
+                      <li class="toctree-l3">
+                        <a class="reference internal" href="#limitacoes"
+                          >Limitações</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="toctree-l2">
+                    <a class="reference internal" href="#english">English</a>
+                    <ul>
+                      <li class="toctree-l3">
+                        <a
+                          class="reference internal"
+                          href="#video-tokenization-transforming-videos-into-continuous-latents"
+                          >Video Tokenization: Transforming Videos into
+                          “Continuous Latents”</a
+                        >
+                      </li>
+                      <li class="toctree-l3">
+                        <a
+                          class="reference internal"
+                          href="#formulation-the-denoising-process"
+                          >Formulation: The Denoising Process</a
+                        >
+                        <ul>
+                          <li class="toctree-l4">
+                            <a
+                              class="reference internal"
+                              href="#formulation-details"
+                              >Formulation Details</a
+                            >
+                          </li>
+                        </ul>
+                      </li>
+                      <li class="toctree-l3">
+                        <a
+                          class="reference internal"
+                          href="#model-architecture-how-denoising-is-built"
+                          >Model Architecture: How Denoising Is Built</a
+                        >
+                        <ul>
+                          <li class="toctree-l4">
+                            <a
+                              class="reference internal"
+                              href="#key-architectural-components"
+                              >Key Architectural Components</a
+                            >
+                          </li>
+                        </ul>
+                      </li>
+                      <li class="toctree-l3">
+                        <a
+                          class="reference internal"
+                          href="#training-strategy-how-the-model-learns-to-paint"
+                          >Training Strategy: How the Model Learns to “Paint”</a
+                        >
+                      </li>
+                      <li class="toctree-l3">
+                        <a
+                          class="reference internal"
+                          href="#inference-optimization-making-generation-fast"
+                          >Inference Optimization: Making Generation Fast</a
+                        >
+                        <ul>
+                          <li class="toctree-l4">
+                            <a
+                              class="reference internal"
+                              href="#inference-optimization-techniques"
+                              >Inference Optimization Techniques</a
+                            >
+                          </li>
+                        </ul>
+                      </li>
+                      <li class="toctree-l3">
+                        <a
+                          class="reference internal"
+                          href="#prompt-upsampler-for-user-text-inputs"
+                          >Prompt Upsampler: For User Text Inputs</a
+                        >
+                      </li>
+                      <li class="toctree-l3">
+                        <a
+                          class="reference internal"
+                          href="#diffusion-decoder-improving-autoregressive-visual-quality"
+                          >Diffusion Decoder: Improving Autoregressive Visual
+                          Quality</a
+                        >
+                      </li>
+                      <li class="toctree-l3">
+                        <a class="reference internal" href="#equations"
+                          >Equations</a
+                        >
+                        <ul>
+                          <li class="toctree-l4">
+                            <a class="reference internal" href="#denoising-loss"
+                              >Denoising Loss:</a
+                            >
+                          </li>
+                          <li class="toctree-l4">
+                            <a
+                              class="reference internal"
+                              href="#total-training-loss"
+                              >Total Training Loss:</a
+                            >
+                          </li>
+                          <li class="toctree-l4">
+                            <a
+                              class="reference internal"
+                              href="#weighting-function"
+                              >Weighting Function:</a
+                            >
+                          </li>
+                          <li class="toctree-l4">
+                            <a
+                              class="reference internal"
+                              href="#noise-level-distribution"
+                              >Noise Level Distribution:</a
+                            >
+                          </li>
+                        </ul>
+                      </li>
+                      <li class="toctree-l3">
+                        <a
+                          class="reference internal"
+                          href="#results-and-applications"
+                          >Results and Applications</a
+                        >
+                      </li>
+                      <li class="toctree-l3">
+                        <a class="reference internal" href="#limitations"
+                          >Limitations</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="toctree-l2">
+                    <a class="reference internal" href="#referencias-references"
+                      >Referências | References</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li class="toctree-l1">
+                <a
+                  class="reference internal"
+                  href="../../autoregressive/autoregressive/"
+                  >Autoregressive models</a
+                >
+              </li>
+              <li class="toctree-l1">
+                <a class="reference internal">Tokens</a>
+                <ul>
+                  <li class="toctree-l2">
+                    <a class="reference internal">Cosmos Tokenizer</a>
+                    <ul>
+                      <li class="toctree-l3">
+                        <a
+                          class="reference internal"
+                          href="../../tokens/cosmos_tokenizer/cosmos_tokenizer/"
+                          >Cosmos Tokenizer</a
+                        >
+                      </li>
+                      <li class="toctree-l3">
+                        <a
+                          class="reference internal"
+                          href="../../tokens/cosmos_tokenizer/wavelet_compression/"
+                          >Image Decomposition With Wavelets | Decomposição de
+                          imagem com Wavelets</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="toctree-l2">
+                    <a
+                      class="reference internal"
+                      href="../../tokens/dsc_tokenization/"
+                      >DSC Tokenization</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li class="toctree-l1">
+                <a
+                  class="reference internal"
+                  href="../../cosmos_applications/cosmos_applications/"
+                  >Cosmos Applications</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+        <nav
+          class="wy-nav-top"
+          role="navigation"
+          aria-label="Mobile navigation menu"
+        >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">World Foundation Models</a>
+        </nav>
+        <div class="wy-nav-content">
+          <div class="rst-content">
+            <div role="navigation" aria-label="breadcrumbs navigation">
+              <ul class="wy-breadcrumbs">
+                <li>
+                  <a href="../.." class="icon icon-home" aria-label="Docs"></a>
+                </li>
+                <li class="breadcrumb-item">Referências</li>
+                <li class="breadcrumb-item active">Diffusion models</li>
+                <li class="wy-breadcrumbs-aside"></li>
+              </ul>
+              <hr />
+            </div>
+            <div
+              role="main"
+              class="document"
+              itemscope="itemscope"
+              itemtype="http://schema.org/Article"
+            >
+              <div class="section" itemprop="articleBody">
+                <h1 id="diffusion-models-in-world-foundation-models-wfms">
+                  Diffusion models in World Foundation Models (WFMs)
+                </h1>
+                <p>
+                  <strong
+                    ><em
+                      >Authors / Autores:
+                      <a href="http://github.com/Nanashii76">@Nanashii76</a></em
+                    ></strong
+                  >
+                </p>
+                <h2 id="portugues">Português</h2>
+                <p>
+                  No contexto dos World Foundation Models (WFMs),
+                  <strong
+                    >ele transforma ruído em uma simulação de vídeo do
+                    mundo.</strong
+                  >
+                </p>
+                <p>
+                  Analogia: "Pense em um modelo de difusão como um artista que
+                  começa com uma tela cheia de ruído aleatório (como uma "chuva"
+                  de TV antiga) e, gradualmente, passo a passo, aprende a
+                  remover esse ruído, revelando uma imagem ou vídeo coerente e
+                  significativo."
+                </p>
+                <figure>
+                  <img alt="Noise" src="../images/noise.png" />
+                  <figcaption>Figura S1.1-F1-ptbr — Modelo de ruído</figcaption>
+                </figure>
+
+                <h3
+                  id="tokenizacao-de-video-transformando-videos-em-latentes-continuos"
+                >
+                  Tokenização de Vídeo: Transformando Vídeos em "Latentes
+                  Contínuos"
+                </h3>
+                <p>
+                  Assim como os modelos autoregressivos, os modelos de difusão
+                  precisam processar vídeos em um formato mais gerenciável para
+                  sua operação.
+                </p>
+                <ul>
+                  <li>
+                    <p>
+                      Tokens Contínuos: Para modelos de difusão, os vídeos são
+                      transformados em embeddings latentes contínuos (vetores de
+                      números decimais). Pense neles como uma representação
+                      compacta e fluida do vídeo, em oposição aos "tokens
+                      discretos" (números inteiros) usados pelos modelos
+                      autoregressivos.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Cosmos Continuous Tokenizer
+                      (Cosmos-1.0-Tokenizer-CV8x8x8): Este é o componente
+                      responsável por essa transformação. Ele comprime o vídeo
+                      de entrada em uma representação latente de menor dimensão,
+                      preservando a maior parte da informação visual. Este
+                      tokenizer possui uma arquitetura de
+                      codificador-decodificador que opera no espaço wavelet para
+                      maior compressão e preservação de informações semânticas,
+                      além de um design causal temporal (a codificação de
+                      quadros atuais não depende de quadros futuros, crucial
+                      para aplicações de IA Física).
+                    </p>
+                  </li>
+                </ul>
+                <h3 id="formulacao-o-processo-de-denoising-remocao-de-ruido">
+                  Formulação: O Processo de Denoising (Remoção de Ruído)
+                </h3>
+                <p>
+                  O cerne do modelo de difusão é o processo iterativo de
+                  "denoising" (remoção de ruído).
+                </p>
+                <h4 id="detalhes-da-formulacao">Detalhes da Formulação</h4>
+                <table>
+                  <thead>
+                    <tr>
+                      <th style="text-align: center">
+                        <strong>Aspecto</strong>
+                      </th>
+                      <th><strong>Descrição</strong></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style="text-align: center">
+                        Adição e Remoção de Ruído
+                      </td>
+                      <td>
+                        Durante o treinamento,
+                        <strong>ruído gaussiano (aleatório)</strong> é
+                        progressivamente adicionado a um vídeo real. O modelo é,
+                        então, treinado para inverter esse processo, aprendendo
+                        a remover o ruído em cada etapa para reconstruir o vídeo
+                        original a partir de uma versão ruidosa.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: center">
+                        Função Denoising (<span class="arithmatex"
+                          >\(\mathcal{D}_\theta\)</span
+                        >)
+                      </td>
+                      <td>
+                        O modelo de difusão utiliza uma rede neural
+                        <span class="arithmatex">\(\mathcal{D}_\theta\)</span>
+                        (chamada "denoiser") treinada para estimar o ruído
+                        presente em uma amostra corrompida (vídeo com ruído) e,
+                        consequentemente, removê-lo para chegar à versão limpa
+                        do vídeo.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: center">Função de Perda</td>
+                      <td>
+                        O treinamento emprega uma função de perda de
+                        <strong>"denoising score matching"</strong> que penaliza
+                        a diferença entre o ruído previsto pelo modelo e o ruído
+                        real adicionado. Uma técnica de
+                        <strong
+                          >ponderação baseada em incerteza (<span
+                            class="arithmatex"
+                            >\(\mu(\sigma)\)</span
+                          >)</strong
+                        >
+                        é utilizada para gerenciar o aprendizado em diferentes
+                        níveis de ruído, tratando-o como um problema de
+                        aprendizado multi-tarefa.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>
+                  <img
+                    alt="Diffusion Denoising"
+                    src="../images/diffusion_denoising.png"
+                  />
+                </p>
+                <h3 id="arquitetura-do-modelo-como-o-denoising-e-construido">
+                  Arquitetura do Modelo: Como o Denoising é Construído
+                </h3>
+                <p>
+                  A rede
+                  <span class="arithmatex">\(\mathcal{D}_\theta\)</span> do
+                  modelo de difusão é uma adaptação de uma arquitetura
+                  Transformer, otimizada para dados visuais e controle.
+                </p>
+                <h4 id="componentes-arquitetonicos-chave">
+                  Componentes Arquitetônicos Chave
+                </h4>
+                <table>
+                  <thead>
+                    <tr>
+                      <th style="text-align: center">
+                        <strong>Componente</strong>
+                      </th>
+                      <th><strong>Descrição</strong></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style="text-align: center">Patchificação 3D</td>
+                      <td>
+                        As representações latentes de entrada são convertidas em
+                        <strong
+                          >"patches" (pedaços cúbicos) tridimensionais</strong
+                        >, que são então "achatados" em uma sequência
+                        unidimensional. Isso prepara os dados para serem
+                        processados eficientemente pelo Transformer.<br /><br />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: center">
+                        Embeddings Posicionais Híbridos
+                      </td>
+                      <td>
+                        Essenciais para a compreensão espacial e temporal:
+                        <br />•
+                        <strong
+                          >Rotary Position Embedding (RoPE) Fatorado em
+                          3D</strong
+                        >: Ajuda o modelo a entender as posições relativas dos
+                        tokens nas dimensões temporal, de altura e de largura,
+                        permitindo a geração de vídeos de tamanhos e durações
+                        arbitrárias, compatível com diferentes taxas de quadros
+                        (FPS). <br />•
+                        <strong
+                          >Embedding Posicional Absoluto (Aprendível)</strong
+                        >: Um embedding adicional usado em cada bloco
+                        Transformer que, combinado com RoPE, melhora o
+                        desempenho, reduz a perda de treinamento e minimiza
+                        artefatos de "morphing".
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: center">
+                        Cross-Attention para Condicionamento de Texto
+                      </td>
+                      <td>
+                        Camadas integradas que permitem ao modelo gerar vídeos
+                        com base em descrições de texto, incorporando
+                        informações de
+                        <strong>embeddings de texto</strong> (gerados pelo
+                        <strong>T5-XXL</strong>) no processo de denoising.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: center">
+                        QK-Normalização (QKNorm)
+                      </td>
+                      <td>
+                        Normaliza os vetores de "query" (Q) e "key" (K) antes da
+                        operação de atenção, o que aumenta a
+                        <strong>estabilidade do treinamento</strong>,
+                        especialmente nas fases iniciais, prevenindo a saturação
+                        da atenção.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: center">AdaLN-LoRA</td>
+                      <td>
+                        Uma otimização arquitetônica que
+                        <strong
+                          >reduz significativamente a contagem de
+                          parâmetros</strong
+                        >
+                        (ex: 36% para o modelo de 7B parâmetros) sem comprometer
+                        o desempenho, tornando o modelo mais eficiente em termos
+                        de memória e computação.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <h3
+                  id="estrategia-de-treinamento-como-o-modelo-aprende-a-pintar"
+                >
+                  Estratégia de Treinamento: Como o Modelo Aprende a "Pintar"
+                </h3>
+                <p>
+                  Os modelos de difusão são treinados em várias etapas para
+                  otimizar seu desempenho e generalização.
+                </p>
+                <table>
+                  <thead>
+                    <tr>
+                      <th style="text-align: center">
+                        <strong>Aspecto</strong>
+                      </th>
+                      <th><strong>Descrição</strong></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style="text-align: center">
+                        Treinamento Conjunto Imagem e Vídeo
+                      </td>
+                      <td>
+                        Para alavancar a vasta quantidade de dados de imagens,
+                        uma estratégia de
+                        <strong>otimização alternada</strong> intercala lotes de
+                        dados de imagem e vídeo. É usada uma
+                        <strong>normalização específica de domínio</strong> para
+                        alinhar as distribuições latentes e encorajar uma
+                        representação isotrópica gaussiana. A perda de denoising
+                        para vídeos é escalonada para lidar com a convergência
+                        mais lenta.<br /><br />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: center">
+                        Treinamento Progressivo
+                      </td>
+                      <td>
+                        O modelo é treinado progressivamente, iniciando com
+                        <strong>resoluções e durações de vídeo menores</strong>
+                        (ex: 512p com 57 quadros) e avançando para
+                        <strong>resoluções e durações maiores</strong> (ex: 720p
+                        com 121 quadros). Uma fase de
+                        <strong>"resfriamento" (cooling-down)</strong> com dados
+                        de alta qualidade e uma taxa de aprendizado decrescente
+                        refina ainda mais o modelo.<br /><br />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: center">
+                        Treinamento Multi-Aspecto
+                      </td>
+                      <td>
+                        Os dados são organizados em "buckets" com base em suas
+                        <strong>proporções de aspecto</strong> (ex: 1:1, 16:9)
+                        para acomodar a diversidade de conteúdo.
+                        <strong>Preenchimento (padding) com reflexão</strong> é
+                        usado para pixels ausentes durante o processamento em
+                        lote.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: center">
+                        Treinamento com Precisão Mista
+                      </td>
+                      <td>
+                        Para eficiência, os pesos do modelo são mantidos em
+                        <strong>BF16 e FP32</strong>. O BF16 é usado para os
+                        passes de <em>forward</em> e <em>backward</em>, e o FP32
+                        para as atualizações de parâmetros, garantindo
+                        <strong>estabilidade numérica</strong>.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: center">
+                        Condicionamento de Texto
+                      </td>
+                      <td>
+                        Utiliza o <strong>T5-XXL</strong> como codificador de
+                        texto. Modelos <strong>Text2World</strong> são capazes
+                        de gerar vídeo a partir de uma entrada textual.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: center">
+                        Condicionamento de Imagem e Vídeo (Video2World)
+                      </td>
+                      <td>
+                        Modelos <strong>Video2World</strong> estendem os modelos
+                        Text2World para aceitar quadros anteriores (imagem ou
+                        vídeo) como condição para gerar quadros futuros. Ruído
+                        adicional é introduzido nos quadros condicionais durante
+                        o treinamento para aumentar a robustez.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <h3 id="otimizacao-de-inferencia-tornando-a-geracao-rapida">
+                  Otimização de Inferência: Tornando a Geração Rápida
+                </h3>
+                <p>
+                  Embora os modelos de difusão sejam inerentemente mais lentos
+                  devido ao seu processo iterativo de denoising, otimizações
+                  significativas são aplicadas para acelerar a geração.
+                </p>
+                <h4 id="tecnicas-de-otimizacao-de-inferencia">
+                  Técnicas de Otimização de Inferência
+                </h4>
+                <table>
+                  <thead>
+                    <tr>
+                      <th style="text-align: center">
+                        <strong>Técnica</strong>
+                      </th>
+                      <th><strong>Descrição</strong></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style="text-align: center">
+                        FSDP (Fully Sharded Data Parallelism)
+                      </td>
+                      <td>
+                        Distribui os parâmetros do modelo, gradientes e estados
+                        do otimizador por múltiplos dispositivos (GPUs),
+                        resultando em significativa
+                        <strong>economia de memória</strong> e permitindo o uso
+                        de modelos maiores.<br /><br />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: center">
+                        Context Parallelism (CP)
+                      </td>
+                      <td>
+                        Divide a computação e as ativações ao longo da dimensão
+                        da sequência, distribuindo-as entre GPUs. Esta técnica é
+                        crucial para lidar com
+                        <strong>contextos longos de vídeo</strong>, onde a
+                        quantidade de dados a ser processada é muito grande.<br /><br />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <h3 id="prompt-upsampler-para-entradas-de-texto-do-usuario">
+                  Prompt Upsampler: Para Entradas de Texto do Usuário
+                </h3>
+                <ul>
+                  <li>
+                    <p>
+                      Para preencher a lacuna entre as prompts de texto curtas e
+                      variadas fornecidas pelos usuários e as descrições de
+                      vídeo detalhadas usadas no treinamento dos WFMs, um
+                      "Prompt Upsampler" é desenvolvido.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Ele transforma as prompts originais em versões mais
+                      detalhadas e ricas que se alinham com a distribuição das
+                      prompts de treinamento, melhorando a qualidade do vídeo
+                      gerado. Para modelos Text2World, o
+                      Mistral-NeMo-12B-Instruct é usado para isso; para
+                      Video2World, o Pixtral-12B é utilizado.
+                    </p>
+                  </li>
+                </ul>
+                <h3
+                  id="decodificador-de-difusao-melhorando-a-qualidade-visual-do-autoregressivo"
+                >
+                  Decodificador de Difusão: Melhorando a Qualidade Visual do
+                  Autoregressivo
+                </h3>
+                <p>
+                  Embora este seja uma parte do modelo de difusão, ele tem um
+                  papel especial de pós-otimização para outros modelos:
+                </p>
+                <ul>
+                  <li>
+                    <p>
+                      Para os modelos autoregressivos (que podem gerar vídeos
+                      borrados devido à tokenização agressiva), um decodificador
+                      de difusão mais poderoso é usado como uma
+                      "pós-otimização".
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Este decodificador pega os tokens discretos (saída do
+                      modelo autoregressivo) e os "traduz" de volta para tokens
+                      contínuos de maior qualidade, que são então convertidos em
+                      vídeos RGB de alta qualidade. É como refinar um rascunho
+                      em uma obra de arte acabada.
+                    </p>
+                  </li>
+                </ul>
+                <h3 id="equacoes">Equações</h3>
+                <h4 id="perda-do-denoising">Perda do Denoising:</h4>
+                <div class="arithmatex">
+                  \[\mathcal{L}(\mathcal{D}_\theta, \sigma) = \mathbb{E}_{x_0,
+                  n} ||\mathcal{D}_\theta(x_0 + n; \sigma) - x_0||_2^2\]
+                </div>
+                <p>Onde:</p>
+                <ul>
+                  <li>
+                    <p>
+                      <span class="arithmatex">\(x_0\)</span> (lê-se "x zero"):
+                      Representa o vídeo original, limpo (a "tela perfeita")
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <span class="arithmatex">\(n\)</span>: Representa o ruído
+                      gaussiano aleatório que foi adicionado ao vídeo x_0
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <span class="arithmatex">\(\sigma\)</span> (sigma): Indica
+                      o nível de ruído naquele momento. Vídeos com mais ruído
+                      terão um \sigma maior.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <span class="arithmatex">\(x_0 + n\)</span>: É o vídeo com
+                      ruído (a "tela suja") que é dado como entrada para o nosso
+                      modelo
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <span class="arithmatex">\(\mathcal{D}_\theta\)</span>: É
+                      a nossa rede neural "denoiser". O \theta (theta)
+                      representa todos os parâmetros (pesos) que a rede precisa
+                      aprender durante o treinamento
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <span class="arithmatex"
+                        >\(\mathcal{D}_\theta(x_0 + n;\sigma)\)</span
+                      >: É o que o modelo
+                      <span class="arithmatex">\(\mathcal{D}_\theta\)</span>
+                      prevê que seja o vídeo original limpo (<span
+                        class="arithmatex"
+                        >\(x_0\)</span
+                      >), dado o vídeo ruidoso (<span class="arithmatex"
+                        >\(x_0 + n\)</span
+                      >) e o nível de ruído (<span class="arithmatex"
+                        >\(\sigma\)</span
+                      >)
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <span class="arithmatex"
+                        >\(\mathcal{D}_\theta(x_0 + n;\sigma)− x_0\)</span
+                      >: Esta é a diferença entre o que o modelo previu e o
+                      vídeo real e limpo (<span class="arithmatex">\(x_0\)</span
+                      >)
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <span class="arithmatex">\(||...||_2^2\)</span>: Isso
+                      significa o quadrado da norma L2, que é uma forma de medir
+                      a "distância" ou o "erro" entre a previsão do modelo e a
+                      realidade. Basicamente, estamos pegando a diferença,
+                      elevando ao quadrado (para que valores negativos e
+                      positivos contem igualmente) e somando tudo. Queremos que
+                      esse erro seja o menor possível
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <span class="arithmatex"
+                        >\(\mathbb{E}_{x_0, n}|| ... ||\)</span
+                      >: Significa a esperança (ou média) sobre diferentes
+                      vídeos limpos (<span class="arithmatex">\(x_0\)</span>) e
+                      diferentes tipos de ruído (n)
+                    </p>
+                  </li>
+                </ul>
+                <h4 id="perda-total-de-treinamento">
+                  Perda total de Treinamento:
+                </h4>
+                <div class="arithmatex">
+                  \[\mathcal{L}(\mathcal{D}_\theta) = \mathbb{E}_\sigma
+                  [\lambda(\sigma) \cdot \mathcal{L}(\mathcal{D}_0, \sigma) +
+                  u(\sigma)]\]
+                </div>
+                <p>Onde:</p>
+                <ul>
+                  <li>
+                    <p>
+                      <span class="arithmatex"
+                        >\(\mathbb{E}_\sigma[ ... ]\)</span
+                      >: Significa a esperança (média) sobre diferentes níveis
+                      de ruído (<span class="arithmatex">\(\sigma\)</span>). O
+                      modelo é treinado para lidar com todos os níveis de ruído,
+                      do quase limpo ao totalmente ruidoso.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <span class="arithmatex">\(\lambda(\sigma)\)</span>
+                      (lambda de sigma): É uma função de ponderação. Ela ajusta
+                      a importância de cada nível de ruído (<span
+                        class="arithmatex"
+                        >\(\sigma\)</span
+                      >) na perda total, para que o modelo preste atenção a
+                      todos eles. Inicialmente, ela garante que todos os níveis
+                      de ruído contribuam igualmente para o aprendizado.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <span class="arithmatex">\(u(\sigma)\)</span> (u de
+                      sigma): É uma função de incerteza contínua. O modelo
+                      também aprende essa função. Se o modelo está "incerto"
+                      sobre como remover o ruído em um certo nível
+                      <span class="arithmatex">\(\sigma\)</span>, ele se
+                      penaliza, incentivando-o a reduzir essa incerteza. Isso
+                      ajuda a otimização em diferentes níveis de ruído,
+                      tratando-os como um problema de aprendizado multi-tarefa
+                    </p>
+                  </li>
+                </ul>
+                <h4 id="funcao-de-ponderacao">Função de Ponderação:</h4>
+                <div class="arithmatex">
+                  \[\lambda(\sigma) = \frac{(\sigma^2 + \sigma_{data}^2)}{\sigma
+                  \cdot \sigma_{data}}\]
+                </div>
+                <p>Onde:</p>
+                <ul>
+                  <li>
+                    <span class="arithmatex">\(\sigma_{data}\)</span>: É o
+                    desvio padrão dos dados de treinamento. Essa equação define
+                    como o
+                    <span class="arithmatex">\(\lambda(\sigma)\)</span> calcula
+                    o peso de cada nível de ruído, inicialmente visando uma
+                    contribuição igualitária
+                  </li>
+                </ul>
+                <h4 id="distribuicao-do-nivel-de-ruido">
+                  Distribuição do Nível de Ruído:
+                </h4>
+                <div class="arithmatex">
+                  \[ln(\sigma) ~ N (P_{mean}, P_{std}^2)\]
+                </div>
+                <p>Onde:</p>
+                <ul>
+                  <li>
+                    Isso descreve como os níveis de ruído (<span
+                      class="arithmatex"
+                      >\(\sigma\)</span
+                    >) são escolhidos durante o treinamento. O logaritmo natural
+                    (<span class="arithmatex">\(ln\)</span>) de
+                    <span class="arithmatex">\(\sigma\)</span> segue uma
+                    distribuição normal (<span class="arithmatex">\(N\)</span>),
+                    com uma média (<span class="arithmatex">\(P_{mean}\)</span>)
+                    e um desvio padrão (<span class="arithmatex"
+                      >\(P_{std}\)</span
+                    >) definidos. Isso garante que o modelo veja uma boa
+                    variedade de níveis de ruído
+                  </li>
+                </ul>
+                <h3 id="resultados-e-aplicacoes">Resultados e Aplicações</h3>
+                <p>
+                  Os modelos de difusão Cosmos-1.0 (7B e 14B) são capazes de
+                  gerar vídeos com alta qualidade visual, dinâmicas de movimento
+                  e alinhamento preciso com o texto. O modelo de 14B demonstra
+                  uma capacidade aprimorada de capturar detalhes visuais mais
+                  finos e padrões de movimento mais intrincados.
+                </p>
+                <p>
+                  Eles são utilizados em diversas aplicações de IA Física, como:
+                </p>
+                <ul>
+                  <li>
+                    <p>
+                      Controle de Câmera: Permitem gerar mundos virtuais
+                      navegáveis com base em uma imagem de referência e
+                      trajetórias de câmera, mantendo a coerência 3D e temporal.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Manipulação Robótica: Podem ser ajustados para prever
+                      vídeos de robôs seguindo instruções de texto ou sequências
+                      de ações.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Condução Autônoma: São adaptados para criar modelos de
+                      mundo multi-visão para cenários de condução, gerando
+                      vídeos de seis câmeras simultaneamente e até seguindo
+                      trajetórias de veículos.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Modelos de difusão baseados em Transformer são
+                      frequentemente capazes de incorporar diversos sinais de
+                      controle.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      As avaliações mostram que os WFMs baseados em difusão
+                      entregam melhor qualidade de geração e maior consistência
+                      3D em comparação com as linhas de base e os modelos
+                      autoregressivos em certas condições.
+                    </p>
+                  </li>
+                </ul>
+                <h3 id="limitacoes">Limitações</h3>
+                <p>
+                  Apesar dos avanços, os modelos de difusão para simulação do
+                  mundo ainda enfrentam desafios comuns aos WFMs:
+                </p>
+                <ul>
+                  <li>
+                    <p>
+                      Falta de Permanência de Objetos: Objetos podem desaparecer
+                      ou aparecer inesperadamente.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Imprecisões em Dinâmicas com Contato: Interações físicas
+                      complexas, como colisões, ainda são difíceis de modelar
+                      com precisão.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Inconsistência no Seguimento de Instruções: O modelo nem
+                      sempre segue as instruções de texto de forma totalmente
+                      precisa.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Aderência às Leis da Física: A gravidade, interações de
+                      luz e dinâmicas de fluidos ainda não são perfeitamente
+                      simuladas.
+                    </p>
+                  </li>
+                </ul>
+                <h2 id="english">English</h2>
+                <p>
+                  In the context of World Foundation Models (WFMs), it
+                  transforms noise into a video simulation of the world.
+                </p>
+                <p>
+                  Analogy: “Think of a diffusion model as an artist who starts
+                  with a canvas full of random noise (like old TV ‘static’) and,
+                  gradually, step by step, learns to remove that noise,
+                  revealing a coherent and meaningful image or video.”
+                </p>
+                <p><img alt="Noise" src="../images/noise.png" /></p>
+                <h3
+                  id="video-tokenization-transforming-videos-into-continuous-latents"
+                >
+                  Video Tokenization: Transforming Videos into “Continuous
+                  Latents”
+                </h3>
+                <p>
+                  Just like autoregressive models, diffusion models need to
+                  process videos in a more manageable format for their
+                  operation.
+                </p>
+                <ul>
+                  <li>
+                    Continuous Tokens: For diffusion models, videos are
+                    transformed into continuous latent embeddings (vectors of
+                    decimal numbers). Think of them as a compact and fluid
+                    representation of the video, as opposed to the “discrete
+                    tokens” (integers) used by autoregressive models.
+                  </li>
+                  <li>
+                    Cosmos Continuous Tokenizer (Cosmos-1.0-Tokenizer-CV8x8x8):
+                    This is the component responsible for this transformation.
+                    It compresses the input video into a lower-dimensional
+                    latent representation, preserving most of the visual
+                    information. This tokenizer has an encoder-decoder
+                    architecture that operates in the wavelet space for greater
+                    compression and preservation of semantic information, along
+                    with a causal temporal design (the encoding of current
+                    frames does not depend on future frames, which is crucial
+                    for Physical AI applications).
+                  </li>
+                </ul>
+                <h3 id="formulation-the-denoising-process">
+                  Formulation: The Denoising Process
+                </h3>
+                <p>
+                  The core of the diffusion model is the iterative “denoising”
+                  process.
+                </p>
+                <h4 id="formulation-details">Formulation Details</h4>
+                <table>
+                  <thead>
+                    <tr>
+                      <th style="text-align: center">
+                        <strong>Aspect</strong>
+                      </th>
+                      <th style="text-align: left">
+                        <strong>Description</strong>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style="text-align: center">
+                        Noise Addition and Removal
+                      </td>
+                      <td style="text-align: left">
+                        During training,
+                        <strong>Gaussian (random) noise</strong> is
+                        progressively added to a real video. The model is then
+                        trained to invert this process, learning to remove the
+                        noise at each step to reconstruct the original video
+                        from a noisy version.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: center">
+                        Denoising Function (<span class="arithmatex"
+                          >\(\mathcal{D}_\theta\)</span
+                        >)
+                      </td>
+                      <td style="text-align: left">
+                        The diffusion model uses a neural network
+                        <span class="arithmatex">\(\mathcal{D}_\theta\)</span>
+                        (called the “denoiser”) trained to estimate the noise
+                        present in a corrupted sample (noisy video) and,
+                        consequently, remove it to arrive at the clean version
+                        of the video.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: center">Loss Function</td>
+                      <td style="text-align: left">
+                        Training employs a
+                        <strong>“denoising score matching”</strong> loss
+                        function that penalizes the difference between the noise
+                        predicted by the model and the actual added noise. An u
+                        <strong
+                          >ncertainty-based weighting technique (<span
+                            class="arithmatex"
+                            >\(\mu(\sigma)\)</span
+                          >)</strong
+                        >
+                        is used to manage learning at different noise levels,
+                        treating it as a multi-task learning problem.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <h3 id="model-architecture-how-denoising-is-built">
+                  Model Architecture: How Denoising Is Built
+                </h3>
+                <p>
+                  The diffusion model’s
+                  <span class="arithmatex">\(\mathcal{D}_\theta\)</span> network
+                  is an adaptation of a Transformer architecture, optimized for
+                  visual data and control.
+                </p>
+                <h4 id="key-architectural-components">
+                  Key Architectural Components
+                </h4>
+                <table>
+                  <thead>
+                    <tr>
+                      <th style="text-align: center">
+                        <strong>Component</strong>
+                      </th>
+                      <th style="text-align: left">
+                        <strong>Description</strong>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style="text-align: center">3D Patchification</td>
+                      <td style="text-align: left">
+                        The input latent representations are converted into
+                        <strong
+                          >three-dimensional “patches” (cubic chunks)</strong
+                        >, which are then “flattened” into a one-dimensional
+                        sequence. This prepares the data to be processed
+                        efficiently by the Transformer.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: center">
+                        Hybrid Positional Embeddings
+                      </td>
+                      <td style="text-align: left">
+                        Essential for spatial and temporal understanding: -
+                        3<strong
+                          >D-Factored Rotary Position Embedding (RoPE)</strong
+                        >: Helps the model understand the relative positions of
+                        tokens along temporal, height, and width dimensions,
+                        enabling the generation of videos of arbitrary sizes and
+                        durations, compatible with different frame rates (FPS).
+                        -
+                        <strong
+                          >Absolute (Learnable) Positional Embedding</strong
+                        >: An additional embedding used in each Transformer
+                        block that, combined with RoPE, improves performance,
+                        reduces training loss, and minimizes “morphing”
+                        artifacts.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: center">
+                        Cross-Attention for Text Conditioning
+                      </td>
+                      <td style="text-align: left">
+                        Integrated layers that allow the model to generate
+                        videos based on text descriptions by incorporating
+                        <strong>text embeddings</strong> (generated by
+                        <strong>T5-XXL</strong>) into the denoising process.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: center">
+                        QK-Normalization (QKNorm)
+                      </td>
+                      <td style="text-align: left">
+                        Normalizes the query (Q) and key (K) vectors before the
+                        attention operation, which increases
+                        <strong>training stability</strong>, especially in the
+                        early phases, preventing attention saturation.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: center">AdaLN-LoRA</td>
+                      <td style="text-align: left">
+                        An architectural optimization that
+                        <strong>significantly reduces parameter count</strong>
+                        (e.g., 36% for the 7B-parameter model) without
+                        compromising performance, making the model more memory-
+                        and compute-efficient.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <h3 id="training-strategy-how-the-model-learns-to-paint">
+                  Training Strategy: How the Model Learns to “Paint”
+                </h3>
+                <p>
+                  Diffusion models are trained in multiple stages to optimize
+                  performance and generalization.
+                </p>
+                <table>
+                  <thead>
+                    <tr>
+                      <th style="text-align: center">
+                        <strong>Aspect</strong>
+                      </th>
+                      <th style="text-align: left">
+                        <strong>Description</strong>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style="text-align: center">
+                        Joint Image and Video Training
+                      </td>
+                      <td style="text-align: left">
+                        To leverage the vast amount of image data, an
+                        <strong>alternating optimization</strong> strategy
+                        interleaves batches of image and video data. A
+                        <strong>domain-specific normalization</strong> is used
+                        to align latent distributions and encourage a Gaussian
+                        isotropic representation. The denoising loss for videos
+                        is scaled to handle slower convergence.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: center">Progressive Training</td>
+                      <td style="text-align: left">
+                        The model is trained progressively, starting with
+                        <strong>lower video resolutions and durations</strong>
+                        (e.g., 512p with 57 frames) and advancing to
+                        <strong>higher resolutions and durations</strong> (e.g.,
+                        720p with 121 frames). A
+                        <strong>“cooling-down” phase</strong> with high-quality
+                        data and a decaying learning rate further refines the
+                        model.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: center">Multi-Aspect Training</td>
+                      <td style="text-align: left">
+                        Data are organized into buckets based on their
+                        <strong>aspect ratios</strong> (e.g., 1:1, 16:9) to
+                        accommodate content diversity.
+                        <strong>Reflection padding</strong> is used for missing
+                        pixels during batch processing.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: center">
+                        Mixed-Precision Training
+                      </td>
+                      <td style="text-align: left">
+                        For efficiency, model weights are kept in
+                        <strong>BF16 and </strong>FP32. BF16 is used for
+                        <em>forward</em> and <em>backward</em> passes, and FP32
+                        for parameter updates,
+                        <strong>ensuring numerical stability</strong>.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: center">Text Conditioning</td>
+                      <td style="text-align: left">
+                        Uses <strong>T5-XXL</strong> as the text encoder.
+                        <strong>Text2World</strong> models are capable of
+                        generating video from a text input.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: center">
+                        Image and Video Conditioning (Video2World)
+                      </td>
+                      <td style="text-align: left">
+                        <strong>Video2World</strong> models extend Text2World
+                        models to accept previous frames (image or video) as a
+                        condition to generate future frames. Additional noise is
+                        introduced into the conditional frames during training
+                        to increase robustness.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <h3 id="inference-optimization-making-generation-fast">
+                  Inference Optimization: Making Generation Fast
+                </h3>
+                <p>
+                  Although diffusion models are inherently slower due to their
+                  iterative denoising process, significant optimizations are
+                  applied to speed up generation.
+                </p>
+                <h4 id="inference-optimization-techniques">
+                  Inference Optimization Techniques
+                </h4>
+                <table>
+                  <thead>
+                    <tr>
+                      <th style="text-align: center">
+                        <strong>Technique</strong>
+                      </th>
+                      <th style="text-align: left">
+                        <strong>Description</strong>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style="text-align: center">
+                        FSDP (Fully Sharded Data Parallelism)
+                      </td>
+                      <td style="text-align: left">
+                        Distributes model parameters, gradients, and optimizer
+                        states across multiple devices (GPUs), resulting in
+                        <strong>significant memory savings</strong> and enabling
+                        the use of larger models.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: center">
+                        Context Parallelism (CP)
+                      </td>
+                      <td style="text-align: left">
+                        Splits computation and activations along the sequence
+                        dimension, distributing them across GPUs. This technique
+                        is crucial for handling
+                        <strong>long video contexts</strong>, where the amount
+                        of data to be processed is very large.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <h3 id="prompt-upsampler-for-user-text-inputs">
+                  Prompt Upsampler: For User Text Inputs
+                </h3>
+                <ul>
+                  <li>
+                    To bridge the gap between short and varied user text prompts
+                    and the detailed video descriptions used in WFM training, a
+                    “Prompt Upsampler” is developed.
+                  </li>
+                  <li>
+                    It transforms original prompts into more detailed and richer
+                    versions that align with the distribution of training
+                    prompts, improving the quality of the generated video. For
+                    Text2World models, Mistral-NeMo-12B-Instruct is used; for
+                    Video2World, Pixtral-12B is used.
+                  </li>
+                </ul>
+                <h3
+                  id="diffusion-decoder-improving-autoregressive-visual-quality"
+                >
+                  Diffusion Decoder: Improving Autoregressive Visual Quality
+                </h3>
+                <p>
+                  Although this is part of the diffusion model, it has a special
+                  post-optimization role for other models:
+                </p>
+                <ul>
+                  <li>
+                    For autoregressive models (which can generate blurry videos
+                    due to aggressive tokenization), a more powerful diffusion
+                    decoder is used as a “post-optimization.”
+                  </li>
+                  <li>
+                    This decoder takes the discrete tokens (output of the
+                    autoregressive model) and “translates” them back into
+                    higher-quality continuous tokens, which are then converted
+                    into high-quality RGB videos. It’s like refining a draft
+                    into a finished work of art.
+                  </li>
+                </ul>
+                <h3 id="equations">Equations</h3>
+                <h4 id="denoising-loss">Denoising Loss:</h4>
+                <p>
+                  <span class="arithmatex"
+                    >\(\mathcal{L}(\mathcal{D}_\theta, \sigma) =
+                    \mathbb{E}_{x_0, n} ||\mathcal{D}_\theta(x_0 + n; \sigma) -
+                    x_0||_2^2\)</span
+                  >
+                </p>
+                <p>Where:</p>
+                <ul>
+                  <li>
+                    <p>
+                      <span class="arithmatex">\(x_0\)</span> (read “x zero”):
+                      Represents the original, clean video (the “perfect
+                      canvas”)
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <span class="arithmatex">\(n\)</span>: Represents the
+                      random Gaussian noise that was added to video
+                      <span class="arithmatex">\(x_0\)</span>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <span class="arithmatex">\(\sigma\)</span> (sigma):
+                      Indicates the noise level at that moment. Videos with more
+                      noise will have a larger
+                      <span class="arithmatex">\(\sigma\)</span>.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <span class="arithmatex">\(x_0 + n\)</span>: This is the
+                      noisy video (the “dirty canvas”) that is given as input to
+                      the model
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <span class="arithmatex">\(\mathcal{D}_\theta\)</span>:
+                      This is the neural network “denoiser.” The
+                      <span class="arithmatex">\(\theta\)</span> (theta)
+                      represents all the parameters (weights) the network needs
+                      to learn during training
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <span class="arithmatex"
+                        >\(\mathcal{D}_\theta(x_0 + n;\sigma)\)</span
+                      >: This is what the model
+                      <span class="arithmatex">\(\mathcal{D}_\theta\)</span>
+                      predicts the original clean video (<span
+                        class="arithmatex"
+                        >\(x_0\)</span
+                      >) to be, given the noisy video (<span class="arithmatex"
+                        >\(x_0 + n\)</span
+                      >) and the noise level (<span class="arithmatex"
+                        >\(\sigma\)</span
+                      >)
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <span class="arithmatex"
+                        >\(\mathcal{D}_\theta(x_0 + n;\sigma)− x_0\)</span
+                      >: This is the difference between what the model predicted
+                      and the real, clean video (<span class="arithmatex"
+                        >\(x_0\)</span
+                      >)
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <span class="arithmatex">\(||...||_2^2\)</span>: This
+                      means the squared L2 norm, which is a way to measure the
+                      “distance” or “error” between the model’s prediction and
+                      reality. Basically, we take the difference, square it (so
+                      negative and positive values count equally), and sum
+                      everything. We want this error to be as small as possible
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <span class="arithmatex"
+                        >\(\mathbb{E}_{x_0, n}|| ... ||\)</span
+                      >: Means the expectation (or average) over different clean
+                      videos (<span class="arithmatex">\(x_0\)</span>) and
+                      different types of noise (<span class="arithmatex"
+                        >\(n\)</span
+                      >)
+                    </p>
+                  </li>
+                </ul>
+                <h4 id="total-training-loss">Total Training Loss:</h4>
+                <p>
+                  <span class="arithmatex"
+                    >\(\mathcal{L}(\mathcal{D}_\theta) = \mathbb{E}_\sigma
+                    [\lambda(\sigma) \cdot \mathcal{L}(\mathcal{D}_0, \sigma) +
+                    u(\sigma)]\)</span
+                  >
+                </p>
+                <p>Where:</p>
+                <ul>
+                  <li>
+                    <p>
+                      <span class="arithmatex"
+                        >\(\mathbb{E}_\sigma[ ... ]\)</span
+                      >: Means the expectation (average) over different noise
+                      levels (<span class="arithmatex">\(\sigma\)</span>). The
+                      model is trained to handle all noise levels, from almost
+                      clean to fully noisy.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <span class="arithmatex">\(\lambda(\sigma)\)</span>
+                      (lambda of sigma): A weighting function. It adjusts the
+                      importance of each noise level (<span class="arithmatex"
+                        >\(\sigma\)</span
+                      >) in the total loss so the model pays attention to all of
+                      them. Initially, it ensures that all noise levels
+                      contribute equally to learning.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <span class="arithmatex">\(u(\sigma)\)</span> (u of
+                      sigma): A continuous uncertainty function. The model also
+                      learns this function. If the model is “uncertain” about
+                      how to remove noise at a certain level
+                      <span class="arithmatex">\(\sigma\)</span>, it penalizes
+                      itself, encouraging it to reduce this uncertainty. This
+                      helps optimization across different noise levels, treating
+                      them as a multi-task learning problem
+                    </p>
+                  </li>
+                </ul>
+                <h4 id="weighting-function">Weighting Function:</h4>
+                <p>
+                  <span class="arithmatex"
+                    >\(\lambda(\sigma) = \frac{(\sigma^2 +
+                    \sigma_{data}^2)}{\sigma \cdot \sigma_{data}}\)</span
+                  >
+                </p>
+                <p>Where:</p>
+                <ul>
+                  <li>
+                    <span class="arithmatex">\(\sigma_{data}\)</span>: The
+                    standard deviation of the training data. This equation
+                    defines how
+                    <span class="arithmatex">\(\lambda(\sigma)\)</span> computes
+                    the weight of each noise level, initially aiming for an
+                    equal contribution
+                  </li>
+                </ul>
+                <h4 id="noise-level-distribution">Noise Level Distribution:</h4>
+                <p>
+                  <span class="arithmatex"
+                    >\(\ln(\sigma) \sim \mathcal{N}(P_{mean}, P_{std}^2)\)</span
+                  >
+                </p>
+                <p>Where:</p>
+                <ul>
+                  <li>
+                    This describes how the noise levels (<span
+                      class="arithmatex"
+                      >\(\sigma\)</span
+                    >) are chosen during training. The natural logarithm (<span
+                      class="arithmatex"
+                      >\(\ln\)</span
+                    >) of <span class="arithmatex">\(\sigma\)</span> follows a
+                    normal distribution (<span class="arithmatex"
+                      >\(\mathcal{N}\)</span
+                    >), with a mean (<span class="arithmatex">\(P_{mean}\)</span
+                    >) and a standard deviation (<span class="arithmatex"
+                      >\(P_{std}\)</span
+                    >) defined. This ensures the model sees a good variety of
+                    noise levels
+                  </li>
+                </ul>
+                <h3 id="results-and-applications">Results and Applications</h3>
+                <p>
+                  Cosmos-1.0 diffusion models (7B and 14B) are capable of
+                  generating videos with high visual quality, motion dynamics,
+                  and precise alignment with text. The 14B model demonstrates an
+                  enhanced ability to capture finer visual details and more
+                  intricate motion patterns.
+                </p>
+                <p>
+                  They are used in various Physical AI applications, such as:
+                </p>
+                <ul>
+                  <li>
+                    <p>
+                      Camera Control: They enable the generation of navigable
+                      virtual worlds based on a reference image and camera
+                      trajectories, maintaining 3D and temporal coherence.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Robotic Manipulation: They can be tuned to predict robot
+                      videos following text instructions or action sequences.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Autonomous Driving: They are adapted to create multi-view
+                      world models for driving scenarios, generating videos from
+                      six cameras simultaneously and even following vehicle
+                      trajectories.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Transformer-based diffusion models are often capable of
+                      incorporating multiple control signals.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Evaluations show that diffusion-based WFMs deliver better
+                      generation quality and greater 3D consistency compared to
+                      baselines and autoregressive models under certain
+                      conditions.
+                    </p>
+                  </li>
+                </ul>
+                <h3 id="limitations">Limitations</h3>
+                <p>
+                  Despite the advances, diffusion models for world simulation
+                  still face challenges common to WFMs:
+                </p>
+                <ul>
+                  <li>
+                    <p>
+                      Lack of Object Permanence: Objects may disappear or appear
+                      unexpectedly.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Inaccuracies in Contact Dynamics: Complex physical
+                      interactions, such as collisions, are still difficult to
+                      model accurately.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Inconsistency in Following Instructions: The model does
+                      not always follow text instructions completely accurately.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Adherence to the Laws of Physics: Gravity, light
+                      interactions, and fluid dynamics are not yet perfectly
+                      simulated.
+                    </p>
+                  </li>
+                </ul>
+                <h2 id="referencias-references">Referências | References</h2>
+                <ul>
+                  <li>
+                    <a href="https://arxiv.org/abs/2501.03575"
+                      >Cosmos World Foundation Model Platform for Physical AI
+                      arXiv:2501.03575</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <footer>
+              <div
+                class="rst-footer-buttons"
+                role="navigation"
+                aria-label="Footer Navigation"
+              >
+                <a
+                  href="../../projeto/escopo/"
+                  class="btn btn-neutral float-left"
+                  title="Projeto"
+                  ><span class="icon icon-circle-arrow-left"></span> Previous</a
+                >
+                <a
+                  href="../../autoregressive/autoregressive/"
+                  class="btn btn-neutral float-right"
+                  title="Autoregressive models"
+                  >Next <span class="icon icon-circle-arrow-right"></span
+                ></a>
+              </div>
+
+              <hr />
+
+              <div role="contentinfo">
+                <!-- Copyright etc -->
+              </div>
+
+              Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a
+              <a href="https://github.com/readthedocs/sphinx_rtd_theme"
+                >theme</a
+              >
+              provided by <a href="https://readthedocs.org">Read the Docs</a>.
+            </footer>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="rst-versions" role="note" aria-label="Versions">
+      <span class="rst-current-version" data-toggle="rst-current-version">
+        <span
+          ><a href="../../projeto/escopo/" style="color: #fcfcfc"
+            >&laquo; Previous</a
+          ></span
+        >
+
+        <span
+          ><a href="../../autoregressive/autoregressive/" style="color: #fcfcfc"
+            >Next &raquo;</a
+          ></span
+        >
+      </span>
+    </div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>
+      var base_url = "../..";
+    </script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+    <script src="../../javascripts/mathjax.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+      jQuery(function () {
+        SphinxRtdTheme.Navigation.enable(true);
+      });
+    </script>
+  </body>
+</html>

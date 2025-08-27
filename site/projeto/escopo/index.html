@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Projeto - World Foundation Models</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Projeto";
+        var mkdocs_page_input_path = "projeto/escopo.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> World Foundation Models
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Projeto</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#visao-geral-do-projeto">Visão Geral do projeto</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#problema">Problema</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#objetivos">Objetivos</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#fora-do-escopo">Fora do Escopo</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#usuarios-e-casos-de-uso">Usuarios e casos de uso</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#abordagem-tenica">Abordagem Ténica</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#metricas-de-sucesso">Métricas de Sucesso</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#entregaveis">Entregáveis</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#riscos-suposicoes">Riscos &amp; Suposições</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#links-uteis">Links úteis</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#referencias-references">Referências | References</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Referências</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../diffusion/diffusion/">Diffusion models</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../autoregressive/autoregressive/">Autoregressive models</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Tokens</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" >Cosmos Tokenizer</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../tokens/cosmos_tokenizer/cosmos_tokenizer/">Cosmos Tokenizer</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../tokens/cosmos_tokenizer/wavelet_compression/">Image Decomposition With Wavelets | Decomposição de imagem com Wavelets</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../tokens/dsc_tokenization/">DSC Tokenization</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cosmos_applications/cosmos_applications/">Cosmos Applications</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">World Foundation Models</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Projeto</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="escopo-projeto-world-foundation-model">Escopo - Projeto World Foundation Model ()</h1>
+<p><strong><em>Authors / Autores: <a href="http://github.com/yuri-sl">@yuri-sl</a></em></strong></p>
+<h2 id="visao-geral-do-projeto">Visão Geral do projeto</h2>
+<p>Desenvolver, via simulações físicas 2D, um World Foundation Model capaz de aprender dinâmicas e cinemática de objetos a partir de observações visuais (vídeo/imagens) e prever/planejar evoluções futuras do sistema. O usuário descreve a cena e a tarefa por prompt; o sistema instancia a simulação, executa/prevê rollouts e retorna vídeo, métricas e ações planejadas.</p>
+<h2 id="problema">Problema</h2>
+<p>Falta um modelo unificado, orientado por dados, que:
+<em>Generalize para novas combinações de objetos/propriedades (massa, atrito, elasticidade) em 2D.
+</em>Preveja estados futuros com consistência física por dezenas de passos.
+*Planeje ações para atingir metas (p.ex., “fazer o bloco vermelho tocar o alvo”) sem ajustar hiperparâmetros por tarefa.</p>
+<h2 id="objetivos">Objetivos</h2>
+<ul>
+<li>Criar ambiente 2D para a simulação do prompt do usuário.</li>
+<li>Permitir a interação do usuário com o ambiente através de prompts fornecidos ao sistema.</li>
+<li>Fornecer a representação do sistema proposto pelo usuário através de vídeos.</li>
+</ul>
+<h2 id="fora-do-escopo">Fora do Escopo</h2>
+<ul>
+<li>
+<p>3D, visão estéreo ou robótica real.</p>
+</li>
+<li>
+<p>Aprendizado por reforço end-to-end em hardware físico.</p>
+</li>
+<li>
+<p>Contato deformável/fluídos complexos; multiagente competitivo.</p>
+</li>
+<li>
+<p>RLHF/feedback humano avançado; integração mobile.</p>
+</li>
+</ul>
+<h2 id="usuarios-e-casos-de-uso">Usuarios e casos de uso</h2>
+<h2 id="abordagem-tenica">Abordagem Ténica</h2>
+<p>Este projeto</p>
+<h2 id="metricas-de-sucesso">Métricas de Sucesso</h2>
+<h2 id="entregaveis">Entregáveis</h2>
+<ul>
+<li>FrontEnd que permita a interação do usuário com o sistema para captar o seu prompt.</li>
+<li>Vídeo que representa o resultado final da simulação praticado pelo usuário.</li>
+</ul>
+<h2 id="riscos-suposicoes">Riscos &amp; Suposições</h2>
+<p>Poder computacional falho, dificuldades de manejar cargas de atividades da equipe.</p>
+<h2 id="links-uteis">Links úteis</h2>
+<h2 id="referencias-references">Referências | References</h2>
+<p><a href="https://docs.google.com/document/d/1GqxDtGbsp0xNqUrYcW_h2VUKyDDuHM6sbOMI6WNnzyQ/edit?tab=t.0">Especificação do projeto</a></p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../.." class="btn btn-neutral float-left" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../diffusion/diffusion/" class="btn btn-neutral float-right" title="Diffusion models">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../.." style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../diffusion/diffusion/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../javascripts/mathjax.js"></script>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

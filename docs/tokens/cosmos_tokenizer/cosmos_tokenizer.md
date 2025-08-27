@@ -1,5 +1,7 @@
 # Cosmos Tokenizer
 
+**_Authors / Autores: [@figredos](http://github.com/figredos)_**
+
 ## Português
 
 A seguir apresentamos trechos do capítulo $5$ do artigo **_Cosmos World Foundation Model Platform for Physical AI_**, interpoladas com comentários clarificando e/ou contextualizando conteúdos de seus parágrafos.
@@ -55,6 +57,7 @@ Por outro, uma compressão excessiva pode levar à perda de detalhes visuais ess
 A imagem a seguir ilustra os dois tipos de tokens:
 
 ![Visualization of continuous and discrete tokenizers](../images/cosmos_tokenizer/token_types.png)
+_"Figura S2.1-F1-ptbr — Visualização de Tokenizers contínuos e discretos"_
 
 Tokens ao longo das dimensões espaciais ($\frac{H}{S_{HW}} \times \frac{W}{S_{HW}}$) e temporais ($1 + \frac{T}{S_T}$), com um fator de compressão espacial $S_{HW}$ e um fator de compressão temporal $S_T$. O primeiro token temporal representa o primeiro quadro da entrada, possibilitando a tokenização conjunta de imagens ($T=0$) e vídeos ($T>0$) em um espaço latente compartilhado.
 
@@ -70,6 +73,7 @@ Tokens ao longo das dimensões espaciais ($\frac{H}{S_{HW}} \times \frac{W}{S_{H
 A tabela a seguir ilustra diferentes tokenizers visuais e suas capacidades:
 
 ![Different tokenizers and capabilities](../images/cosmos_tokenizer/tokenizers_table.png)
+_"Figura S2.2-F2-ptbr — Diferentes Tokenizers e suas capacidades"_
 
 O _Tokenizador Cosmos_ utiliza uma arquitetura leve e computacionalmente eficiente com um mecanismo temporal causal. Especificamente, ele emprega camadas de convolução temporal causal e camadas de atenção temporal causal para preservar a ordem temporal natural dos quadros de vídeo.
 
@@ -82,8 +86,7 @@ Os tokenizers são treinados diretamente em imagens de alta resolução e vídeo
 Os gráficos abaixo mostram a comparação de desempenho entre o _Cosmos Tokenizer_ e outros tokenizers, evidenciando a sua qualidade superior mesmo em taxas de compressão mais altas:
 
 ![Tokenizer comparisons](../images/cosmos_tokenizer/tokenizer_comparison.png)
-
-Claro! Segue abaixo o texto traduzido para o português, com a estrutura Markdown totalmente preservada, e mantendo em inglês apenas os termos técnicos que fazem mais sentido no original:
+_"Figura S2.2-F3-ptbr — Comparações entre Tokenizers"_
 
 ### Arquitetura
 
@@ -219,8 +222,10 @@ Essa abordagem garante flexibilidade no tratamento de diferentes resoluções es
 ### Resultados
 
 ![Tokenizer Evaluation 1](../images/cosmos_tokenizer/tokenizer_evaluation_1.png)
+_"Figura S2.2-F4-ptbr — Avaliação 1 de Tokenizers"_
 
 ![Tokenizer Evaluation 2](../images/cosmos_tokenizer/tokenizer_evaluation_2.png)
+_"Figura S2.2-F5-ptbr — Avaliação 2 de Tokenizers"_
 
 Nós avaliamos nossa suíte Cosmos Tokenizer em vários datasets benchmark de imagens e vídeos. Para a avaliação dos image tokenizers, seguimos trabalhos anteriores para avaliar o **MS-COCO 2017** e o **ImageNet-1K**. Utilizamos o subconjunto de validação do **MS-COCO 2017** com $5.000$ imagens, e o subconjunto de validação do **ImageNet-1K** com $50.000$ imagens como benchmark para avaliação de imagens.
 
@@ -306,6 +311,7 @@ Tokenizers are fundamental building blocks of modern large-scale models. They tr
 The image bellow illustrates the tokenization training pipeline, where the goal is to train the encoder and decoder, so that the bottleneck token representation maximally preserves visual information in the input.
 
 ![Tokenization Pipeline](../images/cosmos_tokenizer/tokenization_pipeline.png)
+_"Figura S2.1-F6-ENG — Tokenization Pipelines"_
 
 In the pipeline, an input video is encoded into tokens, which are usually much more compact than the input video. The decoder then reconstructs the input video from the tokens. _Tokenizer training is about learning the encoder and decoder to maximally preserve the visual information in the tokens_.
 
@@ -326,7 +332,7 @@ The success of tokenizers largely relies on their ability to deliver high compre
 The following image illustrates the two types of tokens:
 
 ![Visualization of continuous and discrete tokenizers](../images/cosmos_tokenizer/token_types.png)
-
+_"Figura S2.2-F7-ENG — Visualization of discrete Tokenizers"_
 Tokens along spatial ($\frac{H}{S_{HW}} \times \frac{W}{S_{HW}}$) and temporal ($1 + \frac{T}{S_T}$) dimensions, with a spatial compression factor of $S_{HW}$ and a temporal compression factor of $S_T$. The first temporal token represents the first input frame, enabling joint image ($T=0$) and video ($T>0$) tokenization in a shared latent space.
 
 > $S_{HW}$ is the **_spatial compression factor_** used to compress the spatial dimensions of an image. This is a key step in the spatial tokenization process, where the input frame is divided into smaller patches or blocks with each one of these being represented by one or more tokens.
@@ -341,7 +347,7 @@ Tokens along spatial ($\frac{H}{S_{HW}} \times \frac{W}{S_{HW}}$) and temporal (
 The following table illustrates different visual Tokenizers and their capabilities:
 
 ![Different tokenizers and capabilities](../images/cosmos_tokenizer/tokenizers_table.png)
-
+_"Figura S2.2-F8-ptbr — Different Tokenizers and its capabilites"_
 The _Cosmos Tokenizer_ uses a lightweight and computationally efficient architecture with a temporally causal mechanism. Specifically, it employs causal temporal convolution layers and causal temporal attention layers to preserve the natural temporal order of video frames.
 
 > The term "causal" implies that any predictions on a particular frame or time step are based only on that frame and all previous frames, not on any future ones. Therefore "_Causal Temporal Convolution_" means that the feature generation for a given frame only uses data from frame $t$ and earlier.
@@ -353,6 +359,7 @@ The tokenizers are trained directly on high-resolution images and long-duration 
 The plots bellow show the comparison in performance between the Cosmos Tokenizer and other ones, and denotes the superior quality even at higher compression rates:
 
 ![Tokenizer comparisons](../images/cosmos_tokenizer/tokenizer_comparison.png)
+_"Figura S2.2-F8-ptbr — Comparisons between Tokenizers"_
 
 ### Architecture
 
@@ -408,6 +415,7 @@ The decoder mirrors the encoder replacing the downsampling blocks with an upsamp
 > ![Swish activation function](../images/cosmos_tokenizer/swish_activation_function.png)
 
 ![Tokenizer architecture](../images/cosmos_tokenizer/tokenizer_architecture.png)
+_"Figura S2.2-F8-ptbr — Tokenizers architectures"_
 
 The image depicts the **Overall Cosmos Tokenizer architecture illustrating the integration of temporal causality and an encoder-decoder structure.** Temporal causality (left) processes sequential inputs, while the encoder-decoder (right) leverages wavelet transforms and causal operations to capture spatial and temporal dependencies in the data.
 
@@ -542,7 +550,7 @@ As shown in table $9$, for both image and video tokenizers, Cosmos Tokenizer is 
 
 ## Referências | References
 
-- [Cosmos World Foundation Model Platform for Physical AI](https://arxiv.org/abs/2501.03575)
+- [Cosmos World Foundation Model Platform for Physical AI arXiv:2501.03575](https://arxiv.org/abs/2501.03575)
 
 - [What is Wavelet Transform?Fourier vs Wavelet Transform|CWT-DWT|Wavelet Transform in Image Processing](https://www.youtube.com/watch?v=pUty-98Km_0)
 

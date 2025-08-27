@@ -1,503 +1,1318 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
+<html class="writer-html5" lang="en">
+  <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <link rel="shortcut icon" href="../../img/favicon.ico" />
     <title>Cosmos Applications - World Foundation Models</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
-    
-      <script>
-        // Current page data
-        var mkdocs_page_name = "Cosmos Applications";
-        var mkdocs_page_input_path = "cosmos_applications/cosmos_applications.md";
-        var mkdocs_page_url = null;
-      </script>
-    
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css"
+    />
+
+    <script>
+      // Current page data
+      var mkdocs_page_name = "Cosmos Applications";
+      var mkdocs_page_input_path = "cosmos_applications/cosmos_applications.md";
+      var mkdocs_page_url = null;
+    </script>
+
     <!--[if lt IE 9]>
       <script src="../../js/html5shiv.min.js"></script>
     <![endif]-->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-      <script>hljs.highlightAll();</script> 
-</head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+  </head>
 
-<body class="wy-body-for-nav" role="document">
+  <body class="wy-body-for-nav" role="document">
+    <div class="wy-grid-for-nav">
+      <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+        <div class="wy-side-scroll">
+          <div class="wy-side-nav-search">
+            <a href="../.." class="icon icon-home"> World Foundation Models </a>
+          </div>
 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-    <div class="wy-side-scroll">
-      <div class="wy-side-nav-search">
-          <a href="../.." class="icon icon-home"> World Foundation Models
-        </a>
-      </div>
+          <div
+            class="wy-menu wy-menu-vertical"
+            data-spy="affix"
+            role="navigation"
+            aria-label="Navigation menu"
+          >
+            <ul>
+              <li class="toctree-l1">
+                <a class="reference internal" href="../..">Home</a>
+              </li>
+            </ul>
+            <ul>
+              <li class="toctree-l1">
+                <a class="reference internal" href="../../projeto/escopo/"
+                  >Projeto</a
+                >
+              </li>
+            </ul>
+            <p class="caption"><span class="caption-text">Referências</span></p>
+            <ul class="current">
+              <li class="toctree-l1">
+                <a class="reference internal" href="../../diffusion/diffusion/"
+                  >Diffusion models</a
+                >
+              </li>
+              <li class="toctree-l1">
+                <a
+                  class="reference internal"
+                  href="../../autoregressive/autoregressive/"
+                  >Autoregressive models</a
+                >
+              </li>
+              <li class="toctree-l1">
+                <a class="reference internal">Tokens</a>
+                <ul>
+                  <li class="toctree-l2">
+                    <a class="reference internal">Cosmos Tokenizer</a>
+                    <ul>
+                      <li class="toctree-l3">
+                        <a
+                          class="reference internal"
+                          href="../../tokens/cosmos_tokenizer/cosmos_tokenizer/"
+                          >Cosmos Tokenizer</a
+                        >
+                      </li>
+                      <li class="toctree-l3">
+                        <a
+                          class="reference internal"
+                          href="../../tokens/cosmos_tokenizer/wavelet_compression/"
+                          >Image Decomposition With Wavelets | Decomposição de
+                          imagem com Wavelets</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="toctree-l2">
+                    <a
+                      class="reference internal"
+                      href="../../tokens/dsc_tokenization/"
+                      >DSC Tokenization</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li class="toctree-l1 current">
+                <a class="reference internal current" href="#"
+                  >Cosmos Applications</a
+                >
+                <ul class="current">
+                  <li class="toctree-l2">
+                    <a class="reference internal" href="#english">English</a>
+                    <ul>
+                      <li class="toctree-l3">
+                        <a class="reference internal" href="#introduction"
+                          >Introduction</a
+                        >
+                      </li>
+                      <li class="toctree-l3">
+                        <a
+                          class="reference internal"
+                          href="#different-cosmos-wfm-models"
+                          >Different Cosmos WFM Models</a
+                        >
+                        <ul>
+                          <li class="toctree-l4">
+                            <a
+                              class="reference internal"
+                              href="#cosmos-predict-2"
+                              >Cosmos Predict-2</a
+                            >
+                          </li>
+                          <li class="toctree-l4">
+                            <a
+                              class="reference internal"
+                              href="#cosmos-transfer"
+                              >Cosmos Transfer</a
+                            >
+                          </li>
+                          <li class="toctree-l4">
+                            <a class="reference internal" href="#cosmos-reason"
+                              >Cosmos Reason</a
+                            >
+                          </li>
+                          <li class="toctree-l4">
+                            <a
+                              class="reference internal"
+                              href="#cosmos-tokenizers"
+                              >Cosmos Tokenizers</a
+                            >
+                          </li>
+                          <li class="toctree-l4">
+                            <a
+                              class="reference internal"
+                              href="#cosmos-wfm-post-training-samples"
+                              >Cosmos WFM Post-Training Samples</a
+                            >
+                          </li>
+                          <li class="toctree-l4">
+                            <a
+                              class="reference internal"
+                              href="#cosmos-guardrails"
+                              >Cosmos Guardrails</a
+                            >
+                          </li>
+                          <li class="toctree-l4">
+                            <a
+                              class="reference internal"
+                              href="#cosmos-upsampler"
+                              >Cosmos Upsampler</a
+                            >
+                          </li>
+                        </ul>
+                      </li>
+                      <li class="toctree-l3">
+                        <a class="reference internal" href="#uses-of-cosmos-wfm"
+                          >Uses of Cosmos WFM</a
+                        >
+                        <ul>
+                          <li class="toctree-l4">
+                            <a
+                              class="reference internal"
+                              href="#training-autonomous-cars"
+                              >Training autonomous cars</a
+                            >
+                          </li>
+                          <li class="toctree-l4">
+                            <a
+                              class="reference internal"
+                              href="#synthetic-dataset-generation"
+                              >Synthetic dataset generation</a
+                            >
+                          </li>
+                          <li class="toctree-l4">
+                            <a
+                              class="reference internal"
+                              href="#other-applications"
+                              >Other Applications</a
+                            >
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="toctree-l2">
+                    <a class="reference internal" href="#portuguese"
+                      >Portuguese</a
+                    >
+                    <ul>
+                      <li class="toctree-l3">
+                        <a class="reference internal" href="#introducao"
+                          >Introdução</a
+                        >
+                      </li>
+                      <li class="toctree-l3">
+                        <a
+                          class="reference internal"
+                          href="#diferentes-modelos-do-cosmos-wfm"
+                          >Diferentes Modelos do Cosmos WFM</a
+                        >
+                        <ul>
+                          <li class="toctree-l4">
+                            <a
+                              class="reference internal"
+                              href="#cosmos-predict-2_1"
+                              >Cosmos Predict-2</a
+                            >
+                          </li>
+                          <li class="toctree-l4">
+                            <a
+                              class="reference internal"
+                              href="#cosmos-transfer_1"
+                              >Cosmos Transfer</a
+                            >
+                          </li>
+                          <li class="toctree-l4">
+                            <a
+                              class="reference internal"
+                              href="#cosmos-reason_1"
+                              >Cosmos Reason</a
+                            >
+                          </li>
+                          <li class="toctree-l4">
+                            <a
+                              class="reference internal"
+                              href="#cosmos-tokenizers_1"
+                              >Cosmos Tokenizers</a
+                            >
+                          </li>
+                          <li class="toctree-l4">
+                            <a
+                              class="reference internal"
+                              href="#cosmos-wfm-post-training-samples_1"
+                              >Cosmos WFM Post-Training Samples</a
+                            >
+                          </li>
+                          <li class="toctree-l4">
+                            <a
+                              class="reference internal"
+                              href="#cosmos-guardrails_1"
+                              >Cosmos Guardrails</a
+                            >
+                          </li>
+                          <li class="toctree-l4">
+                            <a
+                              class="reference internal"
+                              href="#cosmos-upsampler_1"
+                              >Cosmos Upsampler</a
+                            >
+                          </li>
+                        </ul>
+                      </li>
+                      <li class="toctree-l3">
+                        <a class="reference internal" href="#usos-do-cosmos-wfm"
+                          >Usos do Cosmos WFM</a
+                        >
+                        <ul>
+                          <li class="toctree-l4">
+                            <a
+                              class="reference internal"
+                              href="#treinamento-de-carros-autonomos"
+                              >Treinamento de Carros autônomos</a
+                            >
+                          </li>
+                          <li class="toctree-l4">
+                            <a
+                              class="reference internal"
+                              href="#geracao-de-datasets-sinteticos"
+                              >Geração de datasets sintéticos</a
+                            >
+                          </li>
+                          <li class="toctree-l4">
+                            <a
+                              class="reference internal"
+                              href="#outras-aplicacoes"
+                              >Outras Aplicações</a
+                            >
+                          </li>
+                        </ul>
+                      </li>
+                      <li class="toctree-l3">
+                        <a class="reference internal" href="#referencias"
+                          >Referências</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../projeto/escopo/">Projeto</a>
-                </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Referências</span></p>
-              <ul class="current">
-                  <li class="toctree-l1"><a class="reference internal" href="../../diffusion/diffusion/">Diffusion models</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../autoregressive/autoregressive/">Autoregressive models</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" >Tokens</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" >Cosmos Tokenizer</a>
-    <ul>
-                <li class="toctree-l3"><a class="reference internal" href="../../tokens/cosmos_tokenizer/cosmos_tokenizer/">Cosmos Tokenizer</a>
-                </li>
-                <li class="toctree-l3"><a class="reference internal" href="../../tokens/cosmos_tokenizer/wavelet_compression/">Image Decomposition With Wavelets | Decomposição de imagem com Wavelets</a>
-                </li>
-    </ul>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../../tokens/dsc_tokenization/">DSC Tokenization</a>
-                </li>
-    </ul>
-                  </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Cosmos Applications</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#english">English</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#different-cosmos-wfm-models">Different Cosmos WFM Models</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#cosmos-predict-2">Cosmos Predict-2</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#cosmos-transfer">Cosmos Transfer</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#cosmos-reason">Cosmos Reason</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#cosmos-tokenizers">Cosmos Tokenizers</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#cosmos-wfm-post-training-samples">Cosmos WFM Post-Training Samples</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#cosmos-guardrails">Cosmos Guardrails</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#cosmos-upsampler">Cosmos Upsampler</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#uses-of-cosmos-wfm">Uses of Cosmos WFM</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#training-autonomous-cars">Training autonomous cars</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#synthetic-dataset-generation">Synthetic dataset generation</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#other-applications">Other Applications</a>
-    </li>
-        </ul>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#portuguese">Portuguese</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#introducao">Introdução</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#diferentes-modelos-do-cosmos-wfm">Diferentes Modelos do Cosmos WFM</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#cosmos-predict-2_1">Cosmos Predict-2</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#cosmos-transfer_1">Cosmos Transfer</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#cosmos-reason_1">Cosmos Reason</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#cosmos-tokenizers_1">Cosmos Tokenizers</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#cosmos-wfm-post-training-samples_1">Cosmos WFM Post-Training Samples</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#cosmos-guardrails_1">Cosmos Guardrails</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#cosmos-upsampler_1">Cosmos Upsampler</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#usos-do-cosmos-wfm">Usos do Cosmos WFM</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#treinamento-de-carros-autonomos">Treinamento de Carros autônomos</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#geracao-de-datasets-sinteticos">Geração de datasets sintéticos</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#outras-aplicacoes">Outras Aplicações</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#referencias">Referências</a>
-    </li>
-        </ul>
-    </li>
-    </ul>
-                  </li>
-              </ul>
-      </div>
-    </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+      <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+        <nav
+          class="wy-nav-top"
+          role="navigation"
+          aria-label="Mobile navigation menu"
+        >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../..">World Foundation Models</a>
-        
-      </nav>
-      <div class="wy-nav-content">
-        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
-  <ul class="wy-breadcrumbs">
-    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">Referências</li>
-      <li class="breadcrumb-item active">Cosmos Applications</li>
-    <li class="wy-breadcrumbs-aside">
-    </li>
-  </ul>
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-            <div class="section" itemprop="articleBody">
-              
-                <h1 id="aplicacoes-da-plataforma-cosmos">Aplicações da plataforma Cosmos</h1>
-<p><strong><em>Authors / Autores: <a href="http://github.com/gibi177">@gibi177</a>, <a href="http://github.com/figredos">@figredos</a></em></strong></p>
-<h2 id="english">English</h2>
-<h3 id="introduction">Introduction</h3>
-<p><a href="https://arxiv.org/html/2501.03575v1">The Cosmos paper</a> suggests a series of possible applications of the World Foundation Models platform. Here, some of these possible applications are discussed, along with the different models available for such applications.</p>
-<h3 id="different-cosmos-wfm-models">Different Cosmos WFM Models</h3>
-<p>NVIDIA, through the NVIDIA Developer site <a href="https://developer.nvidia.com/cosmos?hitsPerPage=6">NVIDIA Developer</a>, provides a set of pre-trained models for download. They vary in function for world generation and the acceleration of Physical AI. Below are the different models and their functions.</p>
-<h4 id="cosmos-predict-2">Cosmos Predict-2</h4>
-<p>Our best world foundation model so far—higher fidelity, flexible frame rates and resolutions, fewer hallucinations, and better control over text, objects, and motion in the video.</p>
-<p>Generate previews from text in under 4 seconds and up to 30 seconds of future-world video from a reference image or preview. Below is an example of using the model in <code>Python</code>:</p>
-<pre><code class="language-python">import torch
-from imaginaire.utils.io import save_image_or_video
-from cosmos_predict2.configs.base.config_video2world import PREDICT2_VIDEO2WORLD_PIPELINE_2B
-from cosmos_predict2.pipelines.video2world import Video2WorldPipeline
-
-# Create the video generation pipeline.
-
-pipe = Video2WorldPipeline.from_config(
-config=PREDICT2_VIDEO2WORLD_PIPELINE_2B,
-dit_path=&quot;checkpoints/nvidia/Cosmos-Predict2-2B-Video2World/model-720p-16fps.pt&quot;,
-text_encoder_path=&quot;checkpoints/google-t5/t5-11b&quot;,
-)
-
-# Specify the input image path and text prompt.
-
-image_path = &quot;assets/video2world/example_input.jpg&quot;
-prompt = &quot;&quot;&quot;
-A high-definition video captures the precision of robotic welding in an industrial setting.
-The first frame showcases a robotic arm, equipped with a welding torch, positioned over a large metal structure.
-The welding process is in full swing, with bright sparks and intense light illuminating the scene, creating a vivid display of blue and white hues.
-A significant amount of smoke billows around the welding area, partially obscuring the view but emphasizing the heat and activity.
-The background reveals parts of the workshop environment, including a ventilation system and various pieces of machinery,
-indicating a busy and functional industrial workspace.
-As the video progresses, the robotic arm maintains its steady position, continuing the welding process and moving to its left.
-The welding torch consistently emits sparks and light, and the smoke continues to rise, diffusing slightly as it moves upward.
-The metal surface beneath the torch shows ongoing signs of heating and melting. The scene retains its industrial ambiance,
-with the welding sparks and smoke dominating the visual field, underscoring the ongoing nature of the welding operation.
-&quot;&quot;&quot;
-
-# Run the video generation pipeline.
-
-video = pipe(input_path=image_path, prompt=prompt)
-
-# Save the resulting output video.
-
-save_image_or_video(video, &quot;output/test.mp4&quot;, fps=16)
-</code></pre>
-<p>For more information on using the model, see the <a href="https://github.com/nvidia-cosmos/cosmos-predict2?tab=readme-ov-file">Cosmos Predict GitHub</a>.</p>
-<p>This <a href="https://developer.nvidia.com/blog/develop-custom-physical-ai-foundation-models-with-nvidia-cosmos-predict-2/">article</a> explains a possible usage pipeline for the model.</p>
-<h4 id="cosmos-transfer">Cosmos Transfer</h4>
-<p>A family of highly performant, pre-trained world foundation models designed to generate videos aligned with input control conditions.</p>
-<p>The Cosmos Transfer1 models are a collection of diffusion-based world foundation models capable of generating dynamic, high-quality videos from text and control video inputs. They can serve as a foundation for various applications or research related to world generation. The models are ready for commercial use.</p>
-<p>For more information on using the model, see the <a href="https://github.com/nvidia-cosmos/cosmos-transfer1">Cosmos Transfer1 GitHub</a>.</p>
-<h4 id="cosmos-reason">Cosmos Reason</h4>
-<p>Physical AI models understand physical common sense and generate appropriate embodied decisions in natural language through long chain-of-thought reasoning processes.</p>
-<p>The Cosmos-Reason1 models are tuned with physical common sense and embodied reasoning data, using supervised fine-tuning and reinforcement learning. These are Physical AI models capable of understanding space, time, and fundamental principles of physics, and can serve as planning models to reason about an embodied agent’s next steps.</p>
-<p>For more information on using the model, see the <a href="https://github.com/nvidia-cosmos/cosmos-reason1">Cosmos Reason1 GitHub</a>.</p>
-<h4 id="cosmos-tokenizers">Cosmos Tokenizers</h4>
-<p>Cosmos Tokenizer is a set of visual tokenizers for images and videos that offers different compression rates while maintaining high reconstruction quality. It serves as an efficient building block for image and video generation models based on diffusion and autoregressive approaches.</p>
-<p>There are two types of tokenizers:</p>
-<ul>
-<li><strong>Continuous (C)</strong>: Encodes visual data into continuous latent embeddings, as in latent diffusion models (e.g., Stable Diffusion). Ideal for models that generate data by sampling from continuous distributions.</li>
-<li><strong>Discrete (D)</strong>: Encodes visual data into discrete latent codes, mapping to quantized indices, as in autoregressive transformers (e.g., VideoPoet). Essential for models that optimize cross-entropy loss, such as GPT-like models.</li>
-</ul>
-<p>Each type has a variant for images (I) and videos (V):</p>
-<ul>
-<li><strong>Cosmos-Tokenizer-CI</strong>: Continuous for images</li>
-<li><strong>Cosmos-Tokenizer-DI</strong>: Discrete for images</li>
-<li><strong>Cosmos-Tokenizer-CV</strong>: Continuous for videos</li>
-<li><strong>Cosmos-Tokenizer-DV</strong>: Discrete for videos</li>
-</ul>
-<p>Given an image or video, Cosmos Tokenizer produces continuous latent or discrete tokens. It achieves spatial compression rates of 8x8 or 16x16 and temporal factors of 4x or 8x, totalling up to a 2048x compression factor (8x16x16). This is 8x more compression than state-of-the-art methods, while maintaining superior image quality and up to 12x speed over the best tokenizers currently available.</p>
-<p>In short, Cosmos Tokenizer combines efficiency, high compression, and quality, making it an advanced solution for generative AI applications involving images and videos.</p>
-<p>For more information on using the model, see the <a href="https://github.com/NVIDIA/Cosmos-Tokenizer">Cosmos Tokenizer GitHub</a>.</p>
-<h4 id="cosmos-wfm-post-training-samples">Cosmos WFM Post-Training Samples</h4>
-<p>Cosmos Sample Models for Autonomous Driving are a family of high-performance Cosmos foundation models, post-trained specifically for autonomous driving scenarios.</p>
-<p>These models are fine-tuned versions of the Cosmos World foundation models, capable of generating high-quality, multi-view consistent driving videos from text, image, or video inputs. They serve as versatile building blocks for various applications and research related to autonomous driving. Ready for commercial use, the models are available under the NVIDIA Open Model License Agreement.</p>
-<p>For more information on using the model, see the <a href="https://github.com/nvidia-cosmos/cosmos-predict2?tab=readme-ov-file">Cosmos Predict GitHub</a>.</p>
-<h4 id="cosmos-guardrails">Cosmos Guardrails</h4>
-<p>A family of highly performant, pre-trained world foundation models designed to generate videos and world states with physical awareness for the development of Physical AI. Cosmos Guardrail is a content safety model composed of three components that ensure content safety:</p>
-<ol>
-<li>
-<p>Blocklist: An expert-curated keyword list used to filter edge cases and sensitive terms.</p>
-</li>
-<li>
-<p>Video Content Safety Filter: A multi-class classifier trained to distinguish between safe and unsafe frames in generated videos, using SigLIP embeddings for high-accuracy detection of inappropriate content.</p>
-</li>
-<li>
-<p>Face Blur Filter: A pixelation filter based on RetinaFace that identifies facial regions with high confidence and applies pixelation to any detections larger than 20x20 pixels, promoting anonymization and privacy in generated scenes.</p>
-</li>
-</ol>
-<p>These components work together to ensure that both text prompts and generated video content meet the content safety standards required for commercial Physical AI applications.</p>
-<h4 id="cosmos-upsampler">Cosmos Upsampler</h4>
-<p>Cosmos-1.0-Prompt-Upsampler-Text2World is a large language model (LLM) designed to transform original prompts into more detailed and enriched versions. It enhances prompts by adding information and maintaining a consistent descriptive structure before they are used in a text-to-world model, which typically results in higher-quality outputs. This model is ready for commercial use.</p>
-<h3 id="uses-of-cosmos-wfm">Uses of Cosmos WFM</h3>
-<p>Below are some of the different applications of the platform.</p>
-<h4 id="training-autonomous-cars">Training autonomous cars</h4>
-<p>A number of companies in the transportation sector have adopted the Cosmos WFM platform for <strong><em>Autonomous Vehicles (AV)</em></strong> solutions.</p>
-<ul>
-<li>
-<p><strong><em>Waabi</em></strong>, a pioneer in generative AI for the physical world, starting with autonomous vehicles, is evaluating Cosmos in the context of data curation for AV software development and simulation.</p>
-</li>
-<li>
-<p><strong><em>Wayve</em></strong>, a company developing AI foundation models for autonomous driving, is evaluating Cosmos as a tool to research corner-case driving scenarios used for safety and validation.</p>
-</li>
-<li>
-<p><strong><em>Uber</em></strong>, the global ride-sharing giant, is partnering with NVIDIA to accelerate autonomous mobility. Uber’s joint driving data assets, combined with capabilities from the Cosmos platform and NVIDIA DGX Cloud, can help AV partners build stronger AI models even more efficiently.</p>
-</li>
-</ul>
-<p>This <a href="https://developer.nvidia.com/blog/simplify-end-to-end-autonomous-vehicle-development-with-new-nvidia-cosmos-world-foundation-models/">article</a> shows a way to simplify end-to-end autonomous vehicle development with the <em>Cosmos WFM</em> platform.</p>
-<h4 id="synthetic-dataset-generation">Synthetic dataset generation</h4>
-<p>In recent years, with advances in computer vision and deep learning models, there has been a strong demand for large volumes of data to train these networks. In this context, one of the most promising applications of Cosmos is precisely the generation of synthetic data, especially where collecting real data is costly or unfeasible. Thus, Cosmos acts as an artificial extender of existing datasets, meeting the demand for trainable data mentioned above.</p>
-<p><img alt="Pedestrian Cross-walk" src="../images/pedestrian_crosswalk.webp" /></p>
-<p><em>As an example, based on a short video or image showing a pedestrian crossing at a crosswalk, it is possible to simulate different weather conditions, lighting, times of day, different angles, etc. This diversity is very useful for training autonomous vehicles, for instance, as it greatly reduces the size of the real video training dataset.</em></p>
-<p>In this sense, <strong>Cosmos Predict</strong> proves to be the most suitable model, as its purpose is data generation itself.</p>
-<p>Additionally, an important discussion to be had is the <strong>feasibility</strong> of the application. For video generation, one of the simplest models is <em>Cosmos-Predict2-2B-Video2World</em>, with 2 billion parameters. Although this model is the simplest released by NVIDIA, it does not run locally on notebooks. Perhaps with a more powerful GPU it is possible to run it with limitations, but in general the computational cost is higher than a typical notebook can support. Thus, the alternative of using cloud computing arises, which also comes with associated financial costs.</p>
-<table>
-<thead>
-<tr>
-<th>Input image</th>
-<th>Output video</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><img alt="Input Image" src="../images/example_input.jpg" /></td>
-<td><img alt="Output video" src="../images/output.mp4" /></td>
-</tr>
-</tbody>
-</table>
-<p><em>Example of how Cosmos-Predict2-2B-Video2World can be used. With an image and text as input, a short video is generated. This strategy can be replicated for different situations and applications, such as the crosswalk example mentioned earlier.</em></p>
-<p>Another relevant point is the quality of <strong>synthetic data</strong>. Although visually realistic, this data may still contain biases or inconsistencies that affect model training. Therefore, it is necessary to use practices for validating generated outputs and comparing them with real reference data. This verification can be done with <strong>Cosmos-Reason</strong>, highlighted earlier for its capability to interpret videos, or even manually, depending on the size of the synthetic dataset.</p>
-<h4 id="other-applications">Other Applications</h4>
-<p>Using the same approach as the previous application—where <em>Cosmos-Predict2-2B-Video2World</em> is used to generate videos from input images or videos combined with a text prompt—opens the door to several other similar applications. Among them, the following stand out:</p>
-<ul>
-<li>
-<p><strong>Scene pre-visualization in films and games</strong>: In the creative industry, the production of films, animations, and digital games goes through various stages of visual prototyping. Traditionally, this requires using 3D modeling tools, physical simulation, and rendering—processes that can be expensive and time-consuming. With Cosmos, however, it is possible to create previsualizations of entire scenes using only simple sketches and textual descriptions. For example, an artist can submit a photo of a landscape and add something like “strong wind swaying the trees at dusk.” The model then generates a short clip that shows this scene with movement, lighting, and weather, without needing to go through the modeling stage.</p>
-</li>
-<li>
-<p><strong>Reconstruction of historical scenes for museums</strong>: Cultural centers can also benefit greatly from using Cosmos. With it, it becomes possible to reconstruct scenes from the past from paintings or old photographs, allowing visitors greater engagement with the content on display and expanding their understanding of the historical context.</p>
-</li>
-</ul>
-<h2 id="portuguese">Portuguese</h2>
-<h3 id="introducao">Introdução</h3>
-<p>O artigo da <a href="https://arxiv.org/html/2501.03575v1">Cosmos</a>, sugere uma série de possíveis aplicações da plataforma de World Foundation Models, aqui são discutidas algumas dessas possíveis aplicações, além dos diferentes modelos disponibilizados para tais aplicações.</p>
-<h3 id="diferentes-modelos-do-cosmos-wfm">Diferentes Modelos do Cosmos WFM</h3>
-<p>A NVIDIA, através do site <a href="https://developer.nvidia.com/cosmos?hitsPerPage=6">nvidia Developer</a>, disponibiliza uma série de modelos pré-treinados para download. Eles variam em função, para geração de mundo, e aceleração de IA física. Abaixo estão listados os diferentes modelos e suas funções.</p>
-<h4 id="cosmos-predict-2_1">Cosmos Predict-2</h4>
-<p>Nosso melhor modelo fundamental de mundo até agora—maior fidelidade, taxas de quadros e resoluções flexíveis, menos alucinações e melhor controle de texto, objetos e movimento no vídeo.</p>
-<p>Gere prévias a partir de texto em menos de 4 segundos e até 30 segundos de vídeo do mundo futuro a partir de uma imagem de referência ou prévia. Abaixo é mostrada a utilização do modelo em <code>python</code>:</p>
-<pre><code class="language-python">import torch
-from imaginaire.utils.io import save_image_or_video
-from cosmos_predict2.configs.base.config_video2world import PREDICT2_VIDEO2WORLD_PIPELINE_2B
-from cosmos_predict2.pipelines.video2world import Video2WorldPipeline
-
-# Create the video generation pipeline.
-
-pipe = Video2WorldPipeline.from_config(
-config=PREDICT2_VIDEO2WORLD_PIPELINE_2B,
-dit_path=&quot;checkpoints/nvidia/Cosmos-Predict2-2B-Video2World/model-720p-16fps.pt&quot;,
-text_encoder_path=&quot;checkpoints/google-t5/t5-11b&quot;,
-)
-
-# Specify the input image path and text prompt.
-
-image_path = &quot;assets/video2world/example_input.jpg&quot;
-prompt = &quot;&quot;&quot;
-A high-definition video captures the precision of robotic welding in an industrial setting.
-The first frame showcases a robotic arm, equipped with a welding torch, positioned over a large metal structure.
-The welding process is in full swing, with bright sparks and intense light illuminating the scene, creating a vivid display of blue and white hues.
-A significant amount of smoke billows around the welding area, partially obscuring the view but emphasizing the heat and activity.
-The background reveals parts of the workshop environment, including a ventilation system and various pieces of machinery,
-indicating a busy and functional industrial workspace.
-As the video progresses, the robotic arm maintains its steady position, continuing the welding process and moving to its left.
-The welding torch consistently emits sparks and light, and the smoke continues to rise, diffusing slightly as it moves upward.
-The metal surface beneath the torch shows ongoing signs of heating and melting. The scene retains its industrial ambiance,
-with the welding sparks and smoke dominating the visual field, underscoring the ongoing nature of the welding operation.
-&quot;&quot;&quot;
-
-# Run the video generation pipeline.
-
-video = pipe(input_path=image_path, prompt=prompt)
-
-# Save the resulting output video.
-
-save_image_or_video(video, &quot;output/test.mp4&quot;, fps=16)
-</code></pre>
-<p>Para mais informações sobre a utilização do modelo, utilizar <a href="https://github.com/nvidia-cosmos/cosmos-predict2?tab=readme-ov-file">github do cosmos predict</a>.</p>
-<p>Esse <a href="https://developer.nvidia.com/blog/develop-custom-physical-ai-foundation-models-with-nvidia-cosmos-predict-2/">artigo</a> explica uma possível pipeline de utilização do modelo.</p>
-<h4 id="cosmos-transfer_1">Cosmos Transfer</h4>
-<p>Uma família de modelos fundamentais de mundo pré-treinados altamente performáticos, projetados para gerar vídeos alinhados com as condições de controle de entrada.</p>
-<p>Os modelos Cosmos Transfer1 são uma coleção de modelos fundamentais de mundo baseados em difusão, capazes de gerar vídeos dinâmicos e de alta qualidade a partir de texto e entradas de vídeo de controle. Eles podem servir como base para diversas aplicações ou pesquisas relacionadas à geração de mundos. Os modelos estão prontos para uso comercial.</p>
-<p>Para mais informações sobre a utilização do modelo, utilizar <a href="https://github.com/nvidia-cosmos/cosmos-transfer1">github do cosmos tranfer1</a>.</p>
-<h4 id="cosmos-reason_1">Cosmos Reason</h4>
-<p>Modelos de IA Física compreendem o senso comum físico e geram decisões corporificadas apropriadas em linguagem natural por meio de longos processos de raciocínio em cadeia.</p>
-<p>Os modelos <strong><em>Cosmos-Reason1</em></strong> são ajustados com dados de senso comum físico e raciocínio corporificado, utilizando afinação supervisionada e aprendizado por reforço. Estes são modelos de IA Física capazes de entender espaço, tempo e princípios fundamentais da física, podendo servir como modelos de planejamento para raciocinar sobre os próximos passos de um agente corporificado.</p>
-<p>Para mais informações sobre a utilização do modelo, utilizar <a href="https://github.com/nvidia-cosmos/cosmos-reason1">github do cosmos reason1</a>.</p>
-<h4 id="cosmos-tokenizers_1">Cosmos Tokenizers</h4>
-<p>O Cosmos Tokenizer é um conjunto de tokenizadores visuais para imagens e vídeos que oferece diferentes taxas de compressão, mantendo alta qualidade de reconstrução. Ele serve como um bloco eficiente para modelos de geração de imagens e vídeos baseados em difusão e em abordagens autoregressivas.</p>
-<p>Existem dois tipos de tokenizadores:</p>
-<ul>
-<li><strong>Contínuo (C)</strong>: Codifica os dados visuais em embeddings latentes contínuos, como em modelos de difusão latente (exemplo: Stable Diffusion). Ideal para modelos que geram dados amostrando de distribuições contínuas.</li>
-<li><strong>Discreto (D)</strong>: Codifica os dados visuais em códigos latentes discretos, mapeando para índices quantizados, como em transformadores autoregressivos (exemplo: VideoPoet). Essencial para modelos que otimizam a perda de entropia cruzada, como os modelos GPT.</li>
-</ul>
-<p>Cada tipo possui variação para imagens (I) e vídeos (V):</p>
-<ul>
-<li><strong>Cosmos-Tokenizer-CI</strong>: Contínuo para imagens</li>
-<li><strong>Cosmos-Tokenizer-DI</strong>: Discreto para imagens</li>
-<li><strong>Cosmos-Tokenizer-CV</strong>: Contínuo para vídeos</li>
-<li><strong>Cosmos-Tokenizer-DV</strong>: Discreto para vídeos</li>
-</ul>
-<p>Dado uma imagem ou vídeo, o Cosmos Tokenizer gera latentes contínuos ou tokens discretos. Ele atinge taxas espaciais de compressão de 8x8 ou 16x16 e fatores temporais de 4x ou 8x, somando até um fator total de compressão de 2048x (8x16x16). Isso é 8x mais compressão que métodos de ponta, mantendo qualidade superior de imagem e velocidade até 12x maior que os melhores tokenizadores disponíveis atualmente.</p>
-<p>Em resumo, Cosmos Tokenizer combina eficiência, alta compressão e qualidade, sendo uma solução avançada para aplicações em inteligência artificial generativa envolvendo imagens e vídeos.</p>
-<p>Para mais informações sobre a utilização do modelo, utilizar <a href="https://github.com/NVIDIA/Cosmos-Tokenizer">github do cosmos tokenizer</a>.</p>
-<h4 id="cosmos-wfm-post-training-samples_1">Cosmos WFM Post-Training Samples</h4>
-<p>Modelos Cosmos Sample para Condução Autônoma são uma família de modelos fundamentais Cosmos de alto desempenho, pós-treinados especialmente para cenários de condução autônoma.</p>
-<p>Esses modelos são versões ajustadas dos modelos fundamentais Cosmos World, capazes de gerar vídeos de condução de alta qualidade e consistentes em múltiplas vistas a partir de entradas de texto, imagem ou vídeo. Servem como blocos versáteis para diversas aplicações e pesquisas relacionadas à condução autônoma. Prontos para uso comercial, os modelos estão disponíveis sob o Acordo de Licença de Modelos Abertos da NVIDIA.</p>
-<p>Para mais informações sobre a utilização do modelo, utilizar <a href="https://github.com/nvidia-cosmos/cosmos-predict2?tab=readme-ov-file">github do cosmos predict</a>.</p>
-<h4 id="cosmos-guardrails_1">Cosmos Guardrails</h4>
-<p>Uma família de modelos fundamentais de mundo pré-treinados e altamente performáticos, projetados para gerar vídeos e estados de mundo com consciência física para o desenvolvimento de IA física.
-O Cosmos Guardrail é um modelo de segurança de conteúdo composto por três componentes que garantem a segurança do conteúdo:</p>
-<ol>
-<li>
-<p>Blocklist: Uma lista de palavras-chave selecionadas por especialistas utilizada para filtrar casos extremos e termos sensíveis.</p>
-</li>
-<li>
-<p>Video Content Safety Filter: Um classificador de múltiplas classes treinado para distinguir entre quadros seguros e inseguros em vídeos gerados, utilizando embeddings SigLIP para alta precisão na detecção de conteúdo inadequado.</p>
-</li>
-<li>
-<p>Face Blur Filter: Um filtro de pixelização baseado no RetinaFace, que identifica com alta confiança regiões faciais e aplica pixelização em quaisquer detecções maiores que 20x20 pixels, promovendo anonimização e privacidade nas cenas geradas.</p>
-</li>
-</ol>
-<p>Esses componentes atuam de forma integrada para garantir que tanto os prompts de texto quanto o conteúdo de vídeo gerado atendam aos padrões de segurança de conteúdo necessários para aplicações comerciais em IA física</p>
-<h4 id="cosmos-upsampler_1">Cosmos Upsampler</h4>
-<p>O Cosmos-1.0-Prompt-Upsampler-Text2World é um modelo de linguagem de grande porte (LLM) projetado para transformar prompts originais em versões mais detalhadas e enriquecidas. Ele aprimora os prompts adicionando informações e mantendo uma estrutura descritiva consistente antes que sejam utilizados em um modelo text-to-world, o que normalmente resulta em saídas de maior qualidade. Este modelo está pronto para uso comercial.</p>
-<h3 id="usos-do-cosmos-wfm">Usos do Cosmos WFM</h3>
-<p>Abaixo são citadas algumas das diferentes aplicações da plataforma.</p>
-<h4 id="treinamento-de-carros-autonomos">Treinamento de Carros autônomos</h4>
-<p>Uma série de empresas do setor de transportes adotaram a plataforma <em>Cosmos WFM</em> para soluções de <strong><em>AV (Autonomous Vehicles)</em></strong></p>
-<ul>
-<li>
-<p><strong><em>Waabi</em></strong>, empresa pioneira em IA generativa para o mundo físico, começando com veículos autônomos, está avaliando o Cosmos no contexto da curadoria de dados para desenvolvimento e simulação de software de <em>AV</em>.</p>
-</li>
-<li>
-<p><strong><em>Wayve</em></strong>, empresa que está desenvolvendo modelos de base de IA para direção autônoma, está avaliando o Cosmos como uma ferramenta para pesquisar cenários de direção em curvas e esquinas usados para segurança e validação.</p>
-</li>
-<li>
-<p><strong><em>Uber</em></strong>, a gigante global de compartilhamento de viagens está fazendo uma parceria com a NVIDIA para acelerar a mobilidade autônoma. Os riscos conjuntos de dados de direção da Uber, combinados com recursos da plataforma Cosmos e do NVIDIA DGX Cloud, podem ajudar os parceiros de <em>AV</em> a criarem modelos de IA mais fortes de forma ainda mais eficiente.</p>
-</li>
-</ul>
-<p>Esse <a href="https://developer.nvidia.com/blog/simplify-end-to-end-autonomous-vehicle-development-with-new-nvidia-cosmos-world-foundation-models/">artigo</a> mostra uma forma de simplificar desenvolvimento end-to-end de veículos autônomos com a plataforma <em>Cosmos WFM</em>.</p>
-<h4 id="geracao-de-datasets-sinteticos">Geração de datasets sintéticos</h4>
-<p>Nos últimos anos, com o avanço dos modelos de visão computacional e deep learning, surgiu uma forte demanda por grandes volumes de dados para o treinamento dessas redes. Nesse cenário, uma das aplicações mais promissoras do Cosmos é justamente a geração de dados sintéticos, especialmente em contextos onde a coleta de dados reais é custosa, ou inviável. Assim, o Cosmos entra como um extensor artificial de datasets já existentes, suprindo a demanda por dados treináveis mencionada.</p>
-<p><img alt="Faixa de pedestres" src="../images/pedestrian_crosswalk.webp" /></p>
-<blockquote>
-<p>Como exemplo, com base em um vídeo curto ou imagem mostrando um pedestre atravessando na faixa, é possível simular diferentes condições climáticas, de iluminação, de horários, com ângulos diferentes, etc. Essa diversidade vem a ser muito útil para o treinamento de veículos autônomos, por exemplo, já que reduz muito o tamanho do dataset de vídeos reais de treinamento.</p>
-</blockquote>
-<p>Nesse sentido, o <strong>Cosmos Predict</strong> se mostra como o modelo mais adequado, já que seu intuito é a própria geração de dados.</p>
-<p>Ademais, uma discussão importante a ser feita é sobre a <strong>viabilidade</strong> da aplicação. Para a geração de vídeos, um dos modelos mais simples é o <em>Cosmos-Predict2-2B-Video2World</em>, com 2 Bilhões de parâmetros. Esse modelo, embora seja o mais simples disponibilizado pela Nvidia, não roda localmente em notebooks. Talvez com uma GPU mais potente seja possível rodar com limitações, mas de forma geral o custo computacional é mais alto do que um notebook normal suporta. Assim, abre-se a alternativa de usar cloud computing, que também vem com custos financeiros associados.</p>
-<table>
-<thead>
-<tr>
-<th>Input image</th>
-<th>Output video</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><img alt="Input Image" src="../images/example_input.jpg" /></td>
-<td><img alt="Output video" src="../images/output.mp4" /></td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>Exemplo de como o <em>Cosmos-Predict2-2B-Video2World</em> pode ser usado. Com uma imagem e texto de input, gera-se um vídeo curto. Essa estratégia pode ser simulada para diferentes situações e aplicações, como por exemplo a da faixa de pedestres mencionada anteriormente.</p>
-</blockquote>
-<p>Outro ponto relevante é a <strong>qualidade dos dados sintéticos</strong>. Embora visualmente realistas, esses dados ainda podem conter vieses ou inconsistências que afetam o treinamento dos modelos. Dessa forma, faz-se necessário o uso de práticas de validação dos outputs gerados e comparação com dados reais de referência. Essa verificação pode ser feita com o <strong>Cosmos-Reason</strong>, destacado anteriormente pela sua capacidade interpretativa de vídeos, ou mesmo manualmente, a depender do tamanho do dataset sintético.</p>
-<h4 id="outras-aplicacoes">Outras Aplicações</h4>
-<p>Usar a mesma abordagem da aplicação anterior, em que usamos o <em>Cosmos-Predict2-2B-Video2World</em> para gerar vídeos a partir de imagens ou vídeos de entrada somados a um input de texto, abre portas para várias outras aplicações de cunho semelhante. Dentre elas, podemos destacar:</p>
-<ul>
-<li>
-<p><strong>Pré-visualização de cenas em filmes e jogos:</strong> Na indústria criativa, a produção de filmes, animações e jogos digitais passa por várias etapas de prototipação visual. Tradicionalmente, isso exige o uso de ferramentas de modelagem 3D, simulação física e renderização, processos que podem ser caros e demorados. Com o Cosmos, porém, é possível criar pré-visualizações de cenas inteiras, usando apenas esboços e descrições textuais simples. Por exemplo, um artista pode enviar uma foto de uma paisagem e adicionar algo como "vento forte balançando as árvores ao entardecer". O modelo então gera um clipe curto que mostra essa cena com movimento, iluminação e clima, sem precisar passar pel etapa de modelagem.</p>
-</li>
-<li>
-<p><strong>Reconstrução de cenas históricas para museus:</strong> Centros culturais também podem se beneficiar muito do uso do Cosmos. Com ele, torna-se possível reconstruir cenas do passado a partir de pinturas ou fotografias antigas, o que permite ao visitante um engajamento maior com o conteúdo exposto e amplia a sua compreensão do contexto histórico.</p>
-</li>
-</ul>
-<h3 id="referencias">Referências</h3>
-<ul>
-<li><a href="https://developer.nvidia.com/cosmos?hitsPerPage=6">NVIDIA Cosmos for Developers</a></li>
-<li><a href="https://research.aimultiple.com/world-foundation-model/">World Foundation Models: 10 Use Cases &amp; Examples [2025]</a></li>
-</ul>
-              
+        </nav>
+        <div class="wy-nav-content">
+          <div class="rst-content">
+            <div role="navigation" aria-label="breadcrumbs navigation">
+              <ul class="wy-breadcrumbs">
+                <li>
+                  <a href="../.." class="icon icon-home" aria-label="Docs"></a>
+                </li>
+                <li class="breadcrumb-item">Referências</li>
+                <li class="breadcrumb-item active">Cosmos Applications</li>
+                <li class="wy-breadcrumbs-aside"></li>
+              </ul>
+              <hr />
             </div>
-          </div><footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../../tokens/dsc_tokenization/" class="btn btn-neutral float-left" title="DSC Tokenization"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+            <div
+              role="main"
+              class="document"
+              itemscope="itemscope"
+              itemtype="http://schema.org/Article"
+            >
+              <div class="section" itemprop="articleBody">
+                <h1 id="aplicacoes-da-plataforma-cosmos">
+                  Aplicações da plataforma Cosmos
+                </h1>
+                <p>
+                  <strong
+                    ><em
+                      >Authors / Autores:
+                      <a href="http://github.com/gibi177">@gibi177</a>,
+                      <a href="http://github.com/figredos">@figredos</a></em
+                    ></strong
+                  >
+                </p>
+                <h2 id="english">English</h2>
+                <h3 id="introduction">Introduction</h3>
+                <p>
+                  <a href="https://arxiv.org/html/2501.03575v1"
+                    >The Cosmos paper</a
+                  >
+                  suggests a series of possible applications of the World
+                  Foundation Models platform. Here, some of these possible
+                  applications are discussed, along with the different models
+                  available for such applications.
+                </p>
+                <h3 id="different-cosmos-wfm-models">
+                  Different Cosmos WFM Models
+                </h3>
+                <p>
+                  NVIDIA, through the NVIDIA Developer site
+                  <a href="https://developer.nvidia.com/cosmos?hitsPerPage=6"
+                    >NVIDIA Developer</a
+                  >, provides a set of pre-trained models for download. They
+                  vary in function for world generation and the acceleration of
+                  Physical AI. Below are the different models and their
+                  functions.
+                </p>
+                <h4 id="cosmos-predict-2">Cosmos Predict-2</h4>
+                <p>
+                  Our best world foundation model so far—higher fidelity,
+                  flexible frame rates and resolutions, fewer hallucinations,
+                  and better control over text, objects, and motion in the
+                  video.
+                </p>
+                <p>
+                  Generate previews from text in under 4 seconds and up to 30
+                  seconds of future-world video from a reference image or
+                  preview. Below is an example of using the model in
+                  <code>Python</code>:
+                </p>
+                <pre><code class="language-python">import torch
+from imaginaire.utils.io import save_image_or_video
+from cosmos_predict2.configs.base.config_video2world import PREDICT2_VIDEO2WORLD_PIPELINE_2B
+from cosmos_predict2.pipelines.video2world import Video2WorldPipeline
+
+# Create the video generation pipeline.
+
+pipe = Video2WorldPipeline.from_config(
+config=PREDICT2_VIDEO2WORLD_PIPELINE_2B,
+dit_path=&quot;checkpoints/nvidia/Cosmos-Predict2-2B-Video2World/model-720p-16fps.pt&quot;,
+text_encoder_path=&quot;checkpoints/google-t5/t5-11b&quot;,
+)
+
+# Specify the input image path and text prompt.
+
+image_path = &quot;assets/video2world/example_input.jpg&quot;
+prompt = &quot;&quot;&quot;
+A high-definition video captures the precision of robotic welding in an industrial setting.
+The first frame showcases a robotic arm, equipped with a welding torch, positioned over a large metal structure.
+The welding process is in full swing, with bright sparks and intense light illuminating the scene, creating a vivid display of blue and white hues.
+A significant amount of smoke billows around the welding area, partially obscuring the view but emphasizing the heat and activity.
+The background reveals parts of the workshop environment, including a ventilation system and various pieces of machinery,
+indicating a busy and functional industrial workspace.
+As the video progresses, the robotic arm maintains its steady position, continuing the welding process and moving to its left.
+The welding torch consistently emits sparks and light, and the smoke continues to rise, diffusing slightly as it moves upward.
+The metal surface beneath the torch shows ongoing signs of heating and melting. The scene retains its industrial ambiance,
+with the welding sparks and smoke dominating the visual field, underscoring the ongoing nature of the welding operation.
+&quot;&quot;&quot;
+
+# Run the video generation pipeline.
+
+video = pipe(input_path=image_path, prompt=prompt)
+
+# Save the resulting output video.
+
+save_image_or_video(video, &quot;output/test.mp4&quot;, fps=16)
+</code></pre>
+                <p>
+                  For more information on using the model, see the
+                  <a
+                    href="https://github.com/nvidia-cosmos/cosmos-predict2?tab=readme-ov-file"
+                    >Cosmos Predict GitHub</a
+                  >.
+                </p>
+                <p>
+                  This
+                  <a
+                    href="https://developer.nvidia.com/blog/develop-custom-physical-ai-foundation-models-with-nvidia-cosmos-predict-2/"
+                    >article</a
+                  >
+                  explains a possible usage pipeline for the model.
+                </p>
+                <h4 id="cosmos-transfer">Cosmos Transfer</h4>
+                <p>
+                  A family of highly performant, pre-trained world foundation
+                  models designed to generate videos aligned with input control
+                  conditions.
+                </p>
+                <p>
+                  The Cosmos Transfer1 models are a collection of
+                  diffusion-based world foundation models capable of generating
+                  dynamic, high-quality videos from text and control video
+                  inputs. They can serve as a foundation for various
+                  applications or research related to world generation. The
+                  models are ready for commercial use.
+                </p>
+                <p>
+                  For more information on using the model, see the
+                  <a href="https://github.com/nvidia-cosmos/cosmos-transfer1"
+                    >Cosmos Transfer1 GitHub</a
+                  >.
+                </p>
+                <h4 id="cosmos-reason">Cosmos Reason</h4>
+                <p>
+                  Physical AI models understand physical common sense and
+                  generate appropriate embodied decisions in natural language
+                  through long chain-of-thought reasoning processes.
+                </p>
+                <p>
+                  The Cosmos-Reason1 models are tuned with physical common sense
+                  and embodied reasoning data, using supervised fine-tuning and
+                  reinforcement learning. These are Physical AI models capable
+                  of understanding space, time, and fundamental principles of
+                  physics, and can serve as planning models to reason about an
+                  embodied agent’s next steps.
+                </p>
+                <p>
+                  For more information on using the model, see the
+                  <a href="https://github.com/nvidia-cosmos/cosmos-reason1"
+                    >Cosmos Reason1 GitHub</a
+                  >.
+                </p>
+                <h4 id="cosmos-tokenizers">Cosmos Tokenizers</h4>
+                <p>
+                  Cosmos Tokenizer is a set of visual tokenizers for images and
+                  videos that offers different compression rates while
+                  maintaining high reconstruction quality. It serves as an
+                  efficient building block for image and video generation models
+                  based on diffusion and autoregressive approaches.
+                </p>
+                <p>There are two types of tokenizers:</p>
+                <ul>
+                  <li>
+                    <strong>Continuous (C)</strong>: Encodes visual data into
+                    continuous latent embeddings, as in latent diffusion models
+                    (e.g., Stable Diffusion). Ideal for models that generate
+                    data by sampling from continuous distributions.
+                  </li>
+                  <li>
+                    <strong>Discrete (D)</strong>: Encodes visual data into
+                    discrete latent codes, mapping to quantized indices, as in
+                    autoregressive transformers (e.g., VideoPoet). Essential for
+                    models that optimize cross-entropy loss, such as GPT-like
+                    models.
+                  </li>
+                </ul>
+                <p>Each type has a variant for images (I) and videos (V):</p>
+                <ul>
+                  <li>
+                    <strong>Cosmos-Tokenizer-CI</strong>: Continuous for images
+                  </li>
+                  <li>
+                    <strong>Cosmos-Tokenizer-DI</strong>: Discrete for images
+                  </li>
+                  <li>
+                    <strong>Cosmos-Tokenizer-CV</strong>: Continuous for videos
+                  </li>
+                  <li>
+                    <strong>Cosmos-Tokenizer-DV</strong>: Discrete for videos
+                  </li>
+                </ul>
+                <p>
+                  Given an image or video, Cosmos Tokenizer produces continuous
+                  latent or discrete tokens. It achieves spatial compression
+                  rates of 8x8 or 16x16 and temporal factors of 4x or 8x,
+                  totalling up to a 2048x compression factor (8x16x16). This is
+                  8x more compression than state-of-the-art methods, while
+                  maintaining superior image quality and up to 12x speed over
+                  the best tokenizers currently available.
+                </p>
+                <p>
+                  In short, Cosmos Tokenizer combines efficiency, high
+                  compression, and quality, making it an advanced solution for
+                  generative AI applications involving images and videos.
+                </p>
+                <p>
+                  For more information on using the model, see the
+                  <a href="https://github.com/NVIDIA/Cosmos-Tokenizer"
+                    >Cosmos Tokenizer GitHub</a
+                  >.
+                </p>
+                <h4 id="cosmos-wfm-post-training-samples">
+                  Cosmos WFM Post-Training Samples
+                </h4>
+                <p>
+                  Cosmos Sample Models for Autonomous Driving are a family of
+                  high-performance Cosmos foundation models, post-trained
+                  specifically for autonomous driving scenarios.
+                </p>
+                <p>
+                  These models are fine-tuned versions of the Cosmos World
+                  foundation models, capable of generating high-quality,
+                  multi-view consistent driving videos from text, image, or
+                  video inputs. They serve as versatile building blocks for
+                  various applications and research related to autonomous
+                  driving. Ready for commercial use, the models are available
+                  under the NVIDIA Open Model License Agreement.
+                </p>
+                <p>
+                  For more information on using the model, see the
+                  <a
+                    href="https://github.com/nvidia-cosmos/cosmos-predict2?tab=readme-ov-file"
+                    >Cosmos Predict GitHub</a
+                  >.
+                </p>
+                <h4 id="cosmos-guardrails">Cosmos Guardrails</h4>
+                <p>
+                  A family of highly performant, pre-trained world foundation
+                  models designed to generate videos and world states with
+                  physical awareness for the development of Physical AI. Cosmos
+                  Guardrail is a content safety model composed of three
+                  components that ensure content safety:
+                </p>
+                <ol>
+                  <li>
+                    <p>
+                      Blocklist: An expert-curated keyword list used to filter
+                      edge cases and sensitive terms.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Video Content Safety Filter: A multi-class classifier
+                      trained to distinguish between safe and unsafe frames in
+                      generated videos, using SigLIP embeddings for
+                      high-accuracy detection of inappropriate content.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Face Blur Filter: A pixelation filter based on RetinaFace
+                      that identifies facial regions with high confidence and
+                      applies pixelation to any detections larger than 20x20
+                      pixels, promoting anonymization and privacy in generated
+                      scenes.
+                    </p>
+                  </li>
+                </ol>
+                <p>
+                  These components work together to ensure that both text
+                  prompts and generated video content meet the content safety
+                  standards required for commercial Physical AI applications.
+                </p>
+                <h4 id="cosmos-upsampler">Cosmos Upsampler</h4>
+                <p>
+                  Cosmos-1.0-Prompt-Upsampler-Text2World is a large language
+                  model (LLM) designed to transform original prompts into more
+                  detailed and enriched versions. It enhances prompts by adding
+                  information and maintaining a consistent descriptive structure
+                  before they are used in a text-to-world model, which typically
+                  results in higher-quality outputs. This model is ready for
+                  commercial use.
+                </p>
+                <h3 id="uses-of-cosmos-wfm">Uses of Cosmos WFM</h3>
+                <p>
+                  Below are some of the different applications of the platform.
+                </p>
+                <h4 id="training-autonomous-cars">Training autonomous cars</h4>
+                <p>
+                  A number of companies in the transportation sector have
+                  adopted the Cosmos WFM platform for
+                  <strong><em>Autonomous Vehicles (AV)</em></strong> solutions.
+                </p>
+                <ul>
+                  <li>
+                    <p>
+                      <strong><em>Waabi</em></strong
+                      >, a pioneer in generative AI for the physical world,
+                      starting with autonomous vehicles, is evaluating Cosmos in
+                      the context of data curation for AV software development
+                      and simulation.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <strong><em>Wayve</em></strong
+                      >, a company developing AI foundation models for
+                      autonomous driving, is evaluating Cosmos as a tool to
+                      research corner-case driving scenarios used for safety and
+                      validation.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <strong><em>Uber</em></strong
+                      >, the global ride-sharing giant, is partnering with
+                      NVIDIA to accelerate autonomous mobility. Uber’s joint
+                      driving data assets, combined with capabilities from the
+                      Cosmos platform and NVIDIA DGX Cloud, can help AV partners
+                      build stronger AI models even more efficiently.
+                    </p>
+                  </li>
+                </ul>
+                <p>
+                  This
+                  <a
+                    href="https://developer.nvidia.com/blog/simplify-end-to-end-autonomous-vehicle-development-with-new-nvidia-cosmos-world-foundation-models/"
+                    >article</a
+                  >
+                  shows a way to simplify end-to-end autonomous vehicle
+                  development with the <em>Cosmos WFM</em> platform.
+                </p>
+                <h4 id="synthetic-dataset-generation">
+                  Synthetic dataset generation
+                </h4>
+                <p>
+                  In recent years, with advances in computer vision and deep
+                  learning models, there has been a strong demand for large
+                  volumes of data to train these networks. In this context, one
+                  of the most promising applications of Cosmos is precisely the
+                  generation of synthetic data, especially where collecting real
+                  data is costly or unfeasible. Thus, Cosmos acts as an
+                  artificial extender of existing datasets, meeting the demand
+                  for trainable data mentioned above.
+                </p>
+                <p>
+                  <img
+                    alt="Pedestrian Cross-walk"
+                    src="../images/pedestrian_crosswalk.webp"
+                  />
+                </p>
+                <p>
+                  <em
+                    >As an example, based on a short video or image showing a
+                    pedestrian crossing at a crosswalk, it is possible to
+                    simulate different weather conditions, lighting, times of
+                    day, different angles, etc. This diversity is very useful
+                    for training autonomous vehicles, for instance, as it
+                    greatly reduces the size of the real video training
+                    dataset.</em
+                  >
+                </p>
+                <p>
+                  In this sense, <strong>Cosmos Predict</strong> proves to be
+                  the most suitable model, as its purpose is data generation
+                  itself.
+                </p>
+                <p>
+                  Additionally, an important discussion to be had is the
+                  <strong>feasibility</strong> of the application. For video
+                  generation, one of the simplest models is
+                  <em>Cosmos-Predict2-2B-Video2World</em>, with 2 billion
+                  parameters. Although this model is the simplest released by
+                  NVIDIA, it does not run locally on notebooks. Perhaps with a
+                  more powerful GPU it is possible to run it with limitations,
+                  but in general the computational cost is higher than a typical
+                  notebook can support. Thus, the alternative of using cloud
+                  computing arises, which also comes with associated financial
+                  costs.
+                </p>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Input image</th>
+                      <th>Output video</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <img
+                          alt="Input Image"
+                          src="../images/example_input.jpg"
+                        />
+                      </td>
+                      <td>
+                        <img alt="Output video" src="../images/output.mp4" />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>
+                  <em
+                    >Example of how Cosmos-Predict2-2B-Video2World can be used.
+                    With an image and text as input, a short video is generated.
+                    This strategy can be replicated for different situations and
+                    applications, such as the crosswalk example mentioned
+                    earlier.</em
+                  >
+                </p>
+                <p>
+                  Another relevant point is the quality of
+                  <strong>synthetic data</strong>. Although visually realistic,
+                  this data may still contain biases or inconsistencies that
+                  affect model training. Therefore, it is necessary to use
+                  practices for validating generated outputs and comparing them
+                  with real reference data. This verification can be done with
+                  <strong>Cosmos-Reason</strong>, highlighted earlier for its
+                  capability to interpret videos, or even manually, depending on
+                  the size of the synthetic dataset.
+                </p>
+                <h4 id="other-applications">Other Applications</h4>
+                <p>
+                  Using the same approach as the previous application—where
+                  <em>Cosmos-Predict2-2B-Video2World</em> is used to generate
+                  videos from input images or videos combined with a text
+                  prompt—opens the door to several other similar applications.
+                  Among them, the following stand out:
+                </p>
+                <ul>
+                  <li>
+                    <p>
+                      <strong>Scene pre-visualization in films and games</strong
+                      >: In the creative industry, the production of films,
+                      animations, and digital games goes through various stages
+                      of visual prototyping. Traditionally, this requires using
+                      3D modeling tools, physical simulation, and
+                      rendering—processes that can be expensive and
+                      time-consuming. With Cosmos, however, it is possible to
+                      create previsualizations of entire scenes using only
+                      simple sketches and textual descriptions. For example, an
+                      artist can submit a photo of a landscape and add something
+                      like “strong wind swaying the trees at dusk.” The model
+                      then generates a short clip that shows this scene with
+                      movement, lighting, and weather, without needing to go
+                      through the modeling stage.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <strong
+                        >Reconstruction of historical scenes for museums</strong
+                      >: Cultural centers can also benefit greatly from using
+                      Cosmos. With it, it becomes possible to reconstruct scenes
+                      from the past from paintings or old photographs, allowing
+                      visitors greater engagement with the content on display
+                      and expanding their understanding of the historical
+                      context.
+                    </p>
+                  </li>
+                </ul>
+                <h2 id="portuguese">Portuguese</h2>
+                <h3 id="introducao">Introdução</h3>
+                <p>
+                  O artigo da
+                  <a href="https://arxiv.org/html/2501.03575v1">Cosmos</a>,
+                  sugere uma série de possíveis aplicações da plataforma de
+                  World Foundation Models, aqui são discutidas algumas dessas
+                  possíveis aplicações, além dos diferentes modelos
+                  disponibilizados para tais aplicações.
+                </p>
+                <h3 id="diferentes-modelos-do-cosmos-wfm">
+                  Diferentes Modelos do Cosmos WFM
+                </h3>
+                <p>
+                  A NVIDIA, através do site
+                  <a href="https://developer.nvidia.com/cosmos?hitsPerPage=6"
+                    >nvidia Developer</a
+                  >, disponibiliza uma série de modelos pré-treinados para
+                  download. Eles variam em função, para geração de mundo, e
+                  aceleração de IA física. Abaixo estão listados os diferentes
+                  modelos e suas funções.
+                </p>
+                <h4 id="cosmos-predict-2_1">Cosmos Predict-2</h4>
+                <p>
+                  Nosso melhor modelo fundamental de mundo até agora—maior
+                  fidelidade, taxas de quadros e resoluções flexíveis, menos
+                  alucinações e melhor controle de texto, objetos e movimento no
+                  vídeo.
+                </p>
+                <p>
+                  Gere prévias a partir de texto em menos de 4 segundos e até 30
+                  segundos de vídeo do mundo futuro a partir de uma imagem de
+                  referência ou prévia. Abaixo é mostrada a utilização do modelo
+                  em <code>python</code>:
+                </p>
+                <pre><code class="language-python">import torch
+from imaginaire.utils.io import save_image_or_video
+from cosmos_predict2.configs.base.config_video2world import PREDICT2_VIDEO2WORLD_PIPELINE_2B
+from cosmos_predict2.pipelines.video2world import Video2WorldPipeline
+
+# Create the video generation pipeline.
+
+pipe = Video2WorldPipeline.from_config(
+config=PREDICT2_VIDEO2WORLD_PIPELINE_2B,
+dit_path=&quot;checkpoints/nvidia/Cosmos-Predict2-2B-Video2World/model-720p-16fps.pt&quot;,
+text_encoder_path=&quot;checkpoints/google-t5/t5-11b&quot;,
+)
+
+# Specify the input image path and text prompt.
+
+image_path = &quot;assets/video2world/example_input.jpg&quot;
+prompt = &quot;&quot;&quot;
+A high-definition video captures the precision of robotic welding in an industrial setting.
+The first frame showcases a robotic arm, equipped with a welding torch, positioned over a large metal structure.
+The welding process is in full swing, with bright sparks and intense light illuminating the scene, creating a vivid display of blue and white hues.
+A significant amount of smoke billows around the welding area, partially obscuring the view but emphasizing the heat and activity.
+The background reveals parts of the workshop environment, including a ventilation system and various pieces of machinery,
+indicating a busy and functional industrial workspace.
+As the video progresses, the robotic arm maintains its steady position, continuing the welding process and moving to its left.
+The welding torch consistently emits sparks and light, and the smoke continues to rise, diffusing slightly as it moves upward.
+The metal surface beneath the torch shows ongoing signs of heating and melting. The scene retains its industrial ambiance,
+with the welding sparks and smoke dominating the visual field, underscoring the ongoing nature of the welding operation.
+&quot;&quot;&quot;
+
+# Run the video generation pipeline.
+
+video = pipe(input_path=image_path, prompt=prompt)
+
+# Save the resulting output video.
+
+save_image_or_video(video, &quot;output/test.mp4&quot;, fps=16)
+</code></pre>
+                <p>
+                  Para mais informações sobre a utilização do modelo, utilizar
+                  <a
+                    href="https://github.com/nvidia-cosmos/cosmos-predict2?tab=readme-ov-file"
+                    >github do cosmos predict</a
+                  >.
+                </p>
+                <p>
+                  Esse
+                  <a
+                    href="https://developer.nvidia.com/blog/develop-custom-physical-ai-foundation-models-with-nvidia-cosmos-predict-2/"
+                    >artigo</a
+                  >
+                  explica uma possível pipeline de utilização do modelo.
+                </p>
+                <h4 id="cosmos-transfer_1">Cosmos Transfer</h4>
+                <p>
+                  Uma família de modelos fundamentais de mundo pré-treinados
+                  altamente performáticos, projetados para gerar vídeos
+                  alinhados com as condições de controle de entrada.
+                </p>
+                <p>
+                  Os modelos Cosmos Transfer1 são uma coleção de modelos
+                  fundamentais de mundo baseados em difusão, capazes de gerar
+                  vídeos dinâmicos e de alta qualidade a partir de texto e
+                  entradas de vídeo de controle. Eles podem servir como base
+                  para diversas aplicações ou pesquisas relacionadas à geração
+                  de mundos. Os modelos estão prontos para uso comercial.
+                </p>
+                <p>
+                  Para mais informações sobre a utilização do modelo, utilizar
+                  <a href="https://github.com/nvidia-cosmos/cosmos-transfer1"
+                    >github do cosmos tranfer1</a
+                  >.
+                </p>
+                <h4 id="cosmos-reason_1">Cosmos Reason</h4>
+                <p>
+                  Modelos de IA Física compreendem o senso comum físico e geram
+                  decisões corporificadas apropriadas em linguagem natural por
+                  meio de longos processos de raciocínio em cadeia.
+                </p>
+                <p>
+                  Os modelos <strong><em>Cosmos-Reason1</em></strong> são
+                  ajustados com dados de senso comum físico e raciocínio
+                  corporificado, utilizando afinação supervisionada e
+                  aprendizado por reforço. Estes são modelos de IA Física
+                  capazes de entender espaço, tempo e princípios fundamentais da
+                  física, podendo servir como modelos de planejamento para
+                  raciocinar sobre os próximos passos de um agente
+                  corporificado.
+                </p>
+                <p>
+                  Para mais informações sobre a utilização do modelo, utilizar
+                  <a href="https://github.com/nvidia-cosmos/cosmos-reason1"
+                    >github do cosmos reason1</a
+                  >.
+                </p>
+                <h4 id="cosmos-tokenizers_1">Cosmos Tokenizers</h4>
+                <p>
+                  O Cosmos Tokenizer é um conjunto de tokenizadores visuais para
+                  imagens e vídeos que oferece diferentes taxas de compressão,
+                  mantendo alta qualidade de reconstrução. Ele serve como um
+                  bloco eficiente para modelos de geração de imagens e vídeos
+                  baseados em difusão e em abordagens autoregressivas.
+                </p>
+                <p>Existem dois tipos de tokenizadores:</p>
+                <ul>
+                  <li>
+                    <strong>Contínuo (C)</strong>: Codifica os dados visuais em
+                    embeddings latentes contínuos, como em modelos de difusão
+                    latente (exemplo: Stable Diffusion). Ideal para modelos que
+                    geram dados amostrando de distribuições contínuas.
+                  </li>
+                  <li>
+                    <strong>Discreto (D)</strong>: Codifica os dados visuais em
+                    códigos latentes discretos, mapeando para índices
+                    quantizados, como em transformadores autoregressivos
+                    (exemplo: VideoPoet). Essencial para modelos que otimizam a
+                    perda de entropia cruzada, como os modelos GPT.
+                  </li>
+                </ul>
+                <p>Cada tipo possui variação para imagens (I) e vídeos (V):</p>
+                <ul>
+                  <li>
+                    <strong>Cosmos-Tokenizer-CI</strong>: Contínuo para imagens
+                  </li>
+                  <li>
+                    <strong>Cosmos-Tokenizer-DI</strong>: Discreto para imagens
+                  </li>
+                  <li>
+                    <strong>Cosmos-Tokenizer-CV</strong>: Contínuo para vídeos
+                  </li>
+                  <li>
+                    <strong>Cosmos-Tokenizer-DV</strong>: Discreto para vídeos
+                  </li>
+                </ul>
+                <p>TESTANDO AQUI SE ATUALIZAS</p>
+                <p>
+                  Dado uma imagem ou vídeo, o Cosmos Tokenizer gera latentes
+                  contínuos ou tokens discretos. Ele atinge taxas espaciais de
+                  compressão de 8x8 ou 16x16 e fatores temporais de 4x ou 8x,
+                  somando até um fator total de compressão de 2048x (8x16x16).
+                  Isso é 8x mais compressão que métodos de ponta, mantendo
+                  qualidade superior de imagem e velocidade até 12x maior que os
+                  melhores tokenizadores disponíveis atualmente.
+                </p>
+                <p>
+                  Em resumo, Cosmos Tokenizer combina eficiência, alta
+                  compressão e qualidade, sendo uma solução avançada para
+                  aplicações em inteligência artificial generativa envolvendo
+                  imagens e vídeos.
+                </p>
+                <p>
+                  Para mais informações sobre a utilização do modelo, utilizar
+                  <a href="https://github.com/NVIDIA/Cosmos-Tokenizer"
+                    >github do cosmos tokenizer</a
+                  >.
+                </p>
+                <h4 id="cosmos-wfm-post-training-samples_1">
+                  Cosmos WFM Post-Training Samples
+                </h4>
+                <p>
+                  Modelos Cosmos Sample para Condução Autônoma são uma família
+                  de modelos fundamentais Cosmos de alto desempenho,
+                  pós-treinados especialmente para cenários de condução
+                  autônoma.
+                </p>
+                <p>
+                  Esses modelos são versões ajustadas dos modelos fundamentais
+                  Cosmos World, capazes de gerar vídeos de condução de alta
+                  qualidade e consistentes em múltiplas vistas a partir de
+                  entradas de texto, imagem ou vídeo. Servem como blocos
+                  versáteis para diversas aplicações e pesquisas relacionadas à
+                  condução autônoma. Prontos para uso comercial, os modelos
+                  estão disponíveis sob o Acordo de Licença de Modelos Abertos
+                  da NVIDIA.
+                </p>
+                <p>
+                  Para mais informações sobre a utilização do modelo, utilizar
+                  <a
+                    href="https://github.com/nvidia-cosmos/cosmos-predict2?tab=readme-ov-file"
+                    >github do cosmos predict</a
+                  >.
+                </p>
+                <h4 id="cosmos-guardrails_1">Cosmos Guardrails</h4>
+                <p>
+                  Uma família de modelos fundamentais de mundo pré-treinados e
+                  altamente performáticos, projetados para gerar vídeos e
+                  estados de mundo com consciência física para o desenvolvimento
+                  de IA física. O Cosmos Guardrail é um modelo de segurança de
+                  conteúdo composto por três componentes que garantem a
+                  segurança do conteúdo:
+                </p>
+                <ol>
+                  <li>
+                    <p>
+                      Blocklist: Uma lista de palavras-chave selecionadas por
+                      especialistas utilizada para filtrar casos extremos e
+                      termos sensíveis.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Video Content Safety Filter: Um classificador de múltiplas
+                      classes treinado para distinguir entre quadros seguros e
+                      inseguros em vídeos gerados, utilizando embeddings SigLIP
+                      para alta precisão na detecção de conteúdo inadequado.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Face Blur Filter: Um filtro de pixelização baseado no
+                      RetinaFace, que identifica com alta confiança regiões
+                      faciais e aplica pixelização em quaisquer detecções
+                      maiores que 20x20 pixels, promovendo anonimização e
+                      privacidade nas cenas geradas.
+                    </p>
+                  </li>
+                </ol>
+                <p>
+                  Esses componentes atuam de forma integrada para garantir que
+                  tanto os prompts de texto quanto o conteúdo de vídeo gerado
+                  atendam aos padrões de segurança de conteúdo necessários para
+                  aplicações comerciais em IA física
+                </p>
+                <h4 id="cosmos-upsampler_1">Cosmos Upsampler</h4>
+                <p>
+                  O Cosmos-1.0-Prompt-Upsampler-Text2World é um modelo de
+                  linguagem de grande porte (LLM) projetado para transformar
+                  prompts originais em versões mais detalhadas e enriquecidas.
+                  Ele aprimora os prompts adicionando informações e mantendo uma
+                  estrutura descritiva consistente antes que sejam utilizados em
+                  um modelo text-to-world, o que normalmente resulta em saídas
+                  de maior qualidade. Este modelo está pronto para uso
+                  comercial.
+                </p>
+                <h3 id="usos-do-cosmos-wfm">Usos do Cosmos WFM</h3>
+                <p>
+                  Abaixo são citadas algumas das diferentes aplicações da
+                  plataforma.
+                </p>
+                <h4 id="treinamento-de-carros-autonomos">
+                  Treinamento de Carros autônomos
+                </h4>
+                <p>
+                  Uma série de empresas do setor de transportes adotaram a
+                  plataforma <em>Cosmos WFM</em> para soluções de
+                  <strong><em>AV (Autonomous Vehicles)</em></strong>
+                </p>
+                <ul>
+                  <li>
+                    <p>
+                      <strong><em>Waabi</em></strong
+                      >, empresa pioneira em IA generativa para o mundo físico,
+                      começando com veículos autônomos, está avaliando o Cosmos
+                      no contexto da curadoria de dados para desenvolvimento e
+                      simulação de software de <em>AV</em>.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <strong><em>Wayve</em></strong
+                      >, empresa que está desenvolvendo modelos de base de IA
+                      para direção autônoma, está avaliando o Cosmos como uma
+                      ferramenta para pesquisar cenários de direção em curvas e
+                      esquinas usados para segurança e validação.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <strong><em>Uber</em></strong
+                      >, a gigante global de compartilhamento de viagens está
+                      fazendo uma parceria com a NVIDIA para acelerar a
+                      mobilidade autônoma. Os riscos conjuntos de dados de
+                      direção da Uber, combinados com recursos da plataforma
+                      Cosmos e do NVIDIA DGX Cloud, podem ajudar os parceiros de
+                      <em>AV</em> a criarem modelos de IA mais fortes de forma
+                      ainda mais eficiente.
+                    </p>
+                  </li>
+                </ul>
+                <p>
+                  Esse
+                  <a
+                    href="https://developer.nvidia.com/blog/simplify-end-to-end-autonomous-vehicle-development-with-new-nvidia-cosmos-world-foundation-models/"
+                    >artigo</a
+                  >
+                  mostra uma forma de simplificar desenvolvimento end-to-end de
+                  veículos autônomos com a plataforma <em>Cosmos WFM</em>.
+                </p>
+                <h4 id="geracao-de-datasets-sinteticos">
+                  Geração de datasets sintéticos
+                </h4>
+                <p>
+                  Nos últimos anos, com o avanço dos modelos de visão
+                  computacional e deep learning, surgiu uma forte demanda por
+                  grandes volumes de dados para o treinamento dessas redes.
+                  Nesse cenário, uma das aplicações mais promissoras do Cosmos é
+                  justamente a geração de dados sintéticos, especialmente em
+                  contextos onde a coleta de dados reais é custosa, ou inviável.
+                  Assim, o Cosmos entra como um extensor artificial de datasets
+                  já existentes, suprindo a demanda por dados treináveis
+                  mencionada.
+                </p>
+                <p>
+                  <img
+                    alt="Faixa de pedestres"
+                    src="../images/pedestrian_crosswalk.webp"
+                  />
+                </p>
+                <blockquote>
+                  <p>
+                    Como exemplo, com base em um vídeo curto ou imagem mostrando
+                    um pedestre atravessando na faixa, é possível simular
+                    diferentes condições climáticas, de iluminação, de horários,
+                    com ângulos diferentes, etc. Essa diversidade vem a ser
+                    muito útil para o treinamento de veículos autônomos, por
+                    exemplo, já que reduz muito o tamanho do dataset de vídeos
+                    reais de treinamento.
+                  </p>
+                </blockquote>
+                <p>
+                  Nesse sentido, o <strong>Cosmos Predict</strong> se mostra
+                  como o modelo mais adequado, já que seu intuito é a própria
+                  geração de dados.
+                </p>
+                <p>
+                  Ademais, uma discussão importante a ser feita é sobre a
+                  <strong>viabilidade</strong> da aplicação. Para a geração de
+                  vídeos, um dos modelos mais simples é o
+                  <em>Cosmos-Predict2-2B-Video2World</em>, com 2 Bilhões de
+                  parâmetros. Esse modelo, embora seja o mais simples
+                  disponibilizado pela Nvidia, não roda localmente em notebooks.
+                  Talvez com uma GPU mais potente seja possível rodar com
+                  limitações, mas de forma geral o custo computacional é mais
+                  alto do que um notebook normal suporta. Assim, abre-se a
+                  alternativa de usar cloud computing, que também vem com custos
+                  financeiros associados.
+                </p>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Input image</th>
+                      <th>Output video</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <img
+                          alt="Input Image"
+                          src="../images/example_input.jpg"
+                        />
+                      </td>
+                      <td>
+                        <img alt="Output video" src="../images/output.mp4" />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <blockquote>
+                  <p>
+                    Exemplo de como o
+                    <em>Cosmos-Predict2-2B-Video2World</em> pode ser usado. Com
+                    uma imagem e texto de input, gera-se um vídeo curto. Essa
+                    estratégia pode ser simulada para diferentes situações e
+                    aplicações, como por exemplo a da faixa de pedestres
+                    mencionada anteriormente.
+                  </p>
+                </blockquote>
+                <p>
+                  Outro ponto relevante é a
+                  <strong>qualidade dos dados sintéticos</strong>. Embora
+                  visualmente realistas, esses dados ainda podem conter vieses
+                  ou inconsistências que afetam o treinamento dos modelos. Dessa
+                  forma, faz-se necessário o uso de práticas de validação dos
+                  outputs gerados e comparação com dados reais de referência.
+                  Essa verificação pode ser feita com o
+                  <strong>Cosmos-Reason</strong>, destacado anteriormente pela
+                  sua capacidade interpretativa de vídeos, ou mesmo manualmente,
+                  a depender do tamanho do dataset sintético.
+                </p>
+                <h4 id="outras-aplicacoes">Outras Aplicações</h4>
+                <p>
+                  Usar a mesma abordagem da aplicação anterior, em que usamos o
+                  <em>Cosmos-Predict2-2B-Video2World</em> para gerar vídeos a
+                  partir de imagens ou vídeos de entrada somados a um input de
+                  texto, abre portas para várias outras aplicações de cunho
+                  semelhante. Dentre elas, podemos destacar:
+                </p>
+                <ul>
+                  <li>
+                    <p>
+                      <strong
+                        >Pré-visualização de cenas em filmes e jogos:</strong
+                      >
+                      Na indústria criativa, a produção de filmes, animações e
+                      jogos digitais passa por várias etapas de prototipação
+                      visual. Tradicionalmente, isso exige o uso de ferramentas
+                      de modelagem 3D, simulação física e renderização,
+                      processos que podem ser caros e demorados. Com o Cosmos,
+                      porém, é possível criar pré-visualizações de cenas
+                      inteiras, usando apenas esboços e descrições textuais
+                      simples. Por exemplo, um artista pode enviar uma foto de
+                      uma paisagem e adicionar algo como "vento forte balançando
+                      as árvores ao entardecer". O modelo então gera um clipe
+                      curto que mostra essa cena com movimento, iluminação e
+                      clima, sem precisar passar pel etapa de modelagem.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <strong
+                        >Reconstrução de cenas históricas para museus:</strong
+                      >
+                      Centros culturais também podem se beneficiar muito do uso
+                      do Cosmos. Com ele, torna-se possível reconstruir cenas do
+                      passado a partir de pinturas ou fotografias antigas, o que
+                      permite ao visitante um engajamento maior com o conteúdo
+                      exposto e amplia a sua compreensão do contexto histórico.
+                    </p>
+                  </li>
+                </ul>
+                <h3 id="referencias">Referências</h3>
+                <ul>
+                  <li>
+                    <a href="https://developer.nvidia.com/cosmos?hitsPerPage=6"
+                      >NVIDIA Cosmos for Developers</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="https://research.aimultiple.com/world-foundation-model/"
+                      >World Foundation Models: 10 Use Cases &amp; Examples
+                      [2025]</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <footer>
+              <div
+                class="rst-footer-buttons"
+                role="navigation"
+                aria-label="Footer Navigation"
+              >
+                <a
+                  href="../../tokens/dsc_tokenization/"
+                  class="btn btn-neutral float-left"
+                  title="DSC Tokenization"
+                  ><span class="icon icon-circle-arrow-left"></span> Previous</a
+                >
+              </div>
+
+              <hr />
+
+              <div role="contentinfo">
+                <!-- Copyright etc -->
+              </div>
+
+              Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a
+              <a href="https://github.com/readthedocs/sphinx_rtd_theme"
+                >theme</a
+              >
+              provided by <a href="https://readthedocs.org">Read the Docs</a>.
+            </footer>
+          </div>
+        </div>
+      </section>
     </div>
 
-  <hr/>
-
-  <div role="contentinfo">
-    <!-- Copyright etc -->
-  </div>
-
-  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
-</footer>
-          
-        </div>
-      </div>
-
-    </section>
-
-  </div>
-
-  <div class="rst-versions" role="note" aria-label="Versions">
-  <span class="rst-current-version" data-toggle="rst-current-version">
-    
-    
-      <span><a href="../../tokens/dsc_tokenization/" style="color: #fcfcfc">&laquo; Previous</a></span>
-    
-    
-  </span>
-</div>
+    <div class="rst-versions" role="note" aria-label="Versions">
+      <span class="rst-current-version" data-toggle="rst-current-version">
+        <span
+          ><a href="../../tokens/dsc_tokenization/" style="color: #fcfcfc"
+            >&laquo; Previous</a
+          ></span
+        >
+      </span>
+    </div>
     <script src="../../js/jquery-3.6.0.min.js"></script>
-    <script>var base_url = "../..";</script>
+    <script>
+      var base_url = "../..";
+    </script>
     <script src="../../js/theme_extra.js"></script>
     <script src="../../js/theme.js"></script>
-      <script src="../../javascripts/mathjax.js"></script>
-      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../javascripts/mathjax.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
-        jQuery(function () {
-            SphinxRtdTheme.Navigation.enable(true);
-        });
+      jQuery(function () {
+        SphinxRtdTheme.Navigation.enable(true);
+      });
     </script>
-
-</body>
+  </body>
 </html>

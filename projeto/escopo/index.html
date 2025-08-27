@@ -48,21 +48,43 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#objetivos">Objetivos</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#limites-do-projeto">Limites do Projeto</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#fora-do-escopo">Fora do Escopo</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#usuarios-e-casos-de-uso">Usuarios e casos de uso</a>
+    <li class="toctree-l2"><a class="reference internal" href="#usuariosstakeholders">Usuarios/Stakeholders</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#abordagem-tenica">Abordagem Ténica</a>
+    <li class="toctree-l2"><a class="reference internal" href="#requisitos-funcionais">Requisitos Funcionais</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#ambiente-de-simulacao-deve-ser-capaz-de">Ambiente de simulação deve ser capaz de:</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#modelo-treinado-deve-ser-capaz-de">Modelo treinado deve ser capaz de:</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#metricas-de-sucesso">Métricas de Sucesso</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#topicos-que-ainda-precisam-ser-abordados-na-documentacao">Tópicos que ainda precisam ser abordados na documentação:</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#requisitos-nao-funcionais">Requisitos não funcionais</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#infraestrutura">Infraestrutura</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#qualidade">Qualidade</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#usabilidade">Usabilidade</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#reprodutibilidade">Reprodutibilidade</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#entregaveis">Entregáveis</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#riscos-suposicoes">Riscos &amp; Suposições</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#english">English</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#links-uteis">Links úteis</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#referencias-references">Referências | References</a>
+        </ul>
     </li>
     </ul>
                 </li>
@@ -79,7 +101,7 @@
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../../tokens/cosmos_tokenizer/cosmos_tokenizer/">Cosmos Tokenizer</a>
                 </li>
-                <li class="toctree-l3"><a class="reference internal" href="../../tokens/cosmos_tokenizer/wavelet_compression/">Image Decomposition With Wavelets | Decomposição de imagem com Wavelets</a>
+                <li class="toctree-l3"><a class="reference internal" href="../../tokens/cosmos_tokenizer/wavelet_compression/">Decomposição de imagem com Wavelets</a>
                 </li>
     </ul>
                 </li>
@@ -114,24 +136,28 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="escopo-projeto-world-foundation-model">Escopo - Projeto World Foundation Model ()</h1>
-<p><strong><em>Authors / Autores: <a href="http://github.com/yuri-sl">@yuri-sl</a></em></strong></p>
 <h2 id="visao-geral-do-projeto">Visão Geral do projeto</h2>
 <p>Desenvolver, via simulações físicas 2D, um World Foundation Model capaz de aprender dinâmicas e cinemática de objetos a partir de observações visuais (vídeo/imagens) e prever/planejar evoluções futuras do sistema. O usuário descreve a cena e a tarefa por prompt; o sistema instancia a simulação, executa/prevê rollouts e retorna vídeo, métricas e ações planejadas.</p>
 <h2 id="problema">Problema</h2>
-<p>Falta um modelo unificado, orientado por dados, que:
-<em>Generalize para novas combinações de objetos/propriedades (massa, atrito, elasticidade) em 2D.
-</em>Preveja estados futuros com consistência física por dezenas de passos.
-*Planeje ações para atingir metas (p.ex., “fazer o bloco vermelho tocar o alvo”) sem ajustar hiperparâmetros por tarefa.</p>
+<ul>
+<li>Membros não possuem experiência prática com arquitetura de <em>world models</em>, de tal maneira que o projeto se faz necessário para permitir que os membros se capacitem e compreendam a profundidade tanto dos fundamentos quanto da implementação de modelos generativos aplicado à simulação física de comportamento de objetos diante de diferentes cenários dados por meio de prompts do usuário.
+  Falta um modelo unificado, orientado por dados, que:
+  <strong>Generalize</strong> para novas combinações de objetos/propriedades (massa, atrito, elasticidade) em 2D.
+  <strong>Preveja</strong> estados futuros com consistência física por dezenas de passos.
+  <strong>Planeje ações</strong> para atingir metas (p.ex., “fazer o bloco vermelho tocar o alvo”) sem ajustar hiperparâmetros por tarefa.</li>
+</ul>
 <h2 id="objetivos">Objetivos</h2>
 <ul>
-<li>Criar ambiente 2D para a simulação do prompt do usuário.</li>
-<li>Permitir a interação do usuário com o ambiente através de prompts fornecidos ao sistema.</li>
-<li>Fornecer a representação do sistema proposto pelo usuário através de vídeos.</li>
+<li>Criar um WorldModel que funcional que permita a interpretação de descrições textuais (prompts) e transformá-las em simulações físicas 2D consistentes e realistas para a devida simulação.</li>
+<li>Elaborar um artigo para a consolidação do conhecimento adquirido ao longo do projeto, contribuindo assim para a disseminação acadêmica e análise científica do tema exposto.</li>
+<li>Permitir a compreensão dos membros sobre novas arquiteturas emergentes em inteligência artificial, de tal maneira a ampliar a cpaacidade de inovação do grupo e permitir a criação de oportunidades dos conhecimentos adquiridos nas áreas de educação, pesquisa e desenvolvimento de tecnologias.</li>
 </ul>
+<h2 id="limites-do-projeto">Limites do Projeto</h2>
+<p>Treinar e avaliar um World Model capaz de compreender e reproduzir a cinemática e dinâmica de objetos em simulações 2D. O projeto não contempla simulações 3D ou aplicações diretas em ambientes físicos, mantendo assim o foco em ambientes digitais controlados.</p>
 <h2 id="fora-do-escopo">Fora do Escopo</h2>
 <ul>
 <li>
-<p>3D, visão estéreo ou robótica real.</p>
+<p>Aplicação em ambiente 3D.</p>
 </li>
 <li>
 <p>Aprendizado por reforço end-to-end em hardware físico.</p>
@@ -139,14 +165,94 @@
 <li>
 <p>Contato deformável/fluídos complexos; multiagente competitivo.</p>
 </li>
+</ul>
+<h2 id="usuariosstakeholders">Usuarios/Stakeholders</h2>
+<ul>
 <li>
-<p>RLHF/feedback humano avançado; integração mobile.</p>
+<p>Membros da equipe de desenvolvimento e pesquisa diretamente envolvidos no projeto.</p>
+</li>
+<li>
+<p>Comunidade acadêmica e técnica interessada em <em>World Models</em>, através do artigo de revisão que será publicado.</p>
 </li>
 </ul>
-<h2 id="usuarios-e-casos-de-uso">Usuarios e casos de uso</h2>
-<h2 id="abordagem-tenica">Abordagem Ténica</h2>
-<p>Este projeto</p>
+<h2 id="requisitos-funcionais">Requisitos Funcionais</h2>
+<h3 id="ambiente-de-simulacao-deve-ser-capaz-de">Ambiente de simulação deve ser capaz de:</h3>
+<ul>
+<li>Gerar vídeos 2D, em formato (.MP4 ou .GIF ou .MKV), representando assim a dinâmica dos objetos a part ir do modelo treinado.</li>
+</ul>
+<p>-Receber prompts em <strong>linguagem natural</strong> especificando os elementos, suas propriedades (massa,cor,formato, peso, etc.), condições iniciais (posição, velocidade, energia potencial, etc.) e interações da simulação.</p>
+<ul>
+<li>
+<p>Permitir que múltiplos cenários com diferentes configurações de objetos sejam executados.</p>
+</li>
+<li>
+<p>Registrar automaticamente os experimentos realizados, salvando também os resultados e metadados.</p>
+</li>
+</ul>
+<h3 id="modelo-treinado-deve-ser-capaz-de">Modelo treinado deve ser capaz de:</h3>
+<ul>
+<li>Ser capaz de inferir a cinemática (posição,velocidade e aceleração) e a dinâmica (forças,colisões, interações) dos objetos simulados.</li>
+</ul>
+<p>-Generalizar para diferentes cenários, não apenas aqueles contidos durante o treinamento, e que sigam as mesmas leis físicas.</p>
+<ul>
+<li>
+<p>Disponibilizar métricas de desempenho (erro médio de previsão de trajetória)</p>
+</li>
+<li>
+<p>Ser capaz de interpretar e simular interações entre 2 a N objetos simultâneos, onde N &lt;= 3.</p>
+</li>
+</ul>
 <h2 id="metricas-de-sucesso">Métricas de Sucesso</h2>
+<ul>
+<li>Métrica de previsão de trajetória (chance de seguir a rota calculada);</li>
+</ul>
+<h2 id="topicos-que-ainda-precisam-ser-abordados-na-documentacao">Tópicos que ainda precisam ser abordados na documentação:</h2>
+<ul>
+<li>
+<p>Descrição da arquitetura, técnicas utilizadas, justificativa das escolhas.</p>
+</li>
+<li>
+<p>Inserção tutoriais de uso para reprodutibilidade (execução do ambiente, uso de modelo e exemplos de prompts).</p>
+</li>
+</ul>
+<h2 id="requisitos-nao-funcionais">Requisitos não funcionais</h2>
+<p>Requisitos não funcionais fazem referência aos requisitos que não são intrísecos às funcionalidades do software em si, mas são mais focadas</p>
+<h3 id="infraestrutura">Infraestrutura</h3>
+<ul>
+<li>
+<p>O modelo deve ser treinável e executável na infraestrutura computacional que é fornecida no laboratório (CPU/GPU local).</p>
+</li>
+<li>
+<p>Deve possuir uma versão reduzida/light que permita a execução em máquinas com recursos mais limitados para testes.</p>
+</li>
+</ul>
+<h3 id="qualidade">Qualidade</h3>
+<ul>
+<li>
+<p>Ambiente de simulação deve apresentar consistência visual e física, sem apresentar falhas críticas que impossibilitem a análise.</p>
+</li>
+<li>
+<p>Código deve seguir as boas práticas de engenharia de software (modularidade, versionamento, testes unitários básicos).</p>
+</li>
+</ul>
+<h3 id="usabilidade">Usabilidade</h3>
+<ul>
+<li>
+<p>Interface de usuário deve ser simples e interativa, sem exigir conhecimentos avançados em programação para um usuário comum utilizar dos cenários mais básicos.</p>
+</li>
+<li>
+<p>Os prompts devem ser escritos em linguagem natural clara, sem necessidade de sintaxe complexa.</p>
+</li>
+</ul>
+<h3 id="reprodutibilidade">Reprodutibilidade</h3>
+<ul>
+<li>
+<p>O repositório do gitHub deve conter as instruções completas de instalação, configuração e execução.</p>
+</li>
+<li>
+<p>Os experimentos devem poder ser reproduzidos por terceiros com acesso ao dataset e código.</p>
+</li>
+</ul>
 <h2 id="entregaveis">Entregáveis</h2>
 <ul>
 <li>FrontEnd que permita a interação do usuário com o sistema para captar o seu prompt.</li>
@@ -154,7 +260,97 @@
 </ul>
 <h2 id="riscos-suposicoes">Riscos &amp; Suposições</h2>
 <p>Poder computacional falho, dificuldades de manejar cargas de atividades da equipe.</p>
-<h2 id="links-uteis">Links úteis</h2>
+<h3 id="english">English</h3>
+<h1 id="project-scope-world-foundation-model">Project Scope - World Foundation Model</h1>
+<h2 id="project-overview">Project Overview</h2>
+<p>Develop, through 2D physical simulations, a World Foundation Model capable of learning the dynamics and kinematics of objects from visual observations (video/images) and predicting/planning the system’s future evolutions.<br />
+The user describes the scene and the task through a prompt; the system instantiates the simulation, executes/predicts rollouts, and returns video outputs, metrics, and planned actions.</p>
+<h2 id="problem">Problem</h2>
+<ul>
+<li>Team members currently lack practical experience with <strong>world model architectures</strong>, making this project necessary to enable them to gain expertise and understand both the theoretical foundations and the practical implementation of generative models applied to physical simulation of object behavior in different user-defined scenarios.</li>
+<li>There is still no unified, data-driven model that can:</li>
+<li><strong>Generalize</strong> to new combinations of objects/properties (mass, friction, elasticity) in 2D.</li>
+<li><strong>Predict</strong> future states with physical consistency across dozens of steps.</li>
+<li><strong>Plan actions</strong> to achieve specific goals (e.g., <em>“make the red block touch the target”</em>) without requiring task-specific hyperparameter tuning.</li>
+</ul>
+<h2 id="objectives">Objectives</h2>
+<ul>
+<li>Develop a functional <strong>World Model</strong> capable of interpreting textual descriptions (prompts) and transforming them into consistent and realistic 2D physical simulations.</li>
+<li>Produce an <strong>academic paper</strong> to consolidate the knowledge acquired throughout the project, contributing to scientific dissemination and analysis of the subject.</li>
+<li>Provide team members with a deeper understanding of emerging <strong>artificial intelligence architectures</strong>, expanding the group’s capacity for innovation and enabling the creation of educational, research, and technological development opportunities.</li>
+</ul>
+<h2 id="project-boundaries">Project Boundaries</h2>
+<ul>
+<li>Train and evaluate a World Model capable of understanding and reproducing the kinematics and dynamics of objects in 2D simulations.</li>
+<li>The project <strong>does not cover</strong> 3D simulations or direct applications in physical environments, maintaining its focus on controlled digital environments.</li>
+</ul>
+<h2 id="out-of-scope">Out of Scope</h2>
+<ul>
+<li>Application in <strong>3D environments</strong>.</li>
+<li><strong>End-to-end reinforcement learning</strong> directly in hardware.</li>
+<li><strong>Deformable contact/complex fluids</strong>; <strong>competitive multi-agent</strong> settings.</li>
+</ul>
+<h2 id="users-stakeholders">Users / Stakeholders</h2>
+<ul>
+<li>Members of the development and research team directly involved in the project.</li>
+<li>The academic and technical community interested in <strong>World Models</strong>, through the review article to be published.</li>
+</ul>
+<h2 id="functional-requirements">Functional Requirements</h2>
+<h3 id="the-simulation-environment-must-be-able-to">The simulation environment must be able to:</h3>
+<ul>
+<li>Generate 2D videos in formats such as <code>.MP4</code>, <code>.GIF</code>, or <code>.MKV</code>, representing object dynamics based on the trained model.</li>
+<li>Receive <strong>natural language prompts</strong> specifying elements, their properties (mass, color, shape, weight, etc.), initial conditions (position, velocity, potential energy, etc.), and interactions within the simulation.</li>
+<li>Allow multiple scenarios with different object configurations to be executed.</li>
+<li>Automatically log conducted experiments, saving results and metadata.</li>
+</ul>
+<h3 id="the-trained-model-must-be-able-to">The trained model must be able to:</h3>
+<ul>
+<li>Infer <strong>kinematics</strong> (position, velocity, acceleration) and <strong>dynamics</strong> (forces, collisions, interactions) of simulated objects.</li>
+<li><strong>Generalize</strong> to different scenarios, not limited to those present in training, provided they follow the same physical laws.</li>
+<li>Provide <strong>performance metrics</strong>, such as average trajectory prediction error.</li>
+<li>Interpret and simulate interactions between <strong>2 to N simultaneous objects</strong>, where <code>N &lt;= 3</code>.</li>
+</ul>
+<h2 id="success-metrics">Success Metrics</h2>
+<ul>
+<li>Trajectory prediction metric (probability of following the calculated path).</li>
+</ul>
+<h2 id="documentation-topics-still-to-be-addressed">Documentation Topics Still to be Addressed</h2>
+<ul>
+<li>Description of the architecture, techniques used, and rationale for design choices.</li>
+<li>Tutorials for reproducibility (environment setup, model usage, and example prompts).</li>
+</ul>
+<h2 id="non-functional-requirements">Non-Functional Requirements</h2>
+<p>Non-functional requirements refer to aspects not directly tied to the software’s functional behavior, but rather to quality attributes and constraints.</p>
+<h3 id="infrastructure">Infrastructure</h3>
+<ul>
+<li>The model must be trainable and executable on the computational infrastructure available in the lab (local CPU/GPU).</li>
+<li>A <strong>lightweight version</strong> should be available for execution on resource-constrained machines for testing purposes.</li>
+</ul>
+<h3 id="quality">Quality</h3>
+<ul>
+<li>The simulation environment must present visual and physical consistency, without critical failures that would prevent analysis.</li>
+<li>The code must follow <strong>software engineering best practices</strong> (modularity, version control, basic unit testing).</li>
+</ul>
+<h3 id="usability">Usability</h3>
+<ul>
+<li>The user interface must be simple and interactive, not requiring advanced programming knowledge for basic scenarios.</li>
+<li>Prompts should be written in clear natural language, without complex syntax requirements.</li>
+</ul>
+<h3 id="reproducibility">Reproducibility</h3>
+<ul>
+<li>The GitHub repository must contain complete instructions for installation, configuration, and execution.</li>
+<li>Experiments should be reproducible by third parties with access to the dataset and code.</li>
+</ul>
+<h2 id="deliverables">Deliverables</h2>
+<ul>
+<li><strong>Frontend</strong> that allows users to interact with the system and provide prompts.</li>
+<li><strong>Video outputs</strong> representing the final result of the simulation generated from the user’s input.</li>
+</ul>
+<h2 id="risks-assumptions">Risks &amp; Assumptions</h2>
+<ul>
+<li>Limited computational resources.</li>
+<li>Potential difficulties managing team workload.</li>
+</ul>
 <h2 id="referencias-references">Referências | References</h2>
 <p><a href="https://docs.google.com/document/d/1GqxDtGbsp0xNqUrYcW_h2VUKyDDuHM6sbOMI6WNnzyQ/edit?tab=t.0">Especificação do projeto</a></p>
               

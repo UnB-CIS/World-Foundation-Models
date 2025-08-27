@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../../img/favicon.ico" />
-    <title>Image Decomposition With Wavelets | Decomposição de imagem com Wavelets - World Foundation Models</title>
+    <title>Decomposição de imagem com Wavelets - World Foundation Models</title>
     <link rel="stylesheet" href="../../../css/theme.css" />
     <link rel="stylesheet" href="../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Image Decomposition With Wavelets | Decomposi\u00e7\u00e3o de imagem com Wavelets";
+        var mkdocs_page_name = "Decomposi\u00e7\u00e3o de imagem com Wavelets";
         var mkdocs_page_input_path = "tokens/cosmos_tokenizer/wavelet_compression.ipynb";
         var mkdocs_page_url = null;
       </script>
@@ -55,15 +55,15 @@
     <ul class="current">
                 <li class="toctree-l3"><a class="reference internal" href="../cosmos_tokenizer/">Cosmos Tokenizer</a>
                 </li>
-                <li class="toctree-l3 current"><a class="reference internal current" href="#">Image Decomposition With Wavelets | Decomposição de imagem com Wavelets</a>
+                <li class="toctree-l3 current"><a class="reference internal current" href="#">Decomposição de imagem com Wavelets</a>
     <ul class="current">
-    <li class="toctree-l4"><a class="reference internal" href="#importing-packages-and-images-importando-pacotes-e-imagens">Importing packages and images | Importando pacotes e imagens</a>
+    <li class="toctree-l4"><a class="reference internal" href="#importando-pacotes-e-imagens">Importando pacotes e imagens</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#one-level-decomposition-decomposicao-de-um-nivel">One-level Decomposition | Decomposição de um nível</a>
+    <li class="toctree-l4"><a class="reference internal" href="#decomposicao-de-um-nivel">Decomposição de um nível</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#two-level-decomposition-decomposicao-de-dois-niveis">Two-level Decomposition | Decomposição de dois níveis</a>
+    <li class="toctree-l4"><a class="reference internal" href="#decomposicao-de-dois-niveis">Decomposição de dois níveis</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#references-referencias">References | Referências</a>
+    <li class="toctree-l4"><a class="reference internal" href="#referencias">Referências</a>
     </li>
     </ul>
                 </li>
@@ -93,7 +93,7 @@
           <li class="breadcrumb-item">Referências</li>
           <li class="breadcrumb-item">Tokens</li>
           <li class="breadcrumb-item">Cosmos Tokenizer</li>
-      <li class="breadcrumb-item active">Image Decomposition With Wavelets | Decomposição de imagem com Wavelets</li>
+      <li class="breadcrumb-item active">Decomposição de imagem com Wavelets</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -544,7 +544,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="image-decomposition-with-wavelets-decomposicao-de-imagem-com-wavelets">Image Decomposition With Wavelets | Decomposição de imagem com Wavelets<a class="anchor-link" href="#image-decomposition-with-wavelets-decomposicao-de-imagem-com-wavelets">¶</a></h1><p><strong><em>Authors | Autores: <a href="http://github.com/figredos">@figredos</a></em></strong></p>
+<h1 id="decomposicao-de-imagem-com-wavelets">Decomposição de imagem com Wavelets<a class="anchor-link" href="#decomposicao-de-imagem-com-wavelets">¶</a></h1>
 </div>
 </div>
 </div>
@@ -555,7 +555,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="importing-packages-and-images-importando-pacotes-e-imagens">Importing packages and images | Importando pacotes e imagens<a class="anchor-link" href="#importing-packages-and-images-importando-pacotes-e-imagens">¶</a></h2>
+<h2 id="importando-pacotes-e-imagens">Importando pacotes e imagens<a class="anchor-link" href="#importando-pacotes-e-imagens">¶</a></h2>
 </div>
 </div>
 </div>
@@ -578,13 +578,15 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Importando pacotes</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pywt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.image</span><span class="w"> </span><span class="kn">import</span> <span class="n">imread</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-1">import os
+<div class="clipboard-copy-txt" id="cell-1"># Importando pacotes
+import os
 import pywt
 import numpy as np
 import matplotlib.pyplot as plt
@@ -613,7 +615,8 @@ from matplotlib.image import imread</div>
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="n">ronaldinho</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Importando imagem</span>
+<span class="n">ronaldinho</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span>
     <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">'..'</span><span class="p">,</span> <span class="s1">'images'</span><span class="p">,</span> <span class="s1">'cosmos_tokenizer'</span><span class="p">,</span> <span class="s1">'example_images'</span><span class="p">,</span> <span class="s1">'ronaldinho.jpg'</span><span class="p">)</span>
 <span class="p">)</span>
 <span class="n">cat_on_snow</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span>
@@ -622,7 +625,8 @@ from matplotlib.image import imread</div>
     <span class="p">)</span>
 <span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-2">ronaldinho = imread(
+<div class="clipboard-copy-txt" id="cell-2"># Importando imagem
+ronaldinho = imread(
     os.path.join('..', 'images', 'cosmos_tokenizer', 'example_images', 'ronaldinho.jpg')
 )
 cat_on_snow = imread(
@@ -642,7 +646,7 @@ cat_on_snow = imread(
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="one-level-decomposition-decomposicao-de-um-nivel">One-level Decomposition | Decomposição de um nível<a class="anchor-link" href="#one-level-decomposition-decomposicao-de-um-nivel">¶</a></h2>
+<h2 id="decomposicao-de-um-nivel">Decomposição de um nível<a class="anchor-link" href="#decomposicao-de-um-nivel">¶</a></h2>
 </div>
 </div>
 </div>
@@ -665,20 +669,18 @@ cat_on_snow = imread(
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Number of decompositions | Numero de decomposições</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Decomposição Wavelet</span>
 <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
-
-<span class="c1"># Type of wavelet | Tipo de wavelet</span>
 <span class="n">w</span> <span class="o">=</span> <span class="s1">'haar'</span>
 
-<span class="c1"># Storing coefficients | Armazenando coeficientes</span>
+<span class="c1"># Armazenando coeficientes para reconstrução</span>
 <span class="n">arr_rgb</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
     <span class="n">channel</span> <span class="o">=</span> <span class="n">ronaldinho</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span>
     <span class="n">coeffs</span> <span class="o">=</span> <span class="n">pywt</span><span class="o">.</span><span class="n">wavedec2</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">wavelet</span><span class="o">=</span><span class="n">w</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
 
-    <span class="c1"># Normalizing coefficients (for visualization) | Normalizando coeficientes para visualização</span>
+    <span class="c1"># Normalizando coeficientes para visualização</span>
     <span class="n">coeffs_norm</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">coeffs</span><span class="p">)</span>
     <span class="n">coeffs_norm</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">coeffs_norm</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
@@ -688,20 +690,18 @@ cat_on_snow = imread(
     <span class="n">arr</span><span class="p">,</span> <span class="n">coeff_slices</span> <span class="o">=</span> <span class="n">pywt</span><span class="o">.</span><span class="n">coeffs_to_array</span><span class="p">(</span><span class="n">coeffs_norm</span><span class="p">)</span>
     <span class="n">arr_rgb</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-3"># Number of decompositions | Numero de decomposições
+<div class="clipboard-copy-txt" id="cell-3"># Decomposição Wavelet
 n = 1
-
-# Type of wavelet | Tipo de wavelet
 w = 'haar'
 
-# Storing coefficients | Armazenando coeficientes
+# Armazenando coeficientes para reconstrução
 arr_rgb = []
 
 for c in range(3):
     channel = ronaldinho[..., c]
     coeffs = pywt.wavedec2(channel, wavelet=w, level=n)
 
-    # Normalizing coefficients (for visualization) | Normalizando coeficientes para visualização
+    # Normalizando coeficientes para visualização
     coeffs_norm = list(coeffs)
     coeffs_norm[0] /= np.abs(coeffs_norm[0]).max()
     for i in range(1, n + 1):
@@ -734,19 +734,19 @@ for c in range(3):
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Image Reconstruction | Reconstruindo imagem</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Reconstruindo imagem</span>
 <span class="n">arr_rgb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">arr_rgb</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="c1"># Visualizing image | Visualizando imagem</span>
+<span class="c1"># Visualizando imagem</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">arr_rgb</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-4"># Image Reconstruction | Reconstruindo imagem
+<div class="clipboard-copy-txt" id="cell-4"># Reconstruindo imagem
 arr_rgb = np.stack(arr_rgb, axis=-1)
 
-# Visualizing image | Visualizando imagem
+# Visualizando imagem
 plt.figure(figsize=(16, 16))
 plt.imshow(np.clip(arr_rgb, 0, 1))
 
@@ -775,7 +775,7 @@ plt.show()</div>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="two-level-decomposition-decomposicao-de-dois-niveis">Two-level Decomposition | Decomposição de dois níveis<a class="anchor-link" href="#two-level-decomposition-decomposicao-de-dois-niveis">¶</a></h2>
+<h2 id="decomposicao-de-dois-niveis">Decomposição de dois níveis<a class="anchor-link" href="#decomposicao-de-dois-niveis">¶</a></h2>
 </div>
 </div>
 </div>
@@ -798,20 +798,18 @@ plt.show()</div>
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Number of decompositions | Numero de decomposições</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Decomposição Wavelet</span>
 <span class="n">n</span> <span class="o">=</span> <span class="mi">2</span>
-
-<span class="c1"># Type of wavelet | Tipo de wavelet</span>
 <span class="n">w</span> <span class="o">=</span> <span class="s1">'haar'</span>
 
-<span class="c1"># Storing coefficients | Armazenando coeficientes</span>
+<span class="c1"># Armazenando coeficientes para reconstrução</span>
 <span class="n">arr_rgb</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
     <span class="n">channel</span> <span class="o">=</span> <span class="n">cat_on_snow</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span>
     <span class="n">coeffs</span> <span class="o">=</span> <span class="n">pywt</span><span class="o">.</span><span class="n">wavedec2</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">wavelet</span><span class="o">=</span><span class="n">w</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
 
-    <span class="c1"># Normalizing coefficients (for visualization) | Normalizando coeficientes para visualização</span>
+    <span class="c1"># Normalizando coeficientes para visualização</span>
     <span class="n">coeffs_norm</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">coeffs</span><span class="p">)</span>
     <span class="n">coeffs_norm</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">coeffs_norm</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
@@ -821,20 +819,18 @@ plt.show()</div>
     <span class="n">arr</span><span class="p">,</span> <span class="n">coeff_slices</span> <span class="o">=</span> <span class="n">pywt</span><span class="o">.</span><span class="n">coeffs_to_array</span><span class="p">(</span><span class="n">coeffs_norm</span><span class="p">)</span>
     <span class="n">arr_rgb</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-5"># Number of decompositions | Numero de decomposições
+<div class="clipboard-copy-txt" id="cell-5"># Decomposição Wavelet
 n = 2
-
-# Type of wavelet | Tipo de wavelet
 w = 'haar'
 
-# Storing coefficients | Armazenando coeficientes
+# Armazenando coeficientes para reconstrução
 arr_rgb = []
 
 for c in range(3):
     channel = cat_on_snow[..., c]
     coeffs = pywt.wavedec2(channel, wavelet=w, level=n)
 
-    # Normalizing coefficients (for visualization) | Normalizando coeficientes para visualização
+    # Normalizando coeficientes para visualização
     coeffs_norm = list(coeffs)
     coeffs_norm[0] /= np.abs(coeffs_norm[0]).max()
     for i in range(1, n + 1):
@@ -867,19 +863,19 @@ for c in range(3):
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Image Reconstruction | Reconstruindo imagem</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Reconstruindo imagem</span>
 <span class="n">arr_rgb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">arr_rgb</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="c1"># Visualizing image | Visualizando imagem</span>
+<span class="c1"># Visualizando imagem</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">arr_rgb</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-6"># Image Reconstruction | Reconstruindo imagem
+<div class="clipboard-copy-txt" id="cell-6"># Reconstruindo imagem
 arr_rgb = np.stack(arr_rgb, axis=-1)
 
-# Visualizing image | Visualizando imagem
+# Visualizando imagem
 plt.figure(figsize=(16, 16))
 plt.imshow(np.clip(arr_rgb, 0, 1))
 
@@ -908,14 +904,16 @@ plt.show()</div>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="references-referencias">References | Referências<a class="anchor-link" href="#references-referencias">¶</a></h2><ul>
+<h2 id="referencias">Referências<a class="anchor-link" href="#referencias">¶</a></h2><ul>
 <li>Data Driven Science &amp; Engineering: Machine Learning, Dynamical Systems, and Control
 by S. L. Brunton and J. N. Kutz
 Cambridge Textbook, 2019
 Copyright 2019, All Rights Reserved
-<a href="http://databookuw.com/">http://databookuw.com/</a></li>
+<a href="http://databookuw.com/">http://databookuw.com/</a><ul>
 <li><a href="https://github.com/dynamicslab/databook_python/blob/master/CH02/CH02_SEC06_4_Wavelet.ipynb">github - dynamicslab/databook_python - Capítulo 2 Seção 6 - Decomposição de imagem com Wavelets </a></li>
 <li><a href="https://github.com/dynamicslab/databook_python/blob/master/CH02/CH02_SEC06_5_Wavelet.ipynb">github - dynamicslab/databook_python - Capítulo 2 Seção 6 - Compressão de imagem com Wavelets</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>

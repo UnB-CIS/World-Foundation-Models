@@ -63,7 +63,7 @@
     </li>
     </ul>
                 </li>
-                <li class="toctree-l3"><a class="reference internal" href="../wavelet_compression/">Image Decomposition With Wavelets | Decomposição de imagem com Wavelets</a>
+                <li class="toctree-l3"><a class="reference internal" href="../wavelet_compression/">Decomposição de imagem com Wavelets</a>
                 </li>
     </ul>
                 </li>
@@ -138,7 +138,8 @@ essa abordagem requer tokens discretos, pois trata o processo de geração como 
 <p>O sucesso dos tokenizers depende, em grande parte, da sua habilidade de fornecer altas taxas de compressão sem comprometer a qualidade da reconstrução visual posterior. Por um lado, uma alta compressão reduz os requisitos de armazenamento e computação.
 Por outro, uma compressão excessiva pode levar à perda de detalhes visuais essenciais. Esse equilíbrio representa um desafio importante no projeto de tokenizers.</p>
 <p>A imagem a seguir ilustra os dois tipos de tokens:</p>
-<p><img alt="Visualization of continuous and discrete tokenizers" src="../../images/cosmos_tokenizer/token_types.png" /></p>
+<p><img alt="Visualization of continuous and discrete tokenizers" src="../../images/cosmos_tokenizer/token_types.png" />
+<em>"Figura S2.1-F1-ptbr — Visualização de Tokenizers contínuos e discretos"</em></p>
 <p>Tokens ao longo das dimensões espaciais (<span class="arithmatex">\(\frac{H}{S_{HW}} \times \frac{W}{S_{HW}}\)</span>) e temporais (<span class="arithmatex">\(1 + \frac{T}{S_T}\)</span>), com um fator de compressão espacial <span class="arithmatex">\(S_{HW}\)</span> e um fator de compressão temporal <span class="arithmatex">\(S_T\)</span>. O primeiro token temporal representa o primeiro quadro da entrada, possibilitando a tokenização conjunta de imagens (<span class="arithmatex">\(T=0\)</span>) e vídeos (<span class="arithmatex">\(T&gt;0\)</span>) em um espaço latente compartilhado.</p>
 <blockquote>
 <p><span class="arithmatex">\(S_{HW}\)</span> é o <strong><em>fator de compressão espacial</em></strong> usado para comprimir as dimensões espaciais de uma imagem. Essa é uma etapa chave no processo de tokenização espacial, no qual o quadro de entrada é dividido em pequenos blocos ou regiões, cada um dos quais é representado por um ou mais tokens.</p>
@@ -148,7 +149,8 @@ A adição de <span class="arithmatex">\(1\)</span> permite ao modelo tratar o q
 <p>Se a imagem mencionada acima fizer parte de um vídeo com <span class="arithmatex">\(32\)</span> quadros, e o <em>fator de compressão temporal</em> tiver valor <span class="arithmatex">\(4\)</span>, o processo de tokenização produzirá 9 tokens temporais: <span class="arithmatex">\(1\)</span> para o primeiro quadro (adaptabilidade para lidar com imagens), e outros 8, cada um agrupando 4 quadros.</p>
 </blockquote>
 <p>A tabela a seguir ilustra diferentes tokenizers visuais e suas capacidades:</p>
-<p><img alt="Different tokenizers and capabilities" src="../../images/cosmos_tokenizer/tokenizers_table.png" /></p>
+<p><img alt="Different tokenizers and capabilities" src="../../images/cosmos_tokenizer/tokenizers_table.png" />
+<em>"Figura S2.2-F2-ptbr — Diferentes Tokenizers e suas capacidades"</em></p>
 <p>O <em>Tokenizador Cosmos</em> utiliza uma arquitetura leve e computacionalmente eficiente com um mecanismo temporal causal. Especificamente, ele emprega camadas de convolução temporal causal e camadas de atenção temporal causal para preservar a ordem temporal natural dos quadros de vídeo.</p>
 <blockquote>
 <p>O termo "causal" implica que qualquer predição sobre um determinado quadro ou ponto no tempo é baseada somente nesse quadro e em todos os quadros anteriores, nunca nos futuros. Portanto, "<em>Convolução Temporal Causal</em>" significa que a geração de características para um dado quadro utiliza apenas dados do quadro <span class="arithmatex">\(t\)</span> para trás.</p>
@@ -156,8 +158,8 @@ A adição de <span class="arithmatex">\(1\)</span> permite ao modelo tratar o q
 </blockquote>
 <p>Os tokenizers são treinados diretamente em imagens de alta resolução e vídeos de longa duração, sem limitar as categorias ou proporções de aspecto. O <em>Cosmos Tokenizer</em> opera em diferentes proporções de aspecto. Ele é agnóstico quanto à duração temporal durante a inferência, sendo capaz de tokenizar além da duração temporal usada durante o treinamento.</p>
 <p>Os gráficos abaixo mostram a comparação de desempenho entre o <em>Cosmos Tokenizer</em> e outros tokenizers, evidenciando a sua qualidade superior mesmo em taxas de compressão mais altas:</p>
-<p><img alt="Tokenizer comparisons" src="../../images/cosmos_tokenizer/tokenizer_comparison.png" /></p>
-<p>Claro! Segue abaixo o texto traduzido para o português, com a estrutura Markdown totalmente preservada, e mantendo em inglês apenas os termos técnicos que fazem mais sentido no original:</p>
+<p><img alt="Tokenizer comparisons" src="../../images/cosmos_tokenizer/tokenizer_comparison.png" />
+<em>"Figura S2.2-F3-ptbr — Comparações entre Tokenizers"</em></p>
 <h3 id="arquitetura">Arquitetura</h3>
 <p>O Cosmos Tokenizer é projetado com uma arquitetura encoder-decoder.
 Dado um vídeo de entrada <span class="arithmatex">\(x_{0:T}\in\mathbb{R^{(1+T)\times H\times W\times3}}\)</span>, com <span class="arithmatex">\(H,\ W,\ T\)</span> sendo a altura, largura e número de quadros, o encoder (<span class="arithmatex">\(\varepsilon\)</span>) tokeniza as entradas em um vídeo de tokens <span class="arithmatex">\(z_{0:T'}\in\mathbb{R^{(1+T)\times H\times W\times3}}\)</span>, com um fator de compressão espacial de <span class="arithmatex">\(s_{H W}=\frac{H}{H'}=\frac{W}{W'}\)</span> e um fator de compressão temporal de <span class="arithmatex">\(S_T=\frac{T}{T'}\)</span>.
@@ -259,8 +261,10 @@ Aqui, as taxas de compressão são <span class="arithmatex">\(H\times W\)</span>
 </ol>
 <p>Essa abordagem garante flexibilidade no tratamento de diferentes resoluções espaciais e temporais para dados de imagem e vídeo.</p>
 <h3 id="resultados">Resultados</h3>
-<p><img alt="Tokenizer Evaluation 1" src="../../images/cosmos_tokenizer/tokenizer_evaluation_1.png" /></p>
-<p><img alt="Tokenizer Evaluation 2" src="../../images/cosmos_tokenizer/tokenizer_evaluation_2.png" /></p>
+<p><img alt="Tokenizer Evaluation 1" src="../../images/cosmos_tokenizer/tokenizer_evaluation_1.png" />
+<em>"Figura S2.2-F4-ptbr — Avaliação 1 de Tokenizers"</em></p>
+<p><img alt="Tokenizer Evaluation 2" src="../../images/cosmos_tokenizer/tokenizer_evaluation_2.png" />
+<em>"Figura S2.2-F5-ptbr — Avaliação 2 de Tokenizers"</em></p>
 <p>Nós avaliamos nossa suíte Cosmos Tokenizer em vários datasets benchmark de imagens e vídeos. Para a avaliação dos image tokenizers, seguimos trabalhos anteriores para avaliar o <strong>MS-COCO 2017</strong> e o <strong>ImageNet-1K</strong>. Utilizamos o subconjunto de validação do <strong>MS-COCO 2017</strong> com <span class="arithmatex">\(5.000\)</span> imagens, e o subconjunto de validação do <strong>ImageNet-1K</strong> com <span class="arithmatex">\(50.000\)</span> imagens como benchmark para avaliação de imagens.</p>
 <p><strong>TokenBench</strong>. Para avaliação dos video tokenizers, ainda não existe um benchmark padrão para vídeos de alta resolução e longa duração. Para isso, introduzimos um benchmark chamado <em>TokenBench</em> para cobrir uma ampla variedade de domínios, incluindo manipulação robótica, direção, egocêntrico e vídeos da web, padronizando assim a avaliação.
 Utilizamos datasets de vídeo existentes que são comumente usados para várias tarefas, incluindo <strong>BDD100K</strong>, <strong>EgoExo-4D</strong>, <strong>BridgeData V2</strong>, e <strong>Panda-70M</strong>.
@@ -327,7 +331,8 @@ The <strong>decoder</strong> mirrors this architecture, substituting the downsam
 <p>All that to say that the images will be compressed to a lower dimensional form (tokens) when passing through a model <em>"tokenizer"</em> that is trained in a unsupervised manner.</p>
 </blockquote>
 <p>The image bellow illustrates the tokenization training pipeline, where the goal is to train the encoder and decoder, so that the bottleneck token representation maximally preserves visual information in the input.</p>
-<p><img alt="Tokenization Pipeline" src="../../images/cosmos_tokenizer/tokenization_pipeline.png" /></p>
+<p><img alt="Tokenization Pipeline" src="../../images/cosmos_tokenizer/tokenization_pipeline.png" />
+<em>"Figura S2.1-F6-ENG — Tokenization Pipelines"</em></p>
 <p>In the pipeline, an input video is encoded into tokens, which are usually much more compact than the input video. The decoder then reconstructs the input video from the tokens. <em>Tokenizer training is about learning the encoder and decoder to maximally preserve the visual information in the tokens</em>.</p>
 <p>Tokenizers come in two types: continuous and discrete. Continuous tokenizers encode visual data into continuous latent embeddings, as in latent diffusion models like <em>Stable Diffusion</em> or <em>VideoLDM</em>. These embeddings are suitable for models that generate data by sampling from continuous distributions.
 Discrete tokenizers encode visual data into discrete latent codes, mapping them into quantized indices, as seen in autoregressive transformers such as VideoPoet. This discrete representation is necessary for models such as GPT that are trained with the <em>cross-entropy loss</em>.</p>
@@ -340,8 +345,9 @@ The paper cites <em>GPT models</em> and how they're trained with cross-entropy l
 </blockquote>
 <p>The success of tokenizers largely relies on their ability to deliver high compression rates without compromising their subsequent visual reconstruction quality. On one hand, high compression reduces storage and computational demands. On the other hand, excessive compression can lead to the loss of essential visual details. This trade-off presents a significant challenge in tokenizer design.</p>
 <p>The following image illustrates the two types of tokens:</p>
-<p><img alt="Visualization of continuous and discrete tokenizers" src="../../images/cosmos_tokenizer/token_types.png" /></p>
-<p>Tokens along spatial (<span class="arithmatex">\(\frac{H}{S_{HW}} \times \frac{W}{S_{HW}}\)</span>) and temporal (<span class="arithmatex">\(1 + \frac{T}{S_T}\)</span>) dimensions, with a spatial compression factor of <span class="arithmatex">\(S_{HW}\)</span> and a temporal compression factor of <span class="arithmatex">\(S_T\)</span>. The first temporal token represents the first input frame, enabling joint image (<span class="arithmatex">\(T=0\)</span>) and video (<span class="arithmatex">\(T&gt;0\)</span>) tokenization in a shared latent space.</p>
+<p><img alt="Visualization of continuous and discrete tokenizers" src="../../images/cosmos_tokenizer/token_types.png" />
+<em>"Figura S2.2-F7-ENG — Visualization of discrete Tokenizers"</em>
+Tokens along spatial (<span class="arithmatex">\(\frac{H}{S_{HW}} \times \frac{W}{S_{HW}}\)</span>) and temporal (<span class="arithmatex">\(1 + \frac{T}{S_T}\)</span>) dimensions, with a spatial compression factor of <span class="arithmatex">\(S_{HW}\)</span> and a temporal compression factor of <span class="arithmatex">\(S_T\)</span>. The first temporal token represents the first input frame, enabling joint image (<span class="arithmatex">\(T=0\)</span>) and video (<span class="arithmatex">\(T&gt;0\)</span>) tokenization in a shared latent space.</p>
 <blockquote>
 <p><span class="arithmatex">\(S_{HW}\)</span> is the <strong><em>spatial compression factor</em></strong> used to compress the spatial dimensions of an image. This is a key step in the spatial tokenization process, where the input frame is divided into smaller patches or blocks with each one of these being represented by one or more tokens.</p>
 <p>If the original image's dimension is <span class="arithmatex">\(224\times 224 \times 3\)</span>, and the <em>spatial compression factor</em> was 16, the token grid would be <span class="arithmatex">\(14\times 14\)</span>, and each token would hold information on a patch of <span class="arithmatex">\(16\times 16\)</span> pixels.</p>
@@ -350,15 +356,17 @@ The addition of <span class="arithmatex">\(1\)</span> allows the model to treat 
 <p>If the image mentioned above was part of a video with <span class="arithmatex">\(32\)</span> frames, and the <em>temporal compression factor</em> had a value of <span class="arithmatex">\(4\)</span>, the tokenization process will produce 9 temporal tokens. <span class="arithmatex">\(1\)</span> for the first frame (adaptability for handling images), and 8 other tokens each compressing 4 frames.</p>
 </blockquote>
 <p>The following table illustrates different visual Tokenizers and their capabilities:</p>
-<p><img alt="Different tokenizers and capabilities" src="../../images/cosmos_tokenizer/tokenizers_table.png" /></p>
-<p>The <em>Cosmos Tokenizer</em> uses a lightweight and computationally efficient architecture with a temporally causal mechanism. Specifically, it employs causal temporal convolution layers and causal temporal attention layers to preserve the natural temporal order of video frames.</p>
+<p><img alt="Different tokenizers and capabilities" src="../../images/cosmos_tokenizer/tokenizers_table.png" />
+<em>"Figura S2.2-F8-ptbr — Different Tokenizers and its capabilites"</em>
+The <em>Cosmos Tokenizer</em> uses a lightweight and computationally efficient architecture with a temporally causal mechanism. Specifically, it employs causal temporal convolution layers and causal temporal attention layers to preserve the natural temporal order of video frames.</p>
 <blockquote>
 <p>The term "causal" implies that any predictions on a particular frame or time step are based only on that frame and all previous frames, not on any future ones. Therefore "<em>Causal Temporal Convolution</em>" means that the feature generation for a given frame only uses data from frame <span class="arithmatex">\(t\)</span> and earlier.</p>
 <p>The same idea applies to "<em>Causal Temporal Attention</em>", where the tokenizer dynamically weighs which frames to focus on when making decisions about the current frame.</p>
 </blockquote>
 <p>The tokenizers are trained directly on high-resolution images and long-duration videos without limiting the categories or aspect ratios. The Cosmos Tokenizer operates across various aspect ratios. They are temporally length-agnostic during inference, capable of tokenizing beyond the temporal length on which it was trained.</p>
 <p>The plots bellow show the comparison in performance between the Cosmos Tokenizer and other ones, and denotes the superior quality even at higher compression rates:</p>
-<p><img alt="Tokenizer comparisons" src="../../images/cosmos_tokenizer/tokenizer_comparison.png" /></p>
+<p><img alt="Tokenizer comparisons" src="../../images/cosmos_tokenizer/tokenizer_comparison.png" />
+<em>"Figura S2.2-F8-ptbr — Comparisons between Tokenizers"</em></p>
 <h3 id="architecture">Architecture</h3>
 <p>Cosmos Tokenizer is designed as an encoder-decoder architecture.
 Given an input video <span class="arithmatex">\(x_{0:T}\in\mathbb{R^{(1 + T)\times H\times W\times 3}}\)</span> with <span class="arithmatex">\(H,\ W,\ T\)</span> being the height, width, and number of frames, the encoder (<span class="arithmatex">\(\varepsilon\)</span>) tokenizes the inputs into a token video <span class="arithmatex">\(z_{0:T'}\in\mathbb{R^{(1+T) \times H\times W\times 3}}\)</span>, with a spatial compression factor of <span class="arithmatex">\(s_{HW} = \frac{H}{H'}=\frac{W}{W'}\)</span> and a temporal compression factor of <span class="arithmatex">\(S_T = \frac{T}{T'}\)</span>.
@@ -397,7 +405,8 @@ The decoder mirrors the encoder replacing the downsampling blocks with an upsamp
 <p>The <strong><em>Swish activation function</em></strong>, defined by <span class="arithmatex">\(\operatorname{Swish}^{\beta}(x) = x \cdot sigmoid(\beta x) = \frac{x}{1+e^{-\beta x}}\)</span></p>
 <p><img alt="Swish activation function" src="../../images/cosmos_tokenizer/swish_activation_function.png" /></p>
 </blockquote>
-<p><img alt="Tokenizer architecture" src="../../images/cosmos_tokenizer/tokenizer_architecture.png" /></p>
+<p><img alt="Tokenizer architecture" src="../../images/cosmos_tokenizer/tokenizer_architecture.png" />
+<em>"Figura S2.2-F8-ptbr — Tokenizers architectures"</em></p>
 <p>The image depicts the <strong>Overall Cosmos Tokenizer architecture illustrating the integration of temporal causality and an encoder-decoder structure.</strong> Temporal causality (left) processes sequential inputs, while the encoder-decoder (right) leverages wavelet transforms and causal operations to capture spatial and temporal dependencies in the data.</p>
 <blockquote>
 <p>The <strong><em>Haar Wavelet3D</em></strong> block does the process shown in the visualization bellow to a group of 4 values in each dimension:</p>
@@ -526,7 +535,7 @@ Moreover, even with <span class="arithmatex">\(2\times\)</span> and <span class=
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
         <a href="../../../autoregressive/autoregressive/" class="btn btn-neutral float-left" title="Autoregressive models"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../wavelet_compression/" class="btn btn-neutral float-right" title="Image Decomposition With Wavelets | Decomposição de imagem com Wavelets">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../wavelet_compression/" class="btn btn-neutral float-right" title="Decomposição de imagem com Wavelets">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>

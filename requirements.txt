@@ -8,3 +8,8 @@ pymdown-extensions
 PyWavelets
 numpy
 matplotlib
+
+# Engine
+pymunk
+pygame
+pyglet

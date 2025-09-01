@@ -8,3 +8,8 @@ pymdown-extensions
 PyWavelets
 numpy
 matplotlib
+tensorflow
+torch
+scikit-learn
+notebook
+pandas

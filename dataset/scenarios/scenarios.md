@@ -30,4 +30,7 @@ Dado que o objetivo dos cenários é criar um dataset, a simulação foi configu
 
 A diversidade do dataset pode ser alcaçada ao juntar a interação com o usuário mencionada e a alteração dos objetos da simulação. Dessa forma, esse cenário é uma forma flexível de testar colisões simples, gravidade e perda de energia.
 
-## Cenário 2
+## Cenário 2: Bolas e obstáculos
+
+> Esse cenário foca em testar a interação entre múltiplos objetos e colisões com superfícies mais complexas e dinâmicas, que podem ser criadas pelo próprio usuário.
+

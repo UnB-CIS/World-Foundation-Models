@@ -2,6 +2,7 @@ import pygame
 import pymunk
 import pymunk.pygame_util
 import cv2 
+import numpy as np
 import datetime
 import os
 
@@ -98,16 +99,17 @@ def run_simulation_and_record():
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_b:
                     current_object_type = 'ball'
-                    print("Modo: Criar Bolas")
                 elif event.key == pygame.K_q:
                     current_object_type = 'box'
-                    print("Modo: Criar Caixas")
 
-        # Criar varias bolas com Shift + Botao Esquerdo 
+        # Adiciona multiplos objetos
         mouse_buttons = pygame.mouse.get_pressed()
         keys = pygame.key.get_mods()
-        if mouse_buttons[0] and keys & pygame.KMOD_SHIFT and current_object_type == 'ball':
-            add_ball(space, pygame.mouse.get_pos())
+        if mouse_buttons[0] and keys & pygame.KMOD_SHIFT:
+            if current_object_type == 'ball':
+                add_ball(space, pygame.mouse.get_pos())
+            elif current_object_type == 'box':
+                add_box(space, pygame.mouse.get_pos())
 
         # Limpar a tela
         screen.fill((255, 255, 255))

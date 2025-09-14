@@ -2,7 +2,6 @@ import pygame
 import pymunk
 import pymunk.pygame_util
 import cv2 
-import numpy as np
 import datetime
 import os
 
@@ -33,7 +32,6 @@ def add_ball_at_mouse_position(space, pos):
     bola_shape.friction = 0.8
     space.add(bola_body, bola_shape)
 
-# --- Loop Principal de Simulação e Gravação ---
 def run_simulation_and_record():
     """Roda a simulação e grava um vídeo."""
     screen, clock = setup_pygame()

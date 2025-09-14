@@ -2,6 +2,8 @@ import pygame
 import pymunk
 import pymunk.pygame_util
 import cv2 
+import numpy as np
+import datetime
 import os
 
 def setup_pygame():
@@ -31,12 +33,14 @@ def add_ball_at_mouse_position(space, pos):
     bola_shape.friction = 0.8
     space.add(bola_body, bola_shape)
 
+# --- Loop Principal de Simulação e Gravação ---
 def run_simulation_and_record():
     """Roda a simulação e grava um vídeo."""
     screen, clock = setup_pygame()
-    
-    # Definir o nome do arquivo
-    video_filename = "cenario_1.mp4"
+
+    # Gerar um nome de arquivo unico com data e hora
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    video_filename = f"cenario1:{timestamp}.mp4"
     
     # Salva o vídeo na pasta 'videos', um nivel acima da atual
     video_path = os.path.join(os.path.dirname(__file__), '..', 'videos', video_filename)

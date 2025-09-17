@@ -1,618 +1,241 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Autoregressive models - World Foundation Models</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Autoregressive models";
+        var mkdocs_page_input_path = "autoregressive/autoregressive.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
 
-<!doctype html>
-<html lang="en" class="no-js">
-  <head>
-    
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      
-      
-      
-      
-        <link rel="prev" href="../../diffusion/">
-      
-      
-        <link rel="next" href="../../tokens/cosmos_tokenizer/cosmos_tokenizer/">
-      
-      
-      <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
-    
-    
-      
-        <title>Autoregressive models - World Foundation Models</title>
-      
-    
-    
-      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
-      
-      
+<body class="wy-body-for-nav" role="document">
 
-
-    
-    
-      
-    
-    
-      
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
-    
-    
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
-    
-      
-
-    
-    
-    
-  </head>
-  
-  
-    <body dir="ltr">
-  
-    
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" for="__drawer"></label>
-    <div data-md-component="skip">
-      
-        
-        <a href="#modelos-autorregressivos-e-aplicacao-em-world-foundation-models-wfms" class="md-skip">
-          Skip to content
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> World Foundation Models
         </a>
-      
-    </div>
-    <div data-md-component="announce">
-      
-    </div>
-    
-    
-      
+      </div>
 
-  
-
-<header class="md-header md-header--shadow" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="World Foundation Models" class="md-header__button md-logo" aria-label="World Foundation Models" data-md-component="logo">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
-
-    </a>
-    <label class="md-header__button md-icon" for="__drawer">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
-    </label>
-    <div class="md-header__title" data-md-component="header-title">
-      <div class="md-header__ellipsis">
-        <div class="md-header__topic">
-          <span class="md-ellipsis">
-            World Foundation Models
-          </span>
-        </div>
-        <div class="md-header__topic" data-md-component="header-topic">
-          <span class="md-ellipsis">
-            
-              Autoregressive models
-            
-          </span>
-        </div>
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../projeto/escopo/">Projeto</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Referências</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../../diffusion/diffusion/">Diffusion models</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Autoregressive models</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#english">English</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#what-is-an-autoregressive-model">What is an Autoregressive Model?</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#usage-examples">Usage examples</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#wfm-based-on-an-autoregressive-model">WFM based on an autoregressive model</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#system-architecture">System Architecture</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#advantages-of-the-approach">Advantages of the Approach</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#limitations">Limitations</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#portugues">Português</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#o-que-e-um-modelo-autorregressivo">O que é um Modelo Autorregressivo?</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#exemplos-de-uso">Exemplos de uso</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#wfm-baseado-em-modelo-autorregressivo">WFM baseado em modelo autorregressivo</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#arquitetura-do-sistema">Arquitetura do Sistema</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#vantagens-da-abordagem">Vantagens da Abordagem</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#limitacoes">Limitações</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Tokens</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" >Cosmos Tokenizer</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../tokens/cosmos_tokenizer/cosmos_tokenizer/">Cosmos Tokenizer</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../tokens/cosmos_tokenizer/wavelet_compression/">Image Decomposition With Wavelets | Decomposição de imagem com Wavelets</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../tokens/dsc_tokenization/">DSC Tokenization</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cosmos_applications/cosmos_applications/">Cosmos Applications</a>
+                  </li>
+              </ul>
       </div>
     </div>
-    
-    
-      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
-    
-    
-    
-    
-  </nav>
-  
-</header>
-    
-    <div class="md-container" data-md-component="container">
-      
-      
-        
-          
-        
-      
-      <main class="md-main" data-md-component="main">
-        <div class="md-main__inner md-grid">
-          
-            
-              
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-
-
-<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
-  <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="World Foundation Models" class="md-nav__button md-logo" aria-label="World Foundation Models" data-md-component="logo">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
-
-    </a>
-    World Foundation Models
-  </label>
-  
-  <ul class="md-nav__list" data-md-scrollfix>
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Home
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../diffusion/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Diffusion models
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Autoregressive models
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
-    Autoregressive models
-    
-  </span>
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#o-que-e-um-modelo-autorregressivo" class="md-nav__link">
-    <span class="md-ellipsis">
-      O que é um Modelo Autorregressivo?
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="O que é um Modelo Autorregressivo?">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#exemplos-de-uso" class="md-nav__link">
-    <span class="md-ellipsis">
-      Exemplos de uso
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#wfm-baseado-em-modelo-autoregressivo" class="md-nav__link">
-    <span class="md-ellipsis">
-      WFM baseado em modelo autoregressivo
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="WFM baseado em modelo autoregressivo">
-      <ul class="md-nav__list">
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">World Foundation Models</a>
         
-          <li class="md-nav__item">
-  <a href="#arquitetura-do-sistema" class="md-nav__link">
-    <span class="md-ellipsis">
-      Arquitetura do Sistema
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#vantagens-da-abordagem" class="md-nav__link">
-    <span class="md-ellipsis">
-      Vantagens da Abordagem
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#limitacoes" class="md-nav__link">
-    <span class="md-ellipsis">
-      Limitações
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Referências</li>
+      <li class="breadcrumb-item active">Autoregressive models</li>
+    <li class="wy-breadcrumbs-aside">
     </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Tokens
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4">
-            <span class="md-nav__icon md-icon"></span>
-            Tokens
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Cosmos Tokenizer
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_1">
-            <span class="md-nav__icon md-icon"></span>
-            Cosmos Tokenizer
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../tokens/cosmos_tokenizer/cosmos_tokenizer/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Cosmos Tokenizer
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../tokens/cosmos_tokenizer/wavelet_compression/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Decomposição de imagem com Wavelets
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../tokens/dsc_tokenization/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    DSC Tokenization
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cosmos_applications/cosmos_applications/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Cosmos Applications
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
   </ul>
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-            
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
               
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#o-que-e-um-modelo-autorregressivo" class="md-nav__link">
-    <span class="md-ellipsis">
-      O que é um Modelo Autorregressivo?
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="O que é um Modelo Autorregressivo?">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#exemplos-de-uso" class="md-nav__link">
-    <span class="md-ellipsis">
-      Exemplos de uso
-    </span>
-  </a>
-  
+                <h1 id="autoregressive-models-and-application-on-world-foundation-models-wfms">Autoregressive models and application on World Foundation Models (WFMs)</h1>
+<p><strong><em>Authors / Autores: <a href="http://github.com/gibi177">@gibi177</a>, <a href="http://github.com/DaniloCTM">@DaniloCTM</a></em></strong></p>
+<h2 id="english">English</h2>
+<h3 id="what-is-an-autoregressive-model">What is an Autoregressive Model?</h3>
+<p>An autoregressive (AR) model is a type of statistical model that predicts future values in a sequence based on its own past values. The term “autoregressive” reflects the idea that the model “regresses on itself", that is, predictions are made from previous observations. In it, we have the relationship:</p>
+<ul>
+<li><strong>Input</strong>: Past observations (e.g., previous words in a sentence, frames in a video).</li>
+<li><strong>Output</strong>: Prediction of the next value in the sequence (e.g., next word, next frame).</li>
+</ul>
+<p>The formula that describes autoregressive models is expressed as</p>
+<div class="arithmatex">\[X_t = \sum_{i=1}^{p} \phi_i X_{t-i} + \varepsilon_t\]</div>
+<p>Where:</p>
+<ul>
+<li><span class="arithmatex">\(X_t\)</span> is the value of the time series at time <span class="arithmatex">\(t\)</span>,</li>
+<li><span class="arithmatex">\(\phi_i\)</span> are the autoregressive coefficients,</li>
+<li><span class="arithmatex">\(p\)</span> is the order of the autoregressive model,</li>
+<li><span class="arithmatex">\(X_{t-i}\)</span> are the past values of the time series</li>
+<li><span class="arithmatex">\(\varepsilon_t\)</span> is the error or noise, considered a random variable with zero mean and constant variance</li>
+</ul>
+<p><img alt="Comparison between 2 AR models" src="../images/ar_comparison.png" /></p>
+<p><em>Comparison between 2 autoregressive models with different parameters. The image shows the flexibility of the models in handling different time series patterns.</em></p>
+<h4 id="usage-examples">Usage examples</h4>
+<p>Autoregressive models are widely used in areas such as natural language processing (NLP) and time series due to their ability to capture sequential and temporal dependencies. Some examples of autoregressive models are:</p>
+<ul>
+<li>
+<p><strong>Time series</strong>: used to predict sequential data, such as stock prices, weather forecasting, or data traffic.</p>
 </li>
-        
-      </ul>
-    </nav>
-  
+<li>
+<p><strong>NLP</strong>: models like GPT operate with an autoregressive approach, generating the next word based on the previous words, sequentially. Dependence among previous words is important for generating context and coherent sentences.</p>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#wfm-baseado-em-modelo-autoregressivo" class="md-nav__link">
-    <span class="md-ellipsis">
-      WFM baseado em modelo autoregressivo
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="WFM baseado em modelo autoregressivo">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#arquitetura-do-sistema" class="md-nav__link">
-    <span class="md-ellipsis">
-      Arquitetura do Sistema
-    </span>
-  </a>
-  
+<li>
+<p><strong>Audio and Signal</strong>s: The AR model is a classical foundation in audio signal analysis, such as in audio coding, speech recognition, and music signal processing. Autocorrelation among audio data at different times can be modeled to predict sounds or identify temporal patterns.</p>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#vantagens-da-abordagem" class="md-nav__link">
-    <span class="md-ellipsis">
-      Vantagens da Abordagem
-    </span>
-  </a>
-  
+</ul>
+<p><img alt="Autoregression example in NLP applied context" src="../images/nlp_autoregression_example.png" /></p>
+<p><em>Example of an autoregressive application for next-word prediction in a context. The sequential nature of predictions is evident, where only one word is predicted at a time. Furthermore, each word depends on previously generated words, demonstrating the autoregressive nature of language models.</em></p>
+<h3 id="wfm-based-on-an-autoregressive-model">WFM based on an autoregressive model</h3>
+<p>WFMs that use autoregressive approaches apply the same principles of language models to the generation of simulated environments. In this architecture, world simulation is generated by predicting the next token, where each video frame is converted into a sequence of tokens that are processed sequentially by the model. The autoregressive nature comes precisely from predicting the next tokens based on the sequence of frames already seen.</p>
+<p>These tokens can represent pixels, visual patches (as in the Vision Transformer), text embeddings, commands, or actions. The model is trained to predict the next token from an accumulated context, respecting the causal order of the data: each prediction is conditioned only on present and past input values, but never on future values.</p>
+<p><img alt="WFM inputs" src="../images/wfm_input_images_text.png" /></p>
+<p><em>The combination of images and text is often used to generate the actions that the physical AI will perform. The combination of image frames with textual inputs, enabled by the model’s transformer architecture, allows finer control over the actions performed by the agent in the real world.</em></p>
+<p>This multimodal integration (combination of multiple data modalities) allows the model to function as a general agent that observes the environment (via video or images), understands commands (via text), and generates sequences of actions based on these inputs. The model learns to simulate and anticipate world states, acting as an autoregressive planner that operates based on continuous observations of the environment.</p>
+<h4 id="system-architecture">System Architecture</h4>
+<p><img alt="Architecture" src="../images/architecture.png" /></p>
+<p>The architecture of autoregressive WFMs follows three main components:</p>
+<ol>
+<li>
+<p><strong>Video Tokenization</strong>:</p>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#limitacoes" class="md-nav__link">
-    <span class="md-ellipsis">
-      Limitações
-    </span>
-  </a>
-  
+<li>
+<p>Videos are initially passed through a visual tokenizer, which transforms each frame into a sequence of discrete tokens. These tokens are compact representations of the frames. In this architecture it produces a tensor of (8x16x16).</p>
 </li>
-        
-      </ul>
-    </nav>
-  
+<li>
+<p><strong>Autoregressive Core</strong>:</p>
 </li>
-      
-    </ul>
-  
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-          
-          
-            <div class="md-content" data-md-component="content">
-              <article class="md-content__inner md-typeset">
-                
-                  
-
-
-
-<h1 id="modelos-autorregressivos-e-aplicacao-em-world-foundation-models-wfms">Modelos Autorregressivos e Aplicação em World Foundation Models (WFMs)</h1>
-<h2 id="o-que-e-um-modelo-autorregressivo">O que é um Modelo Autorregressivo?</h2>
+<li>
+<p>The core of the model is a Transformer decoder, trained to predict the next token based on the previous sequence (this is where the autoregressive nature lies). To handle the three-dimensional structure of videos (time, height, and width), spatial and temporal positional embeddings are used. It can also receive additional information, such as natural language instructions, through cross-attention mechanisms.</p>
+</li>
+<li>
+<p><strong>Positional Embedding:</strong> Attention-based models (Transformers) do not understand order or position by default. For the model to process videos (or any sequential data), it is essential to specify where and when each token occurs. This is where positional embeddings come in, and in this case, we have two combined types:</p>
+<ul>
+<li>
+<p><strong>Absolute Positional Embedding:</strong> For each position in the video, the model assigns a fixed vector. This vector is then added directly to the vocabulary token embedding:</p>
+</li>
+<li>
+<p><span class="arithmatex">\(\text{vocabulary\_embedding} + \text{positional\_embedding} = \text{final\_embedding}\)</span></p>
+</li>
+<li>
+<p><strong>3D RoPE:</strong> RoPE (Rotary Positional Embedding) is a type of embedding that incorporates position into the vector via trigonometric rotation, rather than adding a fixed vector. By applying trigonometric rotation to the 3D vector, it is able to infer relative dimensions among tokens, directions of movement, rhythms, and spatial and temporal patterns.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>T5 text encoder:</strong> The T5 Text Encoder is the encoder component of the T5 (Text-to-Text Transfer Transformer) model, designed to transform any natural language task into a text-to-text task. In this encoder, the input text (such as a descriptive prompt) is tokenized and processed by a stack of Transformer layers, generating a sequence of dense contextual vectors that capture the semantic meaning of each word in the context of the sentence. These embeddings are then used in cross-attention with the video tokens, allowing the model to condition video reconstruction or generation based on textual content. The use of the T5 encoder enables the system to understand natural language commands with semantic depth, guiding multimodal processing in a flexible and expressive way.</p>
+</li>
+<li>
+<p><strong>Cross Attention:</strong> Cross-attention allows video tokens to be guided by text tokens, combining the two modalities intelligently to interpret or generate video based on natural language. The equation used in both self-attention and cross-attention is:</p>
+<ul>
+<li><span class="arithmatex">\(\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right) V\)</span></li>
+<li>Where:</li>
+<li><span class="arithmatex">\(Q\)</span> = query matrix</li>
+<li><span class="arithmatex">\(K\)</span> = key matrix</li>
+<li><span class="arithmatex">\(V\)</span> = value matrix</li>
+<li><span class="arithmatex">\(d_k\)</span> = dimension of the key vectors (scaling normalizer)</li>
+<li><span class="arithmatex">\(QK^T\)</span> = dot product between queries and keys</li>
+<li><span class="arithmatex">\(\text{softmax}\)</span> = transforms weights into probabilities</li>
+</ul>
+</li>
+<li>
+<p><strong>Decoding</strong>:</p>
+</li>
+<li>
+<p>Generation happens sequentially, token by token, until a new frame is reconstructed. There is the possibility that the generated tokens are passed through a diffusion decoder to improve visual quality</p>
+</li>
+</ol>
+<h4 id="advantages-of-the-approach">Advantages of the Approach</h4>
+<p>Among the main strengths of this architecture is its <strong>scalability</strong>: by inheriting the structure of large language models (LLMs), it adapts well to the use of large volumes of data.
+Another important aspect is <strong>flexibility</strong>: the model can handle different types of input (text, video, image), generate sequences of varying lengths, and be controlled precisely by prompts</p>
+<h4 id="limitations">Limitations</h4>
+<p>Despite the advantages, there are inherent challenges to the approach. The <strong>sequential generation</strong> makes the process naturally slower and more computationally expensive, especially in long videos.
+In addition, since each step depends on the previous one, <strong>small errors tend to propagate</strong> and amplify along the sequence, which can compromise the coherence of the generated video.
+Finally, the aggressive tokenization process, necessary to reduce computational cost, can introduce <strong>unexpected objects</strong> that affect the fidelity of the simulation, which is why it is often necessary to apply post-processing with diffusion models.</p>
+<h2 id="portugues">Português</h2>
+<h3 id="o-que-e-um-modelo-autorregressivo">O que é um Modelo Autorregressivo?</h3>
 <p>Um modelo autorregressivo (AR) é um tipo de modelo estatístico que prevê valores futuros em uma sequência com base em seus próprios valores passados. O termo "autorregressivo" reflete a ideia de que o modelo "faz regressão sobre si mesmo", ou seja, as previsões são feitas a partir das observações anteriores. Nele, temos a relação:</p>
 <ul>
 <li>
@@ -622,49 +245,42 @@
 <p><strong>Saída</strong>: Previsão do próximo valor na sequência (ex: próxima palavra, próximo quadro).</p>
 </li>
 </ul>
-<p>A fórmula que descreve os modelos autoregressivos é expressa como</p>
+<p>A fórmula que descreve os modelos autorregressivos é expressa como</p>
 <div class="arithmatex">\[X_t = \sum_{i=1}^{p} \phi_i X_{t-i} + \varepsilon_t\]</div>
 <p>Onde:</p>
 <ul>
 <li><span class="arithmatex">\(X_t\)</span> é o valor da série temporal no tempo <span class="arithmatex">\(t\)</span>,</li>
-<li><span class="arithmatex">\(\phi_i\)</span> são os coeficientes autoregressivos,</li>
-<li><span class="arithmatex">\(p\)</span> é a ordem do modelo autoregressivo,</li>
+<li><span class="arithmatex">\(\phi_i\)</span> são os coeficientes autorregressivos,</li>
+<li><span class="arithmatex">\(p\)</span> é a ordem do modelo autorregressivo,</li>
 <li><span class="arithmatex">\(X_{t-i}\)</span> são os valores passados da série temporal</li>
 <li><span class="arithmatex">\(\varepsilon_t\)</span> é o erro ou ruído, considerado como uma variável aleatória com média zero e variância constante</li>
 </ul>
-<p><img alt="Comparação de 2 modelos AR" src="../src/AR_comparison.png" /></p>
-<blockquote>
-<p>Comparação entre 2 modelos autoregressivos com parâmetros diferentes. A imagem mostra a flexibilidade dos modelos em tratar diferentes padrões de séries temporais.</p>
-</blockquote>
-<h3 id="exemplos-de-uso">Exemplos de uso</h3>
-<p>Modelos autoregressivos são muito usados em áreas como processamento de linguagem natural (PLN) e séries temporais, devido à sua capacidade de capturar dependências sequenciais e temporais. Alguns exemplos de modelos autoregressivos são:</p>
+<p><img alt="Comparação de 2 modelos AR" src="../images/ar_comparison.png" /></p>
+<p><em>Comparação entre 2 modelos autorregressivos com parâmetros diferentes. A imagem mostra a flexibilidade dos modelos em tratar diferentes padrões de séries temporais.</em></p>
+<h4 id="exemplos-de-uso">Exemplos de uso</h4>
+<p>Modelos autorregressivos são muito usados em áreas como processamento de linguagem natural (PLN) e séries temporais, devido à sua capacidade de capturar dependências sequenciais e temporais. Alguns exemplos de modelos autorregressivos são:</p>
 <ul>
 <li>
-<p><strong>Séries temporais</strong>: usados para prever dados sequenciais, como preços de ações, previsão do tempo ou tráfego de dados</p>
+<p><strong>Séries temporais</strong>: usados para prever dados sequenciais, como preços de ações, previsão do tempo ou tráfego de dados.</p>
 </li>
 <li>
-<p><strong>PLN</strong>: modelos como o GPT funcionam com abordagem autoregressiva, gerando a próxima palavra com base nas palavras anteriores, sequencialmente. A dependência entre palavras anteriores é importante para a geração de contexto e de frases coerentes.</p>
+<p><strong>PLN</strong>: modelos como o GPT funcionam com abordagem autorregressiva, gerando a próxima palavra com base nas palavras anteriores, sequencialmente. A dependência entre palavras anteriores é importante para a geração de contexto e de frases coerentes.</p>
 </li>
 <li>
 <p><strong>Áudio e Sinais</strong>: O modelo AR é uma base clássica na análise de sinais de áudio, como na codificação de áudio, reconhecimento de fala e processamento de sinais de música. A autocorrelação entre os dados de áudio em diferentes tempos pode ser modelada para prever sons ou identificar padrões temporais.</p>
 </li>
 </ul>
-<p><img alt="Exemplo de autoregressão aplicado em contexto de PLN" src="../src/exemplo_autoregressao_linguagem.png" /></p>
-<blockquote>
-<p>Exemplo de aplicação autoregressiva para previsão da próxima palavra em um contexto. Percebe-se a sequencialidade das previsões, em que apenas uma palavra é predita de cada vez. Além disso, cada palavra depende das palavras previamente geradas, demonstrando o caráter autoregressivo dos modelos de linguagem.</p>
-</blockquote>
-<h2 id="wfm-baseado-em-modelo-autoregressivo">WFM baseado em modelo autoregressivo</h2>
-<p>WFMs que utilizam abordagens autoregressivas aplicam os mesmos princípios dos modelos de linguagem à geração de ambientes simulados.
-Nesta arquitetura, a simulação de mundo é gerada por meio da previsão do próximo token, onde cada frame de vídeo é convertido em uma sequência de tokens que são processados sequencialmente pelo modelo. O caráter autoregressivo vem justamente da previsão dos próximos tokens com base na sequência de frames já vista.</p>
+<p><img alt="Exemplo de autoregressão aplicado em contexto de PLN" src="../images/nlp_autoregression_example.png" /></p>
+<p><em>Exemplo de aplicação autoregressiva para previsão da próxima palavra em um contexto. Percebe-se a sequencialidade das previsões, em que apenas uma palavra é predita de cada vez. Além disso, cada palavra depende das palavras previamente geradas, demonstrando o caráter autorregressivo dos modelos de linguagem.</em></p>
+<h3 id="wfm-baseado-em-modelo-autorregressivo">WFM baseado em modelo autorregressivo</h3>
+<p>WFMs que utilizam abordagens autorregressivas aplicam os mesmos princípios dos modelos de linguagem à geração de ambientes simulados. Nesta arquitetura, a simulação de mundo é gerada por meio da previsão do próximo token, onde cada frame de vídeo é convertido em uma sequência de tokens que são processados sequencialmente pelo modelo. O caráter autorregressivo vem justamente da previsão dos próximos tokens com base na sequência de frames já vista.</p>
 <p>Esses tokens podem representar pixels, patches visuais (como no Vision Transformer), embeddings de texto, comandos ou ações. O modelo é treinado para prever o próximo token a partir de um contexto acumulado, respeitando a ordem causal dos dados: cada predição é condicionada apenas pelos valores presentes e passados de entrada, mas nunca de valores futuros.</p>
-<p><img alt="Entradas para o WFM" src="../src/WFM_input_imagens_texto.png" /></p>
-<blockquote>
-<p>Frequentemente usa-se a combinação de imagens e texto para gerar as ações que a IA física realizará. A combinação de frames de imagens com inputs textuais, proporcionados pela arquitetura transformer do modelo, permite um controle mais fino das ações realizadas pelo agente no mundo real.</p>
-</blockquote>
-<p>Essa integração multimodal (combinação de várias modalidades de dados), permite que o modelo funcione como um agente geral que observa o ambiente (por vídeo ou imagens), entende comandos (por texto) e gera sequências de ações com base nessas entradas. O modelo aprende a simular e antecipar estados do mundo, funcionando como um planejador autoregressivo que age com base em observações contínuas do ambiente.</p>
-<h3 id="arquitetura-do-sistema">Arquitetura do Sistema</h3>
-<p><img alt="alt text" src="../src/architecture.png" /></p>
-<p>A arquitetura das WFMs autoregressivas segue três componentes principais:</p>
+<p><img alt="Entradas para o WFM" src="../images/wfm_input_images_text.png" /></p>
+<p><em>Frequentemente usa-se a combinação de imagens e texto para gerar as ações que a IA física realizará. A combinação de frames de imagens com inputs textuais, proporcionados pela arquitetura transformer do modelo, permite um controle mais fino das ações realizadas pelo agente no mundo real.</em></p>
+<p>Essa integração multimodal (combinação de várias modalidades de dados), permite que o modelo funcione como um agente geral que observa o ambiente (por vídeo ou imagens), entende comandos (por texto) e gera sequências de ações com base nessas entradas. O modelo aprende a simular e antecipar estados do mundo, funcionando como um planejador autorregressivo que age com base em observações contínuas do ambiente.</p>
+<h4 id="arquitetura-do-sistema">Arquitetura do Sistema</h4>
+<p><img alt="Arquitetura" src="../images/architecture.png" /></p>
+<p>A arquitetura das WFMs autorregressivas segue três componentes principais:</p>
 <ol>
 <li>
 <p><strong>Tokenização de Vídeo</strong>:</p>
@@ -673,33 +289,30 @@ Nesta arquitetura, a simulação de mundo é gerada por meio da previsão do pr�
 </ul>
 </li>
 <li>
-<p><strong>Núcleo Autoregressivo</strong>:</p>
+<p><strong>Núcleo Autorregressivo</strong>:</p>
 <ul>
 <li>
-<p>O núcleo do modelo é um Transformer decoder, treinado para prever o próximo token com base na sequência anterior (aqui está o caráter autoregressivo). Para lidar com a estrutura tridimensional dos vídeos (tempo, altura e largura), são utilizados embeddings posicionais espaciais e temporais. Ele também pode receber informações adicionais, como instruções em linguagem natural, por meio de mecanismos de atenção cruzada.</p>
+<p>O núcleo do modelo é um Transformer decoder, treinado para prever o próximo token com base na sequência anterior (aqui está o caráter autorregressivo). Para lidar com a estrutura tridimensional dos vídeos (tempo, altura e largura), são utilizados embeddings posicionais espaciais e temporais. Ele também pode receber informações adicionais, como instruções em linguagem natural, por meio de mecanismos de atenção cruzada.</p>
 </li>
 <li>
 <p><strong>Positional Embedding:</strong> Modelos baseados em atenção (Transformers) não entendem ordem ou posição por padrão. Para que o modelo processe vídeos (ou qualquer dado sequencial), é essencial dizer onde e quando cada token ocorre. É aqui que entram os positional embeddings, e neste caso, temos dois tipos combinados:</p>
-<ul>
+</li>
 <li>
 <p><strong>Absolute Positional Embedding:</strong> Para cada posição no vídeo, o modelo atribui um vetor fixo. Em seguida esse vetor é somado diretamente ao embedding do token de vocabulário:</p>
-</li>
+<ul>
 <li>
 <div class="arithmatex">\[embedding\_vocabulário + embedding\_posicional = embedding\_final\]</div>
-</li>
-<li>
-<p><strong>3D Rope:</strong> RoPE (Rotary Positional Embedding) é um tipo de embedding que incorpora posição no vetor via rotação trigonométrica, ao invés de somar um vetor fixo. Ao aplicar a rotação trigonométrica no vetor 3D ele é consegue inferir, dimensões relativas entre tokens, direções de movimento, ritmos e padrões espacias e temporais.</p>
 </li>
 </ul>
 </li>
 <li>
-<p><strong>T5 text encoder:</strong> O T5 Text Encoder é a parte codificadora do modelo T5 (Text-to-Text Transfer Transformer), projetado para transformar qualquer tarefa de linguagem natural em uma tarefa de texto para texto.
-Nesse encoder, o texto de entrada (como um prompt descritivo) é tokenizado e processado por uma pilha de camadas Transformer, gerando uma sequência de vetores contextuais densos que capturam o significado semântico de cada palavra no contexto da frase. 
-Esses embeddings são então usados na cross-attention com os tokens do vídeo, permitindo que o modelo condicione a reconstrução ou geração de vídeo com base no conteúdo textual. O uso do T5 encoder permite que o sistema compreenda comandos em linguagem natural com profundidade semântica, guiando o processamento multimodal de forma flexível e expressiva.</p>
+<p><strong>3D Rope:</strong> RoPE (Rotary Positional Embedding) é um tipo de embedding que incorpora posição no vetor via rotação trigonométrica, ao invés de somar um vetor fixo. Ao aplicar a rotação trigonométrica no vetor 3D ele é consegue inferir, dimensões relativas entre tokens, direções de movimento, ritmos e padrões espacias e temporais.</p>
 </li>
 <li>
-<p><strong>Cross Attention:</strong> A cross-attention permite que os tokens do vídeo sejam guiados pelos tokens do texto, combinando as duas modalidades de forma inteligente para interpretar ou gerar vídeo com base em linguagem natural.
-  A equação usada tanto no <strong>self-attention</strong> quanto no <strong>cross-attention</strong> é:</p>
+<p><strong>T5 text encoder:</strong> O T5 Text Encoder é a parte codificadora do modelo T5 (Text-to-Text Transfer Transformer), projetado para transformar qualquer tarefa de linguagem natural em uma tarefa de texto para texto. Nesse encoder, o texto de entrada (como um prompt descritivo) é tokenizado e processado por uma pilha de camadas Transformer, gerando uma sequência de vetores contextuais densos que capturam o significado semântico de cada palavra no contexto da frase. Esses embeddings são então usados na cross-attention com os tokens do vídeo, permitindo que o modelo condicione a reconstrução ou geração de vídeo com base no conteúdo textual. O uso do T5 encoder permite que o sistema compreenda comandos em linguagem natural com profundidade semântica, guiando o processamento multimodal de forma flexível e expressiva.</p>
+</li>
+<li>
+<p><strong>Cross Attention:</strong> A cross-attention permite que os tokens do vídeo sejam guiados pelos tokens do texto, combinando as duas modalidades de forma inteligente para interpretar ou gerar vídeo com base em linguagem natural. A equação usada tanto no <strong>self-attention</strong> quanto no <strong>cross-attention</strong> é:</p>
 </li>
 <li>
 <div class="arithmatex">\[\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right) V\]</div>
@@ -724,72 +337,60 @@ Esses embeddings são então usados na cross-attention com os tokens do vídeo, 
 </ul>
 </li>
 </ol>
-<h3 id="vantagens-da-abordagem">Vantagens da Abordagem</h3>
-<p>Entre os principais pontos positivos dessa arquitetura está sua <strong>escalabilidade</strong>: por herdar a estrutura dos grandes modelos de linguagem (LLMs), ela se adapta bem ao uso de grandes volumes de dados. 
+<h4 id="vantagens-da-abordagem">Vantagens da Abordagem</h4>
+<p>Entre os principais pontos positivos dessa arquitetura está sua <strong>escalabilidade</strong>: por herdar a estrutura dos grandes modelos de linguagem (LLMs), ela se adapta bem ao uso de grandes volumes de dados.
 Outro aspecto importante é a <strong>flexibilidade</strong>: o modelo pode lidar com diferentes tipos de entrada (texto, vídeo, imagem), gerar sequências de comprimentos variados e ser controlado de maneira precisa por prompts</p>
-<h3 id="limitacoes">Limitações</h3>
-<p>Apesar das vantagens, há desafios inerentes à abordagem. A <strong>geração sequencial</strong> faz com que o processo seja naturalmente mais lento e custoso do ponto de vista computacional, principalmente em vídeos longos. 
-Além disso, como cada passo depende do anterior, <strong>pequenos erros tendem a se propagar</strong> e se amplificar ao longo da sequência, o que pode comprometer a coerência do vídeo gerado. 
+<h4 id="limitacoes">Limitações</h4>
+<p>Apesar das vantagens, há desafios inerentes à abordagem. A <strong>geração sequencial</strong> faz com que o processo seja naturalmente mais lento e custoso do ponto de vista computacional, principalmente em vídeos longos.
+Além disso, como cada passo depende do anterior, <strong>pequenos erros tendem a se propagar</strong> e se amplificar ao longo da sequência, o que pode comprometer a coerência do vídeo gerado.
 Por fim, o processo de tokenização agressiva, necessário para reduzir o custo computacional, pode introduzir <strong>objetos inesperados</strong> que afetam a fidelidade da simulação, motivo pelo qual, muitas vezes, é necessário aplicar um pós-processamento com modelos de difusão.</p>
-
-
-
-
-
-
-
-
-
-
-
-
-                
-              </article>
+              
             </div>
-          
-          
-<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
-        </div>
-        
-      </main>
-      
-        <footer class="md-footer">
-  
-  <div class="md-footer-meta md-typeset">
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-copyright">
-  
-  
-    Made with
-    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-      Material for MkDocs
-    </a>
-  
-</div>
-      
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../diffusion/diffusion/" class="btn btn-neutral float-left" title="Diffusion models"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../tokens/cosmos_tokenizer/cosmos_tokenizer/" class="btn btn-neutral float-right" title="Cosmos Tokenizer">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
   </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
-      
-    </div>
-    <div class="md-dialog" data-md-component="dialog">
-      <div class="md-dialog__inner md-typeset"></div>
-    </div>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-    
-      
-      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <span><a href="../../diffusion/diffusion/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <script src="../../assets/javascripts/bundle.56ea9cef.min.js"></script>
-      
-        <script src="../../javascripts/mathjax.js"></script>
-      
-        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-      
-        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-      
+      <span><a href="../../tokens/cosmos_tokenizer/cosmos_tokenizer/" style="color: #fcfcfc">Next &raquo;</a></span>
     
-  </body>
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../javascripts/mathjax.js"></script>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
 </html>

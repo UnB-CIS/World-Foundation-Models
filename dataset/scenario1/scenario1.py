@@ -5,6 +5,7 @@ import cv2
 import datetime
 import os
 import json 
+import numpy as np 
 
 def setup_pygame():
     """Inicializa o Pygame e a tela."""
@@ -111,5 +112,89 @@ def run_simulation_and_record():
     print(f"\nVídeo salvo: {video_path}")
     print(f"Dados de Input (JSON) salvos: {data_path}")
 
+def run_automated_simulation(all_actions, input_filename):
+    """Roda a simulação automaticamente a partir de um JSON carregado."""
+    
+    # Configurar caminhos e nomes de arquivos
+    base_name = os.path.splitext(input_filename)[0] # Remove a extensão .json
+    timestamp = datetime.datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
+    video_filename = f"{base_name}_auto_{timestamp}.mp4"
+    
+    current_dir = os.path.dirname(__file__)
+    video_path = os.path.join(current_dir, 'videos', video_filename)
+
+    # Garante que a pasta 'videos' exista
+    os.makedirs(os.path.join(current_dir, 'videos'), exist_ok=True)
+    
+    # Configurar Simulação
+    screen, clock = setup_pygame()
+    
+    FPS = 60
+    fourcc = cv2.VideoWriter_fourcc(*'mp4v') 
+    out = cv2.VideoWriter(video_path, fourcc, FPS, (800, 600))
+
+    space = pymunk.Space()
+    space.gravity = 0, 980
+    draw_options = pymunk.pygame_util.DrawOptions(screen)
+    create_scenario(space)
+    
+    simulation_time = 0.0
+    action_index = 0
+    
+    # Define o tempo de término: 2 segundos após a última ação
+    end_time = all_actions[-1]["time"] + 2.0 if all_actions else 2.0
+    
+    running = True
+    while running:
+        dt = 1 / 60.0 
+
+        # Lógica de Reprodução Automática
+        while action_index < len(all_actions) and \
+              all_actions[action_index]["time"] <= round(simulation_time, 4):
+            
+            action = all_actions[action_index]
+            
+            # Executar a Ação: Adicionar Bola na posição registrada
+            if action["type"] == "mouse_down" and action["object"] == "ball":
+                pos = (action["pos"][0], action["pos"][1])
+                add_ball_at_mouse_position(space, pos)
+                
+            action_index += 1
+        
+        # Fim da Simulação
+        if simulation_time >= end_time:
+            running = False
+            
+        # Permite fechar a janela, mesmo no modo auto
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+
+        # Atualizar Simulação e Tempo
+        space.step(dt)
+        simulation_time += dt
+
+        # Limpar a tela e desenhar
+        screen.fill((255, 255, 255))
+        space.debug_draw(draw_options)
+        pygame.display.flip()
+
+        # Gravar Frame
+        img_array = pygame.surfarray.array3d(screen)
+        img_array = cv2.cvtColor(img_array.swapaxes(0, 1), cv2.COLOR_RGB2BGR)
+        out.write(img_array)
+
+        clock.tick(60)
+
+    # Liberar recursos
+    out.release()
+    pygame.quit()
+    print(f"\nVídeo automático salvo: {video_path}")
+    return video_path
+
 if __name__ == "__main__":
-    run_simulation_and_record()
+    # Para rodar o modo manual, descomente a próxima linha:
+    # run_simulation_and_record()
+
+    # Para rodar o modo automático, executar o arquivo 'batch_runner.py'
+    print("Resultados da simulação")

@@ -39,18 +39,17 @@ def run_simulation_and_record():
     screen, clock = setup_pygame()
 
     # Configurar caminhos e nomes de arquivos
-    timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    timestamp = datetime.datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
     video_filename = f"cenario_1_{timestamp}.mp4"
     data_filename = f"cenario_1_data_{timestamp}.json"
     
-    # Caminho base: sobe um nivel (do 'scenarios' para o 'dataset')
-    base_dir = os.path.join(os.path.dirname(__file__), '..')
-    
-    video_path = os.path.join(base_dir, 'videos', video_filename)
-    data_path = os.path.join(base_dir, 'inputs', data_filename)
+    current_dir = os.path.dirname(__file__)
+    video_path = os.path.join(current_dir, 'videos', video_filename)
+    data_path = os.path.join(current_dir, 'inputs', data_filename)
 
-    # Garante que a pasta 'inputs' exista
-    os.makedirs(os.path.join(base_dir, 'inputs'), exist_ok=True)
+    # Garante que as pastas 'inputs' e 'videos' existam dentro de 'scenario1'
+    os.makedirs(os.path.join(current_dir, 'inputs'), exist_ok=True)
+    os.makedirs(os.path.join(current_dir, 'videos'), exist_ok=True)
     
     # Configurar Video e Pymunk
     FPS = 60

@@ -36,7 +36,7 @@ A diversidade do dataset pode ser alcaçada ao juntar a interação com o usuár
 
 ### 2. Objetivos
 
-- Testar a física de colisão em superfícies não-planas (como rampas e curvas) 
+- Testar a física de colisão em superfícies não-planas (como rampas e curvas)
 
 - Analisar a interação entre diferentes formas de objetos (círculos e quadrados).
 

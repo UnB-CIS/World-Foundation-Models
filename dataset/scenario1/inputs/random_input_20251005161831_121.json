@@ -1,0 +1,83 @@
+[
+    {
+        "time": 0.95,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            507,
+            182
+        ]
+    },
+    {
+        "time": 1.85,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            434,
+            451
+        ]
+    },
+    {
+        "time": 3.2,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            313,
+            334
+        ]
+    },
+    {
+        "time": 3.88,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            475,
+            125
+        ]
+    },
+    {
+        "time": 4.88,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            456,
+            185
+        ]
+    },
+    {
+        "time": 5.6,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            317,
+            125
+        ]
+    },
+    {
+        "time": 7.07,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            600,
+            239
+        ]
+    },
+    {
+        "time": 7.97,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            117,
+            56
+        ]
+    },
+    {
+        "time": 8.94,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            145,
+            84
+        ]
+    }
+]

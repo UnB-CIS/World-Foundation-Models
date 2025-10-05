@@ -52,7 +52,7 @@ def run_simulation_and_record():
     os.makedirs(os.path.join(current_dir, 'videos'), exist_ok=True)
     
     # Configurar Video e Pymunk
-    FPS = 30
+    FPS = 60
     fourcc = cv2.VideoWriter_fourcc(*'mp4v') 
     out = cv2.VideoWriter(video_path, fourcc, FPS, (800, 600))
 
@@ -67,7 +67,7 @@ def run_simulation_and_record():
     
     running = True
     while running:
-        dt = 1 / 30.0 # Passo de tempo fixo para a simulacao
+        dt = 1 / 60.0 # Passo de tempo fixo para a simulacao
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -99,7 +99,7 @@ def run_simulation_and_record():
         img_array = cv2.cvtColor(img_array.swapaxes(0, 1), cv2.COLOR_RGB2BGR)
         out.write(img_array)
 
-        clock.tick(30)
+        clock.tick(60)
 
     # Salvar o arquivo JSON
     with open(data_path, 'w') as f:
@@ -128,7 +128,7 @@ def run_automated_simulation(all_actions, input_filename):
     # Configurar Simulação
     screen, clock = setup_pygame()
     
-    FPS = 30
+    FPS = 60
     fourcc = cv2.VideoWriter_fourcc(*'mp4v') 
     out = cv2.VideoWriter(video_path, fourcc, FPS, (800, 600))
 
@@ -145,7 +145,7 @@ def run_automated_simulation(all_actions, input_filename):
     
     running = True
     while running:
-        dt = 1 / 30.0 
+        dt = 1 / 60.0 
 
         # Lógica de Reprodução Automática
         while action_index < len(all_actions) and \
@@ -183,7 +183,7 @@ def run_automated_simulation(all_actions, input_filename):
         img_array = cv2.cvtColor(img_array.swapaxes(0, 1), cv2.COLOR_RGB2BGR)
         out.write(img_array)
 
-        clock.tick(30)
+        clock.tick(60)
 
     # Liberar recursos
     out.release()

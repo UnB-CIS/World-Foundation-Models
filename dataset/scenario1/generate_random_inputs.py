@@ -48,4 +48,4 @@ def generate_random_input(num_files=10, max_actions=15, max_time=10.0):
         print(f"Gerado: {filename} ({len(actions)} acoes)")
 
 if __name__ == "__main__":
-    generate_random_input(num_files=20, max_actions=15)
+    generate_random_input(num_files=200, max_actions=15)

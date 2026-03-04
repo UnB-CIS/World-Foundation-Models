@@ -93,7 +93,6 @@ def map_actions_to_frames(json_path, fps):
     """
     Lê o JSON e cria um dicionário {frame_index: action_data}.
     """
-    # CORRIGIDO: agora abre o arquivo json_path corretamente
     with open(json_path, 'r') as f:
         actions_list = json.load(f)
         
@@ -153,45 +152,17 @@ def process_step(frame_curr, frame_next, action_data, models):
     return z_fused.squeeze(0).cpu(), mu_next.squeeze(0).cpu()
 
 
-def get_latent_mu(vae_model, tensor_img):
-    """
-    Função robusta para extrair 'mu' do VAE.
-    Tenta .encode(), se falhar, usa .forward()
-    """
-    # Tenta usar encode (jeito rápido)
-    if hasattr(vae_model, 'encode'):
-        try:
-            mu, _ = vae_model.encode(tensor_img)
-            return mu
-        except:
-            pass # Se der erro, tenta o plano B
-    
-    # Plano B: Método forward padrão (retorna recon, mu, logvar)
-    outputs = vae_model(tensor_img)
-    
-    # Verifica o retorno
-    if isinstance(outputs, tuple):
-        # Geralmente é (recon, mu, logvar) -> pegamos o índice 1
-        if len(outputs) >= 2: 
-            return outputs[1]
-            
-    raise ValueError("Não foi possível extrair 'mu' do VAE. Verifique a saída do modelo.")
-
-
 def process_video_sequence(video_path, json_path, models):
-    vae, text_enc, fuser = models
-    
-    # Carregar JSON
-    with open(json_path, 'r') as f:
-        actions_list = json.load(f)
+    """
+    Itera sobre todos os frames do vídeo, chama process_step e empilha os resultados.
+    """
+    # Carregar Mapa de Ações
+    action_map = map_actions_to_frames(json_path, TARGET_FPS)
         
-    action_map = {}
-    for action in actions_list:
-        frame_idx = int(action['time'] * TARGET_FPS)
-        action_map[frame_idx] = action
-        
+    # Abrir Vídeo
     cap = cv2.VideoCapture(video_path)
-    if not cap.isOpened(): return None
+    if not cap.isOpened(): 
+        return None
     
     inputs_list = []
     targets_list = []
@@ -199,37 +170,35 @@ def process_video_sequence(video_path, json_path, models):
     frame_idx = 0
     ret, frame_curr = cap.read()
     
-    if not ret: return None
+    if not ret: 
+        cap.release()
+        return None
 
+    # Loop Frame a Frame
     while True:
         ret, frame_next = cap.read()
-        if not ret: break
+        if not ret: 
+            break # Fim do vídeo
         
-        t_curr = preprocess_frame(frame_curr)
-        t_next = preprocess_frame(frame_next)
-        
-        # Ação
+        # Pega a ação correspondente a este frame (ou None)
         current_action = action_map.get(frame_idx, None)
-        vec_action = encoding_function(current_action).unsqueeze(0).to(DEVICE)
         
-        with torch.no_grad():
-            # Usamos a função auxiliar 
-            mu_curr = get_latent_mu(vae, t_curr)
-            mu_next = get_latent_mu(vae, t_next) # Target
+        # Processa o passo individual chamando a função auxiliar
+        x, y = process_step(frame_curr, frame_next, current_action, models)
             
-            emb_action = text_enc(vec_action)
-            z_fused = fuser(mu_curr, emb_action)
-            
-        inputs_list.append(z_fused.squeeze(0).cpu())
-        targets_list.append(mu_next.squeeze(0).cpu())
+        inputs_list.append(x)
+        targets_list.append(y)
         
+        # Avança
         frame_curr = frame_next
         frame_idx += 1
         
     cap.release()
     
-    if len(inputs_list) == 0: return None
+    if len(inputs_list) == 0: 
+        return None
         
+    # Empilha tudo em um tensor grande (Time, Channels, H, W)
     return {
         'x': torch.stack(inputs_list),
         'y': torch.stack(targets_list)
@@ -241,12 +210,16 @@ def process_video_sequence(video_path, json_path, models):
 # ==============================================================================
 
 def main():
-    # 1. Carregar Modelos
+    # Carregar Modelos
     models = load_models()
     
     os.makedirs(OUTPUT_FOLDER, exist_ok=True)
     
-    # 2. Listar Arquivos
+    # Listar Arquivos
+    if not os.path.exists(INPUT_FOLDER_JSON):
+        print(f"Pasta não encontrada: {INPUT_FOLDER_JSON}")
+        return
+
     json_files = [f for f in os.listdir(INPUT_FOLDER_JSON) if f.endswith('.json')]
     print(f"Iniciando processamento de {len(json_files)} simulações...")
     
@@ -267,7 +240,7 @@ def main():
         full_video_path = os.path.join(INPUT_FOLDER_VIDEO, video_file)
         full_json_path = os.path.join(INPUT_FOLDER_JSON, json_file)
         
-        # 3. Processar Vídeo
+        # Processar Vídeo
         try:
             dataset_tensors = process_video_sequence(full_video_path, full_json_path, models)
         except Exception as e:
@@ -275,7 +248,7 @@ def main():
             continue
         
         if dataset_tensors:
-            # 4. Salvar Resultado
+            # Salvar Resultado
             save_name = json_file.replace('.json', '.pt')
             torch.save(dataset_tensors, os.path.join(OUTPUT_FOLDER, save_name))
             count += 1

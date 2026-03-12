@@ -12,7 +12,9 @@ pymunk
 pygame
 pyglet
 
-torch>=2.0.0
-torchvision>=0.15.0
-numpy>=1.24.0
-matplotlib>=3.7.0
+torch
+torchvision
+numpy
+matplotlib
+scikit-learn
+opencv-python

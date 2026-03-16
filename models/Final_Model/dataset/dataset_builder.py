@@ -142,7 +142,7 @@ def process_video_sequence(video_path, json_path, models):
     targets_list = []
     
     # -------------------------------------------------------------------------
-    # INICIALIZAÇÃO E PADDING DO HISTÓRICO (FRAME 0)
+    # INICIALIZAÇÃO E PADDING (FRAME 0)
     # -------------------------------------------------------------------------
     ret, frame_curr = cap.read()
     if not ret: 
@@ -150,27 +150,31 @@ def process_video_sequence(video_path, json_path, models):
         return None
 
     # Prepara o frame 0 e extrai o latente mu_0
+    # O latente do frame é representado somente pela média (mu),
+    # desconsideramos o logvar (espalhamento da nuvem de probablidades)
     t_curr = preprocess_frame(frame_curr)
     with torch.no_grad():
+        # Chama forward do vae
+        # forward retorna recon_x, mu, logvar; logo pegamos o índice 1
         mu_0 = vae(t_curr)[1] # Extrai mu_0: (1, 8, 8, 8)
 
     # Padding Inicial: Como não temos frames anteriores a t=0, 
-    # replicamos o primeiro latente (mu_0) K vezes.
-    # Usamos um deque (fila double-ended) para facilitar a janela deslizante.
+    # replicamos o primeiro latente (mu_0) K vezes
+    # Usamos um deque (fila double-ended) para facilitar a janela deslizante
     latent_history = deque([mu_0 for _ in range(K_FRAMES)], maxlen=K_FRAMES)
     
     frame_idx = 0
 
     # -------------------------------------------------------------------------
-    # LOOP PRINCIPAL (JANELA DESLIZANTE)
+    # LOOP PRINCIPAL 
     # -------------------------------------------------------------------------
     while True:
-        # Tenta ler o próximo frame (t+1), que será nosso ALVO
+        # Tenta ler o próximo frame (t+1), o alvo
         ret, frame_next = cap.read()
         if not ret: 
             break # Fim do vídeo
         
-        # Prepara e codifica apenas o novo frame (Eficiência: evita reprocessar)
+        # Prepara e codifica apenas o novo frame 
         t_next = preprocess_frame(frame_next)
         
         # Pega a ação correspondente a este frame_idx (Tempo t)
@@ -186,29 +190,27 @@ def process_video_sequence(video_path, json_path, models):
             
             # -----------------------------------------------------------------
             # FUSÃO
-            # Convertendo a fila de latentes (deque) para uma lista.
-            # O fuser atualizado aceita essa lista e concatena no eixo dos canais.
-            # O último elemento desta lista é sempre o mu_t.
+            # Convertendo a fila de latentes (deque) para uma lista
+            # O fuser aceita essa lista e concatena no eixo dos canais
+            # O último elemento desta lista é sempre o mu_t
             # -----------------------------------------------------------------
             history_list = list(latent_history)
             
-            # z_fused sairá com shape (1, (K*C)+A, H, W) -> ex: (1, 48, 8, 8)
+            # z_fused sairá com shape (1, (K*C)+A, H, W) 
             z_fused = fuser(history_list, emb_action)
             
         # Salva a entrada fundida e o alvo
         inputs_list.append(z_fused.squeeze(0).cpu())
         targets_list.append(mu_next.squeeze(0).cpu())
         
-        # -----------------------------------------------------------------
-        # ATUALIZAÇÃO DA JANELA (Desliza t para t+1)
         # O deque automaticamente descarta o frame mais antigo (t-K) 
-        # ao adicionarmos o novo mu_next no final.
-        # -----------------------------------------------------------------
+        # ao adicionarmos o novo mu_next no final
         latent_history.append(mu_next)
         frame_idx += 1
         
     cap.release()
     
+    # Se o tamanho da lista de entradas for zero, abortar 
     if len(inputs_list) == 0: 
         return None
         

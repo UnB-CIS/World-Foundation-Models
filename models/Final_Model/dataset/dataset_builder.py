@@ -7,6 +7,7 @@ import numpy as np
 from tqdm import tqdm
 import sys
 import os
+from collections import deque
 
 
 # ==============================================================================
@@ -54,6 +55,9 @@ TEXT_WEIGHTS = os.path.join(text_path, "text_encoder_weights.pth")
 TARGET_FPS = 60.0
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Usando dispositivo {DEVICE}")
+
+# Parâmetro configurável para o tamanho do histórico temporal (Frame Stacking)
+K_FRAMES = 4
 
 
 # ==============================================================================
@@ -119,43 +123,13 @@ def preprocess_frame(frame):
     return tensor.to(DEVICE)
 
 
-def process_step(frame_curr, frame_next, action_data, models):
+def process_video_sequence(video_path, json_path, models):
     """
-    Recebe frames brutos e dados da ação.
-    Retorna:
-       - Input X: Latente Fundido (24, 8, 8)
-       - Target Y: Latente Visual Futuro (8, 8, 8)
+    Itera sobre os frames do vídeo criando amostras com Frame Stacking temporal.
+    Gera pares de treino: (z_visual_stack, z_action) -> z_next_frame
     """
     vae, text_enc, fuser = models
     
-    # Preparar Tensores de Imagem
-    t_curr = preprocess_frame(frame_curr)
-    t_next = preprocess_frame(frame_next)
-    
-    # Preparar Tensor de Ação
-    # Chama encoding_function, do encoder de texto
-    vec_action = encoding_function(action_data).unsqueeze(0).to(DEVICE)
-    
-    with torch.no_grad():
-        # Codificar Visual Atual (t) no VAE
-        mu_curr, _ = vae.encode(t_curr)
-        
-        # Codificar Visual Futuro (t+1), o alvo
-        mu_next, _ = vae.encode(t_next)
-        
-        # Codificar Texto/Ação
-        emb_action = text_enc(vec_action)
-        
-        # Fusão (Spatial Broadcast)
-        z_fused = fuser(mu_curr, emb_action)
-        
-    return z_fused.squeeze(0).cpu(), mu_next.squeeze(0).cpu()
-
-
-def process_video_sequence(video_path, json_path, models):
-    """
-    Itera sobre todos os frames do vídeo, chama process_step e empilha os resultados.
-    """
     # Carregar Mapa de Ações
     action_map = map_actions_to_frames(json_path, TARGET_FPS)
         
@@ -167,30 +141,70 @@ def process_video_sequence(video_path, json_path, models):
     inputs_list = []
     targets_list = []
     
-    frame_idx = 0
+    # -------------------------------------------------------------------------
+    # INICIALIZAÇÃO E PADDING DO HISTÓRICO (FRAME 0)
+    # -------------------------------------------------------------------------
     ret, frame_curr = cap.read()
-    
     if not ret: 
         cap.release()
         return None
 
-    # Loop Frame a Frame
+    # Prepara o frame 0 e extrai o latente mu_0
+    t_curr = preprocess_frame(frame_curr)
+    with torch.no_grad():
+        mu_0 = vae(t_curr)[1] # Extrai mu_0: (1, 8, 8, 8)
+
+    # Padding Inicial: Como não temos frames anteriores a t=0, 
+    # replicamos o primeiro latente (mu_0) K vezes.
+    # Usamos um deque (fila double-ended) para facilitar a janela deslizante.
+    latent_history = deque([mu_0 for _ in range(K_FRAMES)], maxlen=K_FRAMES)
+    
+    frame_idx = 0
+
+    # -------------------------------------------------------------------------
+    # LOOP PRINCIPAL (JANELA DESLIZANTE)
+    # -------------------------------------------------------------------------
     while True:
+        # Tenta ler o próximo frame (t+1), que será nosso ALVO
         ret, frame_next = cap.read()
         if not ret: 
             break # Fim do vídeo
         
-        # Pega a ação correspondente a este frame (ou None)
+        # Prepara e codifica apenas o novo frame (Eficiência: evita reprocessar)
+        t_next = preprocess_frame(frame_next)
+        
+        # Pega a ação correspondente a este frame_idx (Tempo t)
         current_action = action_map.get(frame_idx, None)
+        vec_action = encoding_function(current_action).unsqueeze(0).to(DEVICE)
         
-        # Processa o passo individual chamando a função auxiliar
-        x, y = process_step(frame_curr, frame_next, current_action, models)
+        with torch.no_grad():
+            # Extrai o latente do frame alvo (mu_t+1)
+            mu_next = vae(t_next)[1]
             
-        inputs_list.append(x)
-        targets_list.append(y)
+            # Codifica Ação t
+            emb_action = text_enc(vec_action)
+            
+            # -----------------------------------------------------------------
+            # FUSÃO
+            # Convertendo a fila de latentes (deque) para uma lista.
+            # O fuser atualizado aceita essa lista e concatena no eixo dos canais.
+            # O último elemento desta lista é sempre o mu_t.
+            # -----------------------------------------------------------------
+            history_list = list(latent_history)
+            
+            # z_fused sairá com shape (1, (K*C)+A, H, W) -> ex: (1, 48, 8, 8)
+            z_fused = fuser(history_list, emb_action)
+            
+        # Salva a entrada fundida e o alvo
+        inputs_list.append(z_fused.squeeze(0).cpu())
+        targets_list.append(mu_next.squeeze(0).cpu())
         
-        # Avança
-        frame_curr = frame_next
+        # -----------------------------------------------------------------
+        # ATUALIZAÇÃO DA JANELA (Desliza t para t+1)
+        # O deque automaticamente descarta o frame mais antigo (t-K) 
+        # ao adicionarmos o novo mu_next no final.
+        # -----------------------------------------------------------------
+        latent_history.append(mu_next)
         frame_idx += 1
         
     cap.release()
@@ -198,7 +212,7 @@ def process_video_sequence(video_path, json_path, models):
     if len(inputs_list) == 0: 
         return None
         
-    # Empilha tudo em um tensor grande (Time, Channels, H, W)
+    # Empilha tudo em tensores de dataset (Time, Channels, H, W)
     return {
         'x': torch.stack(inputs_list),
         'y': torch.stack(targets_list)

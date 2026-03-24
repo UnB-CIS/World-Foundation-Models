@@ -1,0 +1,33 @@
+# Data
+data:
+  videos_folder: "${oc.env:VIDEOS_DIR,data/scenario_1/videos}"
+  frames_root: "${oc.env:FRAMES_DIR,data/scenario_1/frames}"
+  frame_step: 5
+  img_size: 64
+  batch_size: 256
+  test_split: 0.2
+
+# Model
+model:
+  in_channels: 1
+  latent_channels: 8
+  spatial_size: 8
+
+# Training
+training:
+  num_epochs: 30
+  lr: 1e-3
+  max_norm: 2.0
+  warmup_epochs: 8
+  free_bits: 1.5
+  edge_weight: 100.0
+  bg_weight: 0.1
+  scheduler_patience: 3
+  scheduler_factor: 0.5
+  checkpoint_every: 5
+  early_stopping_patience: 10
+
+#  Paths 
+paths:
+  save_dir: "${paths.checkpoints_root}/vae"
+  samples_dir: "${paths.samples_root}/vae"

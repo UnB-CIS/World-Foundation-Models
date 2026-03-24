@@ -1,0 +1,9 @@
+defaults:
+  - base/default@_global_
+  - pipeline/vae@_global_
+  - _self_
+
+experiment_name: "vae"
+device: "cuda"
+seed: 42
+  

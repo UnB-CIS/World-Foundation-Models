@@ -1,0 +1,15 @@
+# Compute
+compute:
+  num_workers: 4
+  pin_memory: true
+  cudnn_benchmark: true
+
+# Logging
+logging:
+  print_every_n_batches: 20
+  save_samples_every_n_batches: 100
+
+# Path roots
+paths:
+  checkpoints_root: "./checkpoints"
+  samples_root: "./checkpoints/samples"

@@ -1,0 +1,39 @@
+# Data
+data:
+  source_dir: "${oc.env:PROCESSED_DIR,data/scenario_1/processed}"
+  test_split: 0.2
+  batch_size: 64
+
+# Model
+model:
+  visual_channels: 8
+  action_dim: 16
+  spatial_height: 8
+  spatial_width: 8
+  fused_channels: 24       
+
+# Probe
+probe:
+  in_channels: 24
+  action_dim: 16
+  lr: 0.01
+
+# Latent
+decoder:
+  in_channels: 32
+  mid_channels: 24
+  out_channels: 16
+
+# Training
+training:
+  num_epochs: 50
+  lr: 1e-3
+  max_norm: 1.0
+  scheduler_patience: 5
+  scheduler_factor: 0.5
+  checkpoint_every: 10
+
+# Paths
+paths:
+  save_dir: "${paths.checkpoints_root}/fusion"
+  samples_dir: "${paths.samples_root}/fusion"

@@ -1,0 +1,34 @@
+# Scenario
+scenario:
+  screen_width: 800
+  screen_height: 600
+  type_encoding:
+    mouse_down: [1.0]
+    none: [0.0]
+  object_encoding:
+    ball: [1.0]
+    none: [0.0]
+
+# Data
+data:
+  num_samples: 2000
+  positive_ratio: 0.5
+  test_split: 0.2
+  batch_size: 32
+
+# Model
+model:
+  input_dim: 4
+  latent_dim: 16
+  output_dim: 4
+
+# Training
+training:
+  num_epochs: 20
+  lr: 1e-3
+  max_norm: 1.0
+  print_every_n_epochs: 5
+
+# Paths
+paths:
+  save_dir: "${paths.checkpoints_root}/action_encoder"

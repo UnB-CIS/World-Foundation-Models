@@ -1,5 +1,30 @@
 wfm
-.DS_Store
-.conda
-_ignore
+
+# Virtual environments
 venv
+.conda
+
+# Model weights
+/checkpoints
+*.pth
+*.pt
+
+# Datasets
+data/
+
+# Python artifacts
+__pycache__/
+.__pycache__
+.pytest_cache
+
+# Notebooks output
+.ipynb_checkpoints
+
+# Site build
+site/
+
+# Other
+.DS_Store
+/outputs
+_ignore
+

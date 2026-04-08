@@ -18,3 +18,5 @@ numpy
 matplotlib
 scikit-learn
 opencv-python
+hydra
+tqdm

@@ -21,6 +21,7 @@ def create_scenario(space):
     segment_chao = pymunk.Segment(body_chao, (0, 550), (800, 550), 5)
     segment_chao.elasticity = 0.9
     segment_chao.friction = 1.0
+    segment_chao.color = (211, 211, 211, 255) # AJUSTE DE COR: Linha do chão cinza claro
     space.add(body_chao, segment_chao)
 
 
@@ -34,6 +35,7 @@ def add_ball_at_mouse_position(space, pos):
     bola_shape = pymunk.Circle(bola_body, raio)
     bola_shape.elasticity = 0.9
     bola_shape.friction = 0.8
+    bola_shape.color = (0, 0, 0, 255) # AJUSTE DE COR: Bolinhas pretas
     space.add(bola_body, bola_shape)
 
 
@@ -93,7 +95,11 @@ def run_simulation_and_record(output_dir: str):
         simulation_time += dt
 
         # Limpar a tela e desenhar
-        screen.fill((255, 255, 255))
+        screen.fill((255, 255, 255)) # Fundo principal branco
+        
+        # AJUSTE DE COR: Preenche tudo abaixo da linha y=550 com cinza claro
+        pygame.draw.rect(screen, (211, 211, 211), (0, 550, 800, 50))
+        
         space.debug_draw(draw_options)
         pygame.display.flip()
 
@@ -179,7 +185,11 @@ def run_automated_simulation(all_actions, input_filename):
         simulation_time += dt
 
         # Limpar a tela e desenhar
-        screen.fill((255, 255, 255))
+        screen.fill((255, 255, 255)) # Fundo principal branco
+        
+        # AJUSTE DE COR: Preenche tudo abaixo da linha y=550 com cinza claro
+        pygame.draw.rect(screen, (211, 211, 211), (0, 550, 800, 50))
+        
         space.debug_draw(draw_options)
         pygame.display.flip()
 
@@ -199,7 +209,12 @@ def run_automated_simulation(all_actions, input_filename):
 
 if __name__ == "__main__":
     print("Resultados da simulação")
-    # Para rodar o modo manual, descomente a próxima linha:
-    # run_simulation_and_record()
+    
+    # Obtém o caminho absoluto do diretório onde este script (scenario_1.py) está salvo
+    # diretorio_atual = os.path.dirname(os.path.abspath(__file__))
+    
+    # Roda o modo manual passando o diretório atual como destino
+    # run_simulation_and_record(diretorio_atual)
 
-    # Para rodar o modo automático, executar o arquivo 'batch_runner.py'
+    # Pra criar o dataset de uma vez, rodar primeiro o generate_random_inputs.py,
+    # e depois o batch_runner.py

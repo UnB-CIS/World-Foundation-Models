@@ -2,7 +2,7 @@ import os
 import json
 from multiprocessing import Pool, cpu_count
 import time
-from src.simulation.scenario_1 import run_automated_simulation
+from scripts.dataset.scenario_1 import run_automated_simulation
 
 
 def process_single_simulation(input_path):

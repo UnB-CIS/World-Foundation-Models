@@ -52,6 +52,7 @@ VAE_WEIGHTS = os.path.join(vae_path, "vae_weights.pth")
 TEXT_WEIGHTS = os.path.join(text_path, "text_encoder_weights.pth")
 
 TARGET_FPS = 60.0
+FRAME_STRIDE = 4
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Usando dispositivo {DEVICE}")
 
@@ -137,71 +138,74 @@ def process_step(frame_curr, frame_next, action_data, models):
     vec_action = encoding_function(action_data).unsqueeze(0).to(DEVICE)
     
     with torch.no_grad():
-        # Codificar Visual Atual (t) no VAE
-        mu_curr, _ = vae.encode(t_curr)
-        
-        # Codificar Visual Futuro (t+1), o alvo
-        mu_next, _ = vae.encode(t_next)
+        # O VAE expõe o encoder como módulo; mantemos o tensor completo
+        # (mu + logvar) para ficar compatível com o world model atual.
+        z_curr = vae.encoder(t_curr)
+
+        # Codificar Visual Futuro (t+k), o alvo
+        z_next = vae.encoder(t_next)
         
         # Codificar Texto/Ação
         emb_action = text_enc(vec_action)
         
         # Fusão (Spatial Broadcast)
-        z_fused = fuser(mu_curr, emb_action)
+        z_fused = fuser(z_curr, emb_action)
         
-    return z_fused.squeeze(0).cpu(), mu_next.squeeze(0).cpu()
+    return z_fused.squeeze(0).cpu(), z_next.squeeze(0).cpu()
 
 
 def process_video_sequence(video_path, json_path, models):
     """
-    Itera sobre todos os frames do vídeo, chama process_step e empilha os resultados.
+    Itera sobre o video e constroi pares temporais com stride fixo.
+
+    Com FRAME_STRIDE = k, cada amostra usa:
+      entrada: frame_t
+      alvo:    frame_{t+k}
     """
     # Carregar Mapa de Ações
     action_map = map_actions_to_frames(json_path, TARGET_FPS)
-        
+
     # Abrir Vídeo
     cap = cv2.VideoCapture(video_path)
-    if not cap.isOpened(): 
-        return None
-    
-    inputs_list = []
-    targets_list = []
-    
-    frame_idx = 0
-    ret, frame_curr = cap.read()
-    
-    if not ret: 
-        cap.release()
+    if not cap.isOpened():
         return None
 
-    # Loop Frame a Frame
+    frames = []
     while True:
-        ret, frame_next = cap.read()
-        if not ret: 
-            break # Fim do vídeo
-        
-        # Pega a ação correspondente a este frame (ou None)
+        ret, frame = cap.read()
+        if not ret:
+            break
+        frames.append(frame)
+    cap.release()
+
+    if len(frames) <= FRAME_STRIDE:
+        return None
+
+    inputs_list = []
+    targets_list = []
+
+    # Loop temporal com salto fixo.
+    for frame_idx in range(len(frames) - FRAME_STRIDE):
+        frame_curr = frames[frame_idx]
+        frame_next = frames[frame_idx + FRAME_STRIDE]
+
+        # Usa a ação alinhada ao frame de origem.
         current_action = action_map.get(frame_idx, None)
-        
+
         # Processa o passo individual chamando a função auxiliar
         x, y = process_step(frame_curr, frame_next, current_action, models)
-            
+
         inputs_list.append(x)
         targets_list.append(y)
-        
-        # Avança
-        frame_curr = frame_next
-        frame_idx += 1
-        
-    cap.release()
-    
-    if len(inputs_list) == 0: 
+
+    if len(inputs_list) == 0:
         return None
-        
+
     # Empilha tudo em um tensor grande (Time, Channels, H, W)
     return {
         'x': torch.stack(inputs_list),
-        'y': torch.stack(targets_list)
+        'y': torch.stack(targets_list),
+        'frame_stride': FRAME_STRIDE,
     }
 
 
@@ -212,8 +216,9 @@ def process_video_sequence(video_path, json_path, models):
 def main():
     # Carregar Modelos
     models = load_models()
-    
+
     os.makedirs(OUTPUT_FOLDER, exist_ok=True)
+    print(f"Gerando dataset com FRAME_STRIDE={FRAME_STRIDE}")
     
     # Listar Arquivos
     if not os.path.exists(INPUT_FOLDER_JSON):

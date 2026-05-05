@@ -1,0 +1,40 @@
+compute:
+  num_workers: 0
+  pin_memory: true
+  cudnn_benchmark: true
+logging:
+  print_every_n_batches: 20
+  save_samples_every_n_batches: 100
+paths:
+  checkpoints_root: ./checkpoints
+  samples_root: ./checkpoints/samples
+  save_dir: ${paths.checkpoints_root}/fusion
+  samples_dir: ${paths.samples_root}/fusion
+data:
+  source_dir: data/scenario_1/processed
+  test_split: 0.2
+  batch_size: 256
+model:
+  visual_channels: 8
+  action_dim: 16
+  spatial_height: 8
+  spatial_width: 8
+  fused_channels: 24
+probe:
+  in_channels: 24
+  action_dim: 16
+  lr: 0.01
+decoder:
+  in_channels: 32
+  mid_channels: 24
+  out_channels: 16
+training:
+  num_epochs: 10
+  lr: 0.001
+  max_norm: 1.0
+  scheduler_patience: 5
+  scheduler_factor: 0.5
+  checkpoint_every: 10
+experiment_name: fusion_run
+device: cpu
+seed: 42

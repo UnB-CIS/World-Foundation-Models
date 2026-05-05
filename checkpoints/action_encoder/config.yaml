@@ -1,0 +1,41 @@
+compute:
+  num_workers: 4
+  pin_memory: true
+  cudnn_benchmark: true
+logging:
+  print_every_n_batches: 20
+  save_samples_every_n_batches: 100
+paths:
+  checkpoints_root: ./checkpoints
+  samples_root: ./checkpoints/samples
+  save_dir: ${paths.checkpoints_root}/action_encoder
+scenario:
+  screen_width: 800
+  screen_height: 600
+  type_encoding:
+    mouse_down:
+    - 1.0
+    none:
+    - 0.0
+  object_encoding:
+    ball:
+    - 1.0
+    none:
+    - 0.0
+data:
+  num_samples: 2000
+  positive_ratio: 0.5
+  test_split: 0.2
+  batch_size: 32
+model:
+  input_dim: 4
+  latent_dim: 16
+  output_dim: 4
+training:
+  num_epochs: 20
+  lr: 0.001
+  max_norm: 1.0
+  print_every_n_epochs: 5
+experiment_name: action_encoder
+device: cpu
+seed: 42

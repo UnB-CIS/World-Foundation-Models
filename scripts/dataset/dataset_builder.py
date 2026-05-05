@@ -16,7 +16,7 @@ sys.path.insert(0, project_root)
 
 try:
     from src.vae.model import VAE
-    from src.action_encoder.model import ActionTextEncoder
+    from src.action_encoder.model import ActionTextModel
     from src.action_encoder.encoding import encoding_function
     from src.fusion.model import SpatialBroadcastFuser
 
@@ -31,16 +31,16 @@ except ImportError as e:
 # ==============================================================================
 
 PROJECT_ROOT = project_root
-DATA_DIR = os.path.join(PROJECT_ROOT, "data", "scenario_1")
+DATA_DIR = os.path.join(PROJECT_ROOT, "scripts", "dataset")
 INPUT_FOLDER_JSON = os.path.join(DATA_DIR, "inputs")
 INPUT_FOLDER_VIDEO = os.path.join(DATA_DIR, "videos")
 OUTPUT_FOLDER = os.path.join(PROJECT_ROOT, "data", "scenario_1", "processed")
 
 VAE_WEIGHTS = os.path.join(
-    PROJECT_ROOT, "checkpoints", "model_checkpoints", "vae_weights.pth"
+    PROJECT_ROOT, "checkpoints", "vae", "best_model.pth"
 )
 TEXT_WEIGHTS = os.path.join(
-    PROJECT_ROOT, "checkpoints", "model_checkpoints", "text_encoder_weights.pth"
+    PROJECT_ROOT, "checkpoints", "action_encoder", "best_model.pth"
 )
 
 TARGET_FPS = 60.0
@@ -57,14 +57,15 @@ print(f"Usando dispositivo: {DEVICE}")
 
 
 def load_models():
-    """Carrega VAE, ActionTextEncoder e Fuser com pesos pré-treinados."""
+    """Carrega VAE, ActionTextModel e Fuser com pesos pré-treinados."""
 
     # 1. VAE
     vae = VAE().to(DEVICE)
     if os.path.exists(VAE_WEIGHTS):
-        vae.load_state_dict(
-            torch.load(VAE_WEIGHTS, map_location=DEVICE, weights_only=True)
-        )
+        ckpt = torch.load(VAE_WEIGHTS, map_location=DEVICE, weights_only=True)
+        # Handle both raw state dict and checkpoint dict
+        state_dict = ckpt.get("model_state_dict", ckpt)
+        vae.load_state_dict(state_dict)
         print("Pesos VAE carregados")
     else:
         print(f"AVISO: Pesos VAE não encontrados em {VAE_WEIGHTS}")
@@ -72,16 +73,18 @@ def load_models():
     vae.eval()
 
     # 2. Action Encoder
-    text_enc = ActionTextEncoder(input_dim=4, latent_dim=16).to(DEVICE)
+    full_action_model = ActionTextModel(input_dim=4, latent_dim=16, output_dim=4).to(DEVICE)
     if os.path.exists(TEXT_WEIGHTS):
-        text_enc.load_state_dict(
-            torch.load(TEXT_WEIGHTS, map_location=DEVICE, weights_only=True)
-        )
+        ckpt = torch.load(TEXT_WEIGHTS, map_location=DEVICE, weights_only=True)
+        # Handle both raw state dict and checkpoint dict
+        state_dict = ckpt.get("model_state_dict", ckpt)
+        full_action_model.load_state_dict(state_dict)
         print("Pesos Action Encoder carregados.")
     else:
         print(f"AVISO: Pesos Action Encoder não encontrados em {TEXT_WEIGHTS}")
         sys.exit()
-    text_enc.eval()
+    full_action_model.eval()
+    text_enc = full_action_model.encoder
 
     # 3. Fuser
     fuser = SpatialBroadcastFuser(height=8, width=8).to(DEVICE)
@@ -142,8 +145,12 @@ def process_step(frame_curr, frame_next, action_data, models):
     )
 
     with torch.no_grad():
-        mu_curr, _ = vae.encode(t_curr)
-        mu_next, _ = vae.encode(t_next)
+        encoded_curr = vae.encoder(t_curr)
+        mu_curr, _ = torch.chunk(encoded_curr, 2, dim=1)
+
+        encoded_next = vae.encoder(t_next)
+        mu_next, _ = torch.chunk(encoded_next, 2, dim=1)
+
         emb_action = text_enc(vec_action)
         z_fused = fuser(mu_curr, emb_action)
 

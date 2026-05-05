@@ -18,5 +18,5 @@ numpy
 matplotlib
 scikit-learn
 opencv-python
-hydra
+hydra-core
 tqdm

@@ -4,13 +4,12 @@ from datetime import datetime
 
 import torch
 import hydra
-from omegaconf import DictConfig
+from omegaconf import DictConfig, OmegaConf
 
 from training.vae_trainer import VAETrainer
 
 
-@hydra.main(config_path="../../configs", config_name="train_vae", version_base=None)
-def main(cfg: DictConfig) -> None:
+def train(cfg: DictConfig) -> None:
     print(f"Device: {cfg.device} | CUDA available: {torch.cuda.is_available()}")
 
     trainer = VAETrainer(cfg)
@@ -36,4 +35,14 @@ def main(cfg: DictConfig) -> None:
 
 
 if __name__ == "__main__":
-    main()
+    from hydra import compose, initialize
+
+    # Pega os argumentos da linha de comando, ignorando o nome do script
+    import sys
+
+    overrides = sys.argv[1:]
+
+    # Inicializa o Hydra manualmente sem usar argparse
+    with initialize(config_path="../../configs", version_base=None):
+        cfg = compose(config_name="train_vae", overrides=overrides)
+        train(cfg)

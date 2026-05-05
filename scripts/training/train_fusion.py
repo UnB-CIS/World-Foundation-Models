@@ -9,8 +9,7 @@ from omegaconf import DictConfig
 from training.fusion_trainer import FusionTrainer
 
 
-@hydra.main(config_path="../../configs", config_name="train_fusion", version_base=None)
-def main(cfg: DictConfig) -> None:
+def train(cfg: DictConfig) -> None:
     print(f"Device: {cfg.device} | CUDA available: {torch.cuda.is_available()}")
 
     trainer = FusionTrainer(cfg)
@@ -34,4 +33,11 @@ def main(cfg: DictConfig) -> None:
 
 
 if __name__ == "__main__":
-    main()
+    from hydra import compose, initialize
+    import sys
+
+    overrides = sys.argv[1:]
+
+    with initialize(config_path="../../configs", version_base=None):
+        cfg = compose(config_name="train_fusion", overrides=overrides)
+        train(cfg)

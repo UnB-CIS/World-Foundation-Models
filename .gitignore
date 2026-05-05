@@ -4,11 +4,6 @@ wfm
 venv
 .conda
 
-# Model weights
-/checkpoints
-*.pth
-*.pt
-
 # Datasets
 data/
 

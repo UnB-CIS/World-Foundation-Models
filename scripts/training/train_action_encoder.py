@@ -9,14 +9,8 @@ from omegaconf import DictConfig
 from training.action_encoder_trainer import ActionEncoderTrainer
 
 
-@hydra.main(
-    config_path="../../configs", config_name="train_action_encoder", version_base=None
-)
-def main(cfg: DictConfig) -> None:
+def train(cfg: DictConfig) -> None:
     print(f"Device: {cfg.device} | CUDA available: {torch.cuda.is_available()}")
-    from omegaconf import OmegaConf
-
-    print(OmegaConf.to_yaml(cfg))  # ← add this temporarily
 
     trainer = ActionEncoderTrainer(cfg)
 
@@ -39,4 +33,11 @@ def main(cfg: DictConfig) -> None:
 
 
 if __name__ == "__main__":
-    main()
+    from hydra import compose, initialize
+    import sys
+
+    overrides = sys.argv[1:]
+
+    with initialize(config_path="../../configs", version_base=None):
+        cfg = compose(config_name="train_action_encoder", overrides=overrides)
+        train(cfg)

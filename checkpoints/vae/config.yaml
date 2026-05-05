@@ -1,0 +1,38 @@
+compute:
+  num_workers: 4
+  pin_memory: true
+  cudnn_benchmark: true
+logging:
+  print_every_n_batches: 20
+  save_samples_every_n_batches: 100
+paths:
+  checkpoints_root: ./checkpoints
+  samples_root: ./checkpoints/samples
+  save_dir: ${paths.checkpoints_root}/vae
+  samples_dir: ${paths.samples_root}/vae
+data:
+  videos_folder: scripts/dataset/videos
+  frames_root: scripts/dataset/frames
+  frame_step: 5
+  img_size: 64
+  batch_size: 256
+  test_split: 0.2
+model:
+  in_channels: 1
+  latent_channels: 8
+  spatial_size: 8
+training:
+  num_epochs: 5
+  lr: 0.001
+  max_norm: 2.0
+  warmup_epochs: 8
+  free_bits: 1.5
+  edge_weight: 100.0
+  bg_weight: 0.1
+  scheduler_patience: 3
+  scheduler_factor: 0.5
+  checkpoint_every: 5
+  early_stopping_patience: 10
+experiment_name: vae
+device: cpu
+seed: 42

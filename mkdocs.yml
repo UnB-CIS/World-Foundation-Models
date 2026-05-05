@@ -1,13 +1,47 @@
-theme:
-  name: readthedocs
-  color_mode: auto
-  user_color_mode_toggle: true
-
 site_name: World Foundation Models
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.highlight
+    - search.suggest
+
+plugins:
+  - search:
+      lang:
+        - pt
+        - en
+  - mkdocs-jupyter:
+      execute: true
+      include_source: true
+      include:
+        - "*.ipynb"
+  - i18n:
+      docs_structure: suffix
+      default_language: pt
+      languages:
+        - locale: pt
+          default: true
+          name: Português
+          build: true
+        - locale: en
+          name: English
+          build: true
 
 nav:
   - Home: index.md
-
   - Projeto:
       - Visão Geral: projeto/visaoGeral/visaoGeral.md
       - Motivação: projeto/motivacao/motivacao.md
@@ -15,7 +49,6 @@ nav:
       - Metodologia: projeto/metodologia/metodologia.md
       - Proposta: projeto/proposta/proposta.md
       - Escopo: projeto/escopo.md
-
   - Referências:
       - Diffusion Models: diffusion/diffusion.md
       - Autoregressive Models: autoregressive/autoregressive.md
@@ -25,21 +58,20 @@ nav:
               - Introdução: tokens/cosmos_tokenizer/cosmos_tokenizer.md
               - Wavelet Compression: tokens/cosmos_tokenizer/wavelet_compression.ipynb
           - DSC Tokenization: tokens/dsc_tokenization.md
-
   - Experiments & Results: cosmos_applications/cosmos_applications.md
 
 markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - admonition
+  - pymdownx.details
 
 extra_javascript:
   - javascripts/mathjax.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-
-plugins:
-  - mkdocs-jupyter:
-      execute: true
-      include_source: true
-      include:
-        - "*.ipynb"

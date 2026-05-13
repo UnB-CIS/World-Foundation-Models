@@ -43,7 +43,7 @@ BUTTON_BORDER = (150, 112, 79)
 
 
 def _load_scenario1_module():
-    scenario_path = os.path.join(PROJECT_ROOT, "dataset", "scenario1", "scenario1.py")
+    scenario_path = os.path.join(PROJECT_ROOT, "scripts", "dataset", "scenario_1.py")
     if not os.path.exists(scenario_path):
         return None
 
@@ -67,7 +67,7 @@ def create_empty_scenario_frame() -> np.ndarray:
 
     scenario1 = _load_scenario1_module()
     if scenario1 is None or not hasattr(scenario1, "create_scenario"):
-        raise RuntimeError("Nao foi possivel carregar create_scenario de dataset/scenario1/scenario1.py.")
+        raise RuntimeError("Nao foi possivel carregar create_scenario de scripts/dataset/scenario_1.py.")
 
     surface = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
     space = pymunk.Space()

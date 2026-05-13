@@ -13,17 +13,17 @@ from tqdm import tqdm
 
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
-MODELS_ROOT = os.path.abspath(os.path.join(CURRENT_DIR, ".."))
-PROJECT_ROOT = os.path.abspath(os.path.join(CURRENT_DIR, "..", ".."))
-DATASET_DIR = os.path.join(CURRENT_DIR, "dataset", "dataset_processado")
+PROJECT_ROOT = os.path.abspath(os.path.join(CURRENT_DIR, ".."))
+MODELS_ROOT = os.path.join(PROJECT_ROOT, "models")
+DATASET_DIR = os.path.join(PROJECT_ROOT, "scripts", "dataset", "dataset_processado")
 VAE_WEIGHTS = os.path.join(MODELS_ROOT, "VAE", "vae_weights.pth")
 TEXT_WEIGHTS = os.path.join(MODELS_ROOT, "Text_Encoder", "text_encoder_weights.pth")
 WORLD_MODEL_WEIGHTS = os.path.join(CURRENT_DIR, "world_model_weights.pth")
 TRAINING_SAMPLES_DIR = os.path.join(CURRENT_DIR, "world_model_samples")
 
-sys.path.append(os.path.join(MODELS_ROOT, "VAE"))
-sys.path.append(os.path.join(MODELS_ROOT, "Text_Encoder"))
-sys.path.append(MODELS_ROOT)
+sys.path.insert(0, os.path.join(MODELS_ROOT, "VAE"))
+sys.path.insert(0, os.path.join(MODELS_ROOT, "Text_Encoder"))
+sys.path.insert(0, MODELS_ROOT)
 
 from vae_video import VAE  # noqa: E402
 from Text_Encoder import TextEncoder, encoding_function  # noqa: E402
@@ -163,6 +163,9 @@ class ModelBundle:
         memory_frames: int = DEFAULT_MEMORY_FRAMES,
     ) -> None:
         resolved_device = device or ("cuda" if torch.cuda.is_available() else "cpu")
+        if resolved_device.startswith("cuda") and not torch.cuda.is_available():
+            print("CUDA foi solicitada, mas nao esta disponivel. Usando CPU.")
+            resolved_device = "cpu"
         self.device = torch.device(resolved_device)
         self.vae = VAE().to(self.device)
         self.text_encoder = TextEncoder().to(self.device)

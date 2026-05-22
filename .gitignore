@@ -23,3 +23,5 @@ site/
 /outputs
 _ignore
 
+/scripts/dataset/frames
+/scripts/dataset/videos

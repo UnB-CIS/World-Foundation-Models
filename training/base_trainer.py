@@ -46,6 +46,24 @@ class BaseTrainer(ABC):
         os.makedirs(self.cfg.paths.save_dir, exist_ok=True)
         self._save_config()
 
+        mlflow_cfg = self.cfg.get("mlflow")
+        if mlflow_cfg and mlflow_cfg.get("enabled", False):
+            return self._fit_with_mlflow(mlflow_cfg)
+
+        return self._call_train()
+
+    def _fit_with_mlflow(self, mlflow_cfg) -> dict:
+        import mlflow
+        from src.utils.mlflow_utils import log_hydra_config
+
+        mlflow.set_tracking_uri(mlflow_cfg.tracking_uri)
+        mlflow.set_experiment(self.cfg.experiment_name)
+
+        with mlflow.start_run():
+            log_hydra_config(self.cfg)
+            return self._call_train()
+
+    def _call_train(self) -> dict:
         return train(
             model=self.model,
             train_loader=self.train_loader,

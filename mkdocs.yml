@@ -42,13 +42,6 @@ plugins:
 
 nav:
   - Home: index.md
-  - Projeto:
-      - Visão Geral: projeto/visaoGeral/visaoGeral.md
-      - Motivação: projeto/motivacao/motivacao.md
-      - Contextualização: projeto/contextualizacao/contextualizacao.md
-      - Metodologia: projeto/metodologia/metodologia.md
-      - Proposta: projeto/proposta/proposta.md
-      - Escopo: projeto/escopo.md
   - Referências:
       - Diffusion Models: diffusion/diffusion.md
       - Autoregressive Models: autoregressive/autoregressive.md

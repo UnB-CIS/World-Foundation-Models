@@ -32,6 +32,7 @@ TEST_SPLIT        = 0.2
 SEED              = 42
 K                 = 2
 MLFLOW_EXPERIMENT = "wfm_eval"
+MLFLOW_TRACKING   = "mlruns/"   # força file store — mesmo backend que `mlflow ui` usa por padrão
 
 
 def _collect_test_videos():
@@ -79,6 +80,9 @@ def _run_phase(configs, samples):
 
 
 def main():
+    import mlflow
+    mlflow.set_tracking_uri(MLFLOW_TRACKING)
+
     device = "cuda" if torch.cuda.is_available() else "cpu"
     print(f"Device: {device}\n")
 

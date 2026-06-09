@@ -9,7 +9,7 @@ from metrics_fisicas import pixel_metrics, _to_2d
 
 
 def action_sensitivity(predict_fn, history, action, null_action):
-    """(1/HW)·Σ|pred(a) − pred(0)| a partir do mesmo estado. ~0 para modelo cego à ação."""
+    "Roda o modelo 2x a partir do mesmo estado para medir a diferença entre pred_com_acao e pred_sem_acao"
     pred_a = _to_2d(predict_fn(history, action))
     pred_0 = _to_2d(predict_fn(history, null_action))
     diff = np.abs(pred_a - pred_0)
@@ -53,8 +53,9 @@ def run_simple_eval(configs, samples, null_action,
             for s in samples:
                 pred = predict_fn(s["history"], s["action"])
                 for k, v in pixel_metrics(s["gt_next"], pred).items():
-                    if not (isinstance(v, float) and np.isnan(v)):
-                        agg[k].append(float(v))
+                    if isinstance(v, float) and not np.isfinite(v):
+                        continue
+                    agg[k].append(float(v))
 
                 if s.get("is_action_frame"):
                     val, diff = action_sensitivity(
@@ -69,8 +70,6 @@ def run_simple_eval(configs, samples, null_action,
                 mlflow.log_metric(f"mean_{k}", float(np.mean(vals)))
             if sens_vals:
                 mlflow.log_metric("action_sensitivity", float(np.mean(sens_vals)))
-
-    print("Avaliação concluída. Rode `mlflow ui` para comparar os runs.")
 
 
 # ---------------------------------------------------------------------------

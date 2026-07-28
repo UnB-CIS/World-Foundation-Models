@@ -1,0 +1,119 @@
+[
+    {
+        "time": 0.3,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            723,
+            130
+        ]
+    },
+    {
+        "time": 0.52,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            509,
+            430
+        ]
+    },
+    {
+        "time": 0.79,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            320,
+            220
+        ]
+    },
+    {
+        "time": 1.33,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            61,
+            107
+        ]
+    },
+    {
+        "time": 1.81,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            686,
+            326
+        ]
+    },
+    {
+        "time": 2.34,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            265,
+            196
+        ]
+    },
+    {
+        "time": 2.85,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            530,
+            114
+        ]
+    },
+    {
+        "time": 3.19,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            648,
+            169
+        ]
+    },
+    {
+        "time": 3.65,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            676,
+            476
+        ]
+    },
+    {
+        "time": 4.31,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            53,
+            408
+        ]
+    },
+    {
+        "time": 5.09,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            90,
+            294
+        ]
+    },
+    {
+        "time": 5.38,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            405,
+            424
+        ]
+    },
+    {
+        "time": 5.93,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            412,
+            226
+        ]
+    }
+]

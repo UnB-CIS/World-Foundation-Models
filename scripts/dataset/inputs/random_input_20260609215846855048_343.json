@@ -1,0 +1,119 @@
+[
+    {
+        "time": 0.3,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            648,
+            460
+        ]
+    },
+    {
+        "time": 0.88,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            742,
+            50
+        ]
+    },
+    {
+        "time": 1.68,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            623,
+            344
+        ]
+    },
+    {
+        "time": 2.21,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            647,
+            214
+        ]
+    },
+    {
+        "time": 2.81,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            358,
+            369
+        ]
+    },
+    {
+        "time": 3.27,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            644,
+            133
+        ]
+    },
+    {
+        "time": 3.56,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            88,
+            147
+        ]
+    },
+    {
+        "time": 3.97,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            443,
+            369
+        ]
+    },
+    {
+        "time": 4.61,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            522,
+            456
+        ]
+    },
+    {
+        "time": 4.95,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            207,
+            267
+        ]
+    },
+    {
+        "time": 5.55,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            559,
+            325
+        ]
+    },
+    {
+        "time": 6.26,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            620,
+            427
+        ]
+    },
+    {
+        "time": 6.92,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            554,
+            384
+        ]
+    }
+]

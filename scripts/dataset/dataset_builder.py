@@ -32,18 +32,26 @@ except ImportError as e:
 
 PROJECT_ROOT = project_root
 DATA_DIR = os.path.join(PROJECT_ROOT, "scripts", "dataset")
-INPUT_FOLDER_JSON = os.path.join(DATA_DIR, "inputs")
-INPUT_FOLDER_VIDEO = os.path.join(DATA_DIR, "videos")
+INPUT_FOLDER_JSON = os.path.join(PROJECT_ROOT, "data", "scenario_1", "inputs")
+INPUT_FOLDER_VIDEO = os.path.join(PROJECT_ROOT, "data", "scenario_1", "videos")
 OUTPUT_FOLDER = os.path.join(PROJECT_ROOT, "data", "scenario_1", "processed")
 
-VAE_WEIGHTS = os.path.join(
-    PROJECT_ROOT, "checkpoints", "vae", "best_model.pth"
-)
+VAE_WEIGHTS = os.path.join(PROJECT_ROOT, "checkpoints", "vae", "best_model.pth")
 TEXT_WEIGHTS = os.path.join(
     PROJECT_ROOT, "checkpoints", "action_encoder", "best_model.pth"
 )
 
 TARGET_FPS = 60.0
+
+# -----------------------------------------------------------------------------
+# Channel constants — must match world_model_vae.py exactly.
+# VAE encoder outputs 2*VISUAL_LATENT_CHANNELS; mu is VISUAL_LATENT_CHANNELS.
+# Fused tensor = [mu | action_broadcast] => FUSED_LATENT_CHANNELS channels.
+# -----------------------------------------------------------------------------
+VISUAL_LATENT_CHANNELS = 16  # VAE latent_channels
+ACTION_LATENT_CHANNELS = 16  # ActionTextModel output_dim / fuser action dim
+FUSED_LATENT_CHANNELS = VISUAL_LATENT_CHANNELS + ACTION_LATENT_CHANNELS  # 32
+
 DEVICE = torch.device(
     "mps"
     if torch.backends.mps.is_available()
@@ -59,34 +67,39 @@ print(f"Usando dispositivo: {DEVICE}")
 def load_models():
     """Carrega VAE, ActionTextModel e Fuser com pesos pré-treinados."""
 
-    # 1. VAE
-    vae = VAE().to(DEVICE)
+    # 1. VAE — explicit args so this never silently uses wrong defaults
+    vae = VAE(
+        latent_channels=VISUAL_LATENT_CHANNELS,
+        action_latent_channels=ACTION_LATENT_CHANNELS,
+    ).to(DEVICE)
     if os.path.exists(VAE_WEIGHTS):
         ckpt = torch.load(VAE_WEIGHTS, map_location=DEVICE, weights_only=True)
-        # Handle both raw state dict and checkpoint dict
         state_dict = ckpt.get("model_state_dict", ckpt)
         vae.load_state_dict(state_dict)
-        print("Pesos VAE carregados")
+        print(f"Pesos VAE carregados de {VAE_WEIGHTS}")
     else:
-        print(f"AVISO: Pesos VAE não encontrados em {VAE_WEIGHTS}")
-        sys.exit()
+        print(f"ERRO: Pesos VAE não encontrados em {VAE_WEIGHTS}")
+        sys.exit(1)
     vae.eval()
 
-    # 2. Action Encoder
-    full_action_model = ActionTextModel(input_dim=4, latent_dim=16, output_dim=4).to(DEVICE)
+    # 2. Action Encoder — explicit args
+    full_action_model = ActionTextModel(
+        input_dim=4,
+        latent_dim=ACTION_LATENT_CHANNELS,
+        output_dim=4,
+    ).to(DEVICE)
     if os.path.exists(TEXT_WEIGHTS):
         ckpt = torch.load(TEXT_WEIGHTS, map_location=DEVICE, weights_only=True)
-        # Handle both raw state dict and checkpoint dict
         state_dict = ckpt.get("model_state_dict", ckpt)
         full_action_model.load_state_dict(state_dict)
-        print("Pesos Action Encoder carregados.")
+        print(f"Pesos Action Encoder carregados de {TEXT_WEIGHTS}")
     else:
-        print(f"AVISO: Pesos Action Encoder não encontrados em {TEXT_WEIGHTS}")
-        sys.exit()
+        print(f"ERRO: Pesos Action Encoder não encontrados em {TEXT_WEIGHTS}")
+        sys.exit(1)
     full_action_model.eval()
     text_enc = full_action_model.encoder
 
-    # 3. Fuser
+    # 3. Fuser — spatial size must match VAE latent spatial dim (64/8 = 8)
     fuser = SpatialBroadcastFuser(height=8, width=8).to(DEVICE)
 
     return vae, text_enc, fuser
@@ -120,8 +133,8 @@ def process_step(frame_curr, frame_next, action_data, models):
     """
     Recebe frames brutos e dados da ação.
     Retorna:
-       - Input  X: Latente Fundido  (24, 8, 8)
-       - Target Y: Latente Visual Futuro (8, 8, 8)
+       - Input  X: Latente Fundido  (FUSED_LATENT_CHANNELS, 8, 8)
+       - Target Y: Latente Visual Futuro (VISUAL_LATENT_CHANNELS, 8, 8)
     """
     vae, text_enc, fuser = models
 
@@ -145,14 +158,32 @@ def process_step(frame_curr, frame_next, action_data, models):
     )
 
     with torch.no_grad():
+        # Encode current frame — encoder returns (1, 2*VISUAL_LATENT_CHANNELS, 8, 8)
         encoded_curr = vae.encoder(t_curr)
-        mu_curr, _ = torch.chunk(encoded_curr, 2, dim=1)
+        mu_curr, _ = torch.chunk(
+            encoded_curr, 2, dim=1
+        )  # (1, VISUAL_LATENT_CHANNELS, 8, 8)
 
+        # Encode next frame — target is just mu, no sampling noise
         encoded_next = vae.encoder(t_next)
-        mu_next, _ = torch.chunk(encoded_next, 2, dim=1)
+        mu_next, _ = torch.chunk(
+            encoded_next, 2, dim=1
+        )  # (1, VISUAL_LATENT_CHANNELS, 8, 8)
 
+        # Action embedding — shape (1, ACTION_LATENT_CHANNELS)
         emb_action = text_enc(vec_action)
+
+        # Fused = [mu_curr | broadcast(emb_action)] — shape (1, FUSED_LATENT_CHANNELS, 8, 8)
         z_fused = fuser(mu_curr, emb_action)
+
+    # Sanity-check shapes on first call (will raise clearly instead of silently corrupting)
+    assert z_fused.shape[1] == FUSED_LATENT_CHANNELS, (
+        f"z_fused tem {z_fused.shape[1]} canais, esperado {FUSED_LATENT_CHANNELS}. "
+        "Verifique VISUAL_LATENT_CHANNELS e ACTION_LATENT_CHANNELS."
+    )
+    assert (
+        mu_next.shape[1] == VISUAL_LATENT_CHANNELS
+    ), f"mu_next tem {mu_next.shape[1]} canais, esperado {VISUAL_LATENT_CHANNELS}."
 
     return z_fused.squeeze(0).cpu(), mu_next.squeeze(0).cpu()
 
@@ -202,6 +233,13 @@ def process_video_sequence(video_path, json_path, models):
 
 
 def main():
+    print(
+        f"Configuração do dataset: "
+        f"VISUAL_LATENT_CHANNELS={VISUAL_LATENT_CHANNELS}, "
+        f"ACTION_LATENT_CHANNELS={ACTION_LATENT_CHANNELS}, "
+        f"FUSED_LATENT_CHANNELS={FUSED_LATENT_CHANNELS}"
+    )
+
     models = load_models()
     os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
@@ -243,6 +281,9 @@ def main():
             count += 1
 
     print(f"Sucesso! {count} arquivos .pt gerados em {OUTPUT_FOLDER}")
+    print(
+        f"Cada arquivo contém: x=(N,{FUSED_LATENT_CHANNELS},8,8), y=(N,{VISUAL_LATENT_CHANNELS},8,8)"
+    )
 
 
 if __name__ == "__main__":

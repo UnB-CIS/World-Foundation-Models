@@ -1,0 +1,29 @@
+defaults:
+  - base/default@_global_
+  - _self_
+
+experiment_name: "next_frame_predictor"
+device: "cuda"
+seed: 42
+
+data:
+  processed_dir: "${oc.env:PROCESSED_DIR,data/scenario_1/processed}"
+  batch_size: 128
+  train_split: 0.9
+  num_workers: 0
+  pin_memory: true
+
+training:
+  num_epochs: 20
+  lr: 1e-3
+  max_norm: 1.0
+  latent_loss_weight: 1.0
+  frame_loss_weight: 0.25
+  foreground_pixel_weight: 50.0
+  white_pixel_threshold: 0.98
+  save_samples_every: 1
+
+paths:
+  vae_weights: "${oc.env:VAE_WEIGHTS,checkpoints/vae/best_model.pth}"
+  save_dir: "${paths.checkpoints_root}/next_frame_predictor"
+  samples_dir: "${paths.samples_root}/next_frame_predictor"

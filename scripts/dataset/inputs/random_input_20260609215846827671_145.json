@@ -1,0 +1,119 @@
+[
+    {
+        "time": 0.39,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            333,
+            370
+        ]
+    },
+    {
+        "time": 0.89,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            103,
+            352
+        ]
+    },
+    {
+        "time": 1.48,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            89,
+            342
+        ]
+    },
+    {
+        "time": 1.85,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            637,
+            484
+        ]
+    },
+    {
+        "time": 2.05,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            292,
+            379
+        ]
+    },
+    {
+        "time": 2.38,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            623,
+            62
+        ]
+    },
+    {
+        "time": 3.0,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            125,
+            481
+        ]
+    },
+    {
+        "time": 3.67,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            680,
+            435
+        ]
+    },
+    {
+        "time": 4.18,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            464,
+            143
+        ]
+    },
+    {
+        "time": 4.47,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            344,
+            80
+        ]
+    },
+    {
+        "time": 5.01,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            702,
+            503
+        ]
+    },
+    {
+        "time": 5.79,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            341,
+            340
+        ]
+    },
+    {
+        "time": 6.21,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            555,
+            361
+        ]
+    }
+]

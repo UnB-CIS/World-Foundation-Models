@@ -6,6 +6,19 @@ from .training_state import VAETrainingState
 from .loss import gradient_weighted_loss, aggressive_beta
 
 
+def _make_zero_action(images: torch.Tensor, model: VAE) -> torch.Tensor:
+    batch_size = images.size(0)
+    spatial_size = images.size(-1) // 8
+    return torch.zeros(
+        batch_size,
+        model.action_latent_channels,
+        spatial_size,
+        spatial_size,
+        device=images.device,
+        dtype=images.dtype,
+    )
+
+
 def validate_vae(
     model: VAE,
     test_loader: DataLoader,
@@ -19,7 +32,11 @@ def validate_vae(
     with torch.no_grad():
         for images in test_loader:
             images = images.to(device)
-            reconstructed, encoded = model(images)
+
+            # Pass explicit zero action — consistent with inference when no
+            # click is present, and with how vae_loss_fn trains the model.
+            z_action = _make_zero_action(images, model)
+            reconstructed, encoded = model(images, z_action=z_action)
             mu, logvar = torch.chunk(encoded, 2, dim=1)
 
             loss_val, recon_loss, kl_loss = gradient_weighted_loss(
@@ -52,7 +69,6 @@ def vae_loss_fn(
     mu, logvar = torch.chunk(encoded, 2, dim=1)
     beta = aggressive_beta(epoch, batch_idx, num_batches, warmup_epochs=8)
 
-    # Gradient weighting
     loss, recon_loss, kl_loss = gradient_weighted_loss(
         model_input, recon, mu, logvar, beta=beta
     )

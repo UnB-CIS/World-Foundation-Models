@@ -21,21 +21,26 @@ def create_scenario(space):
     segment_chao = pymunk.Segment(body_chao, (0, 550), (800, 550), 5)
     segment_chao.elasticity = 0.9
     segment_chao.friction = 1.0
-    segment_chao.color = (211, 211, 211, 255) # AJUSTE DE COR: Linha do chão cinza claro
+    segment_chao.color = (211, 211, 211, 255)
     space.add(body_chao, segment_chao)
 
 
 def add_ball_at_mouse_position(space, pos):
-    """Adiciona uma nova bola no espaço, na posição do mouse"""
+    """Adiciona uma nova bola no espaço, na posição do mouse.
+
+    Ball radius increased from 15 to 30 so the spawned ball occupies a
+    meaningful area in the 8x8 latent space (≥2x2 cells), making click
+    events produce a strong, unambiguous signal in mu_next.
+    """
     massa = 1
-    raio = 15
+    raio = 30  # was 15 — larger ball = stronger latent signal on spawn
     inercia = pymunk.moment_for_circle(massa, 0, raio)
     bola_body = pymunk.Body(massa, inercia)
     bola_body.position = pos
     bola_shape = pymunk.Circle(bola_body, raio)
     bola_shape.elasticity = 0.9
     bola_shape.friction = 0.8
-    bola_shape.color = (0, 0, 0, 255) # AJUSTE DE COR: Bolinhas pretas
+    bola_shape.color = (0, 0, 0, 255)
     space.add(bola_body, bola_shape)
 
 
@@ -44,7 +49,6 @@ def run_simulation_and_record(output_dir: str):
     """Roda a simulação e grava um vídeo(mp4) e um arquivo de dados(json)"""
     screen, clock = setup_pygame()
 
-    # Configurar caminhos e nomes de arquivos
     timestamp = datetime.datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
     video_filename = f"cenario_1_{timestamp}.mp4"
     data_filename = f"cenario_1_data_{timestamp}.json"
@@ -52,11 +56,9 @@ def run_simulation_and_record(output_dir: str):
     video_path = os.path.join(output_dir, 'videos', video_filename)
     data_path = os.path.join(output_dir, 'inputs', data_filename)
 
-    # Garante que as pastas 'inputs' e 'videos' existam dentro de 'scenario1'
     os.makedirs(os.path.join(output_dir, 'inputs'), exist_ok=True)
     os.makedirs(os.path.join(output_dir, 'videos'), exist_ok=True)
 
-    # Configurar Video e Pymunk
     FPS = 60
     fourcc = cv2.VideoWriter_fourcc(*'mp4v')
     out = cv2.VideoWriter(video_path, fourcc, FPS, (800, 600))
@@ -66,13 +68,12 @@ def run_simulation_and_record(output_dir: str):
     draw_options = pymunk.pygame_util.DrawOptions(screen)
     create_scenario(space)
 
-    # Variaveis de Coleta de Dados
     simulation_time = 0.0
     recorded_actions = []
 
     running = True
     while running:
-        dt = 1 / 60.0  # Passo de tempo fixo para a simulacao
+        dt = 1 / 60.0
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -80,8 +81,6 @@ def run_simulation_and_record(output_dir: str):
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     add_ball_at_mouse_position(space, event.pos)
-
-                    # Coleta de dados da açao
                     action = {
                         "time": round(simulation_time, 4),
                         "type": "mouse_down",
@@ -90,31 +89,23 @@ def run_simulation_and_record(output_dir: str):
                     }
                     recorded_actions.append(action)
 
-        # Atualizar Simulacao e Tempo
         space.step(dt)
         simulation_time += dt
 
-        # Limpar a tela e desenhar
-        screen.fill((255, 255, 255)) # Fundo principal branco
-        
-        # AJUSTE DE COR: Preenche tudo abaixo da linha y=550 com cinza claro
+        screen.fill((255, 255, 255))
         pygame.draw.rect(screen, (211, 211, 211), (0, 550, 800, 50))
-        
         space.debug_draw(draw_options)
         pygame.display.flip()
 
-        # Gravar Frame
         img_array = pygame.surfarray.array3d(screen)
         img_array = cv2.cvtColor(img_array.swapaxes(0, 1), cv2.COLOR_RGB2BGR)
         out.write(img_array)
 
         clock.tick(60)
 
-    # Salvar o arquivo JSON
     with open(data_path, 'w') as f:
         json.dump(recorded_actions, f, indent=4)
 
-    # Liberar recursos
     out.release()
     pygame.quit()
     print(f"\nVídeo salvo: {video_path}")
@@ -123,19 +114,14 @@ def run_simulation_and_record(output_dir: str):
 
 def run_automated_simulation(all_actions, input_filename):
     """Roda a simulação automaticamente a partir de um JSON carregado."""
-
-    # Configurar caminhos e nomes de arquivos
-    base_name = os.path.splitext(input_filename)[0]  # Remove a extensão .json
+    base_name = os.path.splitext(input_filename)[0]
     timestamp = datetime.datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
     video_filename = f"{base_name}_auto_{timestamp}.mp4"
 
     current_dir = os.path.dirname(__file__)
     video_path = os.path.join(current_dir, 'videos', video_filename)
-
-    # Garante que a pasta 'videos' exista
     os.makedirs(os.path.join(current_dir, 'videos'), exist_ok=True)
 
-    # Configurar Simulação
     screen, clock = setup_pygame()
 
     FPS = 60
@@ -150,57 +136,42 @@ def run_automated_simulation(all_actions, input_filename):
     simulation_time = 0.0
     action_index = 0
 
-    # Define o tempo de término: 2 segundos após a última ação
     end_time = all_actions[-1]["time"] + 2.0 if all_actions else 2.0
 
     running = True
     while running:
         dt = 1 / 60.0
 
-        # Lógica de Reprodução Automática
         while action_index < len(all_actions) and all_actions[action_index][
             "time"
         ] <= round(simulation_time, 4):
-
             action = all_actions[action_index]
-
-            # Executar a Ação: Adicionar Bola na posição registrada
             if action["type"] == "mouse_down" and action["object"] == "ball":
                 pos = (action["pos"][0], action["pos"][1])
                 add_ball_at_mouse_position(space, pos)
-
             action_index += 1
 
-        # Fim da Simulação
         if simulation_time >= end_time:
             running = False
 
-        # Permite fechar a janela, mesmo no modo auto
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
 
-        # Atualizar Simulação e Tempo
         space.step(dt)
         simulation_time += dt
 
-        # Limpar a tela e desenhar
-        screen.fill((255, 255, 255)) # Fundo principal branco
-        
-        # AJUSTE DE COR: Preenche tudo abaixo da linha y=550 com cinza claro
+        screen.fill((255, 255, 255))
         pygame.draw.rect(screen, (211, 211, 211), (0, 550, 800, 50))
-        
         space.debug_draw(draw_options)
         pygame.display.flip()
 
-        # Gravar Frame
         img_array = pygame.surfarray.array3d(screen)
         img_array = cv2.cvtColor(img_array.swapaxes(0, 1), cv2.COLOR_RGB2BGR)
         out.write(img_array)
 
         clock.tick(60)
 
-    # Liberar recursos
     out.release()
     pygame.quit()
     print(f"\nVídeo automático salvo: {video_path}")
@@ -209,12 +180,3 @@ def run_automated_simulation(all_actions, input_filename):
 
 if __name__ == "__main__":
     print("Resultados da simulação")
-    
-    # Obtém o caminho absoluto do diretório onde este script (scenario_1.py) está salvo
-    # diretorio_atual = os.path.dirname(os.path.abspath(__file__))
-    
-    # Roda o modo manual passando o diretório atual como destino
-    # run_simulation_and_record(diretorio_atual)
-
-    # Pra criar o dataset de uma vez, rodar primeiro o generate_random_inputs.py,
-    # e depois o batch_runner.py

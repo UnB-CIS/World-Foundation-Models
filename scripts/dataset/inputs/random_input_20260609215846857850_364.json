@@ -1,0 +1,119 @@
+[
+    {
+        "time": 0.63,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            224,
+            502
+        ]
+    },
+    {
+        "time": 1.2,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            99,
+            490
+        ]
+    },
+    {
+        "time": 1.59,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            520,
+            218
+        ]
+    },
+    {
+        "time": 2.28,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            654,
+            476
+        ]
+    },
+    {
+        "time": 2.69,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            156,
+            390
+        ]
+    },
+    {
+        "time": 3.15,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            526,
+            446
+        ]
+    },
+    {
+        "time": 3.46,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            520,
+            81
+        ]
+    },
+    {
+        "time": 4.2,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            300,
+            310
+        ]
+    },
+    {
+        "time": 4.43,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            315,
+            385
+        ]
+    },
+    {
+        "time": 5.07,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            75,
+            342
+        ]
+    },
+    {
+        "time": 5.85,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            132,
+            373
+        ]
+    },
+    {
+        "time": 6.51,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            410,
+            168
+        ]
+    },
+    {
+        "time": 6.96,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            78,
+            139
+        ]
+    }
+]

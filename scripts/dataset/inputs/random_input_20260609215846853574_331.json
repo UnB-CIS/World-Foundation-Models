@@ -1,0 +1,119 @@
+[
+    {
+        "time": 0.4,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            240,
+            282
+        ]
+    },
+    {
+        "time": 1.17,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            467,
+            171
+        ]
+    },
+    {
+        "time": 1.57,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            385,
+            304
+        ]
+    },
+    {
+        "time": 2.2,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            227,
+            290
+        ]
+    },
+    {
+        "time": 2.61,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            605,
+            308
+        ]
+    },
+    {
+        "time": 3.15,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            63,
+            441
+        ]
+    },
+    {
+        "time": 3.87,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            50,
+            373
+        ]
+    },
+    {
+        "time": 4.14,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            117,
+            422
+        ]
+    },
+    {
+        "time": 4.93,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            355,
+            129
+        ]
+    },
+    {
+        "time": 5.51,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            88,
+            369
+        ]
+    },
+    {
+        "time": 5.99,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            369,
+            200
+        ]
+    },
+    {
+        "time": 6.55,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            692,
+            460
+        ]
+    },
+    {
+        "time": 7.04,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            360,
+            73
+        ]
+    }
+]

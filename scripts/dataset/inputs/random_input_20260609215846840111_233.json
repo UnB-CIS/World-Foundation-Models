@@ -1,0 +1,119 @@
+[
+    {
+        "time": 0.24,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            618,
+            250
+        ]
+    },
+    {
+        "time": 0.64,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            748,
+            178
+        ]
+    },
+    {
+        "time": 1.09,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            431,
+            300
+        ]
+    },
+    {
+        "time": 1.85,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            216,
+            407
+        ]
+    },
+    {
+        "time": 2.44,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            252,
+            114
+        ]
+    },
+    {
+        "time": 3.11,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            99,
+            445
+        ]
+    },
+    {
+        "time": 3.76,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            457,
+            468
+        ]
+    },
+    {
+        "time": 4.16,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            99,
+            160
+        ]
+    },
+    {
+        "time": 4.85,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            668,
+            500
+        ]
+    },
+    {
+        "time": 5.26,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            323,
+            194
+        ]
+    },
+    {
+        "time": 6.02,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            737,
+            84
+        ]
+    },
+    {
+        "time": 6.61,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            703,
+            437
+        ]
+    },
+    {
+        "time": 7.0,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            725,
+            366
+        ]
+    }
+]

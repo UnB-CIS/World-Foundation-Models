@@ -1,0 +1,119 @@
+[
+    {
+        "time": 0.7,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            329,
+            175
+        ]
+    },
+    {
+        "time": 1.02,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            570,
+            204
+        ]
+    },
+    {
+        "time": 1.64,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            729,
+            291
+        ]
+    },
+    {
+        "time": 2.14,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            288,
+            172
+        ]
+    },
+    {
+        "time": 2.52,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            179,
+            318
+        ]
+    },
+    {
+        "time": 2.93,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            571,
+            138
+        ]
+    },
+    {
+        "time": 3.29,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            247,
+            484
+        ]
+    },
+    {
+        "time": 4.07,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            522,
+            142
+        ]
+    },
+    {
+        "time": 4.41,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            627,
+            479
+        ]
+    },
+    {
+        "time": 4.96,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            144,
+            300
+        ]
+    },
+    {
+        "time": 5.63,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            65,
+            211
+        ]
+    },
+    {
+        "time": 5.96,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            601,
+            227
+        ]
+    },
+    {
+        "time": 6.21,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            432,
+            495
+        ]
+    }
+]

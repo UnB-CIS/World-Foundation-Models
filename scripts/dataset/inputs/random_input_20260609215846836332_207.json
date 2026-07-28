@@ -1,0 +1,119 @@
+[
+    {
+        "time": 0.68,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            723,
+            475
+        ]
+    },
+    {
+        "time": 1.41,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            504,
+            62
+        ]
+    },
+    {
+        "time": 2.13,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            554,
+            396
+        ]
+    },
+    {
+        "time": 2.84,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            318,
+            251
+        ]
+    },
+    {
+        "time": 3.41,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            278,
+            420
+        ]
+    },
+    {
+        "time": 4.12,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            739,
+            59
+        ]
+    },
+    {
+        "time": 4.54,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            393,
+            520
+        ]
+    },
+    {
+        "time": 5.25,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            492,
+            233
+        ]
+    },
+    {
+        "time": 5.76,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            228,
+            455
+        ]
+    },
+    {
+        "time": 6.33,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            285,
+            245
+        ]
+    },
+    {
+        "time": 6.58,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            172,
+            134
+        ]
+    },
+    {
+        "time": 7.06,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            722,
+            203
+        ]
+    },
+    {
+        "time": 7.8,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            105,
+            425
+        ]
+    }
+]

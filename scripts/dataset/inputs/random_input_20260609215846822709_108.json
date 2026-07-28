@@ -1,0 +1,119 @@
+[
+    {
+        "time": 0.22,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            472,
+            437
+        ]
+    },
+    {
+        "time": 0.5,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            423,
+            340
+        ]
+    },
+    {
+        "time": 0.81,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            591,
+            192
+        ]
+    },
+    {
+        "time": 1.18,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            655,
+            224
+        ]
+    },
+    {
+        "time": 1.44,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            680,
+            134
+        ]
+    },
+    {
+        "time": 1.78,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            324,
+            417
+        ]
+    },
+    {
+        "time": 2.18,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            59,
+            219
+        ]
+    },
+    {
+        "time": 2.54,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            384,
+            385
+        ]
+    },
+    {
+        "time": 3.15,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            153,
+            486
+        ]
+    },
+    {
+        "time": 3.6,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            556,
+            407
+        ]
+    },
+    {
+        "time": 4.1,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            561,
+            320
+        ]
+    },
+    {
+        "time": 4.69,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            303,
+            329
+        ]
+    },
+    {
+        "time": 5.48,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            266,
+            179
+        ]
+    }
+]

@@ -67,7 +67,9 @@ def create_empty_scenario_frame() -> np.ndarray:
 
     scenario1 = _load_scenario1_module()
     if scenario1 is None or not hasattr(scenario1, "create_scenario"):
-        raise RuntimeError("Nao foi possivel carregar create_scenario de scripts/dataset/scenario_1.py.")
+        raise RuntimeError(
+            "Nao foi possivel carregar create_scenario de scripts/dataset/scenario_1.py."
+        )
 
     surface = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
     space = pymunk.Space()
@@ -131,19 +133,39 @@ class InteractiveWorldModelSimulator:
                 "Passar frame",
             ),
             "back": Button(
-                pygame.Rect(panel_x, button_start_y + (button_height + button_gap), button_width, button_height),
+                pygame.Rect(
+                    panel_x,
+                    button_start_y + (button_height + button_gap),
+                    button_width,
+                    button_height,
+                ),
                 "Voltar frame",
             ),
             "auto_play": Button(
-                pygame.Rect(panel_x, button_start_y + 2 * (button_height + button_gap), button_width, button_height),
+                pygame.Rect(
+                    panel_x,
+                    button_start_y + 2 * (button_height + button_gap),
+                    button_width,
+                    button_height,
+                ),
                 "Iniciar automatico",
             ),
             "clear_action": Button(
-                pygame.Rect(panel_x, button_start_y + 3 * (button_height + button_gap), button_width, button_height),
+                pygame.Rect(
+                    panel_x,
+                    button_start_y + 3 * (button_height + button_gap),
+                    button_width,
+                    button_height,
+                ),
                 "Limpar acao",
             ),
             "reset": Button(
-                pygame.Rect(panel_x, button_start_y + 4 * (button_height + button_gap), button_width, button_height),
+                pygame.Rect(
+                    panel_x,
+                    button_start_y + 4 * (button_height + button_gap),
+                    button_width,
+                    button_height,
+                ),
                 "Resetar simulacao",
             ),
         }
@@ -255,13 +277,21 @@ class InteractiveWorldModelSimulator:
         pygame.draw.rect(self.screen, ACCENT_COLOR, self.canvas_rect, width=4)
 
         if self.pending_action is not None:
-            px = int(self.pending_action["pos"][0] / SCREEN_WIDTH * self.canvas_rect.width)
-            py = int(self.pending_action["pos"][1] / SCREEN_HEIGHT * self.canvas_rect.height)
+            px = int(
+                self.pending_action["pos"][0] / SCREEN_WIDTH * self.canvas_rect.width
+            )
+            py = int(
+                self.pending_action["pos"][1] / SCREEN_HEIGHT * self.canvas_rect.height
+            )
             pygame.draw.circle(self.screen, ACCENT_COLOR, (px, py), 8)
             pygame.draw.circle(self.screen, (255, 240, 230), (px, py), 14, width=2)
 
     def draw_panel(self) -> None:
-        pygame.draw.rect(self.screen, PANEL_COLOR, pygame.Rect(CANVAS_SIZE, 0, SIDE_PANEL_WIDTH, WINDOW_HEIGHT))
+        pygame.draw.rect(
+            self.screen,
+            PANEL_COLOR,
+            pygame.Rect(CANVAS_SIZE, 0, SIDE_PANEL_WIDTH, WINDOW_HEIGHT),
+        )
         title = self.font.render("Simulador do World Model", True, TEXT_COLOR)
         self.screen.blit(title, (CANVAS_SIZE + 24, 24))
 
@@ -286,7 +316,9 @@ class InteractiveWorldModelSimulator:
 
         if self.last_result is not None:
             model_text = f"Predicao: {self.last_result.model_status}"
-            self.draw_multiline(model_text, (CANVAS_SIZE + 24, 548), SIDE_PANEL_WIDTH - 48)
+            self.draw_multiline(
+                model_text, (CANVAS_SIZE + 24, 548), SIDE_PANEL_WIDTH - 48
+            )
 
     def run(self) -> None:
         running = True
@@ -309,7 +341,10 @@ class InteractiveWorldModelSimulator:
                         self.reset()
 
             now_ms = pygame.time.get_ticks()
-            if self.auto_play_enabled and now_ms - self.last_auto_advance_ms >= self.auto_play_interval_ms:
+            if (
+                self.auto_play_enabled
+                and now_ms - self.last_auto_advance_ms >= self.auto_play_interval_ms
+            ):
                 self.advance()
                 self.last_auto_advance_ms = now_ms
 
@@ -323,7 +358,9 @@ class InteractiveWorldModelSimulator:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Simulador interativo para o world model 2D.")
+    parser = argparse.ArgumentParser(
+        description="Simulador interativo para o world model 2D."
+    )
     parser.add_argument(
         "--world-model-weights",
         default=WORLD_MODEL_WEIGHTS,

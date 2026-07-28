@@ -1,0 +1,119 @@
+[
+    {
+        "time": 0.64,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            632,
+            354
+        ]
+    },
+    {
+        "time": 1.43,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            680,
+            137
+        ]
+    },
+    {
+        "time": 1.82,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            50,
+            449
+        ]
+    },
+    {
+        "time": 2.08,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            709,
+            65
+        ]
+    },
+    {
+        "time": 2.73,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            204,
+            311
+        ]
+    },
+    {
+        "time": 2.95,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            594,
+            245
+        ]
+    },
+    {
+        "time": 3.32,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            526,
+            448
+        ]
+    },
+    {
+        "time": 3.97,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            397,
+            468
+        ]
+    },
+    {
+        "time": 4.18,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            420,
+            220
+        ]
+    },
+    {
+        "time": 4.91,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            84,
+            358
+        ]
+    },
+    {
+        "time": 5.65,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            361,
+            502
+        ]
+    },
+    {
+        "time": 6.37,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            124,
+            498
+        ]
+    },
+    {
+        "time": 6.85,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            632,
+            230
+        ]
+    }
+]

@@ -1,0 +1,119 @@
+[
+    {
+        "time": 0.61,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            323,
+            143
+        ]
+    },
+    {
+        "time": 1.34,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            630,
+            404
+        ]
+    },
+    {
+        "time": 2.01,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            231,
+            330
+        ]
+    },
+    {
+        "time": 2.45,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            664,
+            403
+        ]
+    },
+    {
+        "time": 3.18,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            692,
+            397
+        ]
+    },
+    {
+        "time": 3.73,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            85,
+            412
+        ]
+    },
+    {
+        "time": 4.02,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            87,
+            74
+        ]
+    },
+    {
+        "time": 4.53,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            472,
+            71
+        ]
+    },
+    {
+        "time": 5.27,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            306,
+            162
+        ]
+    },
+    {
+        "time": 5.73,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            744,
+            210
+        ]
+    },
+    {
+        "time": 6.37,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            123,
+            168
+        ]
+    },
+    {
+        "time": 7.06,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            263,
+            445
+        ]
+    },
+    {
+        "time": 7.57,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            134,
+            385
+        ]
+    }
+]

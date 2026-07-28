@@ -1,0 +1,119 @@
+[
+    {
+        "time": 0.27,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            471,
+            60
+        ]
+    },
+    {
+        "time": 0.96,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            500,
+            248
+        ]
+    },
+    {
+        "time": 1.42,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            106,
+            383
+        ]
+    },
+    {
+        "time": 1.79,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            356,
+            177
+        ]
+    },
+    {
+        "time": 2.3,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            262,
+            382
+        ]
+    },
+    {
+        "time": 3.04,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            365,
+            117
+        ]
+    },
+    {
+        "time": 3.72,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            282,
+            305
+        ]
+    },
+    {
+        "time": 4.12,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            741,
+            502
+        ]
+    },
+    {
+        "time": 4.86,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            361,
+            249
+        ]
+    },
+    {
+        "time": 5.19,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            673,
+            54
+        ]
+    },
+    {
+        "time": 5.65,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            688,
+            260
+        ]
+    },
+    {
+        "time": 6.35,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            312,
+            170
+        ]
+    },
+    {
+        "time": 6.57,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            96,
+            411
+        ]
+    }
+]

@@ -1,0 +1,137 @@
+[
+    {
+        "time": 0.63,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            440,
+            110
+        ]
+    },
+    {
+        "time": 1.09,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            299,
+            252
+        ]
+    },
+    {
+        "time": 1.71,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            537,
+            156
+        ]
+    },
+    {
+        "time": 2.33,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            705,
+            168
+        ]
+    },
+    {
+        "time": 2.76,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            612,
+            151
+        ]
+    },
+    {
+        "time": 2.99,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            261,
+            287
+        ]
+    },
+    {
+        "time": 3.58,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            63,
+            116
+        ]
+    },
+    {
+        "time": 4.19,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            238,
+            304
+        ]
+    },
+    {
+        "time": 4.82,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            127,
+            444
+        ]
+    },
+    {
+        "time": 5.09,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            76,
+            262
+        ]
+    },
+    {
+        "time": 5.85,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            451,
+            273
+        ]
+    },
+    {
+        "time": 6.62,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            100,
+            63
+        ]
+    },
+    {
+        "time": 7.05,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            515,
+            316
+        ]
+    },
+    {
+        "time": 7.8,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            366,
+            164
+        ]
+    },
+    {
+        "time": 8.43,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            402,
+            515
+        ]
+    }
+]

@@ -28,7 +28,13 @@ class VAETrainer(BaseTrainer):
         return validate_vae
 
     def _build_model(self) -> VAE:
-        return VAE()
+        # Read channel sizes from config so vae.yaml is the single source of truth.
+        # Both values must match VISUAL_LATENT_CHANNELS / ACTION_LATENT_CHANNELS
+        # in world_model_vae.py and dataset_builder.py.
+        return VAE(
+            latent_channels=self.cfg.model.latent_channels,
+            action_latent_channels=self.cfg.model.action_latent_channels,
+        )
 
     def _build_optimizer(self) -> Optimizer:
         return torch.optim.Adam(
@@ -88,3 +94,17 @@ class VAETrainer(BaseTrainer):
 
     def _build_training_state(self) -> VAETrainingState:
         return VAETrainingState()
+
+    def _forward_model(self, batch: torch.Tensor) -> tuple:
+        images = batch.to(self.device)
+        batch_size = images.size(0)
+        spatial_size = images.size(-1) // 8  # 64px input -> 8x8 latent spatial
+        z_action = torch.zeros(
+            batch_size,
+            self.cfg.model.action_latent_channels,
+            spatial_size,
+            spatial_size,
+            device=self.device,
+            dtype=images.dtype,
+        )
+        return self.model(images, z_action=z_action)

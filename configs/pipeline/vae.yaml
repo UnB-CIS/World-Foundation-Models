@@ -10,24 +10,25 @@ data:
 # Model
 model:
   in_channels: 1
-  latent_channels: 8
+  latent_channels: 16           
+  action_latent_channels: 16    
   spatial_size: 8
 
 # Training
 training:
-  num_epochs: 30
-  lr: 1e-3
+  num_epochs: 80                
+  lr: 3e-4                      
   max_norm: 2.0
   warmup_epochs: 8
   free_bits: 1.5
   edge_weight: 100.0
   bg_weight: 0.1
-  scheduler_patience: 3
+  scheduler_patience: 5         
   scheduler_factor: 0.5
   checkpoint_every: 5
   early_stopping_patience: 10
 
-#  Paths 
+#  Paths
 paths:
   save_dir: "${paths.checkpoints_root}/vae"
   samples_dir: "${paths.samples_root}/vae"

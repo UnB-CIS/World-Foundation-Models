@@ -3,6 +3,7 @@ from src.utils.training_state import ModelTrainingState
 
 import os
 import torch
+import mlflow
 import torch.nn as nn
 import torch.optim as optim
 from datetime import datetime
@@ -208,6 +209,10 @@ def train(
             current_lr=current_lr,
             num_batches=num_batches,
         )
+
+        if mlflow.active_run():
+            epoch_metrics = {k: v[-1] for k, v in model_training_state.history.items() if v}
+            mlflow.log_metrics(epoch_metrics, step=epoch)
 
         model_training_state.training_epoch_output(
             epoch=epoch,

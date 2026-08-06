@@ -1,3 +1,8 @@
+# MLflow experiment tracking
+mlflow:
+  enabled: true
+  tracking_uri: "./mlruns"
+
 # Compute
 compute:
   num_workers: 4

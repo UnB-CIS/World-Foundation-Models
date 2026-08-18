@@ -1,0 +1,47 @@
+[
+    {
+        "time": 0.45,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            139,
+            348
+        ]
+    },
+    {
+        "time": 1.62,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            464,
+            156
+        ]
+    },
+    {
+        "time": 2.16,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            159,
+            310
+        ]
+    },
+    {
+        "time": 2.66,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            284,
+            285
+        ]
+    },
+    {
+        "time": 4.16,
+        "type": "mouse_down",
+        "object": "ball",
+        "pos": [
+            80,
+            221
+        ]
+    }
+]

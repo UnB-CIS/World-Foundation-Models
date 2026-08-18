@@ -7,6 +7,7 @@ site_name: World Foundation Models
 nav:
   - Home: index.md
   - Projeto: projeto/escopo.md
+  - Avaliação do World Model: relatorio_avaliacao_world_model.md
   - Referências:
       - Diffusion models: diffusion/diffusion.md
       - Autoregressive models: autoregressive/autoregressive.md

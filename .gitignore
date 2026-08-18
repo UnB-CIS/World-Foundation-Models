@@ -23,3 +23,24 @@ site/
 /outputs
 _ignore
 
+.dataset/
+
+# Lote antigo de videos (raio 15) — derivados dos JSONs em inputs/,
+# regeneraveis com scripts/dataset/batch_runner.py. 151 MB.
+scripts/dataset/videos/random_input_20260513222405_*
+
+# Store local do MLflow: 38 MB e com caminhos absolutos da maquina.
+# O registro portavel dos resultados esta em scripts/eval/outputs/.
+mlruns/
+
+# Artefatos de build do LaTeX (o main.pdf continua versionado)
+*.aux
+*.bbl
+*.blg
+*.out
+*.synctex.gz
+IEEE_Article_2026/main.log
+
+# Artefatos do latexmk
+*.fdb_latexmk
+*.fls

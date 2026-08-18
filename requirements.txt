@@ -20,3 +20,8 @@ scikit-learn
 opencv-python
 hydra-core
 tqdm
+
+# Avaliacao do world model (scripts/eval)
+mlflow
+scipy
+scikit-image

@@ -1,0 +1,17 @@
+{
+  "config": {
+    "checkpoint_name": "delta_convlstm_v2",
+    "checkpoint_path": "D:\\Documents\\GitHub\\World-Foundation-Models\\scripts\\world_model_weights.pth",
+    "memory_frames": 6,
+    "memory_stride": 1,
+    "feedback": "pixel"
+  },
+  "selection_metrics": {
+    "latent_mse": 0.07427188922592434,
+    "latent_mse_persistence": 0.08021713343113421,
+    "skill_score": 0.07411439365773154,
+    "delta_cosine": 0.21036857161026262,
+    "delta_magnitude_ratio": 0.7467153966718008,
+    "n_frames": 2476.0
+  }
+}

@@ -7,13 +7,6 @@
 \usepackage{xcolor}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
-
-% Espacamento de floats reduzido para caber no limite de 5 paginas.
-% Nao altera fonte nem margens do template IEEE.
-\setlength{\textfloatsep}{8pt plus 2pt minus 2pt}
-\setlength{\intextsep}{8pt plus 2pt minus 2pt}
-\setlength{\dbltextfloatsep}{8pt plus 2pt minus 2pt}
-
 \begin{document}
 
 \title{A Latent World Model for Action-Conditioned Prediction in Interactive 2D Physics Environments}
@@ -51,7 +44,7 @@ yuri03ysl@gmail.com
 \maketitle
 
 \begin{abstract}
-World models offer a powerful paradigm for learning the internal representations and temporal dynamics of complex environments directly from high-dimensional sensory data. This paper presents a modular latent world model designed to predict the visual evolution of a two-dimensional physical simulation conditioned on external user interventions. To overcome the computational inefficiency and instability associated with direct pixel-space prediction, the proposed architecture decomposes the forecasting problem into visual compression, action embedding, multimodal fusion, and latent dynamics prediction. A Variational Autoencoder (VAE) is employed to compress individual $64 \times 64$ grayscale frames into a structured spatial latent space. Concurrently, an Action Encoder maps user interactions, specifically the instantaneous spawning of objects at given coordinates, into continuous latent vectors. These representations are combined via spatial broadcast fusion and fed into a transition predictor that estimates the subsequent latent state based on a stacked temporal history of past observations. Trained on a custom synthetic dataset generated via a 2D physics engine, the framework is evaluated on held-out episodes against trivial baselines and a reconstruction oracle. It predicts the next ball position more accurately than persistence and constant-velocity extrapolation in every test episode, and its predictions respond specifically and locally to user interventions, while capturing the direction of gravity-driven motion more reliably than its magnitude. This work provides a foundational approach for action-conditioned generative prediction in interactive physical environments.
+World models offer a powerful paradigm for learning the internal representations and temporal dynamics of complex environments directly from high-dimensional sensory data. This paper presents a modular latent world model designed to predict the visual evolution of a two-dimensional physical simulation conditioned on external user interventions. To overcome the computational inefficiency and instability associated with direct pixel-space prediction, the proposed architecture decomposes the forecasting problem into visual compression, action embedding, multimodal fusion, and latent dynamics prediction. A Variational Autoencoder (VAE) is employed to compress individual $64 \times 64$ grayscale frames into a structured spatial latent space. Concurrently, an Action Encoder maps user interactions, specifically the instantaneous spawning of objects at given coordinates, into continuous latent vectors. These representations are combined via spatial broadcast fusion and fed into a transition predictor that estimates the subsequent latent state based on a stacked temporal history of past observations. Trained on a custom synthetic dataset generated via a 2D physics engine, the proposed framework is evaluated on held-out episodes against trivial baselines and a reconstruction oracle. The subsequente ball position is more accurately predicted than persistence and constant-velocity extrapolation across all test epides, responding specifically and locally to user interventions, and captures the direction of gravity-driven motion more reliably than magnitude. These results indicate that the model abstracts basic aspects of gravity-driven dynamics and localized interventions, providing a foundational approach for action-conditioned generative prediction in interactive physical enviroments.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -126,13 +119,13 @@ The core of the problem lies in learning the rules of physics, such as gravity, 
 
 where \(A\) denotes the action embedding function.
 
-The world model acts as a fully latent neural simulator. Each visual latent is fused with the action embedding of the same instant, so the window also carries the interventions applied while it was observed, $E_t = \{e_{t-k+1}, \ldots, e_t\}$. The transition function \(W\) receives this history and predicts the \emph{increment} of the latent state, the next state being obtained residually:
+The world model acts as a fully latent neural simulator. It defines a transition function \(W\), which receives the compressed visual history and the applied action, and attempts to predict the latent state at the next time step:
 
 \begin{equation}
-    \hat{z}_{t+1} = z_t + W(Z_t, E_t).
+    \hat{z}_{t+1} = W(Z_t, e_t).
 \end{equation}
 
-Predicting the increment rather than the absolute state concentrates the learning signal on what changes between consecutive frames. It is in this stage that the system reasons about time and causality, determining the direction and velocity of the objects based on the provided temporal history.
+It is in this stage that the system reasons about time and causality, determining the direction and velocity of the objects based on the provided temporal history.
 
 \subsection{Visual Reconstruction of the Next Frame}
 
@@ -202,96 +195,75 @@ From this representation, a predictor model learns to estimate the next visual s
 \section{Experimental Setup}
 \label{sec:experimental_setup}
 
-Our experiments aim to verify two central hypotheses: (\textit{H1}) the model learns underlying physical dynamics (e.g., gravity, collisions) rather than merely memorizing trajectories; and (\textit{H2}) its predictions are genuinely conditioned by user interventions, independently of inertial cues already present in the visual context.
+Our experiments aim to verify two central hypotheses:
+\begin{itemize}
+    \item (\textit{H1})~the model learns underlying physical dynamics (e.g., gravity, collisions) rather than merely memorizing trajectories;
+    \item (\textit{H2})~its predictions are genuinely conditioned by user interventions, independently of inertial cues already present in the visual context.
+\end{itemize}
 
 \subsection{Held-Out Evaluation Set}
 
-Testing \textit{H1} against memorization requires unseen episodes, so 24 new ones were generated after training with the same engine, action distribution and rendering pipeline of Section~\ref{sec:dataset}, yielding $10{,}127$ evaluated transitions, $273$ conditioned by a click; regenerated frames are bit-identical to the original dataset. Following (1) and (5), the temporal window holds the $k$ most recent contiguous frames; sweeping $k \in \{1,2,4,6,8,10,12\}$ we adopted $k=6$, a single frame ($k=1$) degrading the skill score to $-0.803$ and confirming that the stacked history is what makes velocity estimable. Each action is assigned to the last frame that does \emph{not} yet contain the spawned ball, i.e. $\lceil t f_s \rceil - 1$ for an event at time $t$ with frame rate $f_s$: the object being absent from the visual context, any predicted response must originate from the action channel, which is what makes \textit{H2} meaningful.
+In order to test \textit{H1} against memorization, 24 new episodes were generated after training, using the same engine, action distribution and rendering pipeline of Section~\ref{sec:dataset}, so that any performance difference reflects the unseen trajectories rather than a rendering shift. This yielded $10{,}127$ evaluated transitions, $273$ conditioned by a click. Following (1) and (5), the temporal window holds the $k$ most recent contiguous frames. Sweeping $k \in \{1,2,4,6,8,10,12\}$, the latent skill score (0 matches persistence, 1 is perfect) saturates beyond $k=4$ --- $+0.074$ at $k=6$, $+0.072$ at $k=8$, $+0.070$ at $k=12$ --- so we adopt $k=6$, the choice being uncritical above saturation; $k=1$ collapses it to $-0.803$, an error $80\%$ larger than persistence, confirming that the stacked history is what makes velocity estimable. Each action is assigned to the last frame that does \emph{not} yet contain the spawned ball, i.e.\ $\lceil t \cdot f_s \rceil - 1$ for an event at time $t$ with frame rate $f_s$. This makes \textit{H2} testable: the object is absent from the visual history and its coordinates exist only in the action embedding, so a response correctly \emph{localized} at the clicked position cannot be attributed to visual context.
 
 \subsection{Baselines and Model Variants}
 
-\textbf{Trivial baselines.} \emph{Persistence} ($x_{t+1} = x_t$) repeats the last frame; since objects come to rest due to friction it scores artificially high under pixel-level metrics, and any useful model must still beat it. \emph{Constant velocity} ($x_{t+1} = \text{clip}(2x_t - x_{t-1}, 0, 1)$) assumes uniform linear motion, failing on acceleration, elastic collisions and sudden insertions. Both are evaluated in two domains: \emph{pixel space}, as defined above, and the \emph{decoded domain}, where persistence becomes $\hat{z}_{t+1} = z_t$ and constant velocity extrapolates matched centroids, both undergoing the same reconstruction as the proposed model.
+To isolate the contributions of specific components, we evaluate the proposed architecture against several baselines:
 
-\textbf{Reconstruction oracle.} The \emph{VAE ceiling} decodes the true next latent, $\hat{x}_{t+1} = D(E(x_{t+1}))$: the lowest error attainable by any latent predictor coupled to this autoencoder. Since the oracle itself is far outperformed by pixel-space persistence, a comparison in pixel space cannot separate prediction from reconstruction; the decoded domain is therefore the primary reference for \textit{H1}, the pixel-space figures quantifying the cost of the autoencoder.
+\textbf{Trivial baselines:} 
 
-\textbf{Ablation.} \emph{No-Action} retains the complete architecture --- Action Encoder, Spatial-Broadcast Fuser and transition model all active --- but forces the action input to $\mathbf{0}$ at every step. Because no component is removed, any difference is attributable exclusively to the action signal, a direct test of \textit{H2}; by construction its action sensitivity is zero.
+\begin{itemize}
+    \item \textbf{Persistence ($x_{t+1} = x_t$):} Repeats the last frame. This exposes the limitations of pixel-level metrics, which can score artificially high because they are dominated by the static background rather than object dynamics.
+    \item \textbf{Constant Velocity ($x_{t+1} = \text{clip}(2x_t - x_{t-1}, 0, 1)$):} Assumes uniform linear motion, inherently failing to model acceleration, elastic collisions, or sudden object insertions. Coordinates are normalized to $[0,1]$, and the clip is applied per coordinate.
+    \item \textbf{Reconstruction oracle.} The \textit{VAE ceiling} decodes the true next latent, $\hat{x}_{t+1} = D(E(x_{t+1}))$: the error floor set by the autoencoder's reconstruction alone, independent of any prediction. Since this oracle is itself far outperformed by pixel-space persistence, a comparison in pixel space cannot separate prediction from reconstruction; the decoded domain is therefore the primary reference for \textit{H1}, with the pixel-space figures quantifying the cost of the autoencoder.
+    \item \textbf{Abalation:}\textit{No-Action} the architecture remains unchanged (Acction Encoder, Spatial-Broadcast Fuser and transition model are all active), but the action input is supressesed by reducing it forcibly to $0$ at every step. Since the network is identical and only the action signal is removed, the gap between the full model and this variant isolates the contribution of the action channel, providing the reference against which action sensitivity is measured for \textit{H2}. 
+\end{itemize}
 
 \subsection{Evaluation Metrics}
 
-Image fidelity metrics (MSE, PSNR, SSIM) are combined with object-level physical ones, as pixel-level functions often fail to capture structural consistency and mass conservation. The \textbf{Centroid Position Error (CPE)} is the primary metric: balls are segmented by connected components under a contrast-adaptive threshold, their sub-pixel centroids matched by the Hungarian algorithm, and the mean Euclidean distance reported in pixels of the $800 \times 600$ screen. Since balls at rest are trivially predicted by persistence, we also report CPE restricted to \emph{moving} balls (displaced by more than $3$~px), and monitor mass conservation as the ratio of detected to true objects.
-
-The \textbf{skill score} $1 - \mathrm{MSE}(\hat{z}_{t+1}, z_{t+1})/\mathrm{MSE}(z_t, z_{t+1})$ evaluates, in latent space, the divergence that the second training stage minimizes (Section~\ref{sec:problem_formulation}), and isolates the transition model from the decoder. \textbf{Action sensitivity} is the mean absolute difference between the frames predicted with and without the action, contrasted between click frames and non-click controls. Significance is assessed with paired Wilcoxon tests using the \emph{episode} as the experimental unit, since frames within an episode are correlated; intervals are obtained by bootstrap.
-
 \subsection{Training and Inference Protocol}
 
-Training follows the two-stage decomposition of Section~\ref{sec:problem_formulation}, the VAE converging before the temporal dynamics are learned. The transition function $W$ is a two-layer ConvLSTM with 64 hidden channels and two residual blocks, trained over $4$-step rollouts with an $L_1$ objective on the latent weighted $5\times$ on click frames, plus a decoded-frame term weighted $50\times$ on non-background pixels. Predictions are also evaluated in open-loop rollout, the model being fed back with its own output for up to $16$ frames while receiving only the future actions.
+\subsubsection{Model Ablations}
+
+These variants evaluate the structural choices of our architecture:
+
+\begin{itemize}
+    \item \textbf{No-Action:} The complete architecture is retained - Action Encoder, Spatial-Broadcast Fuser, and Latent Decoder are all active - but the action input is forced to $\mathbf{0}$ at every time step.
+    Because no architectural component is removed, any difference in performance relative to the full model is attributable exclusively to the action signal, providing a direct test of \textit{H2}.
+    By construction, the action-sensitivity metric evaluated exactly zero for this variant.
+\end{itemize}
+
+
+
+\subsection{Evaluation Metrics and Training Protocol}
+The evaluation combines standard image fidelity metrics with domain-specific physical metrics, as pixel-level functions (e.g., Mean Squared Error) often fail to capture structural consistency and mass conservation.
+
+Training strictly follows the two-stage decomposition defined in Section~\ref{sec:problem_formulation}. This separates the optimization processes, ensuring the spatial visual representation (VAE) fully converges before the system attempts to learn the complex temporal dynamics (World Model).
 
 
 \section{Results}
 \label{sec:results}
 
-Both components converged --- VAE validation loss $293.52 \rightarrow 1.73$ over 200 epochs, action encoder $0.1795 \rightarrow 0.00013$ over 20 --- making the representations usable, but saying nothing about predictive ability, which the rest of this section addresses.
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=\columnwidth]{figures/vae_reconstruction_loss.png}
+    \caption{VAE reconstruction loss during training.}
+    \label{fig:vae_reconstruction_loss}
+\end{figure}
 
-\subsection{Single-Step Prediction (H1)}
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=\columnwidth]{figures/action_encoder_loss.png}
+    \caption{Action encoder loss during training.}
+    \label{fig:action_encoder_loss}
+\end{figure}
 
-Table~\ref{tab:one_step} reports the error in predicting the immediate next state, in both evaluation domains.
+The internal components of the \textit{world foundation model} were evaluated independently based on the training history of each module. The visual representation module was trained as a variational autoencoder (VAE), while the action encoder was trained to learn a compact representation of the interaction commands. Since these modules optimize different loss functions and operate on different representations, the absolute loss values should not be directly compared. Therefore, the analysis focuses on convergence behavior, validation loss reduction, and the gap between the training and validation curves.
 
-\begin{table}[!t]
-\caption{24 held-out episodes, CPE in screen pixels. \textbf{Top:} single step, with 95\% CI and fraction of objects recovered; the last two rows are computed directly in pixel space, the others in the decoded domain. \textbf{Bottom:} rollout by horizon $h$, and mean ball fall.}
-\label{tab:one_step}
-\centering
-\scriptsize
-\begin{tabular}{lccccc}
-\hline
-\textbf{Predictor} & \textbf{CPE} & \textbf{CI 95\%} & \textbf{CPE mov.} & \textbf{SSIM} & \textbf{det.} \\
-\hline
-Proposed model      & \textbf{24.69} & [24.08, 25.27] & 21.09 & 0.838 & 79.6\% \\
-No-Action           & 25.13 & [24.49, 25.73] & 21.14 & 0.838 & 78.8\% \\
-\textit{VAE ceiling}& \textit{25.76} & \textit{[25.13, 26.42]} & \textit{20.71} & \textit{0.839} & \textit{84.1\%} \\
-Persistence         & 28.35 & [27.65, 29.01] & 24.01 & 0.833 & 83.7\% \\
-Constant velocity   & 31.06 & [30.32, 31.80] & 25.67 & --- & 83.7\% \\
-\hline
-Persistence (px)    & 5.04 & [4.93, 5.18] & 8.46 & 0.972 & 99.8\% \\
-Const. velocity (px)& 4.74 & [4.62, 4.87] & 7.88 & 0.974 & 99.8\% \\
-\hline
-\end{tabular}
+The VAE showed a substantial reduction in loss throughout training. The total training loss decreased from 1170.73 to 1.37 over 200 epochs, while the validation loss decreased from 293.52 to 1.73. The best validation result was obtained in the final epoch, corresponding to a relative validation loss reduction of 99.41\%. The reconstruction component followed the same trend, with the validation reconstruction loss decreasing from 264.52 to 1.64. This behavior indicates that the encoder--decoder structure progressively learned a compact latent representation capable of reconstructing the visual state of the simulated environment. The KL divergence increased during the initial phase and later stabilized in a high-value regime, which is expected after the $\beta$ warm-up phase and suggests that the latent space was effectively regularized without collapsing.
 
-\vspace{3pt}
+The action encoder presented a highly stable convergence profile. The training loss decreased from 0.1886 to 0.00014, and the validation loss decreased from 0.1795 to 0.00013 over 20 epochs. The best validation value was also achieved in the final epoch, resulting in a relative reduction of 99.93\%. The close alignment between the training and validation curves indicates that the action representation learned by the encoder generalized well to the validation set, with no evidence of overfitting in the observed training history.
 
-\begin{tabular}{lcccccc}
-\hline
-$h$ & 1 & 2 & 4 & 8 & 12 & 16 \\
-\hline
-Proposed model      & \textbf{24.6} & \textbf{25.6} & \textbf{34.7} & \textbf{47.1} & \textbf{55.1} & \textbf{60.3} \\
-Persistence         & 29.8 & 34.3 & 39.3 & 51.9 & 61.3 & 71.5 \\
-Constant velocity   & 30.2 & 33.9 & 37.4 & 50.1 & 62.6 & 76.9 \\
-\textit{VAE ceiling}& \textit{26.9} & \textit{25.0} & \textit{23.2} & \textit{29.9} & \textit{28.2} & \textit{22.6} \\
-\hline
-True fall (px)      & 7.5 & 8.9 & 12.9 & 18.8 & 23.0 & 28.2 \\
-Predicted fall (px) & 2.0 & 3.5 & 5.7 & 7.2 & 7.8 & 10.6 \\
-\hline
-\end{tabular}
-\end{table}
-
-Pixel space measures the autoencoder, not the prediction. Evaluated directly on pixels, both trivial baselines outperform every latent method by a factor of five ($4.74$--$5.04$~px against $24.69$~px). The oracle settles the interpretation: decoding the \emph{true} next latent still yields $25.76$~px, so a predictor correct by construction also loses to copying the previous frame. The pixel-space gap therefore measures the cost of the autoencoder --- $7.4$~dB of PSNR and $16\%$ of the objects lost even in the oracle --- not the quality of the dynamics: in a predominantly static scene, pixel-level metrics reward reconstruction so heavily that prediction becomes unobservable.
-
-In the decoded domain the model beats every baseline. It reduces the error to $24.69$~px against $28.35$ and $31.06$~px. Paired by episode the gain is $+3.69$~px (95\% CI $[3.10, 4.27]$) over persistence and $+6.35$~px (CI $[5.62, 7.03]$) over constant velocity, better in \textbf{all 24 episodes} in both comparisons ($p = 1.2 \times 10^{-7}$); restricted to moving balls, where persistence is no longer trivially correct, the gains remain $+2.97$ and $+4.57$~px, again in $100\%$ of episodes. In latent space the divergence minimized by the second training stage falls from $0.0776$ to $0.0724$, a skill score of $+0.066$, with a cosine of $+0.208$ between predicted and true increments.
-
-The model operates at the level of the oracle ($21.09$ vs $20.71$~px on moving balls; the overall figures are confounded by the oracle's higher detection rate), so at one step the binding constraint is the decoder, not the dynamics, and the gain over the baselines is a \emph{lower bound} on the predictor's contribution.
-
-\subsection{Open-Loop Rollout (H1)}
-
-The lower half of Table~\ref{tab:one_step} reports the error when the model is fed back with its own predictions. It is more accurate than both baselines at \emph{all} 16 horizons, with reductions of $6.1$--$25.3\%$ over persistence and $21.6\%$ over constant velocity at $h = 16$. Since the oracle stays flat around $23$--$30$~px, the growth of the model error is attributable to the dynamics predictor, not to reconstruction --- the separation the single-step analysis could not provide.
-
-The last two rows test gravity directly. The model does move the balls downwards --- persistence predicts a null displacement --- but recovers only $26$--$53\%$ of the true fall. With a ratio of $0.703$ between predicted and true latent increments, this supports a precise claim: the model learned \emph{that} bodies fall and in which direction, while underestimating \emph{how far} --- the signature of regression to the mean under an $L_1$ objective. Elastic collisions were not isolated by a dedicated metric and remain untested.
-
-\subsection{Action Conditioning (H2)}
-
-Running the model twice from an identical state, with and without the click, the predicted frames differ by $3.44 \times 10^{-3}$ on click frames against $4.41 \times 10^{-5}$ on the $10{,}039$ controls --- a ratio of $78.1\times$ with a large effect size (Cohen's $d = 3.02$, $p < 10^{-300}$, Mann--Whitney). The response is localized: the peak of the difference map falls within $100$~px of the clicked position in $85.0\%$ of events and within $200$~px in $90.1\%$, against a detector floor of $12.5$~px measured on the real video. Since the spawned ball is absent from the input frame by construction of the alignment, this cannot be explained by inertial cues, confirming \textit{H2}. The No-Action ablation attains nearly the same aggregate CPE (Table~\ref{tab:one_step}), which does not contradict this: only $2.7\%$ of frames carry a click, so the effect vanishes in an average.
-
-\subsection{Limitations}
-
-Three limitations follow from the measurements. The autoencoder binds visual quality: even decoding the true latent it misses $16\%$ of the objects, so image fidelity requires retraining the VAE, not the predictor. The predictor underestimates the magnitude of motion, its most actionable weakness. Lastly, it does not generalize across object scale: a checkpoint trained with one ball radius scores a skill of $-2.76$ on episodes with a different radius, the learned dynamics staying tied to the training environment.
+Overall, the results support the viability of the modular representation learning strategy adopted in this work. The VAE was able to compress visual observations into a structured latent representation, while the action encoder learned a stable representation for interaction commands. Together, these results indicate that the trained components provide a suitable foundation for subsequent stages of the architecture, in which visual and action representations can be integrated to support future state prediction in the simulated environment.
 
 
 

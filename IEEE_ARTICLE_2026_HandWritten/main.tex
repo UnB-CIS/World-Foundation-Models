@@ -219,27 +219,13 @@ To isolate the contributions of specific components, we evaluate the proposed ar
 \end{itemize}
 
 \subsection{Evaluation Metrics}
+\label{subsec:metrics}
+Since pixel-level functions often fail to capture structural consistency and mass conservation, image fidelity metrics (MSE, PSNR, SSIM) were combined with object-level physical ones. Centroid Position Error (CPE) is the primary metric: balls are segmented by connected components under an adaptive contrast threshold, their intensity-weighted sub-pixel centroids are matched by the Hungarian algorithm, and the mean Euclidean distance is reported in pixels of the $800 \times 600$ screen, centroids being measured on the $64 \times 64$ frame and rescaled so that errors carry the physical units of the environment. Since a ball at rest makes persistence correct by construction, we also report CPE restricted to \emph{moving} balls, whose ground-truth centroid displaces by more than $3$~px between consecutive frames on that same scale. The threshold isolates the cases in which predicting no change is actually wrong; it lies far above the localization floor, and the ranking of predictors remains unchanged for any cut between $1$ and $10$~px. Mass conservation is monitored as the ratio of detected to true objects.
 
+The \textbf{skill score} $1 - \sum_t \mathrm{MSE}(\hat{z}_{t+1}, z_{t+1}) / \sum_t \mathrm{MSE}(z_t, z_{t+1})$ evaluates, in latent space, the divergence minimized by the second training stage, isolating the transition model from the decoder; errors are aggregated over the dataset, matching that objective, rather than averaged as per-frame ratios. A score of $0$ matches persistence and $1$ is perfect. The \textbf{action sensitivity} applies the same intervention as the No-Action variant of Section~\ref{subsec:variants} to the trained model, measuring the mean absolute difference between the frames it predicts under the true action and under $\mathbf{0}$, contrasted between click and control frames; no retraining is involved, both passes reusing the same weights. Significance uses paired Wilcoxon tests with the \emph{episode} as experimental unit for CPE, since frames within an episode are correlated, and a Mann--Whitney test over pooled frames for action sensitivity; intervals come from bootstrap.
 \subsection{Training and Inference Protocol}
-
-\subsubsection{Model Ablations}
-
-These variants evaluate the structural choices of our architecture:
-
-\begin{itemize}
-    \item \textbf{No-Action:} The complete architecture is retained - Action Encoder, Spatial-Broadcast Fuser, and Latent Decoder are all active - but the action input is forced to $\mathbf{0}$ at every time step.
-    Because no architectural component is removed, any difference in performance relative to the full model is attributable exclusively to the action signal, providing a direct test of \textit{H2}.
-    By construction, the action-sensitivity metric evaluated exactly zero for this variant.
-\end{itemize}
-
-
-
-\subsection{Evaluation Metrics and Training Protocol}
-The evaluation combines standard image fidelity metrics with domain-specific physical metrics, as pixel-level functions (e.g., Mean Squared Error) often fail to capture structural consistency and mass conservation.
-
-Training strictly follows the two-stage decomposition defined in Section~\ref{sec:problem_formulation}. This separates the optimization processes, ensuring the spatial visual representation (VAE) fully converges before the system attempts to learn the complex temporal dynamics (World Model).
-
-
+\label{subsec:protocol}
+Training follows the two-stage decomposition of Section~\ref{sec:problem_formulation}, the VAE converging before the temporal dynamics are learned. The VAE was trained for $200$ epochs with Adam (learning rate $5\times10^{-4}$, batch size $256$, gradients clipped at $2.0$) under a plateau scheduler, with a $40$-epoch $\beta$ warm-up and free bits of $1.5$ nats per dimension; the action encoder for $20$ epochs with Adam (learning rate $10^{-3}$, batch size $32$). The transition function $W$ is a two-layer ConvLSTM with $64$ hidden channels and two residual blocks, trained over $4$-step rollouts with an $L_1$ objective on the latent weighted $5\times$ on click frames, plus a decoded-frame term weighted $50\times$ on non-background pixels. All stages used a fixed seed of $42$ on a single GPU. Predictions are also evaluated in open-loop rollout, the model being fed back with its own output for up to $16$ frames while receiving only the future actions.
 \section{Results}
 \label{sec:results}
 

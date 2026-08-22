@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.5.1)  21 AUG 2026 12:28
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.5.1)  22 AUG 2026 10:24
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -297,29 +297,35 @@ File: figures/worldModel.pdf Graphic file (type pdf)
 Package pdftex.def Info: figures/worldModel.pdf  used on input line 185.
 (pdftex.def)             Requested size: 252.0pt x 84.16194pt.
 [3 <./figures/simulationEnvironment.pdf> <./figures/worldModel.pdf>]
-<figures/vae_reconstruction_loss.png, id=70, 569.7285pt x 338.7054pt>
+
+LaTeX Warning: Reference `subsec:variants' on page 4 undefined on input line 225.
+
+
+Overfull \hbox (1.76025pt too wide) in paragraph at lines 225--226
+[]\OT1/ptm/m/n/10 The \OT1/ptm/b/n/10 skill score $\OT1/cmr/m/n/10 1 \OMS/cmsy/m/n/10 ^^@ [][] []\OT1/cmr/m/n/10 ([]\OML/cmm/m/it/10 ; z[]\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 = [][] []\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 z[]; z[]\OT1/cmr/m/n/10 )$
+ []
+
+[4]
+<figures/vae_reconstruction_loss.png, id=74, 569.7285pt x 338.7054pt>
 File: figures/vae_reconstruction_loss.png Graphic file (type png)
 <use figures/vae_reconstruction_loss.png>
-Package pdftex.def Info: figures/vae_reconstruction_loss.png  used on input line 248.
+Package pdftex.def Info: figures/vae_reconstruction_loss.png  used on input line 234.
 (pdftex.def)             Requested size: 252.0pt x 149.8164pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<figures/action_encoder_loss.png, id=72, 569.9694pt x 338.7054pt>
+<figures/action_encoder_loss.png, id=76, 569.9694pt x 338.7054pt>
 File: figures/action_encoder_loss.png Graphic file (type png)
 <use figures/action_encoder_loss.png>
-Package pdftex.def Info: figures/action_encoder_loss.png  used on input line 255.
+Package pdftex.def Info: figures/action_encoder_loss.png  used on input line 241.
 (pdftex.def)             Requested size: 252.0pt x 149.75438pt.
+
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[4] (main.bbl
+(main.bbl
 Underfull \hbox (badness 10000) in paragraph at lines 25--27
 []\OT1/ptm/m/n/8 D. Ha and J. Schmid-hu-ber, ``World mod-els,'' \OT1/ptm/m/it/8 arXiv preprint
  []
 
-
+[5 <./figures/vae_reconstruction_loss.png> <./figures/action_encoder_loss.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 47--49
 []\OT1/ptm/m/n/8 V. Blomqvist, ``Py-munk: A 2d physics li-brary for python,''
  []
@@ -336,24 +342,30 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[5 <./figures/vae_reconstruction_loss.png> <./figures/action_encoder_loss.png>] (main.aux)
+[6
+
+] (main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-03-20>
  ***********
+
+
+LaTeX Warning: There were undefined references.
+
  ) 
 Here is how much of TeX's memory you used:
- 4284 strings out of 467691
- 68517 string characters out of 5415472
- 494565 words of memory out of 5000000
- 33296 multiletter control sequences out of 15000+600000
+ 4287 strings out of 467691
+ 68567 string characters out of 5415472
+ 493607 words of memory out of 5000000
+ 33299 multiletter control sequences out of 15000+600000
  666652 words of font info for 116 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  57i,8n,65p,1960b,287s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/Yuri/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/Yuri/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Yuri/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/Yuri/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Yuri/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/Yuri/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/Yuri/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Yuri/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/Yuri/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Users/Yuri/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Users/Yuri/AppData/Local/Programs/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb><C:/Users/Yuri/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/Yuri/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/Yuri/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/Yuri/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (5 pages, 573388 bytes).
+<C:/Users/Yuri/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/Yuri/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/Yuri/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Yuri/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/Yuri/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Yuri/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/Yuri/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/Yuri/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Yuri/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/Yuri/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Users/Yuri/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Users/Yuri/AppData/Local/Programs/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb><C:/Users/Yuri/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/Yuri/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/Yuri/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/Yuri/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
+Output written on main.pdf (6 pages, 585279 bytes).
 PDF statistics:
- 144 PDF objects out of 1000 (max. 8388607)
+ 152 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)
 

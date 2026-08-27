@@ -1,0 +1,45 @@
+{
+  "checkpoint": "world_model_weights.pth",
+  "memory_stride": 1,
+  "warmup_frames": 20,
+  "validation_episodes": [
+    "holdout_20260804_025",
+    "holdout_20260804_026",
+    "holdout_20260804_027",
+    "holdout_20260804_028",
+    "holdout_20260804_029",
+    "holdout_20260804_030"
+  ],
+  "test_episodes_excluded": 24,
+  "sweep": {
+    "1": {
+      "skill_score": -0.8957376480102539,
+      "error_ratio": 1.895737648010254
+    },
+    "2": {
+      "skill_score": -0.011948585510253906,
+      "error_ratio": 1.011948585510254
+    },
+    "4": {
+      "skill_score": 0.044745445251464844,
+      "error_ratio": 0.9552545547485352
+    },
+    "6": {
+      "skill_score": 0.06749963760375977,
+      "error_ratio": 0.9325003623962402
+    },
+    "8": {
+      "skill_score": 0.06526488065719604,
+      "error_ratio": 0.934735119342804
+    },
+    "10": {
+      "skill_score": 0.064139723777771,
+      "error_ratio": 0.935860276222229
+    },
+    "12": {
+      "skill_score": 0.0633690357208252,
+      "error_ratio": 0.9366309642791748
+    }
+  },
+  "argmax_k": 6
+}
